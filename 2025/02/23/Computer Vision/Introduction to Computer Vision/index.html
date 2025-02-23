@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Introduction to Computer Vision | BlackCat</title>
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../../../css/main.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/github.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- 添加代码高亮样式 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+  <link rel="stylesheet" href="../../../../../css/code.css">
+
+  <!-- 添加 JetBrains Mono 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Add any custom head content here -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    <div class="wrapper">
+      <header class="header">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="../../../../../index.html">BlackCat</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../../index.html">Home</a>
+            </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../../archives">Archives</a>
+            </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../../categories">Categories</a>
+            </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../../tags">Tags</a>
+            </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../../about">About</a>
+            </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  function smoothScroll(event, target) {
+    event.preventDefault();
+    const targetId = target.substring(target.indexOf('#') + 1);
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop - 50, // 调整偏移量
+        behavior: 'smooth'
+      });
+    } else {
+      window.location.href = target;
+    }
+  }
+</script>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <article class="post-content">
+        <h1 class="post-title">Introduction to Computer Vision</h1>
+        <div class="post-meta">
+          <span><i class="fas fa-calendar"></i> 2025-02-23</span>
+          
+            <span><i class="fas fa-folder"></i> <a class="category-link" href="../../../../../categories/Computer-Vision/">Computer Vision</a></span>
+          
+        </div>
+        <div class="post-body">
+          <p>Computer vision is a rapidly evolving field within artificial intelligence (AI) that focuses on enabling computers to interpret and understand visual information from the world, much like humans do. This technology allows machines to derive meaningful information from images, videos, and other visual inputs, facilitating a wide range of applications across various industries.</p>
+<h2 id="Fundamentals-of-Computer-Vision"><a href="#Fundamentals-of-Computer-Vision" class="headerlink" title="Fundamentals of Computer Vision"></a><strong>Fundamentals of Computer Vision</strong></h2><h3 id="What-is-Computer-Vision"><a href="#What-is-Computer-Vision" class="headerlink" title="What is Computer Vision?"></a><strong>What is Computer Vision?</strong></h3><p>At its core, computer vision seeks to replicate the human visual system’s capabilities. It involves the acquisition, processing, and analysis of images to identify and classify objects, detect anomalies, and make decisions based on visual data. The field combines concepts from computer science, AI, and machine learning to achieve these goals[1][3][4].</p>
+<h3 id="How-Does-Computer-Vision-Work"><a href="#How-Does-Computer-Vision-Work" class="headerlink" title="How Does Computer Vision Work?"></a><strong>How Does Computer Vision Work?</strong></h3><p>Computer vision operates through several key processes:</p>
+<ul>
+<li><p><strong>Image Acquisition</strong>: This is the first step where images are captured using sensors like cameras. The quality and type of imaging device can significantly affect the data collected[2][4].</p>
+</li>
+<li><p><strong>Image Processing</strong>: Once an image is acquired, it undergoes processing to enhance its quality and extract relevant features. This can include techniques like noise reduction and contrast adjustment[2][5].</p>
+</li>
+<li><p><strong>Feature Extraction</strong>: Specific features are identified within the image, such as edges, shapes, or textures. This step is crucial for distinguishing different objects within a scene[2][4].</p>
+</li>
+<li><p><strong>Object Recognition and Classification</strong>: The system then identifies and categorizes objects based on learned patterns from previously analyzed images. This is often achieved through machine learning algorithms, particularly convolutional neural networks (CNNs), which excel at recognizing visual patterns[1][2][5].</p>
+</li>
+<li><p><strong>Image Segmentation</strong>: This technique divides an image into segments or regions to analyze specific areas more closely. It helps in understanding the spatial relationships between objects in a scene[2][3].</p>
+</li>
+<li><p><strong>Motion Analysis</strong>: In video sequences, computer vision can track moving objects and analyze their trajectories. This is essential for applications like surveillance and autonomous navigation[2][5].</p>
+</li>
+</ul>
+<h2 id="Key-Technologies-in-Computer-Vision"><a href="#Key-Technologies-in-Computer-Vision" class="headerlink" title="Key Technologies in Computer Vision"></a><strong>Key Technologies in Computer Vision</strong></h2><h3 id="Deep-Learning"><a href="#Deep-Learning" class="headerlink" title="Deep Learning"></a><strong>Deep Learning</strong></h3><p>Deep learning has revolutionized computer vision by allowing systems to learn from vast amounts of data without extensive manual intervention. Algorithms can automatically improve their accuracy as they process more images[1][4]. </p>
+<h3 id="Convolutional-Neural-Networks-CNNs"><a href="#Convolutional-Neural-Networks-CNNs" class="headerlink" title="Convolutional Neural Networks (CNNs)"></a><strong>Convolutional Neural Networks (CNNs)</strong></h3><p>CNNs are a type of deep learning architecture specifically designed for processing grid-like data such as images. They are highly effective in identifying patterns and features within visual data, making them fundamental in many computer vision applications[2][3].</p>
+<h2 id="Applications-of-Computer-Vision"><a href="#Applications-of-Computer-Vision" class="headerlink" title="Applications of Computer Vision"></a><strong>Applications of Computer Vision</strong></h2><p>Computer vision has a wide array of practical applications across various sectors:</p>
+<ul>
+<li><p><strong>Healthcare</strong>: Used for medical imaging analysis to detect diseases such as cancer.</p>
+</li>
+<li><p><strong>Automotive</strong>: Powers autonomous vehicles by enabling them to recognize obstacles and navigate safely.</p>
+</li>
+<li><p><strong>Manufacturing</strong>: Facilitates quality control through automated inspection systems that detect defects in products.</p>
+</li>
+<li><p><strong>Security</strong>: Enhances surveillance systems with facial recognition technology and anomaly detection capabilities.</p>
+</li>
+<li><p><strong>Retail</strong>: Analyzes customer behavior through people counting and demographic analysis in stores[3][4][8].</p>
+</li>
+</ul>
+<h2 id="Challenges-in-Computer-Vision"><a href="#Challenges-in-Computer-Vision" class="headerlink" title="Challenges in Computer Vision"></a><strong>Challenges in Computer Vision</strong></h2><p>Despite its advancements, computer vision faces several challenges:</p>
+<ul>
+<li><p><strong>Data Quality</strong>: High-quality labeled datasets are essential for training effective models but can be difficult to obtain.</p>
+</li>
+<li><p><strong>Complexity of Visual Data</strong>: Real-world images can vary greatly due to lighting conditions, occlusions, and perspectives, making it challenging for models to generalize well.</p>
+</li>
+<li><p><strong>Privacy Concerns</strong>: The use of surveillance technologies raises ethical issues regarding privacy and consent[4][5].</p>
+</li>
+</ul>
+<p>In summary, computer vision is a transformative technology that enhances how machines perceive the world around them. Its ability to analyze and interpret visual data opens up numerous possibilities across different domains while also presenting unique challenges that researchers continue to address.</p>
+<p>Citations:<br>[1] <a target="_blank" rel="noopener" href="https://www.ibm.com/think/topics/computer-vision">https://www.ibm.com/think/topics/computer-vision</a><br>[2] <a target="_blank" rel="noopener" href="https://www.opit.com/magazine/computer-vision-2/">https://www.opit.com/magazine/computer-vision-2/</a><br>[3] <a target="_blank" rel="noopener" href="https://azure.microsoft.com/en-au/resources/cloud-computing-dictionary/what-is-computer-vision">https://azure.microsoft.com/en-au/resources/cloud-computing-dictionary/what-is-computer-vision</a><br>[4] <a target="_blank" rel="noopener" href="https://kili-technology.com/data-labeling/computer-vision">https://kili-technology.com/data-labeling/computer-vision</a><br>[5] <a target="_blank" rel="noopener" href="https://www.v7labs.com/blog/what-is-computer-vision">https://www.v7labs.com/blog/what-is-computer-vision</a><br>[6] <a target="_blank" rel="noopener" href="https://certi.org.br/blog/en/computer-vision/">https://certi.org.br/blog/en/computer-vision/</a><br>[7] <a target="_blank" rel="noopener" href="https://tryolabs.com/guides/introductory-guide-computer-vision">https://tryolabs.com/guides/introductory-guide-computer-vision</a><br>[8] <a target="_blank" rel="noopener" href="https://builtin.com/machine-learning/computer-vision">https://builtin.com/machine-learning/computer-vision</a><br>[9] <a target="_blank" rel="noopener" href="https://clear.ml/blog/computer-vision-101">https://clear.ml/blog/computer-vision-101</a><br>[10] <a target="_blank" rel="noopener" href="https://www.polyu.edu.hk/comp/docdrive/ug/subject/COMP4423.pdf">https://www.polyu.edu.hk/comp/docdrive/ug/subject/COMP4423.pdf</a><br>[11] <a target="_blank" rel="noopener" href="https://opencv.org/blog/what-is-computer-vision/">https://opencv.org/blog/what-is-computer-vision/</a><br>[12] <a target="_blank" rel="noopener" href="https://www.wgu.edu/blog/computer-vision-applications-guide2111.html">https://www.wgu.edu/blog/computer-vision-applications-guide2111.html</a><br>[13] <a target="_blank" rel="noopener" href="https://fullscale.io/blog/computer-vision-concepts/">https://fullscale.io/blog/computer-vision-concepts/</a><br>[14] <a target="_blank" rel="noopener" href="https://www.akgec.ac.in/wp-content/uploads/2024/01/Jan-Jun2022_2.pdf">https://www.akgec.ac.in/wp-content/uploads/2024/01/Jan-Jun2022_2.pdf</a><br>[15] <a target="_blank" rel="noopener" href="https://www.coursera.org/learn/computer-vision-introduction">https://www.coursera.org/learn/computer-vision-introduction</a><br>[16] <a target="_blank" rel="noopener" href="https://dac.digital/what-is-computer-vision-and-what-are-its-practical-applications-in-different-industries/">https://dac.digital/what-is-computer-vision-and-what-are-its-practical-applications-in-different-industries/</a><br>[17] <a target="_blank" rel="noopener" href="https://www.superannotate.com/blog/introduction-to-computer-vision">https://www.superannotate.com/blog/introduction-to-computer-vision</a><br>[18] <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89">https://zh.wikipedia.org/zh-cn/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89</a><br>[19] <a target="_blank" rel="noopener" href="http://vision.stanford.edu/teaching/cs231a_autumn1112/">http://vision.stanford.edu/teaching/cs231a_autumn1112/</a></p>
+
+        </div>
+      </article>
+      
+
+
+
+    </div>
+    <div class="col-md-3">
+      
+<div class="toc-container">
+  <div class="toc-header">
+    <i class="fas fa-list"></i> 目录
+  </div>
+  <div class="toc-content">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Fundamentals-of-Computer-Vision"><span class="toc-text">Fundamentals of Computer Vision</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#What-is-Computer-Vision"><span class="toc-text">What is Computer Vision?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-Does-Computer-Vision-Work"><span class="toc-text">How Does Computer Vision Work?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Key-Technologies-in-Computer-Vision"><span class="toc-text">Key Technologies in Computer Vision</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Deep-Learning"><span class="toc-text">Deep Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Convolutional-Neural-Networks-CNNs"><span class="toc-text">Convolutional Neural Networks (CNNs)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Applications-of-Computer-Vision"><span class="toc-text">Applications of Computer Vision</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenges-in-Computer-Vision"><span class="toc-text">Challenges in Computer Vision</span></a></li></ol>
+  </div>
+</div>
+
+
+    </div>
+  </div>
+</div>
+
+    </div>
+    <footer class="footer">
+  <div class="status-bar">
+    <div class="status-item">
+      <i class="fas fa-code-branch"></i>
+      master
+    </div>
+    <div class="status-item">
+      <i class="fas fa-sync"></i>
+      B143KC47
+    </div>
+    <div class="status-item">
+      <i class="fas fa-clock"></i>
+      2025-02-23
+    </div>
+    <div class="status-item">
+      Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
+    </div>
+    <div class="status-item github">
+      <a href="#" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/highlight.js@11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <!-- 这里可以放置自定义脚本 -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // 代码高亮主题设置
+  hljs.configure({
+    theme: 'vs2015'
+  });
+  
+  // 添加平滑滚动
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+});
+</script>
+<script src="../../../../../js/toc.js"></script>
+
+  </body>
+</html>
