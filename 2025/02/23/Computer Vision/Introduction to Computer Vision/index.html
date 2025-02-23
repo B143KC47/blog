@@ -9,52 +9,57 @@
   <link rel="stylesheet" href="../../../../../css/main.css">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
   <!-- 添加代码高亮样式 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
   <link rel="stylesheet" href="../../../../../css/code.css">
+  <link rel="stylesheet" href="../../../../../css/vscode.css">
+  <link rel="stylesheet" href="../../../../../css/post.css">
+  <link rel="stylesheet" href="../../../../../css/tag.css">
+  <link rel="stylesheet" href="../../../../../css/categories.css">
+  <link rel="stylesheet" href="../../../../../css/archive.css">
 
   <!-- 添加 JetBrains Mono 字体 -->
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- Add any custom head content here -->
 
+  <script src="../../../../../js/explorer.js"></script>
 <meta name="generator" content="Hexo 7.3.0"></head>
 
   <body>
     <div class="wrapper">
-      <header class="header">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="../../../../../index.html">BlackCat</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          
-            <li class="nav-item">
-              <a class="nav-link" href="../../../../../index.html">Home</a>
-            </li>
-          
-            <li class="nav-item">
-              <a class="nav-link" href="../../../../../archives">Archives</a>
-            </li>
-          
-            <li class="nav-item">
-              <a class="nav-link" href="../../../../../categories">Categories</a>
-            </li>
-          
-            <li class="nav-item">
-              <a class="nav-link" href="../../../../../tags">Tags</a>
-            </li>
-          
-            <li class="nav-item">
-              <a class="nav-link" href="../../../../../about">About</a>
-            </li>
-          
-        </ul>
-      </div>
+      <header class="vs-header">
+  <nav class="vs-nav">
+    <div class="nav-left">
+      <a href="../../../../../index.html" class="nav-brand">
+        <i class="fas fa-terminal"></i>
+        BlackCat
+      </a>
+    </div>
+    
+    <div class="nav-right">
+      <a href="../../../../../index.html" class="nav-item ">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a href="../../../../../archives" class="nav-item ">
+        <i class="fas fa-archive"></i>
+        <span>Archives</span>
+      </a>
+      <a href="../../../../../categories/" class="nav-item ">
+        <i class="fas fa-folder"></i>
+        <span>Categories</span>
+      </a>
+      <a href="../../../../../tags/" class="nav-item ">
+        <i class="fas fa-tags"></i>
+        <span>Tags</span>
+      </a>
+      <a href="../../../../../about" class="nav-item ">
+        <i class="fas fa-info-circle"></i>
+        <span>About</span>
+      </a>
     </div>
   </nav>
 </header>
@@ -74,21 +79,106 @@
       window.location.href = target;
     }
   }
+
+  window.addEventListener('scroll', function() {
+    const header = document.querySelector('.vs-header');
+    const nav = document.querySelector('.vs-nav');
+    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    
+    nav.style.setProperty('--scroll-percent', `${scrollPercent}%`);
+    
+    if (window.scrollY > 0) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // 添加标签页切换动画
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      ripple.classList.add('nav-ripple');
+      this.appendChild(ripple);
+      
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+      
+      setTimeout(() => ripple.remove(), 1000);
+    });
+  });
 </script>
 
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-9">
+<div class="vscode-container">
+  <!-- 左侧资源管理器 -->
+  <div class="sidebar-explorer">
+    <!-- TOC导航 -->
+    <div class="explorer-section">
+      <div class="section-header">
+        <i class="fas fa-list"></i>
+        <span>TABLE OF CONTENTS</span>
+      </div>
+      <div class="section-content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Fundamentals-of-Computer-Vision"><span class="toc-text">Fundamentals of Computer Vision</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#What-is-Computer-Vision"><span class="toc-text">What is Computer Vision?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-Does-Computer-Vision-Work"><span class="toc-text">How Does Computer Vision Work?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Key-Technologies-in-Computer-Vision"><span class="toc-text">Key Technologies in Computer Vision</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Deep-Learning"><span class="toc-text">Deep Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Convolutional-Neural-Networks-CNNs"><span class="toc-text">Convolutional Neural Networks (CNNs)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Applications-of-Computer-Vision"><span class="toc-text">Applications of Computer Vision</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenges-in-Computer-Vision"><span class="toc-text">Challenges in Computer Vision</span></a></li></ol>
+      </div>
+    </div>
+    
+    <!-- 相关文章 -->
+    <div class="explorer-section">
+      <div class="section-header">
+        <i class="fas fa-link"></i>
+        <span>RELATED POSTS</span>
+      </div>
+      <div class="section-content">
+        
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="">Introduction to Computer Vision</a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- 主要内容区域 -->
+  <div class="editor-content">
+    <div class="tab-bar">
+      <div class="tab active">
+        <i class="fas fa-file-alt"></i>
+        <span>Introduction to Computer Vision.md</span>
+      </div>
+    </div>
+    
+    <div class="content-area">
       <article class="post-content">
-        <h1 class="post-title">Introduction to Computer Vision</h1>
-        <div class="post-meta">
-          <span><i class="fas fa-calendar"></i> 2025-02-23</span>
-          
-            <span><i class="fas fa-folder"></i> <a class="category-link" href="../../../../../categories/Computer-Vision/">Computer Vision</a></span>
-          
+        <div class="post-header">
+          <h1>Introduction to Computer Vision</h1>
+          <div class="post-meta">
+            <span class="date">
+              <i class="fas fa-calendar-alt"></i>
+              2025-02-23
+            </span>
+            
+              <span class="categories">
+                <i class="fas fa-folder"></i>
+                <a class="category-link" href="../../../../../categories/Computer-Vision/">Computer Vision</a>
+              </span>
+            
+            
+              <span class="tags">
+                <i class="fas fa-tags"></i>
+                <a class="tag-none-link" href="../../../../../tags/ai/" rel="tag">ai</a>, <a class="tag-none-link" href="../../../../../tags/computer-vision/" rel="tag">computer-vision</a>
+              </span>
+            
+          </div>
         </div>
-        <div class="post-body">
+        
+        <div class="post-body vscode-markdown">
           <p>Computer vision is a rapidly evolving field within artificial intelligence (AI) that focuses on enabling computers to interpret and understand visual information from the world, much like humans do. This technology allows machines to derive meaningful information from images, videos, and other visual inputs, facilitating a wide range of applications across various industries.</p>
 <h2 id="Fundamentals-of-Computer-Vision"><a href="#Fundamentals-of-Computer-Vision" class="headerlink" title="Fundamentals of Computer Vision"></a><strong>Fundamentals of Computer Vision</strong></h2><h3 id="What-is-Computer-Vision"><a href="#What-is-Computer-Vision" class="headerlink" title="What is Computer Vision?"></a><strong>What is Computer Vision?</strong></h3><p>At its core, computer vision seeks to replicate the human visual system’s capabilities. It involves the acquisition, processing, and analysis of images to identify and classify objects, detect anomalies, and make decisions based on visual data. The field combines concepts from computer science, AI, and machine learning to achieve these goals[1][3][4].</p>
 <h3 id="How-Does-Computer-Vision-Work"><a href="#How-Does-Computer-Vision-Work" class="headerlink" title="How Does Computer Vision Work?"></a><strong>How Does Computer Vision Work?</strong></h3><p>Computer vision operates through several key processes:</p>
@@ -134,24 +224,13 @@
 <p>Citations:<br>[1] <a target="_blank" rel="noopener" href="https://www.ibm.com/think/topics/computer-vision">https://www.ibm.com/think/topics/computer-vision</a><br>[2] <a target="_blank" rel="noopener" href="https://www.opit.com/magazine/computer-vision-2/">https://www.opit.com/magazine/computer-vision-2/</a><br>[3] <a target="_blank" rel="noopener" href="https://azure.microsoft.com/en-au/resources/cloud-computing-dictionary/what-is-computer-vision">https://azure.microsoft.com/en-au/resources/cloud-computing-dictionary/what-is-computer-vision</a><br>[4] <a target="_blank" rel="noopener" href="https://kili-technology.com/data-labeling/computer-vision">https://kili-technology.com/data-labeling/computer-vision</a><br>[5] <a target="_blank" rel="noopener" href="https://www.v7labs.com/blog/what-is-computer-vision">https://www.v7labs.com/blog/what-is-computer-vision</a><br>[6] <a target="_blank" rel="noopener" href="https://certi.org.br/blog/en/computer-vision/">https://certi.org.br/blog/en/computer-vision/</a><br>[7] <a target="_blank" rel="noopener" href="https://tryolabs.com/guides/introductory-guide-computer-vision">https://tryolabs.com/guides/introductory-guide-computer-vision</a><br>[8] <a target="_blank" rel="noopener" href="https://builtin.com/machine-learning/computer-vision">https://builtin.com/machine-learning/computer-vision</a><br>[9] <a target="_blank" rel="noopener" href="https://clear.ml/blog/computer-vision-101">https://clear.ml/blog/computer-vision-101</a><br>[10] <a target="_blank" rel="noopener" href="https://www.polyu.edu.hk/comp/docdrive/ug/subject/COMP4423.pdf">https://www.polyu.edu.hk/comp/docdrive/ug/subject/COMP4423.pdf</a><br>[11] <a target="_blank" rel="noopener" href="https://opencv.org/blog/what-is-computer-vision/">https://opencv.org/blog/what-is-computer-vision/</a><br>[12] <a target="_blank" rel="noopener" href="https://www.wgu.edu/blog/computer-vision-applications-guide2111.html">https://www.wgu.edu/blog/computer-vision-applications-guide2111.html</a><br>[13] <a target="_blank" rel="noopener" href="https://fullscale.io/blog/computer-vision-concepts/">https://fullscale.io/blog/computer-vision-concepts/</a><br>[14] <a target="_blank" rel="noopener" href="https://www.akgec.ac.in/wp-content/uploads/2024/01/Jan-Jun2022_2.pdf">https://www.akgec.ac.in/wp-content/uploads/2024/01/Jan-Jun2022_2.pdf</a><br>[15] <a target="_blank" rel="noopener" href="https://www.coursera.org/learn/computer-vision-introduction">https://www.coursera.org/learn/computer-vision-introduction</a><br>[16] <a target="_blank" rel="noopener" href="https://dac.digital/what-is-computer-vision-and-what-are-its-practical-applications-in-different-industries/">https://dac.digital/what-is-computer-vision-and-what-are-its-practical-applications-in-different-industries/</a><br>[17] <a target="_blank" rel="noopener" href="https://www.superannotate.com/blog/introduction-to-computer-vision">https://www.superannotate.com/blog/introduction-to-computer-vision</a><br>[18] <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89">https://zh.wikipedia.org/zh-cn/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89</a><br>[19] <a target="_blank" rel="noopener" href="http://vision.stanford.edu/teaching/cs231a_autumn1112/">http://vision.stanford.edu/teaching/cs231a_autumn1112/</a></p>
 
         </div>
+        
+        <!-- 文章导航 -->
+        <nav class="post-nav">
+          
+          
+        </nav>
       </article>
-      
-
-
-
-    </div>
-    <div class="col-md-3">
-      
-<div class="toc-container">
-  <div class="toc-header">
-    <i class="fas fa-list"></i> 目录
-  </div>
-  <div class="toc-content">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Fundamentals-of-Computer-Vision"><span class="toc-text">Fundamentals of Computer Vision</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#What-is-Computer-Vision"><span class="toc-text">What is Computer Vision?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-Does-Computer-Vision-Work"><span class="toc-text">How Does Computer Vision Work?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Key-Technologies-in-Computer-Vision"><span class="toc-text">Key Technologies in Computer Vision</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Deep-Learning"><span class="toc-text">Deep Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Convolutional-Neural-Networks-CNNs"><span class="toc-text">Convolutional Neural Networks (CNNs)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Applications-of-Computer-Vision"><span class="toc-text">Applications of Computer Vision</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenges-in-Computer-Vision"><span class="toc-text">Challenges in Computer Vision</span></a></li></ol>
-  </div>
-</div>
-
-
     </div>
   </div>
 </div>
