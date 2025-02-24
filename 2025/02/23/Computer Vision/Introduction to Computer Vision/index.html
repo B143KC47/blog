@@ -28,6 +28,7 @@
   <!-- Add any custom head content here -->
 
   <script src="../../../../../js/explorer.js"></script>
+  <script src="../../../../../js/code-copy.js"></script>
 <meta name="generator" content="Hexo 7.3.0"></head>
 
 
@@ -147,6 +148,11 @@
             <a href="">Introduction to Computer Vision</a>
           </div>
         
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="../../Image%20Generation/Scalable%20Diffusion%20Models%20with%20Transformers/">Scalable Diffusion Models with Transformers</a>
+          </div>
+        
       </div>
     </div>
   </div>
@@ -186,6 +192,10 @@
         
         <div class="post-body vscode-markdown">
           <p>Computer vision is a rapidly evolving field within artificial intelligence (AI) that focuses on enabling computers to interpret and understand visual information from the world, much like humans do. This technology allows machines to derive meaningful information from images, videos, and other visual inputs, facilitating a wide range of applications across various industries.</p>
+<p>Here’s a simple example of how you might use OpenCV (a popular computer vision library) in Python to load and display an image:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2<br><br><span class="hljs-comment"># Load an image</span><br>image = cv2.imread(<span class="hljs-string">&#x27;image.jpg&#x27;</span>)<br><br><span class="hljs-comment"># Check if the image was loaded successfully</span><br><span class="hljs-keyword">if</span> image <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Error: Could not load image&quot;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-comment"># Display the image</span><br>    cv2.imshow(<span class="hljs-string">&#x27;Image&#x27;</span>, image)<br>    cv2.waitKey(<span class="hljs-number">0</span>)  <span class="hljs-comment"># Wait for a key press</span><br>    cv2.destroyAllWindows()  <span class="hljs-comment"># Close all windows</span><br></code></pre></td></tr></table></figure>
+
+<p>This code snippet demonstrates loading an image, checking for loading errors, displaying the image in a window, and then closing the window after a key is pressed. Make sure you have OpenCV installed (<code>pip install opencv-python</code>) and that <code>image.jpg</code> is in the same directory as your script, or provide the correct path to your image file.</p>
 <h2 id="Fundamentals-of-Computer-Vision"><a href="#Fundamentals-of-Computer-Vision" class="headerlink" title="Fundamentals of Computer Vision"></a><strong>Fundamentals of Computer Vision</strong></h2><h3 id="What-is-Computer-Vision"><a href="#What-is-Computer-Vision" class="headerlink" title="What is Computer Vision?"></a><strong>What is Computer Vision?</strong></h3><p>At its core, computer vision seeks to replicate the human visual system’s capabilities. It involves the acquisition, processing, and analysis of images to identify and classify objects, detect anomalies, and make decisions based on visual data. The field combines concepts from computer science, AI, and machine learning to achieve these goals[1][3][4].</p>
 <h3 id="How-Does-Computer-Vision-Work"><a href="#How-Does-Computer-Vision-Work" class="headerlink" title="How Does Computer Vision Work?"></a><strong>How Does Computer Vision Work?</strong></h3><p>Computer vision operates through several key processes:</p>
 <ul>
@@ -234,6 +244,11 @@
         <!-- 文章导航 -->
         <nav class="post-nav">
           
+          
+            <a class="next" href="../../Image%20Generation/Scalable%20Diffusion%20Models%20with%20Transformers/">
+              Scalable Diffusion Models with Transformers
+              <i class="fas fa-chevron-right"></i>
+            </a>
           
         </nav>
       </article>

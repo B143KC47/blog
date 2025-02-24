@@ -35,3 +35,15 @@
         padding-top: 50px;
     }
 }
+
+@media (max-width: 768px) {
+  .copy-button {
+    opacity: 1;  /* 在移动端始终显示复制按钮 */
+    top: 0.3em;
+    right: 0.3em;
+  }
+  
+  pre {
+    padding: 2em 0.8em 0.8em;  /* 调整移动端padding */
+  }
+}

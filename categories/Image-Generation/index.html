@@ -55,11 +55,11 @@
         <i class="fas fa-archive"></i>
         <span>Archives</span>
       </a>
-      <a href="../../categories/" class="nav-item ">
+      <a href="../../categories/" class="nav-item active">
         <i class="fas fa-folder"></i>
         <span>Categories</span>
       </a>
-      <a href="../../tags/" class="nav-item active">
+      <a href="../../tags/" class="nav-item ">
         <i class="fas fa-tags"></i>
         <span>Tags</span>
       </a>
@@ -121,94 +121,60 @@
 </script>
 
 
-<div class="vscode-container">
-  <!-- 左侧资源管理器 -->
-  <div class="sidebar-explorer">
-    <div class="explorer-section">
-      <div class="section-header">
-        <i class="fas fa-tags"></i>
-        <span>ALL TAGS</span>
-      </div>
-      <div class="section-content">
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h1>Categories: Image Generation</h1>
+      <ul>
         
-          <div class="tag-item ">
-            <i class="fas fa-tag"></i>
-            <a href="../ai/">ai</a>
-            <span class="count">(2)</span>
-          </div>
+          <li>
+            <a href="../../2025/02/23/Image%20Generation/Scalable%20Diffusion%20Models%20with%20Transformers/">Scalable Diffusion Models with Transformers</a>
+            <span>2025-02-23</span>
+          </li>
         
-          <div class="tag-item active">
-            <i class="fas fa-tag"></i>
-            <a href="">computer-vision</a>
-            <span class="count">(1)</span>
-          </div>
-        
-          <div class="tag-item ">
-            <i class="fas fa-tag"></i>
-            <a href="../image-generation/">image-generation</a>
-            <span class="count">(1)</span>
-          </div>
-        
-      </div>
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <aside class="sidebar">
+  <!-- 关于我 -->
+  <div class="sidebar-section about">
+    <h3><i class="fas fa-user"></i> About</h3>
+    <div class="about-info">
+      <img src="../../images/avatar.png" alt="avatar" class="avatar">
+      <p>A simple dark Hexo theme inspired by code.</p>
     </div>
   </div>
 
-  <!-- 主要内容区域 -->
-  <div class="editor-content">
-    <div class="tab-bar">
-      <div class="tab active">
-        <i class="fas fa-tag"></i>
-        <span>tag: computer-vision.md</span>
-      </div>
-    </div>
-    
-    <div class="content-area">
-      <div class="tag-header">
-        <h1>
-          <i class="fas fa-tag"></i>
-          Tag: computer-vision
-        </h1>
-        <span class="tag-count">1 posts</span>
-      </div>
+  <!-- 分类 -->
+  <div class="sidebar-section categories">
+    <h3><i class="fas fa-folder"></i> Categories</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../Computer-Vision/">Computer Vision</a></li><li class="category-list-item"><a class="category-list-link" href="">Image Generation</a></li></ul>
+  </div>
 
-      <div class="posts-container">
-        
-          <div class="post-card">
-            <div class="post-header">
-              <i class="fas fa-file-alt"></i>
-              <span class="post-title">
-                <a href="../../2025/02/23/Computer%20Vision/Introduction%20to%20Computer%20Vision/">Introduction to Computer Vision</a>
-              </span>
-            </div>
-            
-            <div class="post-meta">
-              <span class="date">
-                <i class="fas fa-calendar-alt"></i>
-                2025-02-23
-              </span>
-              
-                <span class="category">
-                  <i class="fas fa-folder"></i>
-                  <a class="category-link" href="../../categories/Computer-Vision/">Computer Vision</a>
-                </span>
-              
-            </div>
-            
-            <div class="post-excerpt">
-              Computer vision is a rapidly evolving field within artificial intelligence (AI) that focuses on enabling computers to interpret and understand visual information from the world, much like humans do. T...
-            </div>
-            
-            <div class="post-footer">
-              <a href="../../2025/02/23/Computer%20Vision/Introduction%20to%20Computer%20Vision/" class="read-more">
-                <i class="fas fa-code"></i>
-                Read More
-              </a>
-            </div>
-          </div>
-        
-      </div>
+  <!-- 标签云 -->
+  <div class="sidebar-section tags">
+    <h3><i class="fas fa-tags"></i> Tags</h3>
+    <a href="../../tags/ai/" style="font-size: 24px; color: #fff">ai</a> <a href="../../tags/computer-vision/" style="font-size: 12px; color: #999">computer-vision</a> <a href="../../tags/image-generation/" style="font-size: 12px; color: #999">image-generation</a>
+  </div>
+</aside>
 
-      
+<script>
+  function smoothScroll(event, target) {
+    event.preventDefault();
+    const targetId = target.substring(target.indexOf('#') + 1);
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop - 50, // 调整偏移量
+        behavior: 'smooth'
+      });
+    } else {
+      window.location.href = target;
+    }
+  }
+</script>
+
     </div>
   </div>
 </div>

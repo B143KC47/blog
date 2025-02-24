@@ -116,6 +116,7 @@
 .content-area {
   padding: 20px;
   overflow-y: auto;
+  max-width: 100%;      /* 确保内容区域不会溢出 */
 }
 
 /* 文章卡片样式 */
@@ -282,4 +283,171 @@
 
 .section-content.collapsed {
   max-height: 0;
+}
+
+/* 代码块相关样式 */
+pre {
+  position: relative;
+  padding: 2.5em 1em 1em;  /* 增加顶部padding为按钮留出空间 */
+  margin: 1em 0;
+  background: var(--vscode-bg);
+  border-radius: 4px;
+  overflow-x: auto;    /* 允许横向滚动 */
+  width: 100%;         /* 确保 pre 标签占满容器宽度 */
+  box-sizing: border-box;
+  min-height: 100px;   /* 确保最小高度 */
+}
+
+.copy-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: var(--vscode-active);
+  border: 1px solid var(--vscode-border);
+  border-radius: 4px;
+  color: var(--vscode-text);
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.2s ease;
+  z-index: 100;
+  /* 移除点击时的外边框 */
+  outline: none;
+  /* 移除点击时的高亮 */
+  -webkit-tap-highlight-color: transparent;
+  /* 禁用文本选择 */
+  user-select: none;
+}
+
+.copy-button:focus {
+  /* 移除焦点时的外边框 */
+  outline: none;
+  box-shadow: none;
+}
+
+pre:hover .copy-button {
+  opacity: 1;
+}
+
+.copy-button:hover {
+  background: var(--vscode-border);
+}
+
+.copy-button.copied {
+  background: var(--vscode-accent);
+  border-color: var(--vscode-accent);
+}
+
+/* Tooltip 样式 */
+.copy-button::before {
+  content: "复制代码";
+  position: absolute;
+  top: -2em;
+  right: 0;
+  background: var(--vscode-sidebar);
+  color: var(--vscode-text);
+  padding: 0.3em 0.6em;
+  border-radius: 4px;
+  font-size: 0.75em;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.copy-button:hover::before {
+  opacity: 1;
+}
+
+/* 确保只有代码块内的复制按钮可见 */
+pre:not(:has(code)) .copy-button {
+  display: none;
+}
+
+/* 移除所有可能的轮廓 */
+pre, pre code, .copy-button {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 代码块容器样式 */
+.hljs {
+  width: 100%;         /* 修改宽度为100% */
+  max-width: 100%;     /* 确保不会溢出 */
+  tab-size: 4;
+  -moz-tab-size: 4;
+  white-space: pre-wrap;
+  word-break: keep-all;  /* 改为 keep-all 避免破坏代码格式 */
+  word-wrap: break-word;
+  overflow-x: auto;      /* 添加横向滚动 */
+  padding: 0.5em;        /* 添加内边距 */
+  min-width: 100%;     /* 确保最小宽度 */
+  white-space: pre;    /* 保持原始格式 */
+  font-size: 14px;     /* 基础字体大小 */
+  line-height: 1.5;    /* 行高 */
+}
+
+/* 优化移动端显示 */
+@media (max-width: 768px) {
+  pre {
+    padding: 2.5em 0.5em 1em;  /* 减少移动端的内边距 */
+    margin: 1em -15px;  /* 负边距使代码块通栏显示 */
+    border-radius: 0;   /* 移除圆角 */
+    padding: 2.5em 5px 1em;  /* 减少内边距 */
+  }
+  
+  .hljs {
+    padding: 0.3em;    /* 减少移动端的内边距 */
+    font-size: 12px;    /* 移动端字体稍小 */
+    padding: 0.3em;
+    min-width: 320px;   /* 确保最小宽度适合移动设备 */
+  }
+
+  .copy-button {
+    opacity: 1;         /* 始终显示复制按钮 */
+    top: 5px;
+    right: 5px;
+    width: 24px;       /* 稍微小一点的按钮 */
+    height: 24px;
+    font-size: 12px;
+  }
+  
+  /* 优化移动端滚动体验 */
+  pre, .hljs {
+    -webkit-overflow-scrolling: touch;  /* 平滑滚动 */
+    scrollbar-width: thin;             /* 细滚动条 */
+  }
+  
+  /* 自定义滚动条样式 */
+  pre::-webkit-scrollbar {
+    height: 4px;
+  }
+  
+  pre::-webkit-scrollbar-thumb {
+    background: var(--vscode-border);
+    border-radius: 2px;
+  }
+}
+
+/* 小屏幕设备的额外优化 */
+@media screen and (max-width: 480px) {
+  .hljs {
+    font-size: 11px;    /* 更小屏幕上进一步减小字体 */
+  }
+  
+  pre {
+    padding: 2em 3px 0.5em;  /* 进一步减少内边距 */
+  }
+}
+
+/* 横屏模式优化 */
+@media screen and (max-height: 480px) and (orientation: landscape) {
+  pre {
+    max-height: 80vh;   /* 限制最大高度 */
+    overflow-y: auto;   /* 允许垂直滚动 */
+  }
 }
