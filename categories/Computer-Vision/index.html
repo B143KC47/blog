@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="../../css/mobile.css">
   <link rel="stylesheet" href="../../css/responsive.css">
 
-  <!-- 添加 JetBrains Mono 字体 -->
+  <!-- 添加 JetBrains Mono 字体 -->  
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- Add any custom head content here -->
@@ -120,101 +120,60 @@
 </script>
 
 
-<div class="vscode-container">
-  <!-- 左侧资源管理器 -->
-  <div class="sidebar-explorer">
-    <div class="explorer-section">
-      <div class="section-header">
-        <i class="fas fa-clock"></i>
-        <span>ARCHIVES</span>
-      </div>
-      <div class="section-content">
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h1>Categories: Computer Vision</h1>
+      <ul>
         
+          <li>
+            <a href="../../2025/02/23/Computer%20Vision/Introduction%20to%20Computer%20Vision/">Introduction to Computer Vision</a>
+            <span>2025-02-23</span>
+          </li>
         
-          
-          
-          
-        
-        
-        
-          <div class="archive-year">
-            <div class="folder">
-              <i class="fas fa-folder"></i>
-              <span>2025</span>
-              <span class="count">(1)</span>
-            </div>
-            <div class="archive-posts">
-              
-                <div class="file ">
-                  <i class="fas fa-file-alt"></i>
-                  <a href="../../2025/02/23/Computer%20Vision/Introduction%20to%20Computer%20Vision/">
-                    02-23 Introduction to Computer Vision
-                  </a>
-                </div>
-              
-            </div>
-          </div>
-        
-      </div>
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <aside class="sidebar">
+  <!-- 关于我 -->
+  <div class="sidebar-section about">
+    <h3><i class="fas fa-user"></i> About</h3>
+    <div class="about-info">
+      <img src="../../images/avatar.png" alt="avatar" class="avatar">
+      <p>A simple dark Hexo theme inspired by code.</p>
     </div>
   </div>
 
-  <!-- 主要内容区域 -->
-  <div class="editor-content">
-    <div class="tab-bar">
-      <div class="tab active">
-        <i class="fas fa-archive"></i>
-        <span>archives.md</span>
-      </div>
-    </div>
-    
-    <div class="content-area">
-      <div class="archive-header">
-        <h1>
-          <i class="fas fa-archive"></i>
-          Archives
-        </h1>
-        <span class="archive-count">1 posts</span>
-      </div>
+  <!-- 分类 -->
+  <div class="sidebar-section categories">
+    <h3><i class="fas fa-folder"></i> Categories</h3>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="">Computer Vision</a></li></ul>
+  </div>
 
-      <div class="timeline-container">
-        
-          <div class="timeline-year">
-            <div class="year-header">
-              <i class="fas fa-calendar-alt"></i>
-              2025
-              <span class="year-count">(1 posts)</span>
-            </div>
-            <div class="year-posts">
-              
-                <div class="timeline-post">
-                  <div class="post-date">
-                    <i class="fas fa-clock"></i>
-                    02-23
-                  </div>
-                  <div class="post-info">
-                    <a href="../../2025/02/23/Computer%20Vision/Introduction%20to%20Computer%20Vision/">Introduction to Computer Vision</a>
-                    <div class="post-meta">
-                      
-                        <span class="category">
-                          <i class="fas fa-folder"></i>
-                          <a class="category-link" href="">Computer Vision</a>
-                        </span>
-                      
-                      
-                        <span class="tags">
-                          <i class="fas fa-tags"></i>
-                          <a class="tag-none-link" href="../../tags/ai/" rel="tag">ai</a>, <a class="tag-none-link" href="../../tags/computer-vision/" rel="tag">computer-vision</a>
-                        </span>
-                      
-                    </div>
-                  </div>
-                </div>
-              
-            </div>
-          </div>
-        
-      </div>
+  <!-- 标签云 -->
+  <div class="sidebar-section tags">
+    <h3><i class="fas fa-tags"></i> Tags</h3>
+    <a href="../../tags/ai/" style="font-size: 12px; color: #999">ai</a> <a href="../../tags/computer-vision/" style="font-size: 12px; color: #999">computer-vision</a>
+  </div>
+</aside>
+
+<script>
+  function smoothScroll(event, target) {
+    event.preventDefault();
+    const targetId = target.substring(target.indexOf('#') + 1);
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop - 50, // 调整偏移量
+        behavior: 'smooth'
+      });
+    } else {
+      window.location.href = target;
+    }
+  }
+</script>
+
     </div>
   </div>
 </div>
@@ -232,7 +191,7 @@
     </div>
     <div class="status-item">
       <i class="fas fa-clock"></i>
-      2025-02-23
+      2025-02-24
     </div>
     <div class="status-item">
       Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
