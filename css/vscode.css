@@ -288,14 +288,14 @@
 /* 代码块相关样式 */
 pre {
   position: relative;
-  padding: 2.5em 1em 1em;  /* 增加顶部padding为按钮留出空间 */
+  padding: 2.5em 1em 1em;
   margin: 1em 0;
   background: var(--vscode-bg);
   border-radius: 4px;
-  overflow-x: auto;    /* 允许横向滚动 */
-  width: 100%;         /* 确保 pre 标签占满容器宽度 */
+  overflow-x: auto;
+  width: 100%;
   box-sizing: border-box;
-  min-height: 100px;   /* 确保最小高度 */
+  min-height: 100px;
 }
 
 .copy-button {
@@ -376,50 +376,50 @@ pre, pre code, .copy-button {
 
 /* 代码块容器样式 */
 .hljs {
-  width: 100%;         /* 修改宽度为100% */
-  max-width: 100%;     /* 确保不会溢出 */
+  width: 100%;
+  max-width: 100%;
   tab-size: 4;
   -moz-tab-size: 4;
-  white-space: pre-wrap;
-  word-break: keep-all;  /* 改为 keep-all 避免破坏代码格式 */
+  white-space: pre-wrap;  /* 允许代码自动换行 */
+  word-break: break-word; /* 允许在单词内换行 */
   word-wrap: break-word;
-  overflow-x: auto;      /* 添加横向滚动 */
-  padding: 0.5em;        /* 添加内边距 */
-  min-width: 100%;     /* 确保最小宽度 */
-  white-space: pre;    /* 保持原始格式 */
-  font-size: 14px;     /* 基础字体大小 */
-  line-height: 1.5;    /* 行高 */
+  overflow-x: auto;
+  padding: 0.5em;
+  min-width: 100%;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 /* 优化移动端显示 */
 @media (max-width: 768px) {
   pre {
-    padding: 2.5em 0.5em 1em;  /* 减少移动端的内边距 */
-    margin: 1em -15px;  /* 负边距使代码块通栏显示 */
-    border-radius: 0;   /* 移除圆角 */
-    padding: 2.5em 5px 1em;  /* 减少内边距 */
+    margin: 1em 0;
+    border-radius: 4px;
+    padding: 2.5em 0.5em 0.5em;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   .hljs {
-    padding: 0.3em;    /* 减少移动端的内边距 */
-    font-size: 12px;    /* 移动端字体稍小 */
     padding: 0.3em;
-    min-width: 320px;   /* 确保最小宽度适合移动设备 */
+    font-size: 13px;
+    white-space: pre-wrap;
+    word-break: break-word;
   }
 
   .copy-button {
-    opacity: 1;         /* 始终显示复制按钮 */
+    opacity: 1;
     top: 5px;
     right: 5px;
-    width: 24px;       /* 稍微小一点的按钮 */
+    width: 24px;
     height: 24px;
     font-size: 12px;
   }
   
   /* 优化移动端滚动体验 */
   pre, .hljs {
-    -webkit-overflow-scrolling: touch;  /* 平滑滚动 */
-    scrollbar-width: thin;             /* 细滚动条 */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
   }
   
   /* 自定义滚动条样式 */
@@ -431,16 +431,52 @@ pre, pre code, .copy-button {
     background: var(--vscode-border);
     border-radius: 2px;
   }
+  
+  /* 确保链接不会溢出容器 */
+  a {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    display: inline-block;
+  }
+  
+  /* 优化页脚样式 */
+  .footer {
+    position: relative;
+    height: auto;
+  }
+  
+  .status-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 8px 5px;
+  }
+  
+  .status-item {
+    margin: 5px;
+    text-align: center;
+  }
+  
+  .status-item.github {
+    margin-left: 5px;
+  }
 }
 
 /* 小屏幕设备的额外优化 */
 @media screen and (max-width: 480px) {
   .hljs {
-    font-size: 11px;    /* 更小屏幕上进一步减小字体 */
+    font-size: 12px;    /* 更小屏幕上进一步减小字体 */
+    line-height: 1.4;   /* 减小行高 */
   }
   
   pre {
-    padding: 2em 3px 0.5em;  /* 进一步减少内边距 */
+    padding: 2em 0.5em 0.5em;  /* 进一步减少内边距 */
+  }
+  
+  /* 优化小屏幕上的代码显示 */
+  code {
+    font-size: 12px;
   }
 }
 
