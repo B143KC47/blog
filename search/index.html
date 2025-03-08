@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="../css/tag.css">
   <link rel="stylesheet" href="../css/categories.css">
   <link rel="stylesheet" href="../css/archive.css">
+  <link rel="stylesheet" href="../css/search.css">
   <link rel="stylesheet" href="../css/mobile.css">
   <link rel="stylesheet" href="../css/responsive.css">
 
@@ -62,6 +63,10 @@
       <a href="../tags/" class="nav-item ">
         <i class="fas fa-tags"></i>
         <span>Tags</span>
+      </a>
+      <a href="../search/" class="nav-item active">
+        <i class="fas fa-search"></i>
+        <span>Search</span>
       </a>
       <a href="../about" class="nav-item ">
         <i class="fas fa-info-circle"></i>
@@ -122,78 +127,109 @@
 
 
 <div class="vscode-container">
-  <!-- 左侧资源管理器 -->
+  <!-- Left sidebar explorer -->
   <div class="sidebar-explorer">
-    <!-- TOC导航 -->
     <div class="explorer-section">
       <div class="section-header">
-        <i class="fas fa-list"></i>
-        <span>TABLE OF CONTENTS</span>
+        <i class="fas fa-search"></i>
+        <span>SEARCH FILTERS</span>
       </div>
       <div class="section-content">
-        
+        <div class="search-filters">
+          <div class="filter-group">
+            <div class="filter-title">Search in</div>
+            <div class="filter-item">
+              <input type="checkbox" id="search-titles" checked>
+              <label for="search-titles">Title</label>
+            </div>
+            <div class="filter-item">
+              <input type="checkbox" id="search-content" checked>
+              <label for="search-content">Content</label>
+            </div>
+            <div class="filter-item">
+              <input type="checkbox" id="search-tags" checked>
+              <label for="search-tags">Tags</label>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     
-    <!-- 相关文章 -->
     <div class="explorer-section">
       <div class="section-header">
-        <i class="fas fa-link"></i>
-        <span>RELATED POSTS</span>
+        <i class="fas fa-history"></i>
+        <span>RECENT SEARCHES</span>
       </div>
       <div class="section-content">
-        
-          <div class="file">
-            <i class="fas fa-file-code"></i>
-            <a href="../2025/02/23/Image%20Generation/Scalable%20Diffusion%20Models%20with%20Transformers/">Scalable Diffusion Models with Transformers</a>
-          </div>
-        
-          <div class="file">
-            <i class="fas fa-file-code"></i>
-            <a href="../2025/02/23/machine%20learning%20basic/">Machine Learning Basic</a>
-          </div>
-        
+        <div id="recent-searches">
+          <!-- Recent searches will be populated dynamically -->
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- 主要内容区域 -->
+  <!-- Main content area -->
   <div class="editor-content">
     <div class="tab-bar">
       <div class="tab active">
-        <i class="fas fa-file-alt"></i>
-        <span>Search.md</span>
+        <i class="fas fa-search"></i>
+        <span>search.md</span>
       </div>
     </div>
     
     <div class="content-area">
-      <article class="post-content">
-        <div class="post-header">
-          <h1>Search</h1>
-          <div class="post-meta">
-            <span class="date">
-              <i class="fas fa-calendar-alt"></i>
-              2025-02-23
-            </span>
-            
-            
+      <div class="vs-search-header">
+        <h1><i class="fas fa-search"></i> Search</h1>
+        <p>Type to search...</p>
+      </div>
+      
+      <div id="vs-search-container" class="vs-search-container">
+        <div class="vs-search-input-container">
+          <i class="fas fa-search vs-search-icon"></i>
+          <input type="text" id="vs-search-input" class="vs-search-input" placeholder="Type to search..." autofocus>
+          <button id="vs-search-clear" class="vs-search-clear">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="vs-search-status-bar">
+          <div class="vs-search-status">
+            <span id="vs-search-counter">0 results</span>
+          </div>
+          <div class="vs-search-commands">
+            <span class="vs-keybind"><span class="vs-key">↑</span><span class="vs-key">↓</span> to navigate</span>
+            <span class="vs-keybind"><span class="vs-key">Enter</span> to select</span>
+            <span class="vs-keybind"><span class="vs-key">Esc</span> to clear</span>
           </div>
         </div>
         
-        <div class="post-body vscode-markdown">
-          
-        </div>
-        
-        <!-- 文章导航 -->
-        <nav class="post-nav">
-          
-          
-        </nav>
-      </article>
+        <div id="vs-search-results" class="vs-search-results"></div>
+      </div>
     </div>
   </div>
 </div>
 
+<script src="../js/search.js"></script>
+
+<script>
+  // Reset search on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('vs-search-input');
+    if (searchInput) {
+      // Focus the search input
+      setTimeout(() => searchInput.focus(), 100);
+      
+      // Clear search with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && document.activeElement === searchInput) {
+          searchInput.value = '';
+          const event = new Event('input');
+          searchInput.dispatchEvent(event);
+        }
+      });
+    }
+  });
+</script>
     </div>
     <footer class="footer">
   <div class="status-bar">
@@ -207,7 +243,7 @@
     </div>
     <div class="status-item">
       <i class="fas fa-clock"></i>
-      2025-03-08
+      2025-03-09
     </div>
     <div class="status-item">
       Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
@@ -244,6 +280,25 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 <script src="../js/toc.js"></script>
+
+<!-- Scripts -->
+<script>
+  // 将语言文件中的翻译传递给前端
+  window.HEXO_CONFIG = {
+    search_placeholder: "Type to search...",
+    search_no_results: "No results found",
+    search_result: "result",
+    search_results: "results",
+    search_results_found: "Found undefined results",
+    search_error: "Error loading search data",
+    search_clear: "Clear"
+  };
+</script>
+
+
+
+<!-- 添加所有需要的脚本 -->
+<script src="../js/main.js"></script>
 
     <script>
       // 移动端菜单切换
