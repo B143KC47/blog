@@ -55,11 +55,11 @@
         <i class="fas fa-archive"></i>
         <span>Archives</span>
       </a>
-      <a href="../../categories/" class="nav-item active">
+      <a href="../../categories/" class="nav-item ">
         <i class="fas fa-folder"></i>
         <span>Categories</span>
       </a>
-      <a href="../../tags/" class="nav-item ">
+      <a href="../../tags/" class="nav-item active">
         <i class="fas fa-tags"></i>
         <span>Tags</span>
       </a>
@@ -121,60 +121,104 @@
 </script>
 
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
-      <h1>Categories: Computer Vision</h1>
-      <ul>
+<div class="vscode-container">
+  <!-- 左侧资源管理器 -->
+  <div class="sidebar-explorer">
+    <div class="explorer-section">
+      <div class="section-header">
+        <i class="fas fa-tags"></i>
+        <span>ALL TAGS</span>
+      </div>
+      <div class="section-content">
         
-          <li>
-            <a href="../../2025/02/23/Computer%20Vision/Introduction%20to%20Computer%20Vision/">Introduction to Computer Vision</a>
-            <span>2025-02-23</span>
-          </li>
+          <div class="tag-item ">
+            <i class="fas fa-tag"></i>
+            <a href="../ai/">ai</a>
+            <span class="count">(1)</span>
+          </div>
         
-      </ul>
+          <div class="tag-item ">
+            <i class="fas fa-tag"></i>
+            <a href="../image-generation/">image-generation</a>
+            <span class="count">(1)</span>
+          </div>
+        
+          <div class="tag-item active">
+            <i class="fas fa-tag"></i>
+            <a href="">machine learning</a>
+            <span class="count">(1)</span>
+          </div>
+        
+      </div>
     </div>
-    <div class="col-md-4">
-      <aside class="sidebar">
-  <!-- 关于我 -->
-  <div class="sidebar-section about">
-    <h3><i class="fas fa-user"></i> About</h3>
-    <div class="about-info">
-      <img src="../../images/avatar.png" alt="avatar" class="avatar">
-      <p>A simple dark Hexo theme inspired by code.</p>
+  </div>
+
+  <!-- 主要内容区域 -->
+  <div class="editor-content">
+    <div class="tab-bar">
+      <div class="tab active">
+        <i class="fas fa-tag"></i>
+        <span>tag: machine%20learning.md</span>
+      </div>
     </div>
-  </div>
+    
+    <div class="content-area">
+      <div class="tag-header">
+        <h1>
+          <i class="fas fa-tag"></i>
+          Tag: machine learning
+        </h1>
+        <span class="tag-count">1 posts</span>
+      </div>
 
-  <!-- 分类 -->
-  <div class="sidebar-section categories">
-    <h3><i class="fas fa-folder"></i> Categories</h3>
-    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="">Computer Vision</a></li><li class="category-list-item"><a class="category-list-link" href="../Image-Generation/">Image Generation</a></li></ul>
-  </div>
+      <div class="posts-container">
+        
+          <div class="post-card">
+            <div class="post-header">
+              <i class="fas fa-file-alt"></i>
+              <span class="post-title">
+                <a href="../../2025/02/23/machine%20learning%20basic/">Machine Learning Basic</a>
+              </span>
+            </div>
+            
+            <div class="post-meta">
+              <span class="date">
+                <i class="fas fa-calendar-alt"></i>
+                2025-02-23
+              </span>
+              
+                <span class="category">
+                  <i class="fas fa-folder"></i>
+                  <a class="category-link" href="../../categories/Image-Generation/">Image Generation</a>
+                </span>
+              
+            </div>
+            
+            <div class="post-excerpt">
+              机器学习让机器学习数据，例如pattern等等
+步骤：
+定义模型
+代入数据
+预测
+模型检验
 
-  <!-- 标签云 -->
-  <div class="sidebar-section tags">
-    <h3><i class="fas fa-tags"></i> Tags</h3>
-    <a href="../../tags/ai/" style="font-size: 24px; color: #fff">ai</a> <a href="../../tags/computer-vision/" style="font-size: 12px; color: #999">computer-vision</a> <a href="../../tags/image-generation/" style="font-size: 12px; color: #999">image-generation</a>
-  </div>
-</aside>
+模型分类1. 基于学习方式
+监督学习模型：利用有标签的数据进行训练，学习输入与输出之间的映射关系。例如线性回归、逻辑回归、支持向量机、决策树等。
+无监督学习模型：利用无标签的数据进行训练，发现数据中的隐藏结构。例如K均值聚类、层次聚类、DBSCAN、主成分分析（PCA）等。
+强化学习模型：通过与环境交互，...
+            </div>
+            
+            <div class="post-footer">
+              <a href="../../2025/02/23/machine%20learning%20basic/" class="read-more">
+                <i class="fas fa-code"></i>
+                Read More
+              </a>
+            </div>
+          </div>
+        
+      </div>
 
-<script>
-  function smoothScroll(event, target) {
-    event.preventDefault();
-    const targetId = target.substring(target.indexOf('#') + 1);
-    const targetElement = document.getElementById(targetId);
-
-    if (targetElement) {
-      window.scrollTo({
-        top: targetElement.offsetTop - 50, // 调整偏移量
-        behavior: 'smooth'
-      });
-    } else {
-      window.location.href = target;
-    }
-  }
-</script>
-
+      
     </div>
   </div>
 </div>
@@ -192,7 +236,7 @@
     </div>
     <div class="status-item">
       <i class="fas fa-clock"></i>
-      2025-02-25
+      2025-03-08
     </div>
     <div class="status-item">
       Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
