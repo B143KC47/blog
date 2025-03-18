@@ -203,7 +203,7 @@
         <div class="post-body vscode-markdown">
           <p>(本博客基于Kaggle教材 link:<a target="_blank" rel="noopener" href="https://www.kaggle.com/learn/pandas">https://www.kaggle.com/learn/pandas</a>)</p>
 <h1 id="Panda：数据分析好帮手"><a href="#Panda：数据分析好帮手" class="headerlink" title="Panda：数据分析好帮手"></a>Panda：数据分析好帮手</h1><p>Panda 是一个强大的 Python 库，主要用于数据分析。可以把它想象成一个超级 Excel，能帮你处理各种表格数据。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd <span class="comment"># 引入 pandas 库，并起个别名 pd，方便后面使用</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd <span class="hljs-comment"># 引入 pandas 库，并起个别名 pd，方便后面使用</span><br></code></pre></td></tr></table></figure>
 
 <p>Panda 有两个核心概念：DataFrame 和 Series。</p>
 <h2 id="DataFrame：表格数据"><a href="#DataFrame：表格数据" class="headerlink" title="DataFrame：表格数据"></a>DataFrame：表格数据</h2><p>DataFrame 就像一个表格，有行和列。</p>
@@ -211,7 +211,7 @@
 <li>列（column）：表格中竖着的一列数据，可以理解为 Excel 中的一列。</li>
 <li>行（record &#x2F; row）：表格中横着的一行数据，可以理解为 Excel 中的一行。</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个 DataFrame</span></span><br><span class="line">pd.DataFrame(&#123;<span class="string">&#x27;Yes&#x27;</span>: [<span class="number">50</span>, <span class="number">21</span>], <span class="string">&#x27;No&#x27;</span>: [<span class="number">131</span>, <span class="number">2</span>]&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 创建一个 DataFrame</span><br>pd.DataFrame(&#123;<span class="hljs-string">&#x27;Yes&#x27;</span>: [<span class="hljs-number">50</span>, <span class="hljs-number">21</span>], <span class="hljs-string">&#x27;No&#x27;</span>: [<span class="hljs-number">131</span>, <span class="hljs-number">2</span>]&#125;)<br></code></pre></td></tr></table></figure>
 
 <p><img src="image.png" alt="alt text"></p>
 <p>创建 DataFrame 就像创建一个字典：</p>
@@ -220,26 +220,26 @@
 <li>Value：列的数据</li>
 </ul>
 <p>例如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个 DataFrame，并指定行索引</span></span><br><span class="line">pd.DataFrame(&#123;<span class="string">&#x27;Bob&#x27;</span>: [<span class="string">&#x27;I liked it.&#x27;</span>, <span class="string">&#x27;It was awful.&#x27;</span>], </span><br><span class="line">              <span class="string">&#x27;Sue&#x27;</span>: [<span class="string">&#x27;Pretty good.&#x27;</span>, <span class="string">&#x27;Bland.&#x27;</span>]&#125;,</span><br><span class="line">             index=[<span class="string">&#x27;Product A&#x27;</span>, <span class="string">&#x27;Product B&#x27;</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 创建一个 DataFrame，并指定行索引</span><br>pd.DataFrame(&#123;<span class="hljs-string">&#x27;Bob&#x27;</span>: [<span class="hljs-string">&#x27;I liked it.&#x27;</span>, <span class="hljs-string">&#x27;It was awful.&#x27;</span>], <br>              <span class="hljs-string">&#x27;Sue&#x27;</span>: [<span class="hljs-string">&#x27;Pretty good.&#x27;</span>, <span class="hljs-string">&#x27;Bland.&#x27;</span>]&#125;,<br>             index=[<span class="hljs-string">&#x27;Product A&#x27;</span>, <span class="hljs-string">&#x27;Product B&#x27;</span>])<br></code></pre></td></tr></table></figure>
 
 <h2 id="Series：一列数据"><a href="#Series：一列数据" class="headerlink" title="Series：一列数据"></a>Series：一列数据</h2><p>Series 就像一个列表，只有一列数据。可以看作是 DataFrame 的一部分。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.Series([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]) <span class="comment"># 创建一个 Series</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pd.Series([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]) <span class="hljs-comment"># 创建一个 Series</span><br></code></pre></td></tr></table></figure>
 
 <p>Series 的索引也可以是字符串：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个 Series，并指定索引和名称</span></span><br><span class="line">pd.Series([<span class="number">30</span>, <span class="number">35</span>, <span class="number">40</span>], index=[<span class="string">&#x27;2015 Sales&#x27;</span>, <span class="string">&#x27;2016 Sales&#x27;</span>, <span class="string">&#x27;2017 Sales&#x27;</span>], name=<span class="string">&#x27;Product A&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 创建一个 Series，并指定索引和名称</span><br>pd.Series([<span class="hljs-number">30</span>, <span class="hljs-number">35</span>, <span class="hljs-number">40</span>], index=[<span class="hljs-string">&#x27;2015 Sales&#x27;</span>, <span class="hljs-string">&#x27;2016 Sales&#x27;</span>, <span class="hljs-string">&#x27;2017 Sales&#x27;</span>], name=<span class="hljs-string">&#x27;Product A&#x27;</span>)<br></code></pre></td></tr></table></figure>
 
 <h2 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h2><p>Panda 可以读取 CSV 文件，CSV 文件是一种常见的表格数据格式。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从 CSV 文件中读取数据，并指定第一列作为索引</span></span><br><span class="line">wine_reviews = pd.read_csv(<span class="string">&quot;../input/wine-reviews/winemag-data-130k-v2.csv&quot;</span>, index_col=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 从 CSV 文件中读取数据，并指定第一列作为索引</span><br>wine_reviews = pd.read_csv(<span class="hljs-string">&quot;../input/wine-reviews/winemag-data-130k-v2.csv&quot;</span>, index_col=<span class="hljs-number">0</span>)<br></code></pre></td></tr></table></figure>
 
 <p><code>index_col=0</code> 的作用是告诉 Panda，CSV 文件中已经有一列作为索引了，不要再自动创建新的索引。</p>
 <p><code>shape</code> 属性可以查看 DataFrame 的大小（行数和列数）：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wine_reviews.shape <span class="comment"># 查看 DataFrame 的大小</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">wine_reviews.shape <span class="hljs-comment"># 查看 DataFrame 的大小</span><br></code></pre></td></tr></table></figure>
 
 <p><code>head()</code> 方法可以查看 DataFrame 的前几行数据：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wine_reviews.head() <span class="comment"># 查看 DataFrame 的前 5 行数据</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">wine_reviews.head() <span class="hljs-comment"># 查看 DataFrame 的前 5 行数据</span><br></code></pre></td></tr></table></figure>
 
 <h2 id="保存数据"><a href="#保存数据" class="headerlink" title="保存数据"></a>保存数据</h2><p>Panda 可以将 DataFrame 保存为 CSV 文件：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># df.to_csv(&quot;xxx.csv&quot;) # 将 DataFrame 保存为 CSV 文件</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># df.to_csv(&quot;xxx.csv&quot;) # 将 DataFrame 保存为 CSV 文件</span><br></code></pre></td></tr></table></figure>
 
 <h2 id="数据选择"><a href="#数据选择" class="headerlink" title="数据选择"></a>数据选择</h2><h3 id="选取数据"><a href="#选取数据" class="headerlink" title="选取数据"></a>选取数据</h3><p>Panda 提供了多种选取数据的方法。</p>
 <h4 id="原生-Python-方式"><a href="#原生-Python-方式" class="headerlink" title="原生 Python 方式"></a>原生 Python 方式</h4><p>可以使用 <code>.</code> 和 <code>[]</code> 来选取数据，和 Python 中访问对象属性的方式类似。</p>
@@ -249,48 +249,48 @@
 <li><code>iloc</code>：使用数字（integer）来选取数据，例如行号或列号。</li>
 </ul>
 <p><strong>注意：</strong> <code>loc</code> 和 <code>iloc</code> 选取数据时都是先<strong>行</strong>后<strong>列</strong>，与 Python 中常见的先<strong>列</strong>后<strong>行</strong>不同。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews.iloc[0] # 选取第一行数据</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># reviews.iloc[0] # 选取第一行数据</span><br></code></pre></td></tr></table></figure>
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews.iloc[:, 0] # 选取第一列数据</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># reviews.iloc[:, 0] # 选取第一列数据</span><br></code></pre></td></tr></table></figure>
 
 <p>例如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews.loc[&quot;A&quot;,&#x27;B&#x27;] # 选取行索引为 &quot;A&quot;，列名为 &quot;B&quot; 的数据</span></span><br><span class="line"><span class="comment"># reviews.iloc[0, 0] # 选取第一行第一列的数据</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># reviews.loc[&quot;A&quot;,&#x27;B&#x27;] # 选取行索引为 &quot;A&quot;，列名为 &quot;B&quot; 的数据</span><br><span class="hljs-comment"># reviews.iloc[0, 0] # 选取第一行第一列的数据</span><br></code></pre></td></tr></table></figure>
 
 <p><code>set_index()</code> 方法可以将 DataFrame 中已有的某一列设置为新的索引：</p>
 <h3 id="条件选择"><a href="#条件选择" class="headerlink" title="条件选择"></a>条件选择</h3><p>可以使用条件表达式来选取满足条件的数据。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews.country == &#x27;Italy&#x27; # 选取 &#x27;country&#x27; 列的值为 &#x27;Italy&#x27; 的行</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># reviews.country == &#x27;Italy&#x27; # 选取 &#x27;country&#x27; 列的值为 &#x27;Italy&#x27; 的行</span><br></code></pre></td></tr></table></figure>
 
 <p>返回：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0     True</span><br><span class="line">1    False</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">0     True<br>1    False<br>...<br></code></pre></td></tr></table></figure>
 
 <p>可以使用 <code>loc</code> 方法结合条件表达式来选取数据：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews.loc[reviews.country == &#x27;Italy&#x27;] # 选取 &#x27;country&#x27; 列的值为 &#x27;Italy&#x27; 的所有行</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># reviews.loc[reviews.country == &#x27;Italy&#x27;] # 选取 &#x27;country&#x27; 列的值为 &#x27;Italy&#x27; 的所有行</span><br></code></pre></td></tr></table></figure>
 
 <p>相当于 SQL 中的 <code>SELECT * FROM reviews WHERE country = &#39;Italy&#39;</code>。</p>
 <p>可以使用多个条件：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews.loc[(reviews.country == &#x27;Italy&#x27;) &amp; (reviews.points &gt;= 90)] # 选取 &#x27;country&#x27; 列的值为 &#x27;Italy&#x27; 且 &#x27;points&#x27; 列的值大于等于 90 的行</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># reviews.loc[(reviews.country == &#x27;Italy&#x27;) &amp; (reviews.points &gt;= 90)] # 选取 &#x27;country&#x27; 列的值为 &#x27;Italy&#x27; 且 &#x27;points&#x27; 列的值大于等于 90 的行</span><br></code></pre></td></tr></table></figure>
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews.loc[(reviews.country == &#x27;Italy&#x27;) | (reviews.points &gt;= 90)] # 选取 &#x27;country&#x27; 列的值为 &#x27;Italy&#x27; 或 &#x27;points&#x27; 列的值大于等于 90 的行</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># reviews.loc[(reviews.country == &#x27;Italy&#x27;) | (reviews.points &gt;= 90)] # 选取 &#x27;country&#x27; 列的值为 &#x27;Italy&#x27; 或 &#x27;points&#x27; 列的值大于等于 90 的行</span><br></code></pre></td></tr></table></figure>
 
 <ul>
 <li><code>|</code> 表示 “或” (or)</li>
 <li><code>&amp;</code> 表示 “与” (and)</li>
 </ul>
 <p><code>isin()</code> 方法可以判断一列的值是否在给定的列表中：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews.loc[reviews.country.isin([&#x27;Italy&#x27;, &#x27;France&#x27;])] # 选取 &#x27;country&#x27; 列的值为 &#x27;Italy&#x27; 或 &#x27;France&#x27; 的行</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># reviews.loc[reviews.country.isin([&#x27;Italy&#x27;, &#x27;France&#x27;])] # 选取 &#x27;country&#x27; 列的值为 &#x27;Italy&#x27; 或 &#x27;France&#x27; 的行</span><br></code></pre></td></tr></table></figure>
 
 <p><code>isnull()</code> 和 <code>notnull()</code> 方法可以判断一列的值是否为空：</p>
 <ul>
 <li><code>isnull()</code>：如果元素是缺失值，则返回 True，否则返回 False。</li>
 <li><code>notnull()</code>：如果元素不是缺失值，则返回 True，否则返回 False。</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews.loc[reviews.price.notnull()] # 选取 &#x27;price&#x27; 列的值不为空的所有行</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># reviews.loc[reviews.price.notnull()] # 选取 &#x27;price&#x27; 列的值不为空的所有行</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><p>可以直接给 DataFrame 添加新的列，并赋值：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews[&#x27;critic&#x27;] = &#x27;everyone&#x27; # 给 &#x27;critic&#x27; 列赋值为 &#x27;everyone&#x27;</span></span><br><span class="line"><span class="comment"># reviews[&#x27;critic&#x27;]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># reviews[&#x27;critic&#x27;] = &#x27;everyone&#x27; # 给 &#x27;critic&#x27; 列赋值为 &#x27;everyone&#x27;</span><br><span class="hljs-comment"># reviews[&#x27;critic&#x27;]</span><br></code></pre></td></tr></table></figure>
 
 <p>可以根据现有列的值计算出新的列的值：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews[&#x27;index_backwards&#x27;] = range(len(reviews), 0, -1) # 创建一个新的列 &#x27;index_backwards&#x27;，其值为 reviews 的索引倒序</span></span><br><span class="line"><span class="comment"># reviews[&#x27;index_backwards&#x27;]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># reviews[&#x27;index_backwards&#x27;] = range(len(reviews), 0, -1) # 创建一个新的列 &#x27;index_backwards&#x27;，其值为 reviews 的索引倒序</span><br><span class="hljs-comment"># reviews[&#x27;index_backwards&#x27;]</span><br></code></pre></td></tr></table></figure>
 
 
         </div>
@@ -382,7 +382,7 @@ document.addEventListener('DOMContentLoaded', () => {
     language: "zh-CN",
     search_placeholder: "输入关键词搜索...",
     search_no_results: "未找到相关结果",
-    search_result: "résultat",
+    search_result: "Ergebnis",
     search_results: "搜索结果",
     search_results_found: "找到 undefined 个结果",
     search_in: "搜索范围",
