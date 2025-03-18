@@ -138,7 +138,25 @@
         
           <div class="tag-item active">
             <i class="fas fa-tag"></i>
-            <a href="">ai</a>
+            <a href="">AI</a>
+            <span class="count">(1)</span>
+          </div>
+        
+          <div class="tag-item ">
+            <i class="fas fa-tag"></i>
+            <a href="../Kaggle/">Kaggle</a>
+            <span class="count">(1)</span>
+          </div>
+        
+          <div class="tag-item ">
+            <i class="fas fa-tag"></i>
+            <a href="../Machine-learning/">Machine learning</a>
+            <span class="count">(1)</span>
+          </div>
+        
+          <div class="tag-item ">
+            <i class="fas fa-tag"></i>
+            <a href="../ai/">ai</a>
             <span class="count">(2)</span>
           </div>
         
@@ -169,7 +187,7 @@
     <div class="tab-bar">
       <div class="tab active">
         <i class="fas fa-tag"></i>
-        <span>tag: ai.md</span>
+        <span>tag: AI.md</span>
       </div>
     </div>
     
@@ -177,9 +195,9 @@
       <div class="tag-header">
         <h1>
           <i class="fas fa-tag"></i>
-          Tag: ai
+          Tag: AI
         </h1>
-        <span class="tag-count">2 posts</span>
+        <span class="tag-count">1 posts</span>
       </div>
 
       <div class="posts-container">
@@ -188,7 +206,7 @@
             <div class="post-header">
               <i class="fas fa-file-alt"></i>
               <span class="post-title">
-                <a href="../../2025/02/23/machine%20learning%20basic/">Machine Learning Basic</a>
+                <a href="../../2025/02/23/Introduction%20to%20machine%20learning/machine%20learning%20basic/">机器学习入门</a>
               </span>
             </div>
             
@@ -200,74 +218,22 @@
               
                 <span class="category">
                   <i class="fas fa-folder"></i>
-                  <a class="category-link" href="../../categories/Introduction-to-Machine-learning/">Introduction to Machine learning</a>
+                  <a class="category-link" href="../../categories/Kaggle%E7%B3%BB%E5%88%97/">Kaggle系列</a>
                 </span>
               
             </div>
             
             <div class="post-excerpt">
-              机器学习让机器学习数据，例如pattern等等
-步骤：
-定义模型
-代入数据
-预测
-模型检验
-
-Panda 介绍Panda是Python中最常用的数据分析库之一，主要功能包括：
-
-数据结构
-
-DataFrame: 二维表格数据结构 （就是一个table表格)
-Series: 一维数组数据结构
-
-
-核心功能
-
-数据读取与写入（CSV, Excel等）
-数据清洗和处理
-数据筛选和过滤
-数据统计和计算
-
-...
+              (本博客内容基于Kaggle教程，感谢：https://www.kaggle.com/learn/intro-to-machine-learning)
+机器学习是啥？简单说，就是让电脑从数据里学习，找到规律，然后用这些规律来做预测。
+机器学习的几个步骤：
+定义模型： 就像搭积木，选择用什么样的积木（算法）来搭建。
+喂数据： 把数据给模型学习，让它找到数据里的规律。
+做预测： 学习完后，让模型用学到...
             </div>
             
             <div class="post-footer">
-              <a href="../../2025/02/23/machine%20learning%20basic/" class="read-more">
-                <i class="fas fa-code"></i>
-                Read More
-              </a>
-            </div>
-          </div>
-        
-          <div class="post-card">
-            <div class="post-header">
-              <i class="fas fa-file-alt"></i>
-              <span class="post-title">
-                <a href="../../2025/02/23/Image%20Generation/Scalable%20Diffusion%20Models%20with%20Transformers/">Scalable Diffusion Models with Transformers</a>
-              </span>
-            </div>
-            
-            <div class="post-meta">
-              <span class="date">
-                <i class="fas fa-calendar-alt"></i>
-                2025-02-23
-              </span>
-              
-                <span class="category">
-                  <i class="fas fa-folder"></i>
-                  <a class="category-link" href="../../categories/Image-Generation/">Image Generation</a>
-                </span>
-              
-            </div>
-            
-            <div class="post-excerpt">
-              Article Link:https://arxiv.org/pdf/2212.09748.pdf
-Abstract 
-We explore a new class of diffusion models based on the transformer architecture. We train latent diffusion models of images, replacing the ...
-            </div>
-            
-            <div class="post-footer">
-              <a href="../../2025/02/23/Image%20Generation/Scalable%20Diffusion%20Models%20with%20Transformers/" class="read-more">
+              <a href="../../2025/02/23/Introduction%20to%20machine%20learning/machine%20learning%20basic/" class="read-more">
                 <i class="fas fa-code"></i>
                 Read More
               </a>
@@ -294,7 +260,7 @@ We explore a new class of diffusion models based on the transformer architecture
     </div>
     <div class="status-item">
       <i class="fas fa-clock"></i>
-      2025-03-16
+      2025-03-18
     </div>
     <div class="status-item">
       Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
@@ -353,7 +319,54 @@ document.addEventListener('DOMContentLoaded', () => {
     language: "zh-CN",
     search_placeholder: "输入关键词搜索...",
     search_no_results: "未找到相关结果",
-    search_result: "Ergebnis",
+    search_result: "نتيجة",
+    search_results: "搜索结果",
+    search_results_found: "找到 undefined 个结果",
+    search_in: "搜索范围",
+    search_in_title: "标题",
+    search_in_content: "内容",
+    search_in_tags: "标签",
+    search_in_categories: "分类",
+    search_filters: "搜索过滤器",
+    search_recent: "最近搜索",
+    search_clear: "清除",
+    search_loading: "加载中...",
+    search_error: "加载搜索数据时出错"
+  };
+</script>
+
+
+
+<!-- 添加所有需要的脚本 -->
+<script src="../../js/main.js"></script>
+<script src="../../js/search.js"></script>
+
+    <script>
+      // 移动端菜单切换
+      $(document).ready(function() {
+        $('.mobile-menu-toggle').click(function() {
+          $('.sidebar-explorer').toggleClass('show');
+        });
+      });
+    </script>
+  </body>
+</html>
+smooth'
+      });
+    });
+  });
+});
+</script>
+<script src="../../js/toc.js"></script>
+
+<!-- Scripts -->
+<script>
+  // 将语言文件中的翻译传递给前端
+  window.HEXO_CONFIG = {
+    language: "zh-CN",
+    search_placeholder: "输入关键词搜索...",
+    search_no_results: "未找到相关结果",
+    search_result: "نتيجة",
     search_results: "搜索结果",
     search_results_found: "找到 undefined 个结果",
     search_in: "搜索范围",
