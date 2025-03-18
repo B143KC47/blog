@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Panda basic | BlackCat</title>
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../../../css/main.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/github.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <!-- 添加代码高亮样式 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+  <link rel="stylesheet" href="../../../../../css/code.css">
+  <link rel="stylesheet" href="../../../../../css/vscode.css">
+  <link rel="stylesheet" href="../../../../../css/post.css">
+  <link rel="stylesheet" href="../../../../../css/tag.css">
+  <link rel="stylesheet" href="../../../../../css/categories.css">
+  <link rel="stylesheet" href="../../../../../css/archive.css">
+  <link rel="stylesheet" href="../../../../../css/search.css">
+  <link rel="stylesheet" href="../../../../../css/mobile.css">
+  <link rel="stylesheet" href="../../../../../css/responsive.css">
+
+  <!-- 添加 JetBrains Mono 字体 -->  
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Add any custom head content here -->
+
+  <script src="../../../../../js/explorer.js"></script>
+  <script src="../../../../../js/code-copy.js"></script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div class="wrapper">
+      <div class="mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <header class="vs-header">
+  <nav class="vs-nav">
+    <div class="nav-left">
+      <a href="/blog/" class="nav-brand">
+        <i class="fas fa-terminal"></i>
+        BlackCat
+      </a>
+    </div>
+    
+    <div class="nav-right">
+      <a href="/blog/" class="nav-item ">
+        <i class="fas fa-home"></i>
+        <span>首页</span>
+      </a>
+      <a href="/blog/archives/" class="nav-item ">
+        <i class="fas fa-archive"></i>
+        <span>归档</span>
+      </a>
+      <a href="/blog/categories/" class="nav-item ">
+        <i class="fas fa-folder"></i>
+        <span>分类</span>
+      </a>
+      <a href="/blog/tags/" class="nav-item ">
+        <i class="fas fa-tags"></i>
+        <span>标签</span>
+      </a>
+      <a href="/blog/search/" class="nav-item ">
+        <i class="fas fa-search"></i>
+        <span>搜索</span>
+      </a>
+      <a href="/blog/about/" class="nav-item ">
+        <i class="fas fa-info-circle"></i>
+        <span>关于</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  function smoothScroll(event, target) {
+    event.preventDefault();
+    const targetId = target.substring(target.indexOf('#') + 1);
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop - 50, // 调整偏移量
+        behavior: 'smooth'
+      });
+    } else {
+      window.location.href = target;
+    }
+  }
+
+  window.addEventListener('scroll', function() {
+    const header = document.querySelector('.vs-header');
+    const nav = document.querySelector('.vs-nav');
+    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    
+    nav.style.setProperty('--scroll-percent', `${scrollPercent}%`);
+    
+    if (window.scrollY > 0) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // 添加标签页切换动画
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      ripple.classList.add('nav-ripple');
+      this.appendChild(ripple);
+      
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+      
+      setTimeout(() => ripple.remove(), 1000);
+    });
+  });
+</script>
+
+
+<div class="vscode-container">
+  <!-- 左侧资源管理器 -->
+  <div class="sidebar-explorer">
+    <!-- TOC导航 -->
+    <div class="explorer-section">
+      <div class="section-header">
+        <i class="fas fa-list"></i>
+        <span>TABLE OF CONTENTS</span>
+      </div>
+      <div class="section-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Panda%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%A5%BD%E5%B8%AE%E6%89%8B"><span class="toc-text">Panda：数据分析好帮手</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DataFrame%EF%BC%9A%E8%A1%A8%E6%A0%BC%E6%95%B0%E6%8D%AE"><span class="toc-text">DataFrame：表格数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Series%EF%BC%9A%E4%B8%80%E5%88%97%E6%95%B0%E6%8D%AE"><span class="toc-text">Series：一列数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-text">读取数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE"><span class="toc-text">保存数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%80%89%E6%8B%A9"><span class="toc-text">数据选择</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-text">选取数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E7%94%9F-Python-%E6%96%B9%E5%BC%8F"><span class="toc-text">原生 Python 方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Panda-%E6%96%B9%E5%BC%8F%EF%BC%9Aloc-%E5%92%8C-iloc"><span class="toc-text">Panda 方式：loc 和 iloc</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E9%80%89%E6%8B%A9"><span class="toc-text">条件选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%8B%E5%80%BC"><span class="toc-text">赋值</span></a></li></ol></li></ol></li></ol>
+      </div>
+    </div>
+    
+    <!-- 相关文章 -->
+    <div class="explorer-section">
+      <div class="section-header">
+        <i class="fas fa-link"></i>
+        <span>RELATED POSTS</span>
+      </div>
+      <div class="section-content">
+        
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="">Panda basic</a>
+          </div>
+        
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="../../../../02/23/Image%20Generation/Scalable%20Diffusion%20Models%20with%20Transformers/">Scalable Diffusion Models with Transformers</a>
+          </div>
+        
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="../../../../02/23/Kaggle/machine%20learning%20basic/">机器学习入门</a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- 主要内容区域 -->
+  <div class="editor-content">
+    <div class="tab-bar">
+      <div class="tab active">
+        <i class="fas fa-file-alt"></i>
+        <span>Panda basic.md</span>
+      </div>
+    </div>
+    
+    <div class="content-area">
+      <article class="post-content">
+        <div class="post-header">
+          <h1>Panda basic</h1>
+          <div class="post-meta">
+            <span class="date">
+              <i class="fas fa-calendar-alt"></i>
+              2025-03-16
+            </span>
+            
+              <span class="categories">
+                <i class="fas fa-folder"></i>
+                <a class="category-link" href="../../../../../categories/Kaggle%E7%B3%BB%E5%88%97/">Kaggle系列</a>
+              </span>
+            
+            
+              <span class="tags">
+                <i class="fas fa-tags"></i>
+                <a class="tag-none-link" href="../../../../../tags/ai/" rel="tag">ai</a>, <a class="tag-none-link" href="../../../../../tags/kaggle/" rel="tag">kaggle</a>, <a class="tag-none-link" href="../../../../../tags/machine-learning/" rel="tag">machine learning</a>
+              </span>
+            
+          </div>
+        </div>
+        
+        <div class="post-body vscode-markdown">
+          <p>(本博客基于Kaggle教材 link:<a target="_blank" rel="noopener" href="https://www.kaggle.com/learn/pandas">https://www.kaggle.com/learn/pandas</a>)</p>
+<h1 id="Panda：数据分析好帮手"><a href="#Panda：数据分析好帮手" class="headerlink" title="Panda：数据分析好帮手"></a>Panda：数据分析好帮手</h1><p>Panda 是一个强大的 Python 库，主要用于数据分析。可以把它想象成一个超级 Excel，能帮你处理各种表格数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd <span class="comment"># 引入 pandas 库，并起个别名 pd，方便后面使用</span></span><br></pre></td></tr></table></figure>
+
+<p>Panda 有两个核心概念：DataFrame 和 Series。</p>
+<h2 id="DataFrame：表格数据"><a href="#DataFrame：表格数据" class="headerlink" title="DataFrame：表格数据"></a>DataFrame：表格数据</h2><p>DataFrame 就像一个表格，有行和列。</p>
+<ul>
+<li>列（column）：表格中竖着的一列数据，可以理解为 Excel 中的一列。</li>
+<li>行（record &#x2F; row）：表格中横着的一行数据，可以理解为 Excel 中的一行。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个 DataFrame</span></span><br><span class="line">pd.DataFrame(&#123;<span class="string">&#x27;Yes&#x27;</span>: [<span class="number">50</span>, <span class="number">21</span>], <span class="string">&#x27;No&#x27;</span>: [<span class="number">131</span>, <span class="number">2</span>]&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="image.png" alt="alt text"></p>
+<p>创建 DataFrame 就像创建一个字典：</p>
+<ul>
+<li>Key：列名</li>
+<li>Value：列的数据</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个 DataFrame，并指定行索引</span></span><br><span class="line">pd.DataFrame(&#123;<span class="string">&#x27;Bob&#x27;</span>: [<span class="string">&#x27;I liked it.&#x27;</span>, <span class="string">&#x27;It was awful.&#x27;</span>], </span><br><span class="line">              <span class="string">&#x27;Sue&#x27;</span>: [<span class="string">&#x27;Pretty good.&#x27;</span>, <span class="string">&#x27;Bland.&#x27;</span>]&#125;,</span><br><span class="line">             index=[<span class="string">&#x27;Product A&#x27;</span>, <span class="string">&#x27;Product B&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<h2 id="Series：一列数据"><a href="#Series：一列数据" class="headerlink" title="Series：一列数据"></a>Series：一列数据</h2><p>Series 就像一个列表，只有一列数据。可以看作是 DataFrame 的一部分。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.Series([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]) <span class="comment"># 创建一个 Series</span></span><br></pre></td></tr></table></figure>
+
+<p>Series 的索引也可以是字符串：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个 Series，并指定索引和名称</span></span><br><span class="line">pd.Series([<span class="number">30</span>, <span class="number">35</span>, <span class="number">40</span>], index=[<span class="string">&#x27;2015 Sales&#x27;</span>, <span class="string">&#x27;2016 Sales&#x27;</span>, <span class="string">&#x27;2017 Sales&#x27;</span>], name=<span class="string">&#x27;Product A&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h2><p>Panda 可以读取 CSV 文件，CSV 文件是一种常见的表格数据格式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从 CSV 文件中读取数据，并指定第一列作为索引</span></span><br><span class="line">wine_reviews = pd.read_csv(<span class="string">&quot;../input/wine-reviews/winemag-data-130k-v2.csv&quot;</span>, index_col=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>index_col=0</code> 的作用是告诉 Panda，CSV 文件中已经有一列作为索引了，不要再自动创建新的索引。</p>
+<p><code>shape</code> 属性可以查看 DataFrame 的大小（行数和列数）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wine_reviews.shape <span class="comment"># 查看 DataFrame 的大小</span></span><br></pre></td></tr></table></figure>
+
+<p><code>head()</code> 方法可以查看 DataFrame 的前几行数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wine_reviews.head() <span class="comment"># 查看 DataFrame 的前 5 行数据</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="保存数据"><a href="#保存数据" class="headerlink" title="保存数据"></a>保存数据</h2><p>Panda 可以将 DataFrame 保存为 CSV 文件：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># df.to_csv(&quot;xxx.csv&quot;) # 将 DataFrame 保存为 CSV 文件</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="数据选择"><a href="#数据选择" class="headerlink" title="数据选择"></a>数据选择</h2><h3 id="选取数据"><a href="#选取数据" class="headerlink" title="选取数据"></a>选取数据</h3><p>Panda 提供了多种选取数据的方法。</p>
+<h4 id="原生-Python-方式"><a href="#原生-Python-方式" class="headerlink" title="原生 Python 方式"></a>原生 Python 方式</h4><p>可以使用 <code>.</code> 和 <code>[]</code> 来选取数据，和 Python 中访问对象属性的方式类似。</p>
+<h4 id="Panda-方式：loc-和-iloc"><a href="#Panda-方式：loc-和-iloc" class="headerlink" title="Panda 方式：loc 和 iloc"></a>Panda 方式：<code>loc</code> 和 <code>iloc</code></h4><p>Panda 提供了 <code>loc</code> 和 <code>iloc</code> 两种方法来选取数据。</p>
+<ul>
+<li><code>loc</code>：使用标签（label）来选取数据，例如行索引或列名。</li>
+<li><code>iloc</code>：使用数字（integer）来选取数据，例如行号或列号。</li>
+</ul>
+<p><strong>注意：</strong> <code>loc</code> 和 <code>iloc</code> 选取数据时都是先<strong>行</strong>后<strong>列</strong>，与 Python 中常见的先<strong>列</strong>后<strong>行</strong>不同。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews.iloc[0] # 选取第一行数据</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews.iloc[:, 0] # 选取第一列数据</span></span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews.loc[&quot;A&quot;,&#x27;B&#x27;] # 选取行索引为 &quot;A&quot;，列名为 &quot;B&quot; 的数据</span></span><br><span class="line"><span class="comment"># reviews.iloc[0, 0] # 选取第一行第一列的数据</span></span><br></pre></td></tr></table></figure>
+
+<p><code>set_index()</code> 方法可以将 DataFrame 中已有的某一列设置为新的索引：</p>
+<h3 id="条件选择"><a href="#条件选择" class="headerlink" title="条件选择"></a>条件选择</h3><p>可以使用条件表达式来选取满足条件的数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews.country == &#x27;Italy&#x27; # 选取 &#x27;country&#x27; 列的值为 &#x27;Italy&#x27; 的行</span></span><br></pre></td></tr></table></figure>
+
+<p>返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0     True</span><br><span class="line">1    False</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>可以使用 <code>loc</code> 方法结合条件表达式来选取数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews.loc[reviews.country == &#x27;Italy&#x27;] # 选取 &#x27;country&#x27; 列的值为 &#x27;Italy&#x27; 的所有行</span></span><br></pre></td></tr></table></figure>
+
+<p>相当于 SQL 中的 <code>SELECT * FROM reviews WHERE country = &#39;Italy&#39;</code>。</p>
+<p>可以使用多个条件：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews.loc[(reviews.country == &#x27;Italy&#x27;) &amp; (reviews.points &gt;= 90)] # 选取 &#x27;country&#x27; 列的值为 &#x27;Italy&#x27; 且 &#x27;points&#x27; 列的值大于等于 90 的行</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews.loc[(reviews.country == &#x27;Italy&#x27;) | (reviews.points &gt;= 90)] # 选取 &#x27;country&#x27; 列的值为 &#x27;Italy&#x27; 或 &#x27;points&#x27; 列的值大于等于 90 的行</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>|</code> 表示 “或” (or)</li>
+<li><code>&amp;</code> 表示 “与” (and)</li>
+</ul>
+<p><code>isin()</code> 方法可以判断一列的值是否在给定的列表中：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews.loc[reviews.country.isin([&#x27;Italy&#x27;, &#x27;France&#x27;])] # 选取 &#x27;country&#x27; 列的值为 &#x27;Italy&#x27; 或 &#x27;France&#x27; 的行</span></span><br></pre></td></tr></table></figure>
+
+<p><code>isnull()</code> 和 <code>notnull()</code> 方法可以判断一列的值是否为空：</p>
+<ul>
+<li><code>isnull()</code>：如果元素是缺失值，则返回 True，否则返回 False。</li>
+<li><code>notnull()</code>：如果元素不是缺失值，则返回 True，否则返回 False。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews.loc[reviews.price.notnull()] # 选取 &#x27;price&#x27; 列的值不为空的所有行</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><p>可以直接给 DataFrame 添加新的列，并赋值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews[&#x27;critic&#x27;] = &#x27;everyone&#x27; # 给 &#x27;critic&#x27; 列赋值为 &#x27;everyone&#x27;</span></span><br><span class="line"><span class="comment"># reviews[&#x27;critic&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<p>可以根据现有列的值计算出新的列的值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reviews[&#x27;index_backwards&#x27;] = range(len(reviews), 0, -1) # 创建一个新的列 &#x27;index_backwards&#x27;，其值为 reviews 的索引倒序</span></span><br><span class="line"><span class="comment"># reviews[&#x27;index_backwards&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+        <!-- 文章导航 -->
+        <nav class="post-nav">
+          
+          
+            <a class="next" href="../../../../02/23/Image%20Generation/Scalable%20Diffusion%20Models%20with%20Transformers/">
+              Scalable Diffusion Models with Transformers
+              <i class="fas fa-chevron-right"></i>
+            </a>
+          
+        </nav>
+      </article>
+    </div>
+  </div>
+</div>
+
+    </div>
+    <footer class="footer">
+  <div class="status-bar">
+    <div class="status-item">
+      <i class="fas fa-code-branch"></i>
+      master
+    </div>
+    <div class="status-item">
+      <i class="fas fa-sync"></i>
+      B143KC47
+    </div>
+    <div class="status-item">
+      <i class="fas fa-clock"></i>
+      2025-03-18
+    </div>
+    <div class="status-item">
+      Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
+    </div>
+    <div class="status-item github">
+      <a href="#" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <!-- 全局配置 -->
+    <script>
+      window.HEXO_CONFIG = {
+        language: "zh-CN",
+        root: "/blog/"
+      };
+      
+      // 特定于搜索的配置
+      window.VSC4T_SEARCH = {
+        root: "/blog/"
+      };
+    </script>
+    
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/highlight.js@11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <!-- 这里可以放置自定义脚本 -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // 代码高亮主题设置
+  hljs.configure({
+    theme: 'vs2015'
+  });
+  
+  // 添加平滑滚动
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+});
+</script>
+<script src="../../../../../js/toc.js"></script>
+
+<!-- Scripts -->
+<script>
+  // 将语言文件中的翻译传递给前端
+  window.HEXO_CONFIG = {
+    language: "zh-CN",
+    search_placeholder: "输入关键词搜索...",
+    search_no_results: "未找到相关结果",
+    search_result: "résultat",
+    search_results: "搜索结果",
+    search_results_found: "找到 undefined 个结果",
+    search_in: "搜索范围",
+    search_in_title: "标题",
+    search_in_content: "内容",
+    search_in_tags: "标签",
+    search_in_categories: "分类",
+    search_filters: "搜索过滤器",
+    search_recent: "最近搜索",
+    search_clear: "清除",
+    search_loading: "加载中...",
+    search_error: "加载搜索数据时出错"
+  };
+</script>
+
+
+
+<!-- 添加所有需要的脚本 -->
+<script src="../../../../../js/main.js"></script>
+<script src="../../../../../js/search.js"></script>
+
+    <script>
+      // 移动端菜单切换
+      $(document).ready(function() {
+        $('.mobile-menu-toggle').click(function() {
+          $('.sidebar-explorer').toggleClass('show');
+        });
+      });
+    </script>
+  </body>
+</html>
