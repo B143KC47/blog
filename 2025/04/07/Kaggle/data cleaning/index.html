@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Data Cleaning | BlackCat</title>
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../../../css/main.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/github.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <!-- 添加代码高亮样式 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+  <link rel="stylesheet" href="../../../../../css/code.css">
+  <link rel="stylesheet" href="../../../../../css/vscode.css">
+  <link rel="stylesheet" href="../../../../../css/post.css">
+  <link rel="stylesheet" href="../../../../../css/tag.css">
+  <link rel="stylesheet" href="../../../../../css/categories.css">
+  <link rel="stylesheet" href="../../../../../css/archive.css">
+  <link rel="stylesheet" href="../../../../../css/search.css">
+  <link rel="stylesheet" href="../../../../../css/mobile.css">
+  <link rel="stylesheet" href="../../../../../css/responsive.css">
+
+  <!-- 添加 JetBrains Mono 字体 -->  
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Add any custom head content here -->
+
+  <script src="../../../../../js/explorer.js"></script>
+  <script src="../../../../../js/code-copy.js"></script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div class="wrapper">
+      <div class="mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <header class="vs-header">
+  <nav class="vs-nav">
+    <div class="nav-left">
+      <a href="/blog/" class="nav-brand">
+        <i class="fas fa-terminal"></i>
+        BlackCat
+      </a>
+    </div>
+    
+    <div class="nav-right">
+      <a href="/blog/" class="nav-item ">
+        <i class="fas fa-home"></i>
+        <span>首页</span>
+      </a>
+      <a href="/blog/archives/" class="nav-item ">
+        <i class="fas fa-archive"></i>
+        <span>归档</span>
+      </a>
+      <a href="/blog/categories/" class="nav-item ">
+        <i class="fas fa-folder"></i>
+        <span>分类</span>
+      </a>
+      <a href="/blog/tags/" class="nav-item ">
+        <i class="fas fa-tags"></i>
+        <span>标签</span>
+      </a>
+      <a href="/blog/search/" class="nav-item ">
+        <i class="fas fa-search"></i>
+        <span>搜索</span>
+      </a>
+      <a href="/blog/about/" class="nav-item ">
+        <i class="fas fa-info-circle"></i>
+        <span>关于</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  function smoothScroll(event, target) {
+    event.preventDefault();
+    const targetId = target.substring(target.indexOf('#') + 1);
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop - 50, // 调整偏移量
+        behavior: 'smooth'
+      });
+    } else {
+      window.location.href = target;
+    }
+  }
+
+  window.addEventListener('scroll', function() {
+    const header = document.querySelector('.vs-header');
+    const nav = document.querySelector('.vs-nav');
+    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    
+    nav.style.setProperty('--scroll-percent', `${scrollPercent}%`);
+    
+    if (window.scrollY > 0) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // 添加标签页切换动画
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      ripple.classList.add('nav-ripple');
+      this.appendChild(ripple);
+      
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+      
+      setTimeout(() => ripple.remove(), 1000);
+    });
+  });
+</script>
+
+
+<div class="vscode-container">
+  <!-- 左侧资源管理器 -->
+  <div class="sidebar-explorer">
+    <!-- TOC导航 -->
+    <div class="explorer-section">
+      <div class="section-header">
+        <i class="fas fa-list"></i>
+        <span>TABLE OF CONTENTS</span>
+      </div>
+      <div class="section-content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E7%BC%BA%E5%A4%B1%E5%80%BC%EF%BC%88Handling-Missing-Values%EF%BC%89"><span class="toc-text">处理缺失值（Handling Missing Values）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9D%E5%A7%8B%E6%95%B0%E6%8D%AE%E6%9F%A5%E7%9C%8B-Initial-Data-Inspection"><span class="toc-text">1. 初始数据查看 (Initial Data Inspection)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%AE%A1%E7%AE%97%E7%BC%BA%E5%A4%B1%E5%80%BC%E6%95%B0%E9%87%8F-Counting-Missing-Values"><span class="toc-text">2. 计算缺失值数量 (Counting Missing Values)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%86%E6%9E%90%E7%BC%BA%E5%A4%B1%E5%8E%9F%E5%9B%A0-Understanding-Why-Data-is-Missing"><span class="toc-text">3. 分析缺失原因 (Understanding Why Data is Missing)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%88%A0%E9%99%A4%E7%BC%BA%E5%A4%B1%E5%80%BC-Dropping-Missing-Values"><span class="toc-text">4. 删除缺失值 (Dropping Missing Values)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%A1%AB%E5%85%85%E7%BC%BA%E5%A4%B1%E5%80%BC-Filling-Missing-Values"><span class="toc-text">5. 填充缺失值 (Filling Missing Values)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%85%B3%E9%94%AE%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-Key-Considerations"><span class="toc-text">6. 关键注意事项 (Key Considerations)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%9C%AF%E8%AF%AD-Key-Terms"><span class="toc-text">核心术语 (Key Terms)</span></a></li></ol>
+      </div>
+    </div>
+    
+    <!-- 相关文章 -->
+    <div class="explorer-section">
+      <div class="section-header">
+        <i class="fas fa-link"></i>
+        <span>RELATED POSTS</span>
+      </div>
+      <div class="section-content">
+        
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="">Data Cleaning</a>
+          </div>
+        
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="../../../../03/16/Kaggle/panda/">Panda basic</a>
+          </div>
+        
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="../../../../03/16/Kaggle/introduction%20to%20ai%20ethics/">Intro to AI Ethics</a>
+          </div>
+        
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="../../../../02/23/Image%20Generation/Scalable%20Diffusion%20Models%20with%20Transformers/">Scalable Diffusion Models with Transformers</a>
+          </div>
+        
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="../../../../02/23/Kaggle/machine%20learning%20basic/">机器学习入门</a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- 主要内容区域 -->
+  <div class="editor-content">
+    <div class="tab-bar">
+      <div class="tab active">
+        <i class="fas fa-file-alt"></i>
+        <span>Data Cleaning.md</span>
+      </div>
+    </div>
+    
+    <div class="content-area">
+      <article class="post-content">
+        <div class="post-header">
+          <h1>Data Cleaning</h1>
+          <div class="post-meta">
+            <span class="date">
+              <i class="fas fa-calendar-alt"></i>
+              2025-04-07
+            </span>
+            
+              <span class="categories">
+                <i class="fas fa-folder"></i>
+                <a class="category-link" href="../../../../../categories/Kaggle%E7%B3%BB%E5%88%97/">Kaggle系列</a>
+              </span>
+            
+            
+              <span class="tags">
+                <i class="fas fa-tags"></i>
+                <a class="tag-none-link" href="../../../../../tags/ai/" rel="tag">ai</a>, <a class="tag-none-link" href="../../../../../tags/kaggle/" rel="tag">kaggle</a>
+              </span>
+            
+          </div>
+        </div>
+        
+        <div class="post-body vscode-markdown">
+          <h2 id="处理缺失值（Handling-Missing-Values）"><a href="#处理缺失值（Handling-Missing-Values）" class="headerlink" title="处理缺失值（Handling Missing Values）"></a>处理缺失值（Handling Missing Values）</h2><h3 id="1-初始数据查看-Initial-Data-Inspection"><a href="#1-初始数据查看-Initial-Data-Inspection" class="headerlink" title="1. 初始数据查看 (Initial Data Inspection)"></a>1. <strong>初始数据查看 (Initial Data Inspection)</strong></h3><ul>
+<li><strong>函数&#x2F;操作</strong>:<ul>
+<li><code>pd.read_csv()</code>: 读取CSV文件，加载数据集（如NFL比赛数据）。</li>
+<li><code>data.head()</code>: 查看前五行数据，初步发现缺失值（显示为<code>NaN</code>或<code>None</code>）。</li>
+<li><strong>注意</strong>：加载时可能遇到混合数据类型警告（<code>DtypeWarning</code>），建议指定<code>dtype</code>或设置<code>low_memory=False</code>。  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pd.read_csv(file_path, low_memory=<span class="hljs-literal">False</span>)<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="2-计算缺失值数量-Counting-Missing-Values"><a href="#2-计算缺失值数量-Counting-Missing-Values" class="headerlink" title="2. 计算缺失值数量 (Counting Missing Values)"></a>2. <strong>计算缺失值数量 (Counting Missing Values)</strong></h3><ul>
+<li><strong>关键函数</strong>:<ul>
+<li><code>data.isnull().sum()</code>: 统计每列的缺失值数量。</li>
+<li><code>np.product(data.shape)</code>：计算总共的records</li>
+<li>然后 missing&#x2F;总 * 100</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-分析缺失原因-Understanding-Why-Data-is-Missing"><a href="#3-分析缺失原因-Understanding-Why-Data-is-Missing" class="headerlink" title="3. 分析缺失原因 (Understanding Why Data is Missing)"></a>3. <strong>分析缺失原因 (Understanding Why Data is Missing)</strong></h3><ul>
+<li><strong>核心问题</strong>:<ul>
+<li>区分缺失原因是<strong>未记录（Not Recorded）<strong>还是</strong>不存在（Does Not Exist）</strong>。</li>
+<li><strong>示例</strong>:<ul>
+<li><code>TimeSecs</code>（比赛剩余秒数）缺失是因未记录，适合填充。</li>
+<li><code>PenalizedTeam</code>（受罚球队）缺失是因无罚球，可保留<code>NaN</code>或标记为”无”。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-删除缺失值-Dropping-Missing-Values"><a href="#4-删除缺失值-Dropping-Missing-Values" class="headerlink" title="4. 删除缺失值 (Dropping Missing Values)"></a>4. <strong>删除缺失值 (Dropping Missing Values)</strong></h3><ul>
+<li><strong>方法</strong>:<ul>
+<li><strong>删除行</strong>: <code>data.dropna()</code> → 删除所有有missing value的records</li>
+<li><strong>删除列</strong>: <code>data.dropna(axis=1)</code> → 但丢失大量信息。</li>
+<li><strong>参数说明</strong>:<ul>
+<li><code>axis=0</code> (按行删除): 关注的是哪些行包含缺失值。</li>
+<li><code>axis=1</code> (按列删除): 关注的是哪些列包含缺失值。</li>
+</ul>
+</li>
+<li><strong>结果检查</strong>:<ul>
+<li><code>nfl_data.shape[1]</code>查看原始列数，<code>columns_with_na_dropped.shape[1]</code>查看删除后列数。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-填充缺失值-Filling-Missing-Values"><a href="#5-填充缺失值-Filling-Missing-Values" class="headerlink" title="5. 填充缺失值 (Filling Missing Values)"></a>5. <strong>填充缺失值 (Filling Missing Values)</strong></h3><ul>
+<li><strong>常用函数</strong>:<ul>
+<li><code>fillna()</code>: 填充缺失值。<ul>
+<li><strong>填充固定值</strong>: <code>data.fillna(0)</code> → 所有<code>NaN</code>替换为0。</li>
+<li><strong>向后填充（Backward Fill）</strong>: <code>fillna(method=&#39;bfill&#39;, axis=0).fillna(0)</code> → 用后续值填充，剩余<code>NaN</code>填0。</li>
+</ul>
+</li>
+<li><strong>适用场景</strong>:<ul>
+<li>时间序列数据（如<code>TimeSecs</code>）适合用前后值填充。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-关键注意事项-Key-Considerations"><a href="#6-关键注意事项-Key-Considerations" class="headerlink" title="6. 关键注意事项 (Key Considerations)"></a>6. <strong>关键注意事项 (Key Considerations)</strong></h3><ul>
+<li><strong>权衡删除与填充</strong>:<ul>
+<li>删除列&#x2F;行可能丢失有用信息，填充可能引入噪声。</li>
+<li>需结合业务逻辑（如<code>PenalizedTeam</code>列的处理）(例子)。<ul>
+<li><p>在决定如何处理包含缺失值的 PenalizedTeam 这一列时，不能简单地说”缺失值太多就删除”或者”用某种固定的值填充”。而是需要思考：</p>
+<ul>
+<li>PenalizedTeam 列的业务含义是什么？ 它记录的是在某个比赛事件中受到处罚的队伍。</li>
+<li>为什么会出现缺失值？ 缺失可能是因为在那个特定的比赛事件中没有发生任何处罚。如果真是这样，那么缺失值本身就代表了一种”没有处罚”的状态，这在业务上是有意义的。</li>
+<li>如果删除这一列会丢失什么信息？ 如果我们删除了 PenalizedTeam 列，我们就无法分析哪些队伍更常受到处罚，或者处罚对比赛结果的影响等相关问题。</li>
+<li>如果填充缺失值会引入什么问题？ 如果我们用一个虚拟的队伍名称或者”无”来填充缺失值，这可能会在后续的分析中产生误导，因为它会错误地将没有处罚的事件也归类到某个队伍或者”无”这个类别下。</li>
+</ul>
+</li>
+<li><p>基于业务逻辑，更合理的处理方式是什么？</p>
+<ul>
+<li>不填充，保留缺失值： 如果缺失值代表”没有处罚”的实际业务含义，那么保留缺失值可能是最合适的做法。后续的分析需要考虑到这种缺失值的特殊含义。</li>
+<li>创建新的类别： 可以创建一个新的类别（例如”No Penalty”）来显式地表示没有处罚的情况，而不是使用 NaN。但这仍然需要基于对业务的理解来判断是否合理。</li>
+<li>与其他列结合分析： 可能会有其他列的信息能够帮助我们理解 PenalizedTeam 为空的情况。例如，是否存在一个”PenaltyType”列，当其为空时，PenalizedTeam 也为空？</li>
+</ul>
+</li>
+<li><p>总而言之，”需结合业务逻辑” 要求我们在处理数据时，要像理解实际业务运作一样去理解数据，基于业务知识来判断哪些数据处理方法是合理且有意义的，避免盲目地应用技术手段而扭曲了数据的真实含义。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="核心术语-Key-Terms"><a href="#核心术语-Key-Terms" class="headerlink" title="核心术语 (Key Terms)"></a>核心术语 (Key Terms)</h2><ul>
+<li><strong>NaN</strong>: 缺失值的标记（Not a Number）。</li>
+<li><strong>DataFrame</strong>: Pandas中的二维数据结构（类似表格）。</li>
+<li><strong>Imputation</strong>: 缺失值填充技术（如均值、中位数、前后值填充）。</li>
+<li><strong>Axis参数</strong>: <code>axis=0</code>（行操作），<code>axis=1</code>（列操作）。</li>
+</ul>
+
+        </div>
+        
+        <!-- 文章导航 -->
+        <nav class="post-nav">
+          
+          
+            <a class="next" href="../../../../03/16/Kaggle/panda/">
+              Panda basic
+              <i class="fas fa-chevron-right"></i>
+            </a>
+          
+        </nav>
+      </article>
+    </div>
+  </div>
+</div>
+
+    </div>
+    <footer class="footer">
+  <div class="status-bar">
+    <div class="status-item">
+      <i class="fas fa-code-branch"></i>
+      master
+    </div>
+    <div class="status-item">
+      <i class="fas fa-sync"></i>
+      B143KC47
+    </div>
+    <div class="status-item">
+      <i class="fas fa-clock"></i>
+      2025-04-07
+    </div>
+    <div class="status-item">
+      Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
+    </div>
+    <div class="status-item github">
+      <a href="#" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <!-- 全局配置 -->
+    <script>
+      window.HEXO_CONFIG = {
+        language: "zh-CN",
+        root: "/blog/"
+      };
+      
+      // 特定于搜索的配置
+      window.VSC4T_SEARCH = {
+        root: "/blog/"
+      };
+    </script>
+    
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/highlight.js@11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <!-- 这里可以放置自定义脚本 -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // 代码高亮主题设置
+  hljs.configure({
+    theme: 'vs2015'
+  });
+  
+  // 添加平滑滚动
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+});
+</script>
+<script src="../../../../../js/toc.js"></script>
+
+<!-- Scripts -->
+<script>
+  // 将语言文件中的翻译传递给前端
+  window.HEXO_CONFIG = {
+    language: "zh-CN",
+    search_placeholder: "输入关键词搜索...",
+    search_no_results: "未找到相关结果",
+    search_result: "result",
+    search_results: "搜索结果",
+    search_results_found: "找到 undefined 个结果",
+    search_in: "搜索范围",
+    search_in_title: "标题",
+    search_in_content: "内容",
+    search_in_tags: "标签",
+    search_in_categories: "分类",
+    search_filters: "搜索过滤器",
+    search_recent: "最近搜索",
+    search_clear: "清除",
+    search_loading: "加载中...",
+    search_error: "加载搜索数据时出错"
+  };
+</script>
+
+
+
+<!-- 添加所有需要的脚本 -->
+<script src="../../../../../js/main.js"></script>
+<script src="../../../../../js/search.js"></script>
+
+    <script>
+      // 移动端菜单切换
+      $(document).ready(function() {
+        $('.mobile-menu-toggle').click(function() {
+          $('.sidebar-explorer').toggleClass('show');
+        });
+      });
+    </script>
+  </body>
+</html>
