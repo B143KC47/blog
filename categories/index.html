@@ -145,7 +145,7 @@
           <a class="category-item " href="Kaggle%E7%B3%BB%E5%88%97/">
             <i class="fas fa-folder"></i>
             <span>Kaggle系列</span>
-            <span class="count">(5)</span>
+            <span class="count">(4)</span>
           </a>
         
       </div>
@@ -163,14 +163,16 @@
     
     <div class="content-area">
       <div class="categories-overview">
-        
-          <div class="category-section">
-            <div class="category-header">
+                  <div class="category-section">
+            <div class="category-header collapsed">
               <i class="fas fa-folder"></i>
-              <h2>Image Generation</h2>
+              <a href="Image-Generation/" class="category-link">
+                <h2>Image Generation</h2>
+              </a>
               <span class="count">1 posts</span>
+              <i class="fas fa-chevron-down toggle-icon"></i>
             </div>
-            <div class="category-posts">
+            <div class="category-posts collapsed">
               
                 <div class="post-item">
                   <i class="fas fa-file-alt"></i>
@@ -185,14 +187,16 @@
               
             </div>
           </div>
-        
-          <div class="category-section">
-            <div class="category-header">
+                  <div class="category-section">
+            <div class="category-header collapsed">
               <i class="fas fa-folder"></i>
-              <h2>Kaggle系列</h2>
-              <span class="count">5 posts</span>
+              <a href="Kaggle%E7%B3%BB%E5%88%97/" class="category-link">
+                <h2>Kaggle系列</h2>
+              </a>
+              <span class="count">4 posts</span>
+              <i class="fas fa-chevron-down toggle-icon"></i>
             </div>
-            <div class="category-posts">
+            <div class="category-posts collapsed">
               
                 <div class="post-item">
                   <i class="fas fa-file-alt"></i>
@@ -201,17 +205,6 @@
                     <span class="date">
                       <i class="fas fa-calendar-alt"></i>
                       2025-04-07
-                    </span>
-                  </div>
-                </div>
-              
-                <div class="post-item">
-                  <i class="fas fa-file-alt"></i>
-                  <div class="post-info">
-                    <a href="../2025/03/16/Kaggle/introduction%20to%20ai%20ethics/">Intro to AI Ethics</a>
-                    <span class="date">
-                      <i class="fas fa-calendar-alt"></i>
-                      2025-03-16
                     </span>
                   </div>
                 </div>
@@ -230,10 +223,10 @@
                 <div class="post-item">
                   <i class="fas fa-file-alt"></i>
                   <div class="post-info">
-                    <a href="../2025/02/23/Kaggle/machine%20learning%20basic/">机器学习入门</a>
+                    <a href="../2025/03/16/Kaggle/introduction%20to%20ai%20ethics/">Intro to AI Ethics</a>
                     <span class="date">
                       <i class="fas fa-calendar-alt"></i>
-                      2025-02-23
+                      2025-03-16
                     </span>
                   </div>
                 </div>
@@ -241,7 +234,7 @@
                 <div class="post-item">
                   <i class="fas fa-file-alt"></i>
                   <div class="post-info">
-                    <a href="../2025/02/23/Introduction%20to%20machine%20learning/machine%20learning%20basic/">机器学习入门</a>
+                    <a href="../2025/02/23/Kaggle/machine%20learning%20basic/">机器学习入门</a>
                     <span class="date">
                       <i class="fas fa-calendar-alt"></i>
                       2025-02-23
@@ -329,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
     language: "zh-CN",
     search_placeholder: "输入关键词搜索...",
     search_no_results: "未找到相关结果",
-    search_result: "Ergebnis",
+    search_result: "نتيجة",
     search_results: "搜索结果",
     search_results_found: "找到 undefined 个结果",
     search_in: "搜索范围",
@@ -350,6 +343,9 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- 添加所有需要的脚本 -->
 <script src="../js/main.js"></script>
 <script src="../js/search.js"></script>
+
+<script src="../js/categories-toggle.js"></script>
+
 
     <script>
       // 移动端菜单切换

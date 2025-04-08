@@ -126,80 +126,96 @@
 </script>
 
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
-      <h1>分类: Kaggle系列</h1>
-      <ul>
+<div class="vscode-container">
+  <!-- 左侧资源管理器 -->
+  <div class="sidebar-explorer">
+    <div class="explorer-section">
+      <div class="section-header">
+        <i class="fas fa-folder-open"></i>
+        <span>CATEGORIES</span>
+      </div>
+      <div class="section-content">
         
-          <li>
-            <a href="../../2025/04/07/Kaggle/data%20cleaning/">Data Cleaning</a>
-            <span>2025-04-07</span>
-          </li>
+          <a class="category-item " href="../Image-Generation/">
+            <i class="fas fa-folder"></i>
+            <span>Image Generation</span>
+            <span class="count">(1)</span>
+          </a>
         
-          <li>
-            <a href="../../2025/03/16/Kaggle/introduction%20to%20ai%20ethics/">Intro to AI Ethics</a>
-            <span>2025-03-16</span>
-          </li>
+          <a class="category-item active" href="">
+            <i class="fas fa-folder"></i>
+            <span>Kaggle系列</span>
+            <span class="count">(4)</span>
+          </a>
         
-          <li>
-            <a href="../../2025/03/16/Kaggle/panda/">Panda basic</a>
-            <span>2025-03-16</span>
-          </li>
-        
-          <li>
-            <a href="../../2025/02/23/Kaggle/machine%20learning%20basic/">机器学习入门</a>
-            <span>2025-02-23</span>
-          </li>
-        
-          <li>
-            <a href="../../2025/02/23/Introduction%20to%20machine%20learning/machine%20learning%20basic/">机器学习入门</a>
-            <span>2025-02-23</span>
-          </li>
-        
-      </ul>
-    </div>
-    <div class="col-md-4">
-      <aside class="sidebar">
-  <!-- 关于我 -->
-  <div class="sidebar-section about">
-    <h3><i class="fas fa-user"></i> About</h3>
-    <div class="about-info">
-      <img src="../../images/avatar.png" alt="avatar" class="avatar">
-      <p>A simple dark Hexo theme inspired by code.</p>
+      </div>
     </div>
   </div>
 
-  <!-- 分类 -->
-  <div class="sidebar-section categories">
-    <h3><i class="fas fa-folder"></i> Categories</h3>
-    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../Image-Generation/">Image Generation</a></li><li class="category-list-item"><a class="category-list-link" href="">Kaggle系列</a></li></ul>
-  </div>
-
-  <!-- 标签云 -->
-  <div class="sidebar-section tags">
-    <h3><i class="fas fa-tags"></i> Tags</h3>
-    <a href="../../tags/AI/" style="font-size: 16px; color: #bbb">AI</a> <a href="../../tags/Kaggle/" style="font-size: 16px; color: #bbb">Kaggle</a> <a href="../../tags/Machine-learning/" style="font-size: 16px; color: #bbb">Machine learning</a> <a href="../../tags/ai/" style="font-size: 24px; color: #fff">ai</a> <a href="../../tags/image-generation/" style="font-size: 12px; color: #999">image-generation</a> <a href="../../tags/kaggle/" style="font-size: 20px; color: #ddd">kaggle</a> <a href="../../tags/machine-learning/" style="font-size: 12px; color: #999">machine learning</a>
-  </div>
-</aside>
-
-<script>
-  function smoothScroll(event, target) {
-    event.preventDefault();
-    const targetId = target.substring(target.indexOf('#') + 1);
-    const targetElement = document.getElementById(targetId);
-
-    if (targetElement) {
-      window.scrollTo({
-        top: targetElement.offsetTop - 50, // 调整偏移量
-        behavior: 'smooth'
-      });
-    } else {
-      window.location.href = target;
-    }
-  }
-</script>
-
+  <!-- 主要内容区域 -->
+  <div class="editor-content">
+    <div class="tab-bar">
+      <div class="tab active">
+        <i class="fas fa-folder-open"></i>
+        <span>Kaggle系列.md</span>
+      </div>
+    </div>
+    
+    <div class="content-area">
+      <div class="category-detail">
+        <div class="category-header">
+          <i class="fas fa-folder"></i>
+          <h2>Kaggle系列</h2>
+          <span class="count">4 posts</span>
+        </div>
+        <div class="category-posts">
+          
+            <div class="post-item">
+              <i class="fas fa-file-alt"></i>
+              <div class="post-info">
+                <a href="../../2025/04/07/Kaggle/data%20cleaning/">Data Cleaning</a>
+                <span class="date">
+                  <i class="fas fa-calendar-alt"></i>
+                  2025-04-07
+                </span>
+              </div>
+            </div>
+          
+            <div class="post-item">
+              <i class="fas fa-file-alt"></i>
+              <div class="post-info">
+                <a href="../../2025/03/16/Kaggle/panda/">Panda basic</a>
+                <span class="date">
+                  <i class="fas fa-calendar-alt"></i>
+                  2025-03-16
+                </span>
+              </div>
+            </div>
+          
+            <div class="post-item">
+              <i class="fas fa-file-alt"></i>
+              <div class="post-info">
+                <a href="../../2025/03/16/Kaggle/introduction%20to%20ai%20ethics/">Intro to AI Ethics</a>
+                <span class="date">
+                  <i class="fas fa-calendar-alt"></i>
+                  2025-03-16
+                </span>
+              </div>
+            </div>
+          
+            <div class="post-item">
+              <i class="fas fa-file-alt"></i>
+              <div class="post-info">
+                <a href="../../2025/02/23/Kaggle/machine%20learning%20basic/">机器学习入门</a>
+                <span class="date">
+                  <i class="fas fa-calendar-alt"></i>
+                  2025-02-23
+                </span>
+              </div>
+            </div>
+          
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -276,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
     language: "zh-CN",
     search_placeholder: "输入关键词搜索...",
     search_no_results: "未找到相关结果",
-    search_result: "Ergebnis",
+    search_result: "نتيجة",
     search_results: "搜索结果",
     search_results_found: "找到 undefined 个结果",
     search_in: "搜索范围",
@@ -297,6 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- 添加所有需要的脚本 -->
 <script src="../../js/main.js"></script>
 <script src="../../js/search.js"></script>
+
 
     <script>
       // 移动端菜单切换
