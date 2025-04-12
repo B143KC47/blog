@@ -4,24 +4,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title> | BlackCat</title>
-
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
   <!-- 添加代码高亮样式 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
-  <link rel="stylesheet" href="css/code.css">
+  <!-- 添加highlight.js库 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>  <link rel="stylesheet" href="css/code.css">
+  <link rel="stylesheet" href="css/code-custom.css">
+  <link rel="stylesheet" href="css/code-languages.css">
+
   <link rel="stylesheet" href="css/vscode.css">
   <link rel="stylesheet" href="css/post.css">
   <link rel="stylesheet" href="css/tag.css">
   <link rel="stylesheet" href="css/categories.css">
   <link rel="stylesheet" href="css/archive.css">
   <link rel="stylesheet" href="css/search.css">
-  <link rel="stylesheet" href="css/mobile.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/mobile.css">  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/elements.css">
 
   <!-- 添加 JetBrains Mono 字体 -->  
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -30,6 +32,7 @@
 
   <script src="js/explorer.js"></script>
   <script src="js/code-copy.js"></script>
+  <script src="js/code-enhance.js"></script>
 <meta name="generator" content="Hexo 7.3.0"></head>
 
 
@@ -143,8 +146,8 @@
       <div class="section-content">
           <div class="folder">
             <i class="fas fa-folder"></i>
-            <a href="categories/Image-Generation/" class="category-link">
-              <span>Image Generation</span>
+            <a href="categories/Web%E5%BC%80%E5%8F%91/" class="category-link">
+              <span>Web开发</span>
               <span class="count">(1)</span>
             </a>
           </div>
@@ -153,6 +156,13 @@
             <a href="categories/Kaggle%E7%B3%BB%E5%88%97/" class="category-link">
               <span>Kaggle系列</span>
               <span class="count">(4)</span>
+            </a>
+          </div>
+          <div class="folder">
+            <i class="fas fa-folder"></i>
+            <a href="categories/Image-Generation/" class="category-link">
+              <span>Image Generation</span>
+              <span class="count">(1)</span>
             </a>
           </div>
       </div>
@@ -165,6 +175,10 @@
       </div>
       
       <div class="section-content">
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="2025/04/10/test/">文章标题</a>
+          </div>
           <div class="file">
             <i class="fas fa-file-code"></i>
             <a href="2025/04/07/Kaggle/data%20cleaning/">Data Cleaning</a>
@@ -180,10 +194,6 @@
           <div class="file">
             <i class="fas fa-file-code"></i>
             <a href="2025/02/23/Image%20Generation/Scalable%20Diffusion%20Models%20with%20Transformers/">Scalable Diffusion Models with Transformers</a>
-          </div>
-          <div class="file">
-            <i class="fas fa-file-code"></i>
-            <a href="2025/02/23/Kaggle/machine%20learning%20basic/">机器学习入门</a>
           </div>
       </div>
     </div>
@@ -222,6 +232,12 @@
         
           <div class="tag-item">
             <i class="fas fa-tag"></i>
+            <a href="tags/hexo/">hexo</a>
+            <span class="count">(1)</span>
+          </div>
+        
+          <div class="tag-item">
+            <i class="fas fa-tag"></i>
             <a href="tags/image-generation/">image-generation</a>
             <span class="count">(1)</span>
           </div>
@@ -235,6 +251,18 @@
           <div class="tag-item">
             <i class="fas fa-tag"></i>
             <a href="tags/machine-learning/">machine learning</a>
+            <span class="count">(1)</span>
+          </div>
+        
+          <div class="tag-item">
+            <i class="fas fa-tag"></i>
+            <a href="tags/%E4%B8%BB%E9%A2%98/">主题</a>
+            <span class="count">(1)</span>
+          </div>
+        
+          <div class="tag-item">
+            <i class="fas fa-tag"></i>
+            <a href="tags/%E4%BC%98%E5%8C%96/">优化</a>
             <span class="count">(1)</span>
           </div>
         
@@ -252,6 +280,37 @@
     
     <div class="content-area">
       <div class="posts-container">
+          <div class="post-card">
+            <div class="post-header">
+              <i class="fas fa-file-alt"></i>
+              <span class="post-title">
+                <a href="2025/04/10/test/">文章标题</a>
+              </span>
+            </div>
+            
+            <div class="post-meta">
+              <span class="date">
+                <i class="fas fa-calendar-alt"></i>
+                2025-04-10
+              </span>
+                <span class="category">
+                  <i class="fas fa-folder"></i>
+                  <a class="category-link" href="categories/Web%E5%BC%80%E5%8F%91/">Web开发</a>
+                </span>
+            </div>
+            
+            <div class="post-excerpt">
+              nigga test
+...
+            </div>
+            
+            <div class="post-footer">
+              <a href="2025/04/10/test/" class="read-more">
+                <i class="fas fa-code"></i>
+                Read More
+              </a>
+            </div>
+          </div>
           <div class="post-card">
             <div class="post-header">
               <i class="fas fa-file-alt"></i>
@@ -458,7 +517,7 @@ We explore a new class of diffusion models based on the transformer architecture
     </div>
     <div class="status-item">
       <i class="fas fa-clock"></i>
-      2025-04-08
+      2025-04-12
     </div>
     <div class="status-item">
       Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>

@@ -4,24 +4,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Data Cleaning | BlackCat</title>
-
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../../../../css/main.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
   <!-- 添加代码高亮样式 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
-  <link rel="stylesheet" href="../../../../../css/code.css">
+  <!-- 添加highlight.js库 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>  <link rel="stylesheet" href="../../../../../css/code.css">
+  <link rel="stylesheet" href="../../../../../css/code-custom.css">
+  <link rel="stylesheet" href="../../../../../css/code-languages.css">
+
   <link rel="stylesheet" href="../../../../../css/vscode.css">
   <link rel="stylesheet" href="../../../../../css/post.css">
   <link rel="stylesheet" href="../../../../../css/tag.css">
   <link rel="stylesheet" href="../../../../../css/categories.css">
   <link rel="stylesheet" href="../../../../../css/archive.css">
   <link rel="stylesheet" href="../../../../../css/search.css">
-  <link rel="stylesheet" href="../../../../../css/mobile.css">
-  <link rel="stylesheet" href="../../../../../css/responsive.css">
+  <link rel="stylesheet" href="../../../../../css/mobile.css">  <link rel="stylesheet" href="../../../../../css/responsive.css">
+  <link rel="stylesheet" href="../../../../../css/elements.css">
 
   <!-- 添加 JetBrains Mono 字体 -->  
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -30,6 +32,7 @@
 
   <script src="../../../../../js/explorer.js"></script>
   <script src="../../../../../js/code-copy.js"></script>
+  <script src="../../../../../js/code-enhance.js"></script>
 <meta name="generator" content="Hexo 7.3.0"></head>
 
 
@@ -136,7 +139,7 @@
         <span>TABLE OF CONTENTS</span>
       </div>
       <div class="section-content">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E7%BC%BA%E5%A4%B1%E5%80%BC%EF%BC%88Handling-Missing-Values%EF%BC%89"><span class="toc-text">处理缺失值（Handling Missing Values）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9D%E5%A7%8B%E6%95%B0%E6%8D%AE%E6%9F%A5%E7%9C%8B-Initial-Data-Inspection"><span class="toc-text">1. 初始数据查看 (Initial Data Inspection)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%AE%A1%E7%AE%97%E7%BC%BA%E5%A4%B1%E5%80%BC%E6%95%B0%E9%87%8F-Counting-Missing-Values"><span class="toc-text">2. 计算缺失值数量 (Counting Missing Values)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%86%E6%9E%90%E7%BC%BA%E5%A4%B1%E5%8E%9F%E5%9B%A0-Understanding-Why-Data-is-Missing"><span class="toc-text">3. 分析缺失原因 (Understanding Why Data is Missing)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%88%A0%E9%99%A4%E7%BC%BA%E5%A4%B1%E5%80%BC-Dropping-Missing-Values"><span class="toc-text">4. 删除缺失值 (Dropping Missing Values)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%A1%AB%E5%85%85%E7%BC%BA%E5%A4%B1%E5%80%BC-Filling-Missing-Values"><span class="toc-text">5. 填充缺失值 (Filling Missing Values)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%85%B3%E9%94%AE%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-Key-Considerations"><span class="toc-text">6. 关键注意事项 (Key Considerations)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%9C%AF%E8%AF%AD-Key-Terms"><span class="toc-text">核心术语 (Key Terms)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BC%A9%E6%94%BE-Scaling-%E4%B8%8E%E5%BD%92%E4%B8%80%E5%8C%96-Normalization-%E7%AC%94%E8%AE%B0"><span class="toc-text">数据缩放(Scaling)与归一化(Normalization)笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-text">核心概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%87%BD%E6%95%B0%E4%B8%8E%E5%BA%93"><span class="toc-text">关键函数与库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">代码实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E9%80%94"><span class="toc-text">用途</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8E%E6%A0%87%E5%87%86%E5%8C%96%EF%BC%88Z-score%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">与标准化（Z-score）的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python-%E7%A4%BA%E4%BE%8B"><span class="toc-text">Python 示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%B7%AE%E5%BC%82"><span class="toc-text">关键差异</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">应用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-1"><span class="toc-text">注意事项</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A%E8%A7%A3%E6%9E%90%E6%97%A5%E6%9C%9F%EF%BC%88Parsing-Dates%EF%BC%89%E7%AC%94%E8%AE%B0"><span class="toc-text">总结：解析日期（Parsing Dates）笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE"><span class="toc-text">1. 环境设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%A3%80%E6%9F%A5%E6%97%A5%E6%9C%9F%E5%88%97%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">2. 检查日期列的数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%BD%AC%E6%8D%A2%E6%97%A5%E6%9C%9F%E5%88%97%E4%B8%BAdatetime%E6%A0%BC%E5%BC%8F"><span class="toc-text">3. 转换日期列为datetime格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%A4%84%E7%90%86%E5%A4%9A%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E9%97%AE%E9%A2%98"><span class="toc-text">4. 处理多日期格式问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%8F%90%E5%8F%96%E6%97%A5%E6%9C%9F%E4%BF%A1%E6%81%AF"><span class="toc-text">5. 提取日期信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E9%AA%8C%E8%AF%81%E6%97%A5%E6%9C%9F%E8%A7%A3%E6%9E%90"><span class="toc-text">6. 验证日期解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E6%A6%82%E5%BF%B5"><span class="toc-text">关键概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-2"><span class="toc-text">注意事项</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E7%BC%BA%E5%A4%B1%E5%80%BC%EF%BC%88Handling-Missing-Values%EF%BC%89"><span class="toc-text">处理缺失值（Handling Missing Values）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%9D%E5%A7%8B%E6%95%B0%E6%8D%AE%E6%9F%A5%E7%9C%8B-Initial-Data-Inspection"><span class="toc-text">1. 初始数据查看 (Initial Data Inspection)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%AE%A1%E7%AE%97%E7%BC%BA%E5%A4%B1%E5%80%BC%E6%95%B0%E9%87%8F-Counting-Missing-Values"><span class="toc-text">2. 计算缺失值数量 (Counting Missing Values)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%88%86%E6%9E%90%E7%BC%BA%E5%A4%B1%E5%8E%9F%E5%9B%A0-Understanding-Why-Data-is-Missing"><span class="toc-text">3. 分析缺失原因 (Understanding Why Data is Missing)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%88%A0%E9%99%A4%E7%BC%BA%E5%A4%B1%E5%80%BC-Dropping-Missing-Values"><span class="toc-text">4. 删除缺失值 (Dropping Missing Values)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%A1%AB%E5%85%85%E7%BC%BA%E5%A4%B1%E5%80%BC-Filling-Missing-Values"><span class="toc-text">5. 填充缺失值 (Filling Missing Values)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%85%B3%E9%94%AE%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-Key-Considerations"><span class="toc-text">6. 关键注意事项 (Key Considerations)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%9C%AF%E8%AF%AD-Key-Terms"><span class="toc-text">核心术语 (Key Terms)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BC%A9%E6%94%BE-Scaling-%E4%B8%8E%E5%BD%92%E4%B8%80%E5%8C%96-Normalization-%E7%AC%94%E8%AE%B0"><span class="toc-text">数据缩放(Scaling)与归一化(Normalization)笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-text">核心概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%87%BD%E6%95%B0%E4%B8%8E%E5%BA%93"><span class="toc-text">关键函数与库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">代码实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">工作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E9%80%94"><span class="toc-text">用途</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8E%E6%A0%87%E5%87%86%E5%8C%96%EF%BC%88Z-score%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">与标准化（Z-score）的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python-%E7%A4%BA%E4%BE%8B"><span class="toc-text">Python 示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%B7%AE%E5%BC%82"><span class="toc-text">关键差异</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-1"><span class="toc-text">注意事项</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90%E6%97%A5%E6%9C%9F%EF%BC%88Parsing-Dates%EF%BC%89"><span class="toc-text">解析日期（Parsing Dates）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE"><span class="toc-text">1. 环境设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%A3%80%E6%9F%A5%E6%97%A5%E6%9C%9F%E5%88%97%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">2. 检查日期列的数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%BD%AC%E6%8D%A2%E6%97%A5%E6%9C%9F%E5%88%97%E4%B8%BAdatetime%E6%A0%BC%E5%BC%8F"><span class="toc-text">3. 转换日期列为datetime格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%A4%84%E7%90%86%E5%A4%9A%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E9%97%AE%E9%A2%98"><span class="toc-text">4. 处理多日期格式问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%8F%90%E5%8F%96%E6%97%A5%E6%9C%9F%E4%BF%A1%E6%81%AF"><span class="toc-text">5. 提取日期信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E9%AA%8C%E8%AF%81%E6%97%A5%E6%9C%9F%E8%A7%A3%E6%9E%90"><span class="toc-text">6. 验证日期解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E6%A6%82%E5%BF%B5"><span class="toc-text">关键概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-2"><span class="toc-text">注意事项</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%EF%BC%88Character-Encodings%EF%BC%89%E6%80%BB%E7%BB%93"><span class="toc-text">字符编码（Character Encodings）总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">1. 基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Python-%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%AD%97%E8%8A%82%E4%B8%B2"><span class="toc-text">2. Python 中的字符串与字节串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E4%B8%8E%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98"><span class="toc-text">3. 文件读取与编码问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BF%9D%E5%AD%98%E6%96%87%E4%BB%B6%E4%B8%BA-UTF-8"><span class="toc-text">4. 保存文件为 UTF-8</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">5. 注意事项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%87%BD%E6%95%B0%E4%B8%8E%E5%B7%A5%E5%85%B7"><span class="toc-text">关键函数与工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A%E6%B8%85%E7%90%86%E4%B8%8D%E4%B8%80%E8%87%B4%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5%E7%9A%84Jupyter-Notebook"><span class="toc-text">总结：清理不一致文本数据输入的Jupyter Notebook</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE-Environment-Setup"><span class="toc-text">1. 环境设置 (Environment Setup)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86-Data-Preprocessing"><span class="toc-text">2. 数据预处理 (Data Preprocessing)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%A8%A1%E7%B3%8A%E5%8C%B9%E9%85%8D%E7%BA%A0%E6%AD%A3%E6%95%B0%E6%8D%AE-Fuzzy-Matching-for-Inconsistencies"><span class="toc-text">3. 模糊匹配纠正数据 (Fuzzy Matching for Inconsistencies)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%BA%94%E7%94%A8%E7%A4%BA%E4%BE%8B-Example-Workflow"><span class="toc-text">4. 应用示例 (Example Workflow)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%90%8E%E7%BB%AD%E4%BB%BB%E5%8A%A1-Next-Steps"><span class="toc-text">5. 后续任务 (Next Steps)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E6%A6%82%E5%BF%B5-Key-Terms"><span class="toc-text">关键概念 (Key Terms)</span></a></li></ol></li></ol></li></ol></li></ol>
       </div>
     </div>
     
@@ -179,14 +182,14 @@
         
           <div class="tag-item">
             <i class="fas fa-tag"></i>
-            <a href="../../../../../tags/ai/">ai</a>
-            <span class="count">(4)</span>
+            <a href="../../../../../tags/kaggle/">kaggle</a>
+            <span class="count">(3)</span>
           </div>
         
           <div class="tag-item">
             <i class="fas fa-tag"></i>
-            <a href="../../../../../tags/kaggle/">kaggle</a>
-            <span class="count">(3)</span>
+            <a href="../../../../../tags/ai/">ai</a>
+            <span class="count">(4)</span>
           </div>
         
       </div>
@@ -211,24 +214,27 @@
             <span class="date">
               <i class="fas fa-calendar-alt"></i>
               2025-04-07
-            </span>
-            
+            </span>            
               <span class="categories">
                 <i class="fas fa-folder"></i>
-                <a class="category-link" href="../../../../../categories/Kaggle%E7%B3%BB%E5%88%97/">Kaggle系列</a>
+                <div class="categories-list">
+                  <ul class="category-item-post-list"><li class="category-item-post-list-item"><a class="category-item-post-list-link" href="../../../../../categories/Kaggle%E7%B3%BB%E5%88%97/">Kaggle系列</a></li></ul>
+                </div>
               </span>
             
             
               <span class="tags">
                 <i class="fas fa-tags"></i>
-                <a class="tag-none-link" href="../../../../../tags/ai/" rel="tag">ai</a>, <a class="tag-none-link" href="../../../../../tags/kaggle/" rel="tag">kaggle</a>
+                <div class="tags-list">
+                  <ul class="tag-item-post-list" itemprop="keywords"><li class="tag-item-post-list-item"><a class="tag-item-post-list-link" href="../../../../../tags/ai/" rel="tag">ai</a></li><li class="tag-item-post-list-item"><a class="tag-item-post-list-link" href="../../../../../tags/kaggle/" rel="tag">kaggle</a></li></ul>
+                </div>
               </span>
             
           </div>
         </div>
         
         <div class="post-body vscode-markdown">
-          <h2 id="处理缺失值（Handling-Missing-Values）"><a href="#处理缺失值（Handling-Missing-Values）" class="headerlink" title="处理缺失值（Handling Missing Values）"></a>处理缺失值（Handling Missing Values）</h2><h3 id="1-初始数据查看-Initial-Data-Inspection"><a href="#1-初始数据查看-Initial-Data-Inspection" class="headerlink" title="1. 初始数据查看 (Initial Data Inspection)"></a>1. <strong>初始数据查看 (Initial Data Inspection)</strong></h3><ul>
+          <h1 id="处理缺失值（Handling-Missing-Values）"><a href="#处理缺失值（Handling-Missing-Values）" class="headerlink" title="处理缺失值（Handling Missing Values）"></a>处理缺失值（Handling Missing Values）</h1><h2 id="1-初始数据查看-Initial-Data-Inspection"><a href="#1-初始数据查看-Initial-Data-Inspection" class="headerlink" title="1. 初始数据查看 (Initial Data Inspection)"></a>1. <strong>初始数据查看 (Initial Data Inspection)</strong></h2><ul>
 <li><strong>函数&#x2F;操作</strong>:<ul>
 <li><code>pd.read_csv()</code>: 读取CSV文件，加载数据集（如NFL比赛数据）。</li>
 <li><code>data.head()</code>: 查看前五行数据，初步发现缺失值（显示为<code>NaN</code>或<code>None</code>）。</li>
@@ -236,7 +242,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="2-计算缺失值数量-Counting-Missing-Values"><a href="#2-计算缺失值数量-Counting-Missing-Values" class="headerlink" title="2. 计算缺失值数量 (Counting Missing Values)"></a>2. <strong>计算缺失值数量 (Counting Missing Values)</strong></h3><ul>
+<h2 id="2-计算缺失值数量-Counting-Missing-Values"><a href="#2-计算缺失值数量-Counting-Missing-Values" class="headerlink" title="2. 计算缺失值数量 (Counting Missing Values)"></a>2. <strong>计算缺失值数量 (Counting Missing Values)</strong></h2><ul>
 <li><strong>关键函数</strong>:<ul>
 <li><code>data.isnull().sum()</code>: 统计每列的缺失值数量。</li>
 <li><code>np.product(data.shape)</code>：计算总共的records</li>
@@ -244,7 +250,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="3-分析缺失原因-Understanding-Why-Data-is-Missing"><a href="#3-分析缺失原因-Understanding-Why-Data-is-Missing" class="headerlink" title="3. 分析缺失原因 (Understanding Why Data is Missing)"></a>3. <strong>分析缺失原因 (Understanding Why Data is Missing)</strong></h3><ul>
+<h2 id="3-分析缺失原因-Understanding-Why-Data-is-Missing"><a href="#3-分析缺失原因-Understanding-Why-Data-is-Missing" class="headerlink" title="3. 分析缺失原因 (Understanding Why Data is Missing)"></a>3. <strong>分析缺失原因 (Understanding Why Data is Missing)</strong></h2><ul>
 <li><strong>核心问题</strong>:<ul>
 <li>区分缺失原因是<strong>未记录（Not Recorded）<strong>还是</strong>不存在（Does Not Exist）</strong>。</li>
 <li><strong>示例</strong>:<ul>
@@ -255,7 +261,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="4-删除缺失值-Dropping-Missing-Values"><a href="#4-删除缺失值-Dropping-Missing-Values" class="headerlink" title="4. 删除缺失值 (Dropping Missing Values)"></a>4. <strong>删除缺失值 (Dropping Missing Values)</strong></h3><ul>
+<h2 id="4-删除缺失值-Dropping-Missing-Values"><a href="#4-删除缺失值-Dropping-Missing-Values" class="headerlink" title="4. 删除缺失值 (Dropping Missing Values)"></a>4. <strong>删除缺失值 (Dropping Missing Values)</strong></h2><ul>
 <li><strong>方法</strong>:<ul>
 <li><strong>删除行</strong>: <code>data.dropna()</code> → 删除所有有missing value的records</li>
 <li><strong>删除列</strong>: <code>data.dropna(axis=1)</code> → 但丢失大量信息。</li>
@@ -271,7 +277,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="5-填充缺失值-Filling-Missing-Values"><a href="#5-填充缺失值-Filling-Missing-Values" class="headerlink" title="5. 填充缺失值 (Filling Missing Values)"></a>5. <strong>填充缺失值 (Filling Missing Values)</strong></h3><ul>
+<h2 id="5-填充缺失值-Filling-Missing-Values"><a href="#5-填充缺失值-Filling-Missing-Values" class="headerlink" title="5. 填充缺失值 (Filling Missing Values)"></a>5. <strong>填充缺失值 (Filling Missing Values)</strong></h2><ul>
 <li><strong>常用函数</strong>:<ul>
 <li><code>fillna()</code>: 填充缺失值。<ul>
 <li><strong>填充固定值</strong>: <code>data.fillna(0)</code> → 所有<code>NaN</code>替换为0。</li>
@@ -285,7 +291,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="6-关键注意事项-Key-Considerations"><a href="#6-关键注意事项-Key-Considerations" class="headerlink" title="6. 关键注意事项 (Key Considerations)"></a>6. <strong>关键注意事项 (Key Considerations)</strong></h3><ul>
+<h2 id="6-关键注意事项-Key-Considerations"><a href="#6-关键注意事项-Key-Considerations" class="headerlink" title="6. 关键注意事项 (Key Considerations)"></a>6. <strong>关键注意事项 (Key Considerations)</strong></h2><ul>
 <li><strong>权衡删除与填充</strong>:<ul>
 <li>删除列&#x2F;行可能丢失有用信息，填充可能引入噪声。</li>
 <li>需结合业务逻辑（如<code>PenalizedTeam</code>列的处理）(例子)。<ul>
@@ -317,8 +323,8 @@
 <li><strong>Imputation</strong>: 缺失值填充技术（如均值、中位数、前后值填充）。</li>
 <li><strong>Axis参数</strong>: <code>axis=0</code>（行操作），<code>axis=1</code>（列操作）。</li>
 </ul>
-<h3 id="数据缩放-Scaling-与归一化-Normalization-笔记"><a href="#数据缩放-Scaling-与归一化-Normalization-笔记" class="headerlink" title="数据缩放(Scaling)与归一化(Normalization)笔记"></a>数据缩放(Scaling)与归一化(Normalization)笔记</h3><hr>
-<h4 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h4><ol>
+<h1 id="数据缩放-Scaling-与归一化-Normalization-笔记"><a href="#数据缩放-Scaling-与归一化-Normalization-笔记" class="headerlink" title="数据缩放(Scaling)与归一化(Normalization)笔记"></a>数据缩放(Scaling)与归一化(Normalization)笔记</h1><hr>
+<h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><ol>
 <li><p><strong>Scaling（缩放）</strong>  </p>
 <ul>
 <li>改变数据范围(range)  </li>
@@ -335,10 +341,10 @@
 </li>
 </ol>
 <hr>
-<h4 id="关键函数与库"><a href="#关键函数与库" class="headerlink" title="关键函数与库"></a>关键函数与库</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 环境设置</span><br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">from</span> scipy <span class="hljs-keyword">import</span> stats          <span class="hljs-comment"># Box-Cox变换</span><br><span class="hljs-keyword">from</span> mlxtend.preprocessing <span class="hljs-keyword">import</span> minmax_scaling  <span class="hljs-comment"># 最小-最大缩放</span><br><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br><span class="hljs-comment"># 可重复性设置</span><br>np.random.seed(<span class="hljs-number">0</span>)<br></code></pre></td></tr></table></figure>
+<h3 id="关键函数与库"><a href="#关键函数与库" class="headerlink" title="关键函数与库"></a>关键函数与库</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 环境设置</span><br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">from</span> scipy <span class="hljs-keyword">import</span> stats          <span class="hljs-comment"># Box-Cox变换</span><br><span class="hljs-keyword">from</span> mlxtend.preprocessing <span class="hljs-keyword">import</span> minmax_scaling  <span class="hljs-comment"># 最小-最大缩放</span><br><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br><span class="hljs-comment"># 可重复性设置</span><br>np.random.seed(<span class="hljs-number">0</span>)<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><ol>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><ol>
 <li><p><strong>Min-Max Scaling示例</strong>  </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 生成指数分布数据</span><br>original_data = np.random.exponential(size=<span class="hljs-number">1000</span>)<br><br><span class="hljs-comment"># 应用最小-最大缩放（0-1范围）</span><br>scaled_data = minmax_scaling(original_data, columns=[<span class="hljs-number">0</span>])<br><br><span class="hljs-comment"># 可视化对比</span><br>fig, ax = plt.subplots(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, figsize=(<span class="hljs-number">15</span>,<span class="hljs-number">3</span>))<br>sns.histplot(original_data, ax=ax[<span class="hljs-number">0</span>], kde=<span class="hljs-literal">True</span>)<br>sns.histplot(scaled_data, ax=ax[<span class="hljs-number">1</span>], kde=<span class="hljs-literal">True</span>)<br>plt.show()<br></code></pre></td></tr></table></figure>
 <ul>
@@ -355,13 +361,13 @@
 <hr>
 <p><code>minmax_scaling</code>（最小-最大缩放）是一种数据标准化方法，用于将数据线性地变换到一个指定的范围（通常是 [0, 1] 或 [-1, 1]）。它的核心作用是通过缩放消除原始数据的量纲和范围差异，使得不同特征具有可比性，同时保留原始数据的分布形状。</p>
 <hr>
-<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a><strong>工作原理</strong></h3><p>假设有一组数据 ( X &#x3D; [x_1, x_2, …, x_n] )，<code>minmax_scaling</code> 的公式为：<br>[<br>x_{\text{scaled}} &#x3D; \frac{x - \min(X)}{\max(X) - \min(X)}<br>]</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a><strong>工作原理</strong></h2><p>假设有一组数据 ( X &#x3D; [x_1, x_2, …, x_n] )，<code>minmax_scaling</code> 的公式为：<br>[<br>x_{\text{scaled}} &#x3D; \frac{x - \min(X)}{\max(X) - \min(X)}<br>]</p>
 <ul>
 <li>将数据压缩到 <strong>[0, 1]</strong> 区间（默认）。</li>
 <li>若想缩放到其他范围（如 [a, b]），公式可扩展为：<br>[<br>x_{\text{scaled}} &#x3D; a + \frac{(x - \min(X))(b - a)}{\max(X) - \min(X)}<br>]</li>
 </ul>
 <hr>
-<h3 id="用途"><a href="#用途" class="headerlink" title="用途"></a><strong>用途</strong></h3><ol>
+<h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a><strong>用途</strong></h2><ol>
 <li><p><strong>消除量纲差异</strong><br>当数据特征的单位或范围差异很大时（例如：年龄 [0-100] 和收入 [0-1,000,000]），直接建模会导致数值大的特征主导模型。缩放后所有特征在同一量级上。</p>
 </li>
 <li><p><strong>加速模型收敛</strong><br>许多机器学习算法（如神经网络、梯度下降、KNN、SVM）对特征的尺度敏感。缩放后的数据能更快收敛。</p>
@@ -372,7 +378,7 @@
 </li>
 </ol>
 <hr>
-<h3 id="与标准化（Z-score）的区别"><a href="#与标准化（Z-score）的区别" class="headerlink" title="与标准化（Z-score）的区别"></a><strong>与标准化（Z-score）的区别</strong></h3><ul>
+<h2 id="与标准化（Z-score）的区别"><a href="#与标准化（Z-score）的区别" class="headerlink" title="与标准化（Z-score）的区别"></a><strong>与标准化（Z-score）的区别</strong></h2><ul>
 <li><p><strong>最小-最大缩放</strong>：  </p>
 <ul>
 <li>范围固定（如 [0, 1]）。  </li>
@@ -387,17 +393,17 @@
 </li>
 </ul>
 <hr>
-<h3 id="Python-示例"><a href="#Python-示例" class="headerlink" title="Python 示例"></a><strong>Python 示例</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> MinMaxScaler<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-comment"># 原始数据</span><br>data = np.array([[<span class="hljs-number">10</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">5</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">8</span>]])<br><br><span class="hljs-comment"># 缩放到 [0, 1]</span><br>scaler = MinMaxScaler()<br>scaled_data = scaler.fit_transform(data)<br><br><span class="hljs-built_in">print</span>(scaled_data)<br></code></pre></td></tr></table></figure>
+<h2 id="Python-示例"><a href="#Python-示例" class="headerlink" title="Python 示例"></a><strong>Python 示例</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> MinMaxScaler<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-comment"># 原始数据</span><br>data = np.array([[<span class="hljs-number">10</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">5</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">8</span>]])<br><br><span class="hljs-comment"># 缩放到 [0, 1]</span><br>scaler = MinMaxScaler()<br>scaled_data = scaler.fit_transform(data)<br><br><span class="hljs-built_in">print</span>(scaled_data)<br></code></pre></td></tr></table></figure>
 <p>输出：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-string">[[1.   0.        ]</span><br><span class="hljs-string"> [0.444 0.166...]</span><br><span class="hljs-string"> [0.    1.        ]]</span><br></code></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a><strong>注意事项</strong></h3><ul>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a><strong>注意事项</strong></h2><ul>
 <li><strong>异常值问题</strong>：如果数据存在极端值，<code>minmax_scaling</code> 会导致有效数据被压缩（例如，99% 的数据集中在 0.01-0.02 之间）。此时可用 <code>RobustScaler</code>（基于分位数缩放）或标准化（Z-score）。</li>
 <li><strong>树模型（如随机森林）不需要缩放</strong>：因为这些模型不依赖特征尺度。</li>
 </ul>
 <p>总结：<code>minmax_scaling</code> 是数据预处理的基础工具，适用于需要固定范围或量纲统一的场景，但在异常值较多时需谨慎使用。</p>
-<h4 id="关键差异"><a href="#关键差异" class="headerlink" title="关键差异"></a>关键差异</h4><table>
+<h3 id="关键差异"><a href="#关键差异" class="headerlink" title="关键差异"></a>关键差异</h3><table>
 <thead>
 <tr>
 <th><strong>特征</strong></th>
@@ -427,28 +433,28 @@
 </tr>
 </tbody></table>
 <hr>
-<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><ul>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
 <li><strong>Scaling案例</strong>：比较不同货币（100日元≈1美元）或量纲差异大的特征  </li>
 <li><strong>Normalization案例</strong>：使右偏&#x2F;左偏数据更适合线性模型假设</li>
 </ul>
 <hr>
-<h4 id="注意事项-1"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h4><ul>
+<h3 id="注意事项-1"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
 <li><code>np.random.seed(0)</code>：确保随机过程可复现  </li>
 <li>Box-Cox要求输入数据必须&gt;0  </li>
 <li>可视化是验证效果的关键工具（如直方图+KDE曲线）</li>
 </ul>
-<h1 id="总结：解析日期（Parsing-Dates）笔记"><a href="#总结：解析日期（Parsing-Dates）笔记" class="headerlink" title="总结：解析日期（Parsing Dates）笔记"></a>总结：解析日期（Parsing Dates）笔记</h1><h2 id="1-环境设置"><a href="#1-环境设置" class="headerlink" title="1. 环境设置"></a>1. 环境设置</h2><ul>
+<h1 id="解析日期（Parsing-Dates）"><a href="#解析日期（Parsing-Dates）" class="headerlink" title="解析日期（Parsing Dates）"></a>解析日期（Parsing Dates）</h1><h2 id="1-环境设置"><a href="#1-环境设置" class="headerlink" title="1. 环境设置"></a>1. 环境设置</h2><ul>
 <li>导入必要库：<code>pandas</code>, <code>numpy</code>, <code>seaborn</code>, <code>datetime</code></li>
 <li>读取数据：<code>landslides = pd.read_csv(&quot;../input/landslide-events/catalog.csv&quot;)</code></li>
 <li>设置随机种子：<code>np.random.seed(0)</code></li>
 </ul>
 <h2 id="2-检查日期列的数据类型"><a href="#2-检查日期列的数据类型" class="headerlink" title="2. 检查日期列的数据类型"></a>2. 检查日期列的数据类型</h2><ul>
 <li>使用<code>head()</code>查看数据前几行</li>
-<li>打印日期列：<code>landslides[&#39;date&#39;].head()</code></li>
-<li>检查数据类型：<code>landslides[&#39;date&#39;].dtype</code>返回<code>object</code>(对象)类型，表示Python未识别为日期</li>
+<li>打印日期列：<code>data[&#39;date&#39;].head()</code></li>
+<li>检查数据类型：<code>data[&#39;date&#39;].dtype</code>返回<code>object</code>(对象)类型，表示Python未识别为日期</li>
 </ul>
 <h2 id="3-转换日期列为datetime格式"><a href="#3-转换日期列为datetime格式" class="headerlink" title="3. 转换日期列为datetime格式"></a>3. 转换日期列为datetime格式</h2><ul>
-<li>使用<code>pd.to_datetime()</code>函数解析日期：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">landslides[<span class="hljs-string">&#x27;date_parsed&#x27;</span>] = pd.to_datetime(landslides[<span class="hljs-string">&#x27;date&#x27;</span>], <span class="hljs-built_in">format</span>=<span class="hljs-string">&quot;%m/%d/%y&quot;</span>)<br></code></pre></td></tr></table></figure></li>
+<li>使用<code>pd.to_datetime()</code>函数解析日期：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">data[<span class="hljs-string">&#x27;date_parsed&#x27;</span>] = pd.to_datetime(data[<span class="hljs-string">&#x27;date&#x27;</span>], <span class="hljs-built_in">format</span>=<span class="hljs-string">&quot;%m/%d/%y&quot;</span>)<br></code></pre></td></tr></table></figure></li>
 <li>strftime directives(格式化指令)：<ul>
 <li><code>%m</code>：月份</li>
 <li><code>%d</code>：日</li>
@@ -483,11 +489,126 @@
 <li>解析日期后，可以进行各种日期相关操作和计算</li>
 <li>验证日期解析结果很重要，可避免月份和日期的混淆错误</li>
 </ul>
+<h1 id="字符编码（Character-Encodings）总结"><a href="#字符编码（Character-Encodings）总结" class="headerlink" title="字符编码（Character Encodings）总结"></a>字符编码（Character Encodings）总结</h1><h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. <strong>基本概念</strong></h2><ul>
+<li><strong>字符编码（Character Encodings）</strong>：将二进制字节（如 <code>0110100001101001</code>）映射为人类可读文本（如 “hi”）的规则集合。  </li>
+<li><strong>常见问题</strong>：<ul>
+<li><strong>乱码（Mojibake）</strong>：用错误编码解码文本时的混乱字符（如 <code>æ–‡å—åŒ–ã??</code>）。</li>
+<li><strong>未知字符（Unknown Characters）</strong>：无对应映射时显示的占位符（如 <code>����������</code>）。</li>
+</ul>
+</li>
+<li><strong>UTF-8</strong>：现代标准编码，Python 3 的默认编码，建议所有数据优先使用。</li>
+</ul>
+<hr>
+<h3 id="2-Python-中的字符串与字节串"><a href="#2-Python-中的字符串与字节串" class="headerlink" title="2. Python 中的字符串与字节串"></a>2. <strong>Python 中的字符串与字节串</strong></h3><ul>
+<li><strong>字符串（String）</strong>：Python 3 默认以 UTF-8 存储文本。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">before = <span class="hljs-string">&quot;This is the euro symbol: €&quot;</span><br><span class="hljs-built_in">type</span>(before)  <span class="hljs-comment"># 输出: str</span><br></code></pre></td></tr></table></figure></li>
+<li><strong>字节串（Bytes）</strong>：通过 <code>encode()</code> 将字符串转换为字节序列。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">after = before.encode(<span class="hljs-string">&quot;utf-8&quot;</span>, errors=<span class="hljs-string">&quot;replace&quot;</span>)  <span class="hljs-comment"># 用 &#x27;replace&#x27; 处理无法编码的字符</span><br><span class="hljs-built_in">type</span>(after)  <span class="hljs-comment"># 输出: bytes</span><br></code></pre></td></tr></table></figure></li>
+<li><strong>解码（Decode）</strong>：用正确编码将字节串转回字符串。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(after.decode(<span class="hljs-string">&quot;utf-8&quot;</span>))  <span class="hljs-comment"># 正确输出原字符串</span><br><span class="hljs-built_in">print</span>(after.decode(<span class="hljs-string">&quot;ascii&quot;</span>))  <span class="hljs-comment"># 报错: UnicodeDecodeError（编码不匹配）</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="3-文件读取与编码问题"><a href="#3-文件读取与编码问题" class="headerlink" title="3. 文件读取与编码问题"></a>3. <strong>文件读取与编码问题</strong></h3><ul>
+<li><strong>常见错误</strong>：读取非 UTF-8 文件时可能触发 <code>UnicodeDecodeError</code>。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 示例报错：&#x27;utf-8&#x27; codec can&#x27;t decode byte 0x99...</span><br>pd.read_csv(<span class="hljs-string">&quot;non_utf8_file.csv&quot;</span>)<br></code></pre></td></tr></table></figure></li>
+<li><strong>解决方案</strong>：<ul>
+<li>使用 <code>charset_normalizer</code> 检测文件编码：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;file.csv&quot;</span>, <span class="hljs-string">&quot;rb&quot;</span>) <span class="hljs-keyword">as</span> rawdata:<br>    result = charset_normalizer.detect(rawdata.read(<span class="hljs-number">10000</span>))  <span class="hljs-comment"># 读取前10000字节猜测编码</span><br><span class="hljs-built_in">print</span>(result)  <span class="hljs-comment"># 输出: &#123;&#x27;encoding&#x27;: &#x27;Windows-1252&#x27;, &#x27;confidence&#x27;: 0.73&#125;</span><br></code></pre></td></tr></table></figure></li>
+<li>指定正确编码读取文件：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">df = pd.read_csv(<span class="hljs-string">&quot;file.csv&quot;</span>, encoding=<span class="hljs-string">&quot;Windows-1252&quot;</span>)<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="4-保存文件为-UTF-8"><a href="#4-保存文件为-UTF-8" class="headerlink" title="4. 保存文件为 UTF-8"></a>4. <strong>保存文件为 UTF-8</strong></h3><ul>
+<li><strong>默认保存</strong>：Python 保存文件时默认使用 UTF-8。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">df.to_csv(<span class="hljs-string">&quot;output_utf8.csv&quot;</span>)  <span class="hljs-comment"># 无额外参数即可保存为 UTF-8</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="5-注意事项"><a href="#5-注意事项" class="headerlink" title="5. 注意事项"></a>5. <strong>注意事项</strong></h3><ul>
+<li><strong>避免数据损坏</strong>：错误编码转换可能导致不可逆信息丢失（如用 <code>errors=&quot;replace&quot;</code> 替换无法解析的字符）。</li>
+<li><strong>混合数据类型警告</strong>：读取文件时可能触发 <code>DtypeWarning</code>，可通过指定 <code>dtype</code> 或 <code>low_memory=False</code> 解决。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pd.read_csv(<span class="hljs-string">&quot;file.csv&quot;</span>, dtype=&#123;<span class="hljs-string">&quot;column&quot;</span>: <span class="hljs-built_in">str</span>&#125;, low_memory=<span class="hljs-literal">False</span>)<br></code></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="关键函数与工具"><a href="#关键函数与工具" class="headerlink" title="关键函数与工具"></a>关键函数与工具</h2><ul>
+<li><strong>函数</strong>：<ul>
+<li><code>encode(encoding, errors)</code>：将字符串编码为字节串。</li>
+<li><code>decode(encoding, errors)</code>：将字节串解码为字符串。</li>
+<li><code>pd.read_csv(encoding=...)</code>：指定编码读取 CSV 文件。</li>
+<li><code>to_csv()</code>：保存 DataFrame 为 CSV（默认 UTF-8）。</li>
+</ul>
+</li>
+<li><strong>模块</strong>：<ul>
+<li><code>charset_normalizer</code>：自动检测文件编码（替代 <code>chardet</code>）。</li>
+</ul>
+</li>
+</ul>
+<p>通过正确处理编码，可避免数据解析错误，确保文本处理的准确性。</p>
+<h3 id="总结：清理不一致文本数据输入的Jupyter-Notebook"><a href="#总结：清理不一致文本数据输入的Jupyter-Notebook" class="headerlink" title="总结：清理不一致文本数据输入的Jupyter Notebook"></a>总结：清理不一致文本数据输入的Jupyter Notebook</h3><h4 id="1-环境设置-Environment-Setup"><a href="#1-环境设置-Environment-Setup" class="headerlink" title="1. 环境设置 (Environment Setup)"></a><strong>1. 环境设置 (Environment Setup)</strong></h4><ul>
+<li><strong>导入库 (Libraries Imported)</strong>:<ul>
+<li><code>pandas</code> &amp; <code>numpy</code>：数据处理与分析。</li>
+<li><code>fuzzywuzzy</code>：模糊字符串匹配（用于纠正拼写不一致）。</li>
+<li><code>charset_normalizer</code>：检测文件编码。</li>
+</ul>
+</li>
+<li><strong>读取数据</strong>：<br>使用 <code>pd.read_csv()</code> 加载数据集 <code>pakistan_intellectual_capital.csv</code>。</li>
+<li><strong>设置随机种子</strong>：<code>np.random.seed(0)</code> 确保结果可复现。</li>
+</ul>
+<hr>
+<h4 id="2-数据预处理-Data-Preprocessing"><a href="#2-数据预处理-Data-Preprocessing" class="headerlink" title="2. 数据预处理 (Data Preprocessing)"></a><strong>2. 数据预处理 (Data Preprocessing)</strong></h4><ul>
+<li><strong>查看数据</strong>：<code>professors.head()</code> 显示前五行，重点关注 <code>Country</code> 列。</li>
+<li><strong>统一格式</strong>：<ul>
+<li><strong>小写转换</strong>：<code>professors[&#39;Country&#39;].str.lower()</code> 消除大小写差异。</li>
+<li><strong>去除空格</strong>：<code>professors[&#39;Country&#39;].str.strip()</code> 清理前后空格。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="3-模糊匹配纠正数据-Fuzzy-Matching-for-Inconsistencies"><a href="#3-模糊匹配纠正数据-Fuzzy-Matching-for-Inconsistencies" class="headerlink" title="3. 模糊匹配纠正数据 (Fuzzy Matching for Inconsistencies)"></a><strong>3. 模糊匹配纠正数据 (Fuzzy Matching for Inconsistencies)</strong></h4><ul>
+<li><strong>问题示例</strong>：<code>Country</code> 列中存在 <code>south korea</code> 和 <code>southkorea</code> 等不一致条目。</li>
+<li><strong>使用 <code>fuzzywuzzy</code></strong>：<ul>
+<li><strong>核心函数</strong>：<code>process.extract(string, list, scorer=fuzz.token_sort_ratio)</code> 计算字符串相似度。</li>
+<li><strong>相似度阈值</strong>：设定 <code>min_ratio</code>（如47）筛选需替换的条目。</li>
+</ul>
+</li>
+<li><strong>自定义函数 <code>replace_matches_in_column</code></strong>：<ul>
+<li><strong>功能</strong>：自动替换指定列中与目标字符串相似度高于阈值的条目。</li>
+<li><strong>参数</strong>：<ul>
+<li><code>df</code>：目标DataFrame。</li>
+<li><code>column</code>：待清理的列名。</li>
+<li><code>string_to_match</code>：标准化的目标字符串（如 <code>&quot;south korea&quot;</code>）。</li>
+<li><code>min_ratio</code>：最小匹配相似度（默认47）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="4-应用示例-Example-Workflow"><a href="#4-应用示例-Example-Workflow" class="headerlink" title="4. 应用示例 (Example Workflow)"></a><strong>4. 应用示例 (Example Workflow)</strong></h4><ol>
+<li><p><strong>识别相似项</strong>：  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">matches = fuzzywuzzy.process.extract(<span class="hljs-string">&quot;south korea&quot;</span>, countries, limit=<span class="hljs-number">10</span>, scorer=fuzzywuzzy.fuzz.token_sort_ratio)<br></code></pre></td></tr></table></figure>
+<p>输出结果包含相似字符串及其匹配分数（如 <code>(&#39;southkorea&#39;, 48)</code>）。</p>
+</li>
+<li><p><strong>执行替换</strong>：  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">replace_matches_in_column(df=professors, column=<span class="hljs-string">&#x27;Country&#x27;</span>, string_to_match=<span class="hljs-string">&quot;south korea&quot;</span>)<br></code></pre></td></tr></table></figure>
+<p>将 <code>southkorea</code> 等条目统一为 <code>south korea</code>。</p>
+</li>
+<li><p><strong>验证结果</strong>：<br><code>professors[&#39;Country&#39;].unique()</code> 检查是否仅保留标准化值。</p>
+</li>
+</ol>
+<hr>
+<h4 id="5-后续任务-Next-Steps"><a href="#5-后续任务-Next-Steps" class="headerlink" title="5. 后续任务 (Next Steps)"></a><strong>5. 后续任务 (Next Steps)</strong></h4><ul>
+<li>继续清理其他列（如 <code>Graduated from</code> 或 <code>Designation</code>）的不一致数据。</li>
+<li>扩展模糊匹配逻辑，处理更多边缘案例（如 <code>usofa</code> → <code>usa</code>）。</li>
+</ul>
+<hr>
+<h4 id="关键概念-Key-Terms"><a href="#关键概念-Key-Terms" class="headerlink" title="关键概念 (Key Terms)"></a><strong>关键概念 (Key Terms)</strong></h4><ul>
+<li><strong>模糊匹配 (Fuzzy Matching)</strong>：通过计算编辑距离（edit distance）量化字符串相似度，自动化纠正拼写错误或变体。</li>
+<li><strong>Token Sort Ratio</strong>：<code>fuzzywuzzy</code> 的一种评分方法，忽略单词顺序和大小写的影响。</li>
+</ul>
 
         </div>
         
         <!-- 文章导航 -->
         <nav class="post-nav">
+          
+            <a class="prev" href="../../../10/test/">
+              <i class="fas fa-chevron-left"></i>
+              文章标题
+            </a>
           
           
             <a class="next" href="../../../../03/16/Kaggle/introduction%20to%20ai%20ethics/">
@@ -514,7 +635,7 @@
     </div>
     <div class="status-item">
       <i class="fas fa-clock"></i>
-      2025-04-08
+      2025-04-12
     </div>
     <div class="status-item">
       Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
