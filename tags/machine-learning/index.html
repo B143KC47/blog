@@ -33,7 +33,11 @@
   <script src="../../js/explorer.js"></script>
   <script src="../../js/code-copy.js"></script>
   <script src="../../js/code-enhance.js"></script>
-<meta name="generator" content="Hexo 7.3.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
 
 
   <body>
@@ -151,9 +155,9 @@
             <span class="count">(1)</span>
           </div>
         
-          <div class="tag-item active">
+          <div class="tag-item ">
             <i class="fas fa-tag"></i>
-            <a href="">Machine learning</a>
+            <a href="../Machine-learning/">Machine learning</a>
             <span class="count">(1)</span>
           </div>
         
@@ -161,12 +165,6 @@
             <i class="fas fa-tag"></i>
             <a href="../ai/">ai</a>
             <span class="count">(4)</span>
-          </div>
-        
-          <div class="tag-item ">
-            <i class="fas fa-tag"></i>
-            <a href="../hexo/">hexo</a>
-            <span class="count">(1)</span>
           </div>
         
           <div class="tag-item ">
@@ -181,21 +179,9 @@
             <span class="count">(3)</span>
           </div>
         
-          <div class="tag-item ">
+          <div class="tag-item active">
             <i class="fas fa-tag"></i>
-            <a href="../machine-learning/">machine learning</a>
-            <span class="count">(1)</span>
-          </div>
-        
-          <div class="tag-item ">
-            <i class="fas fa-tag"></i>
-            <a href="../%E4%B8%BB%E9%A2%98/">主题</a>
-            <span class="count">(1)</span>
-          </div>
-        
-          <div class="tag-item ">
-            <i class="fas fa-tag"></i>
-            <a href="../%E4%BC%98%E5%8C%96/">优化</a>
+            <a href="">machine learning</a>
             <span class="count">(1)</span>
           </div>
         
@@ -208,7 +194,7 @@
     <div class="tab-bar">
       <div class="tab active">
         <i class="fas fa-tag"></i>
-        <span>tag: Machine%20learning.md</span>
+        <span>tag: machine%20learning.md</span>
       </div>
     </div>
     
@@ -216,7 +202,7 @@
       <div class="tag-header">
         <h1>
           <i class="fas fa-tag"></i>
-          Tag: Machine learning
+          Tag: machine learning
         </h1>
         <span class="tag-count">1 posts</span>
       </div>
@@ -227,14 +213,14 @@
             <div class="post-header">
               <i class="fas fa-file-alt"></i>
               <span class="post-title">
-                <a href="../../2025/02/23/Kaggle/machine%20learning%20basic/">机器学习入门</a>
+                <a href="../../2025/03/16/Kaggle/panda/">Panda basic</a>
               </span>
             </div>
             
             <div class="post-meta">
               <span class="date">
                 <i class="fas fa-calendar-alt"></i>
-                2025-02-23
+                2025-03-16
               </span>
               
                 <span class="category">
@@ -245,16 +231,13 @@
             </div>
             
             <div class="post-excerpt">
-              (本博客内容基于Kaggle教程，感谢：https://www.kaggle.com/learn/intro-to-machine-learning)
-机器学习是啥？简单说，就是让电脑从数据里学习，找到规律，然后用这些规律来做预测。
-机器学习的几个步骤：
-定义模型： 就像搭积木，选择用什么样的积木（算法）来搭建。
-喂数据： 把数据给模型学习，让它找到数据里的规律。
-做预测： 学习完后，让模型用学到...
+              (本博客基于Kaggle教材 link:https://www.kaggle.com/learn/pandas)
+PandaPanda 是一个强大的 Python 库，主要用于数据分析。在本人的学习中，我认为Panda与SQL有异曲同工之妙，如果你直接接触过SQL你可以把其理解为一个Python版本的SQL
+1import pandas as pd # 引入 pandas 库，并起个别名 pd，方...
             </div>
             
             <div class="post-footer">
-              <a href="../../2025/02/23/Kaggle/machine%20learning%20basic/" class="read-more">
+              <a href="../../2025/03/16/Kaggle/panda/" class="read-more">
                 <i class="fas fa-code"></i>
                 Read More
               </a>
@@ -281,7 +264,7 @@
     </div>
     <div class="status-item">
       <i class="fas fa-clock"></i>
-      2025-04-12
+      2025-04-14
     </div>
     <div class="status-item">
       Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
@@ -340,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
     language: "zh-CN",
     search_placeholder: "输入关键词搜索...",
     search_no_results: "未找到相关结果",
-    search_result: "نتيجة",
+    search_result: "Ergebnis",
     search_results: "搜索结果",
     search_results_found: "找到 undefined 个结果",
     search_in: "搜索范围",
