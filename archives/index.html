@@ -164,13 +164,17 @@
           
           
         
+          
+          
+          
+        
         
         
           <div class="archive-year">
             <div class="folder">
               <i class="fas fa-folder"></i>
               <span>2025</span>
-              <span class="count">(5)</span>
+              <span class="count">(6)</span>
             </div>
             <div class="archive-posts">
               
@@ -204,8 +208,15 @@
               
                 <div class="file ">
                   <i class="fas fa-file-alt"></i>
+                  <a href="../2025/02/23/Kaggle/Intermediate%20Machine%20Learning/">
+                    02-23 machine learning basic
+                  </a>
+                </div>
+              
+                <div class="file ">
+                  <i class="fas fa-file-alt"></i>
                   <a href="../2025/02/23/Kaggle/machine%20learning%20basic/">
-                    02-23 机器学习入门
+                    02-23 machine learning basic
                   </a>
                 </div>
               
@@ -231,7 +242,7 @@
           <i class="fas fa-archive"></i>
           Archives
         </h1>
-        <span class="archive-count">5 posts</span>
+        <span class="archive-count">6 posts</span>
       </div>
 
       <div class="timeline-container">
@@ -240,7 +251,7 @@
             <div class="year-header">
               <i class="fas fa-calendar-alt"></i>
               2025
-              <span class="year-count">(5 posts)</span>
+              <span class="year-count">(6 posts)</span>
             </div>
             <div class="year-posts">
               
@@ -346,7 +357,31 @@
                     02-23
                   </div>
                   <div class="post-info">
-                    <a href="../2025/02/23/Kaggle/machine%20learning%20basic/">机器学习入门</a>
+                    <a href="../2025/02/23/Kaggle/Intermediate%20Machine%20Learning/">machine learning basic</a>
+                    <div class="post-meta">
+                      
+                        <span class="category">
+                          <i class="fas fa-folder"></i>
+                          <a class="category-link" href="../categories/Kaggle%E7%B3%BB%E5%88%97/">Kaggle系列</a>
+                        </span>
+                      
+                      
+                        <span class="tags">
+                          <i class="fas fa-tags"></i>
+                          <a class="tag-none-link" href="../tags/AI/" rel="tag">AI</a>, <a class="tag-none-link" href="../tags/Kaggle/" rel="tag">Kaggle</a>, <a class="tag-none-link" href="../tags/Machine-learning/" rel="tag">Machine learning</a>
+                        </span>
+                      
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="timeline-post">
+                  <div class="post-date">
+                    <i class="fas fa-clock"></i>
+                    02-23
+                  </div>
+                  <div class="post-info">
+                    <a href="../2025/02/23/Kaggle/machine%20learning%20basic/">machine learning basic</a>
                     <div class="post-meta">
                       
                         <span class="category">
@@ -418,19 +453,41 @@
     <script>hljs.highlightAll();</script>
     <!-- 这里可以放置自定义脚本 -->
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  // 代码高亮主题设置
-  hljs.configure({
-    theme: 'vs2015'
-  });
-  
-  // 添加平滑滚动
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+document.addEventListener('DOMContentLoaded', (event) => {
+  // Apply smooth scroll to non-TOC anchor links
+  document.querySelectorAll('a[href^="#"]:not(.toc-link)').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
-      document.querySelector(this.getAttribute('href')).scrollIntoView({
-        behavior: 'smooth'
-      });
+      // Check if querySelector is valid before using it
+      try {
+        const targetSelector = this.getAttribute('href');
+        // Basic check for potentially invalid selectors (though not exhaustive)
+        if (targetSelector && targetSelector.length > 1) { 
+          const targetElement = document.querySelector(targetSelector);
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth'
+            });
+          } else {
+            console.warn('Smooth scroll target not found:', targetSelector);
+          }
+        } else {
+           console.warn('Invalid href for smooth scroll:', targetSelector);
+        }
+      } catch (error) {
+        console.error('Error during smooth scroll:', error, 'Selector:', this.getAttribute('href'));
+        // Fallback or alternative behavior if needed
+        // For example, try getElementById if it's just an ID
+        const targetId = this.getAttribute('href').slice(1);
+        try {
+            const targetElementById = document.getElementById(decodeURIComponent(targetId));
+            if (targetElementById) {
+                targetElementById.scrollIntoView({ behavior: 'smooth' });
+            }
+        } catch (idError) {
+             console.error('Fallback getElementById also failed:', idError);
+        }
+      }
     });
   });
 });
@@ -444,7 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
     language: "zh-CN",
     search_placeholder: "输入关键词搜索...",
     search_no_results: "未找到相关结果",
-    search_result: "Ergebnis",
+    search_result: "نتيجة",
     search_results: "搜索结果",
     search_results_found: "找到 undefined 个结果",
     search_in: "搜索范围",

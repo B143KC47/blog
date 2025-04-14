@@ -150,16 +150,16 @@
       <div class="section-content">
           <div class="folder">
             <i class="fas fa-folder"></i>
-            <a href="categories/Kaggle%E7%B3%BB%E5%88%97/" class="category-link">
-              <span>Kaggle系列</span>
-              <span class="count">(4)</span>
+            <a href="categories/Image-Generation/" class="category-link">
+              <span>Image Generation</span>
+              <span class="count">(1)</span>
             </a>
           </div>
           <div class="folder">
             <i class="fas fa-folder"></i>
-            <a href="categories/Image-Generation/" class="category-link">
-              <span>Image Generation</span>
-              <span class="count">(1)</span>
+            <a href="categories/Kaggle%E7%B3%BB%E5%88%97/" class="category-link">
+              <span>Kaggle系列</span>
+              <span class="count">(5)</span>
             </a>
           </div>
       </div>
@@ -190,7 +190,7 @@
           </div>
           <div class="file">
             <i class="fas fa-file-code"></i>
-            <a href="2025/02/23/Kaggle/machine%20learning%20basic/">机器学习入门</a>
+            <a href="2025/02/23/Kaggle/Intermediate%20Machine%20Learning/">machine learning basic</a>
           </div>
       </div>
     </div>
@@ -206,19 +206,19 @@
           <div class="tag-item">
             <i class="fas fa-tag"></i>
             <a href="tags/AI/">AI</a>
-            <span class="count">(1)</span>
+            <span class="count">(2)</span>
           </div>
         
           <div class="tag-item">
             <i class="fas fa-tag"></i>
             <a href="tags/Kaggle/">Kaggle</a>
-            <span class="count">(1)</span>
+            <span class="count">(2)</span>
           </div>
         
           <div class="tag-item">
             <i class="fas fa-tag"></i>
             <a href="tags/Machine-learning/">Machine learning</a>
-            <span class="count">(1)</span>
+            <span class="count">(2)</span>
           </div>
         
           <div class="tag-item">
@@ -388,7 +388,46 @@ We explore a new class of diffusion models based on the transformer architecture
             <div class="post-header">
               <i class="fas fa-file-alt"></i>
               <span class="post-title">
-                <a href="2025/02/23/Kaggle/machine%20learning%20basic/">机器学习入门</a>
+                <a href="2025/02/23/Kaggle/Intermediate%20Machine%20Learning/">machine learning basic</a>
+              </span>
+            </div>
+            
+            <div class="post-meta">
+              <span class="date">
+                <i class="fas fa-calendar-alt"></i>
+                2025-02-23
+              </span>
+                <span class="category">
+                  <i class="fas fa-folder"></i>
+                  <a class="category-link" href="categories/Kaggle%E7%B3%BB%E5%88%97/">Kaggle系列</a>
+                </span>
+            </div>
+            
+            <div class="post-excerpt">
+              Missing Values数据缺失值常见产生途径：
+
+数据采集不完整或设备故障  
+录入错误或人为省略  
+无效或不适用的数据项  
+不同数据源合并时的对齐缺失  
+隐私或保密原因导致的信息遮蔽
+
+如果尝试使用缺失值数据建立模型，大多数机器学习库（包括 scikit-learn）都会出错。
+...
+            </div>
+            
+            <div class="post-footer">
+              <a href="2025/02/23/Kaggle/Intermediate%20Machine%20Learning/" class="read-more">
+                <i class="fas fa-code"></i>
+                Read More
+              </a>
+            </div>
+          </div>
+          <div class="post-card">
+            <div class="post-header">
+              <i class="fas fa-file-alt"></i>
+              <span class="post-title">
+                <a href="2025/02/23/Kaggle/machine%20learning%20basic/">machine learning basic</a>
               </span>
             </div>
             
@@ -471,19 +510,41 @@ We explore a new class of diffusion models based on the transformer architecture
     <script>hljs.highlightAll();</script>
     <!-- 这里可以放置自定义脚本 -->
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  // 代码高亮主题设置
-  hljs.configure({
-    theme: 'vs2015'
-  });
-  
-  // 添加平滑滚动
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+document.addEventListener('DOMContentLoaded', (event) => {
+  // Apply smooth scroll to non-TOC anchor links
+  document.querySelectorAll('a[href^="#"]:not(.toc-link)').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
-      document.querySelector(this.getAttribute('href')).scrollIntoView({
-        behavior: 'smooth'
-      });
+      // Check if querySelector is valid before using it
+      try {
+        const targetSelector = this.getAttribute('href');
+        // Basic check for potentially invalid selectors (though not exhaustive)
+        if (targetSelector && targetSelector.length > 1) { 
+          const targetElement = document.querySelector(targetSelector);
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth'
+            });
+          } else {
+            console.warn('Smooth scroll target not found:', targetSelector);
+          }
+        } else {
+           console.warn('Invalid href for smooth scroll:', targetSelector);
+        }
+      } catch (error) {
+        console.error('Error during smooth scroll:', error, 'Selector:', this.getAttribute('href'));
+        // Fallback or alternative behavior if needed
+        // For example, try getElementById if it's just an ID
+        const targetId = this.getAttribute('href').slice(1);
+        try {
+            const targetElementById = document.getElementById(decodeURIComponent(targetId));
+            if (targetElementById) {
+                targetElementById.scrollIntoView({ behavior: 'smooth' });
+            }
+        } catch (idError) {
+             console.error('Fallback getElementById also failed:', idError);
+        }
+      }
     });
   });
 });
@@ -497,7 +558,7 @@ document.addEventListener('DOMContentLoaded', () => {
     language: "zh-CN",
     search_placeholder: "输入关键词搜索...",
     search_no_results: "未找到相关结果",
-    search_result: "Ergebnis",
+    search_result: "نتيجة",
     search_results: "搜索结果",
     search_results_found: "找到 undefined 个结果",
     search_in: "搜索范围",
