@@ -1,23 +1,52 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Panda basic | BlackCat</title>
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../../css/main.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-  <!-- 添加代码高亮样式 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
-  <!-- 添加highlight.js库 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>  <link rel="stylesheet" href="../../../../../css/code.css">
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="A simple dark Hexo theme inspired by code.">
+  <meta name="keywords" content="ai,kaggle,machine learning">
+  <meta name="author" content="B143KC47">
+  <link rel="canonical" href="https://B143KC47.github.io/blog">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Panda basic | BlackCat">
+  <meta property="og:description" content="A simple dark Hexo theme inspired by code.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://B143KC47.github.io/blog">
+  <meta property="og:site_name" content="BlackCat">
+  <meta property="article:published_time" content="2025-03-15T16:00:00.000Z">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Panda basic | BlackCat">
+  <meta name="twitter:description" content="A simple dark Hexo theme inspired by code.">
+
+  <!-- Favicon 配置 -->
+  
+
+  <!-- 外部样式 - 统一使用 jsdelivr CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" crossorigin="anonymous">
+
+  <!-- 代码高亮样式 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.min.css" crossorigin="anonymous">
+
+  <!-- Mermaid.js 库 (defer加载) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" crossorigin="anonymous"></script>
+
+  <!-- 主题样式 -->
+  <link rel="stylesheet" href="../../../../../css/theme-colors.css">
+  <link rel="stylesheet" href="../../../../../css/main.css">
+  <link rel="stylesheet" href="../../../../../css/code.css">
   <link rel="stylesheet" href="../../../../../css/code-custom.css">
   <link rel="stylesheet" href="../../../../../css/code-languages.css">
+  <link rel="stylesheet" href="../../../../../css/mermaid.css">
 
-  <link rel="stylesheet" href="../../../../../css/vscode.css">
-  <link rel="stylesheet" href="../../../../../css/post.css">
+  <link rel="stylesheet" href="../../../../../css/vs-code.css">
+  <link rel="stylesheet" href="../../../../../css/post.css?v=1781612876006">
   <link rel="stylesheet" href="../../../../../css/tag.css">
   <link rel="stylesheet" href="../../../../../css/categories.css">
   <link rel="stylesheet" href="../../../../../css/archive.css">
@@ -30,21 +59,21 @@
 
   <!-- Add any custom head content here -->
 
-  <script src="../../../../../js/explorer.js"></script>
-  <script src="../../../../../js/code-copy.js"></script>
-  <script src="../../../../../js/code-enhance.js"></script>
+  <script defer src="../../../../../js/explorer.js"></script>
+  <script defer src="../../../../../js/code-enhance.js"></script>
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
 
-
   <body>
     <div class="wrapper">
-      <div class="mobile-menu-toggle">
+      <div class="mobile-menu-toggle" aria-label="Toggle sidebar menu" role="button" tabindex="0">
         <i class="fas fa-bars"></i>
       </div>
+      <!-- 移动端侧边栏遮罩层 -->
+      <div class="sidebar-overlay" aria-hidden="true"></div>
       <header class="vs-header">
   <nav class="vs-nav">
     <div class="nav-left">
@@ -140,19 +169,19 @@
     <div class="explorer-section">
       <div class="section-header">
         <i class="fas fa-list"></i>
-        <span>TABLE OF CONTENTS</span>
+        <span>目录</span>
       </div>
       <div class="section-content">
         <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Panda"><span class="toc-text">Panda</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DataFrame%EF%BC%9A%E8%A1%A8%E6%A0%BC%E6%95%B0%E6%8D%AE"><span class="toc-text">DataFrame：表格数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Series%EF%BC%9A%E4%B8%80%E5%88%97%E6%95%B0%E6%8D%AE"><span class="toc-text">Series：一列数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-text">读取数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE"><span class="toc-text">保存数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%80%89%E6%8B%A9"><span class="toc-text">数据选择</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-text">选取数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E7%94%9F-Python-%E6%96%B9%E5%BC%8F"><span class="toc-text">原生 Python 方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Panda-%E6%96%B9%E5%BC%8F%EF%BC%9Aloc-%E5%92%8C-iloc"><span class="toc-text">Panda 方式：loc 和 iloc</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E9%80%89%E6%8B%A9"><span class="toc-text">条件选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%8B%E5%80%BC"><span class="toc-text">赋值</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Summary-Functions-and-Maps"><span class="toc-text">Summary Functions and Maps</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary-Functions-%E6%91%98%E8%A6%81%E5%87%BD%E6%95%B0"><span class="toc-text">Summary Functions 摘要函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#agg-%E5%A4%9A%E9%87%8D%E7%BB%9F%E8%AE%A1"><span class="toc-text">agg() - 多重统计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reset-index-%E9%87%8D%E7%BD%AE%E7%B4%A2%E5%BC%95"><span class="toc-text">reset_index() - 重置索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F%E5%87%BD%E6%95%B0"><span class="toc-text">排序函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#sort-values-%E6%8C%89%E5%80%BC%E6%8E%92%E5%BA%8F"><span class="toc-text">sort_values() - 按值排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sort-index-%E6%8C%89%E7%B4%A2%E5%BC%95%E6%8E%92%E5%BA%8F"><span class="toc-text">sort_index() - 按索引排序</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E7%BC%BA%E5%A4%B1%E5%80%BC%E5%A4%84%E7%90%86"><span class="toc-text">数据类型和缺失值处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%93%8D%E4%BD%9C"><span class="toc-text">数据类型操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#dtype-%E5%B1%9E%E6%80%A7"><span class="toc-text">dtype 属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dtypes-%E5%B1%9E%E6%80%A7"><span class="toc-text">dtypes 属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#astype-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">astype() - 类型转换</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E5%A4%B1%E5%80%BC%E5%A4%84%E7%90%86"><span class="toc-text">缺失值处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A3%80%E6%B5%8B%E7%BC%BA%E5%A4%B1%E5%80%BC"><span class="toc-text">检测缺失值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fillna-%E5%A1%AB%E5%85%85%E7%BC%BA%E5%A4%B1%E5%80%BC"><span class="toc-text">fillna() - 填充缺失值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#replace-%E6%9B%BF%E6%8D%A2%E5%80%BC"><span class="toc-text">replace() - 替换值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">注意事项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%87%8D%E5%91%BD%E5%90%8D%E5%92%8C%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C"><span class="toc-text">数据重命名和合并操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%91%BD%E5%90%8D%E6%93%8D%E4%BD%9C"><span class="toc-text">重命名操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#rename-%E9%87%8D%E5%91%BD%E5%90%8D%E5%88%97%E6%88%96%E7%B4%A2%E5%BC%95"><span class="toc-text">rename() - 重命名列或索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rename-axis-%E9%87%8D%E5%91%BD%E5%90%8D%E8%BD%B4"><span class="toc-text">rename_axis() - 重命名轴</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#set-index-%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95"><span class="toc-text">set_index() - 设置索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C"><span class="toc-text">数据合并操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#concat-%E6%95%B0%E6%8D%AE%E6%8B%BC%E6%8E%A5"><span class="toc-text">concat() - 数据拼接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#join-%E5%9F%BA%E4%BA%8E%E7%B4%A2%E5%BC%95%E5%90%88%E5%B9%B6"><span class="toc-text">join() - 基于索引合并</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-1"><span class="toc-text">注意事项</span></a></li></ol></li></ol></li></ol>
       </div>
     </div>
-    
+
     <!-- 同分类文章 -->
     
     <div class="explorer-section">
       <div class="section-header">
         <i class="fas fa-folder"></i>
-        <span>CATEGORY POSTS</span>
+        <span>同分类文章</span>
       </div>
       <div class="section-content">
         
@@ -185,20 +214,20 @@
     <div class="explorer-section">
       <div class="section-header">
         <i class="fas fa-tags"></i>
-        <span>ARTICLE TAGS</span>
+        <span>文章标签</span>
       </div>
       <div class="section-content">
         
           <div class="tag-item">
             <i class="fas fa-tag"></i>
-            <a href="../../../../../tags/kaggle/">kaggle</a>
-            <span class="count">(3)</span>
+            <a href="../../../../../tags/ai/">ai</a>
+            <span class="count">(4)</span>
           </div>
         
           <div class="tag-item">
             <i class="fas fa-tag"></i>
-            <a href="../../../../../tags/ai/">ai</a>
-            <span class="count">(4)</span>
+            <a href="../../../../../tags/kaggle/">kaggle</a>
+            <span class="count">(3)</span>
           </div>
         
           <div class="tag-item">
@@ -229,7 +258,13 @@
             <span class="date">
               <i class="fas fa-calendar-alt"></i>
               2025-03-16
-            </span>            
+            </span>
+            
+            <span class="updated-date">
+              <i class="fas fa-sync-alt"></i>
+              更新于 2025-04-13
+            </span>
+                        
               <span class="categories">
                 <i class="fas fa-folder"></i>
                 <div class="categories-list">
@@ -452,7 +487,10 @@
 
         </div>
         
-        <!-- 文章导航 -->
+        <!-- 文章导航 - 只在同分类有多篇文章时显示 -->
+        
+        
+        
         <nav class="post-nav">
           
             <a class="prev" href="../introduction%20to%20ai%20ethics/">
@@ -467,6 +505,363 @@
             </a>
           
         </nav>
+        
+        
+        <!-- 推荐文章 -->
+        
+
+
+<div class="vs-recommended-posts">
+  <div class="vs-recommended-header">
+    <div class="section-header">
+      <i class="fas fa-lightbulb"></i>
+      <span>相关文章</span>
+    </div>
+  </div>
+  
+  <div class="vs-recommended-grid">
+    
+      <div class="vs-recommended-item" data-index="0" tabindex="0">
+        <a href="../introduction%20to%20ai%20ethics/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>Intro to AI Ethics</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+                <span class="vs-tags-preview">
+                  <i class="fas fa-tags"></i>
+                  ai, kaggle
+                  
+                </span>
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  3月 16
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  1 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      <div class="vs-recommended-item" data-index="1" tabindex="0">
+        <a href="../../../../04/07/Kaggle/data%20cleaning/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>Data Cleaning</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              处理缺失值（Handling Missing Values）1. 初始数据查看 (Initial Data Inspection)pd.read_csv():读取CSV文件，加载数据集data.head(): 查看前五行数据，初步发现缺失值...
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+                <span class="vs-tags-preview">
+                  <i class="fas fa-tags"></i>
+                  ai, kaggle
+                  
+                </span>
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  4月 07
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  4 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      <div class="vs-recommended-item" data-index="2" tabindex="0">
+        <a href="../../../../02/23/Kaggle/Intermediate%20Machine%20Learning/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>machine learning basic</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              Missing Values数据缺失值常见产生途径： 数据采集不完整或设备故障 录入错误或人为省略 无效或不适用的数据项 不同数据源合并时的对齐缺失 隐私或保密原因导致的信息遮蔽 如果尝试使用缺失值数据建立模型，大多数机器学习库（包括 sc...
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+                <span class="vs-tags-preview">
+                  <i class="fas fa-tags"></i>
+                  Machine learning, Kaggle, AI
+                  
+                </span>
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  2月 23
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  1 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      <div class="vs-recommended-item" data-index="3" tabindex="0">
+        <a href="../../../../02/23/Kaggle/machine%20learning%20basic/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>machine learning basic</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              (本博客内容基于Kaggle教程，感谢：https://www.kaggle.com/learn/intro-to-machine-learning) 机器学习是啥？简单说，就是让电脑从数据里学习，找到规律，然后用这些规律来做预测。 机器学...
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+                <span class="vs-tags-preview">
+                  <i class="fas fa-tags"></i>
+                  Machine learning, Kaggle, AI
+                  
+                </span>
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  2月 23
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  1 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      <div class="vs-recommended-item" data-index="4" tabindex="0">
+        <a href="../../../../02/23/Image%20Generation/Scalable%20Diffusion%20Models%20with%20Transformers/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>Scalable Diffusion Models with Transformers</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              Article Link:https://arxiv.org/pdf/2212.09748.pdf Abstract We explore a new class of diffusion models based on the trans...
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+                <span class="vs-tags-preview">
+                  <i class="fas fa-tags"></i>
+                  ai, image-generation
+                  
+                </span>
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  2月 23
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  1 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+  </div>
+  
+  <!-- 查看更多 -->
+  <div class="vs-recommended-footer">
+    <a href="../../../../../archives/" class="vs-view-more">
+      <i class="fas fa-folder-open"></i>
+      <span>查看更多文章</span>
+      <i class="fas fa-chevron-right"></i>
+    </a>
+  </div>
+</div>
+
+<script>
+// 键盘导航支持
+document.addEventListener('DOMContentLoaded', function() {
+  const items = document.querySelectorAll('.vs-recommended-item');
+  let currentIndex = -1;
+  
+  // 键盘事件
+  document.addEventListener('keydown', function(e) {
+    if (!items.length) return;
+    
+    if (e.key === 'Tab') {
+      // Tab键导航由浏览器处理
+      return;
+    }
+    
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      
+      // 移除当前高亮
+      if (currentIndex >= 0) {
+        items[currentIndex].classList.remove('vs-focused');
+      }
+      
+      // 更新索引
+      if (e.key === 'ArrowRight') {
+        currentIndex = (currentIndex + 1) % items.length;
+      } else {
+        currentIndex = currentIndex <= 0 ? items.length - 1 : currentIndex - 1;
+      }
+      
+      // 添加新高亮
+      items[currentIndex].classList.add('vs-focused');
+      items[currentIndex].focus();
+    }
+    
+    if (e.key === 'Enter' && currentIndex >= 0) {
+      const link = items[currentIndex].querySelector('a');
+      if (link) link.click();
+    }
+  });
+  
+  // 鼠标悬停时更新当前索引
+  items.forEach((item, index) => {
+    item.addEventListener('mouseenter', function() {
+      currentIndex = index;
+      items.forEach(i => i.classList.remove('vs-focused'));
+      item.classList.add('vs-focused');
+    });
+  });
+});
+</script>
+
+        
+        <!-- 评论区 -->
+        
+  <div class="vs-comments-section">
+    <div class="section-header">
+      <i class="fas fa-comments"></i>
+      <span>评论</span>
+    </div>
+    
+    
+      <!-- Waline 评论系统 -->
+      <div id="waline"></div>
+      <script>
+        // 加载 Waline CSS
+        const walineCSS = document.createElement('link');
+        walineCSS.rel = 'stylesheet';
+        walineCSS.href = 'https://unpkg.com/@waline/client@v3/dist/waline.css';
+        document.head.appendChild(walineCSS);
+        
+        // 加载 Waline JS
+        const walineScript = document.createElement('script');
+        walineScript.type = 'module';
+        walineScript.onload = function() {
+          // 确保 Waline 加载后再初始化
+          import('https://unpkg.com/@waline/client@v3/dist/waline.js').then(({ init }) => {
+            const waline = init({
+              el: '#waline',
+              serverURL: 'https://vsc4tblackcat1337.vercel.app/',
+              lang: 'zh-CN',
+              locale: {},
+              emoji: ["https://unpkg.com/@waline/emojis@1.2.0/weibo","https://unpkg.com/@waline/emojis@1.2.0/alus"],
+              requiredMeta: [],
+              login: 'disable',
+              wordLimit: 0,
+              pageSize: 10,
+              imageUploader: false,
+              highlighter: true,
+              texRenderer: false,
+              search: false,
+              pageview: false,
+              comment: true,
+              copyright: false,
+              
+              // 自动适配主题
+              dark: document.documentElement.getAttribute('data-theme') === 'dark' ? 'auto' : false,
+              
+              // 评论框占位符
+              placeholder: '欢迎留言，无需登录即可评论~',
+              
+              // 元数据配置
+              meta: ['nick', 'mail', 'link'],
+              
+              // 表情配置
+              emojiCDN: 'https://unpkg.com/@waline/emojis@1.2.0/',
+            });
+            
+            // 监听主题变化
+            const observer = new MutationObserver((mutations) => {
+              mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+                  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                  // Waline 会自动处理主题切换
+                  if (waline) {
+                    waline.update({ dark: isDark ? 'auto' : false });
+                  }
+                }
+              });
+            });
+            
+            observer.observe(document.documentElement, {
+              attributes: true,
+              attributeFilter: ['data-theme']
+            });
+          });
+        };
+        walineScript.src = 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+        document.body.appendChild(walineScript);
+      </script>
+    
+    
+  </div>
+
       </article>
     </div>
   </div>
@@ -485,7 +880,7 @@
     </div>
     <div class="status-item">
       <i class="fas fa-clock"></i>
-      2025-04-14
+      2026-06-16
     </div>
     <div class="status-item">
       Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
@@ -498,24 +893,19 @@
   </div>
 </footer>
 
-    
-    <!-- 全局配置 -->
+
+    <!-- 搜索专用配置 (HEXO_CONFIG 在 scripts.ejs 中统一定义) -->
     <script>
-      window.HEXO_CONFIG = {
-        language: "zh-CN",
-        root: "/blog/"
-      };
-      
-      // 特定于搜索的配置
       window.VSC4T_SEARCH = {
         root: "/blog/"
       };
     </script>
-    
-    <script src="//cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/highlight.js@11.7.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
+
+    <!-- 外部脚本 - 统一使用 cdnjs CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" crossorigin="anonymous"></script>
+    <script>if(typeof hljs !== 'undefined') hljs.highlightAll();</script>
     <!-- 这里可以放置自定义脚本 -->
 <script>
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -557,16 +947,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
   });
 });
 </script>
-<script src="../../../../../js/toc.js"></script>
 
 <!-- Scripts -->
 <script>
-  // 将语言文件中的翻译传递给前端
+  // 全局配置 - 包含 i18n 字符串和主题配置
   window.HEXO_CONFIG = {
     language: "zh-CN",
+    root: "/blog/",
+    
+    theme_switch: {
+      enabled: false,
+      light_start: "06:00",
+      light_end: "18:00"
+    },
+    
+    // Search i18n strings
     search_placeholder: "输入关键词搜索...",
     search_no_results: "未找到相关结果",
-    search_result: "نتيجة",
+    search_result: "resultado",
     search_results: "搜索结果",
     search_results_found: "找到 undefined 个结果",
     search_in: "搜索范围",
@@ -578,22 +976,88 @@ document.addEventListener('DOMContentLoaded', (event) => {
     search_recent: "最近搜索",
     search_clear: "清除",
     search_loading: "加载中...",
-    search_error: "加载搜索数据时出错"
+    search_error: "加载搜索数据时出错",
+    // Encryption i18n strings
+    encrypt_badge: "受保护",
+    encrypt_title: "受保护的内容",
+    encrypt_description: "请输入密码以解锁本文，密码会在本设备本地保存，直到你选择重新加密。",
+    encrypt_label: "密码",
+    encrypt_placeholder: "输入密码解锁内容",
+    encrypt_button: "解锁",
+    encrypt_button_loading: "解锁中...",
+    encrypt_hint: "按 Enter 提交，密码会在本设备上记住。",
+    encrypt_success: "内容解锁成功！",
+    encrypt_unlocked_note: "内容已解锁，可随时重新加密。",
+    encrypt_again: "重新加密",
+    encrypt_wrong_password: "密码错误，请重试。",
+    encrypt_show_password: "显示密码",
+    encrypt_hide_password: "隐藏密码",
+    // Sidebar i18n strings
+    sidebar_about: "关于",
+    sidebar_categories: "分类",
+    sidebar_tags: "标签",
+    // Post page i18n strings
+    post_toc: "目录",
+    post_category_posts: "同分类文章",
+    post_article_tags: "文章标签"
   };
 </script>
 
 
 
 <!-- 添加所有需要的脚本 -->
-<script src="../../../../../js/main.js"></script>
 <script src="../../../../../js/search.js"></script>
+<script src="../../../../../js/theme-switch.js"></script>
 
+<script src="../../../../../js/password-protect.js?v=1781612876006"></script>
 
     <script>
       // 移动端菜单切换
       $(document).ready(function() {
-        $('.mobile-menu-toggle').click(function() {
-          $('.sidebar-explorer').toggleClass('show');
+        var $body = $('body');
+        var $sidebar = $('.sidebar-explorer');
+        var $overlay = $('.sidebar-overlay');
+        var $toggle = $('.mobile-menu-toggle');
+
+        function openSidebar() {
+          $sidebar.addClass('show');
+          $overlay.addClass('show');
+          $toggle.addClass('active');
+          $body.addClass('sidebar-open');
+        }
+
+        function closeSidebar() {
+          $sidebar.removeClass('show');
+          $overlay.removeClass('show');
+          $toggle.removeClass('active');
+          $body.removeClass('sidebar-open');
+        }
+
+        // 汉堡按钮点击切换
+        $toggle.on('click', function(e) {
+          e.stopPropagation();
+          if ($sidebar.hasClass('show')) {
+            closeSidebar();
+          } else {
+            openSidebar();
+          }
+        });
+
+        // 点击遮罩层关闭
+        $overlay.on('click', function() {
+          closeSidebar();
+        });
+
+        // ESC 键关闭
+        $(document).on('keydown', function(e) {
+          if (e.key === 'Escape' && $sidebar.hasClass('show')) {
+            closeSidebar();
+          }
+        });
+
+        // 点击侧边栏内的链接时自动关闭侧边栏，确保锚点跳转正常
+        $sidebar.on('click', 'a', function() {
+          closeSidebar();
         });
       });
     </script>

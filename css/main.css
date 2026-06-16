@@ -1,11 +1,4 @@
-:root {
-  --vscode-bg: #1e1e1e;
-  --vscode-sidebar: #252526;
-  --vscode-text: #d4d4d4;
-  --vscode-active: #37373d;
-  --vscode-highlight: #264f78;
-  --vscode-accent: #0078d4;
-}
+@import "post.css";
 
 /* 基本样式 */
 body {
@@ -18,7 +11,7 @@ body {
 }
 
 .wrapper {
-  max-width: 1200px;
+  max-width: 85%;
   margin: 0 auto;
   padding: 20px;
   min-height: calc(100vh - 30px);
@@ -37,7 +30,7 @@ body {
 
 .post-item:hover {
   transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px var(--vscode-shadow);
 }
 
 /* 侧边栏样式 */
@@ -52,7 +45,7 @@ body {
   background-color: var(--vscode-sidebar);
   border-bottom: 1px solid var(--vscode-active);
   margin-bottom: 2rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  box-shadow: 0 2px 4px var(--vscode-shadow);
   padding: 0.5rem 1rem;
 }
 
@@ -71,7 +64,7 @@ a {
 }
 
 a:hover {
-  color: #5caeef;
+  color: var(--vscode-link-hover);
   text-decoration: none;
 }
 
@@ -85,9 +78,10 @@ pre {
 
 /* 标题样式 */
 h1, h2, h3, h4, h5, h6 {
-  color: #fff;
+  color: var(--vscode-text);
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 0.7rem; /* 减小底部边距 */
+  line-height: 1.3; /* 更紧凑的行高 */
 }
 
 /* Footer 样式 */
@@ -214,7 +208,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .post-excerpt {
   margin: 1rem 0;
-  color: #a0a0a0;
+  color: var(--vscode-text-light);
   font-size: 0.95rem;
 }
 
@@ -264,102 +258,124 @@ h1, h2, h3, h4, h5, h6 {
 
 .about-info p {
   font-size: 0.9rem;
-  color: #a0a0a0;
+  color: var(--vscode-text-light);
 }
 
-/* 分页样式 */
-.pagination {
-  display: flex;
-  justify-content: center;
-  margin: 2rem 0;
-}
+/* ========================================
+   Pagination Component - Minimalist Design
+   ======================================== */
 
-.page-number,
-.extend {
-  padding: 0.5rem 1rem;
-  margin: 0 0.25rem;
-  background-color: var(--vscode-active);
-  border-radius: 4px;
-  color: var(--vscode-text);
-}
-
-.current {
-  background-color: var(--vscode-highlight);
-}
-
-/* 分页容器样式 */
+/* Container: horizontal layout, subtle styling */
 .pagination-container {
-  background-color: var(--vscode-sidebar);
-  border: 1px solid var(--vscode-active);
-  border-radius: 4px;
-  padding: 1rem;
-  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.625rem 1rem;
+  margin: 1.5rem 0;
+  background-color: var(--vscode-bg-light);
+  border-radius: 6px;
 }
 
+/* Page info text: subtle, muted */
 .pagination-info {
-  color: var(--vscode-text);
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--vscode-active);
+  color: var(--vscode-text-light);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
-.pagination-info i {
-  margin-right: 0.5rem;
-  color: var(--vscode-accent);
-}
-
+/* Button group */
 .pagination {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.25rem;
 }
 
+/* Individual page buttons */
 .page-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 32px;
-  height: 32px;
-  padding: 0 0.5rem;
-  background-color: var(--vscode-active);
-  border: 1px solid transparent;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 0.375rem;
+  background-color: transparent;
+  border: none;
   border-radius: 4px;
-  color: var(--vscode-text);
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
-}
-
-.page-btn:hover {
-  background-color: var(--vscode-highlight);
-  color: #fff;
+  color: var(--vscode-text-light);
+  font-size: 0.8125rem;
+  font-weight: 500;
   text-decoration: none;
-  transform: translateY(-1px);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
+/* Hover state */
+.page-btn:hover:not(.current):not(.disabled) {
+  background-color: var(--vscode-active);
+  color: var(--vscode-text);
+  text-decoration: none;
+}
+
+/* Focus visible for accessibility */
+.page-btn:focus-visible {
+  outline: 2px solid var(--vscode-accent);
+  outline-offset: 1px;
+}
+
+/* Current page indicator */
 .page-btn.current {
   background-color: var(--vscode-accent);
-  color: #fff;
+  color: #ffffff;
   cursor: default;
+  font-weight: 600;
 }
 
-.page-btn.prev,
-.page-btn.next {
-  background-color: transparent;
-  border-color: var(--vscode-active);
+/* Disabled state for prev/next when at bounds */
+.page-btn.disabled {
+  color: var(--vscode-border);
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
-.page-btn.prev:hover,
-.page-btn.next:hover {
-  background-color: var(--vscode-active);
-  border-color: var(--vscode-accent);
+/* Icon sizing in buttons */
+.page-btn i {
+  font-size: 0.75rem;
 }
 
-/* 移除之前的分页样式 */
+/* Legacy styles - hidden */
 .pagination .page-number,
 .pagination .extend {
   display: none;
+}
+
+/* ----------------------------------------
+   Pagination Responsive - Mobile
+   ---------------------------------------- */
+@media (max-width: 480px) {
+  .pagination-container {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .pagination-info {
+    order: 2;
+    font-size: 0.75rem;
+  }
+
+  .pagination {
+    order: 1;
+    gap: 0.375rem;
+  }
+
+  .page-btn {
+    min-width: 32px;
+    height: 32px;
+    font-size: 0.875rem;
+  }
 }
 
 /* 系列文章样式 */
@@ -415,7 +431,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .series-count {
   font-size: 0.8rem;
-  color: #666;
+  color: var(--vscode-text-light);
   margin-left: 1rem;
 }
 
@@ -451,81 +467,200 @@ h1, h2, h3, h4, h5, h6 {
 
 .post-date {
   font-size: 0.8rem;
-  color: #666;
+  color: var(--vscode-text-light);
 }
 
-/* 推荐文章样式 */
-.recommended-posts {
-  background-color: var(--vscode-sidebar);
-  border: 1px solid var(--vscode-active);
-  border-radius: 4px;
-  padding: 1.5rem;
-  margin-top: 2rem;
+/* VS Code风格推荐文章样式 */
+.vs-recommended-posts {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--vscode-border);
 }
 
-.recommended-header {
-  font-size: 1.1rem;
-  font-weight: bold;
+.vs-recommended-header {
+  margin-bottom: 1.5rem;
+}
+
+.vs-recommended-header .section-header {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
   color: var(--vscode-text);
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--vscode-active);
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
 }
 
-.recommended-header i {
+.vs-recommended-header .section-header i {
   margin-right: 0.5rem;
-  color: var(--vscode-accent);
+  color: var(--vscode-warning);
+  font-size: 0.875rem;
 }
 
-.recommended-list {
+/* 推荐文章网格布局 */
+.vs-recommended-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-.recommended-item {
-  background-color: var(--vscode-active);
+.vs-recommended-item {
+  background: var(--vscode-sidebar);
+  border: 1px solid var(--vscode-border);
   border-radius: 4px;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.recommended-item:hover {
-  transform: translateY(-2px);
-  background-color: var(--vscode-highlight);
+.vs-recommended-item:hover,
+.vs-recommended-item.vs-focused {
+  background: var(--vscode-active);
+  border-color: var(--vscode-accent);
+  box-shadow: 0 2px 8px var(--vscode-shadow);
 }
 
-.recommended-link {
+.vs-recommended-link {
   display: block;
   padding: 1rem;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+
+/* 文章内容样式 */
+.vs-recommended-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.vs-recommended-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--vscode-text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  line-height: 1.4;
+}
+
+.vs-recommended-title i {
+  color: #569cd6;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.vs-recommended-excerpt {
+  font-size: 0.875rem;
+  color: var(--vscode-text-light);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 元数据样式 */
+.vs-recommended-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--vscode-text-light);
+}
+
+.vs-series-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  background: rgba(86, 156, 214, 0.15);
+  border: 1px solid rgba(86, 156, 214, 0.3);
+  border-radius: 3px;
+  color: #569cd6;
+  font-weight: 500;
+}
+
+.vs-series-badge i {
+  font-size: 0.625rem;
+}
+
+.vs-tags-preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--vscode-text-light);
+}
+
+.vs-tags-preview i {
+  font-size: 0.625rem;
+}
+
+.vs-more-tags {
+  color: #569cd6;
+  font-weight: 500;
+  margin-left: 0.25rem;
+}
+
+.vs-meta-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.vs-date,
+.vs-reading-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.vs-date i,
+.vs-reading-time i {
+  font-size: 0.625rem;
+}
+
+/* 查看更多链接 */
+.vs-recommended-footer {
+  text-align: center;
+  padding-top: 1rem;
+}
+
+.vs-view-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--vscode-active);
+  border: 1px solid var(--vscode-border);
+  border-radius: 4px;
   color: var(--vscode-text);
   text-decoration: none;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
 }
 
-.recommended-title {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
+.vs-view-more:hover {
+  background: var(--vscode-highlight);
+  border-color: var(--vscode-accent);
   color: var(--vscode-text);
 }
 
-.recommended-title i {
-  margin-right: 0.5rem;
-  color: var(--vscode-accent);
+.vs-view-more i:first-child {
+  color: #569cd6;
 }
 
-.recommended-meta {
-  font-size: 0.8rem;
-  color: #888;
-  display: flex;
-  gap: 1rem;
+.vs-view-more i:last-child {
+  font-size: 0.75rem;
+  transition: transform 0.2s ease;
 }
 
-.series-tag i,
-.date-tag i {
-  margin-right: 0.3rem;
-}
-
-.series-tag {
-  color: var(--vscode-accent);
+.vs-view-more:hover i:last-child {
+  transform: translateX(3px);
 }
 
 /* 标签页面样式 */
@@ -623,5 +758,286 @@ h1, h2, h3, h4, h5, h6 {
   
   .status-item, .status-item.github {
     font-size: 10px;
+  }
+}
+
+/* 从 main.scss 转换的样式 */
+/* 导入字体 - 已在 head.ejs 中导入，这里注释掉避免重复 */
+/* @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap'); */
+
+/* 导航栏样式 - 从 SCSS 转换 */
+.header {
+  background-color: var(--vscode-bg);
+  border-bottom: 1px solid var(--vscode-border);
+  padding: 1rem 0;
+}
+
+.header .navbar {
+  background-color: transparent !important;
+}
+
+.header .navbar .navbar-brand {
+  color: var(--vscode-link);
+  font-weight: bold;
+}
+
+.header .navbar .nav-link {
+  color: var(--vscode-text);
+}
+
+.header .navbar .nav-link:hover {
+  color: var(--vscode-link);
+}
+
+/* 文章卡片样式 - 从 SCSS 转换 */
+.post {
+  background-color: var(--vscode-bg-light);
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--vscode-border);
+  position: relative;
+}
+
+.post::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--vscode-link), var(--vscode-success));
+  border-radius: 4px 4px 0 0;
+}
+
+.post h2 {
+  color: var(--vscode-link);
+  margin-bottom: 1rem;
+}
+
+.post h2 a {
+  text-decoration: none;
+}
+
+.post h2 a:hover {
+  color: var(--vscode-link-hover);
+}
+
+.post .post-meta {
+  font-size: 0.9rem;
+  color: var(--vscode-text-light);
+  margin-bottom: 1rem;
+}
+
+.post .post-meta i {
+  margin-right: 0.2rem;
+}
+
+.post .post-excerpt {
+  color: var(--vscode-text);
+}
+
+/* 侧边栏样式 - 从 SCSS 转换 */
+.sidebar .sidebar-widget {
+  background-color: var(--vscode-bg-light);
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--vscode-border);
+}
+
+.sidebar .sidebar-widget h3 {
+  color: var(--vscode-success);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--vscode-border);
+}
+
+/* 分页样式 - 从 SCSS 转换 */
+.pagination .page-link {
+  background-color: var(--vscode-bg-light);
+  border-color: var(--vscode-border);
+  color: var(--vscode-text);
+}
+
+.pagination .page-link:hover {
+  background-color: var(--vscode-link);
+  color: var(--vscode-bg);
+}
+
+/* VS Code 风格评论区样式 */
+.vs-comments-section {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background-color: var(--vscode-sidebar);
+  border: 1px solid var(--vscode-border);
+  border-radius: 4px;
+}
+
+.vs-comments-section .section-header {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--vscode-text);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--vscode-border);
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+}
+
+.vs-comments-section .section-header i {
+  margin-right: 0.5rem;
+  color: var(--vscode-link);
+  font-size: 0.875rem;
+}
+
+/* Waline 评论系统样式 */
+#waline {
+  width: 100%;
+  background-color: transparent !important;
+}
+
+/* Waline 容器样式 */
+.waline-wrapper {
+  background-color: var(--vscode-sidebar);
+  border: 1px solid var(--vscode-border);
+  border-radius: 4px;
+  padding: 0;
+}
+
+/* 覆盖 Waline 默认样式，适配 VS Code 主题 */
+#waline .wl-card {
+  background-color: var(--vscode-bg-light) !important;
+  border-color: var(--vscode-border) !important;
+}
+
+#waline .wl-header {
+  background-color: transparent !important;
+}
+
+#waline .wl-editor {
+  background-color: var(--vscode-bg) !important;
+  border-color: var(--vscode-border) !important;
+  color: var(--vscode-text) !important;
+}
+
+#waline .wl-input {
+  background-color: var(--vscode-bg) !important;
+  border-color: var(--vscode-border) !important;
+  color: var(--vscode-text) !important;
+}
+
+#waline .wl-btn {
+  background-color: var(--vscode-link) !important;
+  border-color: var(--vscode-link) !important;
+  color: var(--vscode-bg) !important;
+}
+
+#waline .wl-btn:hover {
+  background-color: var(--vscode-link-hover) !important;
+  border-color: var(--vscode-link-hover) !important;
+}
+
+#waline .wl-comment {
+  border-bottom-color: var(--vscode-border) !important;
+}
+
+#waline .wl-nick {
+  color: var(--vscode-link) !important;
+}
+
+#waline .wl-time {
+  color: var(--vscode-text-light) !important;
+}
+
+#waline .wl-content {
+  color: var(--vscode-text) !important;
+}
+
+#waline .wl-content pre {
+  background-color: var(--vscode-code-bg) !important;
+  border-color: var(--vscode-code-border) !important;
+  color: var(--vscode-text) !important;
+}
+
+#waline .wl-content code {
+  background-color: var(--vscode-code-bg) !important;
+  color: var(--vscode-code-text) !important;
+}
+
+#waline .wl-panel {
+  background-color: transparent !important;
+  border-color: var(--vscode-border) !important;
+}
+
+/* Waline 加载动画 */
+#waline .wl-loading {
+  color: var(--vscode-link) !important;
+}
+
+/* Waline 分页 */
+#waline .wl-pagination a {
+  color: var(--vscode-link) !important;
+}
+
+#waline .wl-pagination a:hover {
+  color: var(--vscode-link-hover) !important;
+}
+
+/* Giscus iframe 样式 */
+.giscus, .giscus-frame {
+  width: 100%;
+}
+
+/* Utterances iframe 样式 */
+.utterances {
+  width: 100%;
+}
+
+/* ========================================
+   Sidebar Tag Cloud - Pinyin Sorted
+   ======================================== */
+.tagcloud-pinyin {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.tagcloud-pinyin .tag-cloud-link {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  background-color: var(--vscode-active);
+  border: 1px solid var(--vscode-border);
+  border-radius: 3px;
+  color: var(--vscode-text-light);
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tagcloud-pinyin .tag-cloud-link:hover {
+  background-color: var(--vscode-accent);
+  border-color: var(--vscode-accent);
+  color: #ffffff;
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.tagcloud-pinyin .tag-cloud-link:active {
+  transform: translateY(0);
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+  .vs-comments-section {
+    padding: 1rem;
+    margin-left: -10px;
+    margin-right: -10px;
+    border-radius: 0;
   }
 }

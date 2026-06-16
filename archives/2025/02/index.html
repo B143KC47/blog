@@ -1,23 +1,52 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title> | BlackCat</title>
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../css/main.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-  <!-- 添加代码高亮样式 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
-  <!-- 添加highlight.js库 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>  <link rel="stylesheet" href="../../../css/code.css">
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="A simple dark Hexo theme inspired by code.">
+  <meta name="keywords" content="">
+  <meta name="author" content="B143KC47">
+  <link rel="canonical" href="https://B143KC47.github.io/blog">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content=" | BlackCat">
+  <meta property="og:description" content="A simple dark Hexo theme inspired by code.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://B143KC47.github.io/blog">
+  <meta property="og:site_name" content="BlackCat">
+  
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content=" | BlackCat">
+  <meta name="twitter:description" content="A simple dark Hexo theme inspired by code.">
+
+  <!-- Favicon 配置 -->
+  
+
+  <!-- 外部样式 - 统一使用 jsdelivr CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" crossorigin="anonymous">
+
+  <!-- 代码高亮样式 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.min.css" crossorigin="anonymous">
+
+  <!-- Mermaid.js 库 (defer加载) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" crossorigin="anonymous"></script>
+
+  <!-- 主题样式 -->
+  <link rel="stylesheet" href="../../../css/theme-colors.css">
+  <link rel="stylesheet" href="../../../css/main.css">
+  <link rel="stylesheet" href="../../../css/code.css">
   <link rel="stylesheet" href="../../../css/code-custom.css">
   <link rel="stylesheet" href="../../../css/code-languages.css">
+  <link rel="stylesheet" href="../../../css/mermaid.css">
 
-  <link rel="stylesheet" href="../../../css/vscode.css">
-  <link rel="stylesheet" href="../../../css/post.css">
+  <link rel="stylesheet" href="../../../css/vs-code.css">
+  <link rel="stylesheet" href="../../../css/post.css?v=1781612876012">
   <link rel="stylesheet" href="../../../css/tag.css">
   <link rel="stylesheet" href="../../../css/categories.css">
   <link rel="stylesheet" href="../../../css/archive.css">
@@ -30,21 +59,21 @@
 
   <!-- Add any custom head content here -->
 
-  <script src="../../../js/explorer.js"></script>
-  <script src="../../../js/code-copy.js"></script>
-  <script src="../../../js/code-enhance.js"></script>
+  <script defer src="../../../js/explorer.js"></script>
+  <script defer src="../../../js/code-enhance.js"></script>
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
 
-
   <body>
     <div class="wrapper">
-      <div class="mobile-menu-toggle">
+      <div class="mobile-menu-toggle" aria-label="Toggle sidebar menu" role="button" tabindex="0">
         <i class="fas fa-bars"></i>
       </div>
+      <!-- 移动端侧边栏遮罩层 -->
+      <div class="sidebar-overlay" aria-hidden="true"></div>
       <header class="vs-header">
   <nav class="vs-nav">
     <div class="nav-left">
@@ -182,6 +211,7 @@
                   <i class="fas fa-file-alt"></i>
                   <a href="../../../2025/04/07/Kaggle/data%20cleaning/">
                     04-07 Data Cleaning
+                    
                   </a>
                 </div>
               
@@ -189,6 +219,7 @@
                   <i class="fas fa-file-alt"></i>
                   <a href="../../../2025/03/16/Kaggle/introduction%20to%20ai%20ethics/">
                     03-16 Intro to AI Ethics
+                    
                   </a>
                 </div>
               
@@ -196,6 +227,7 @@
                   <i class="fas fa-file-alt"></i>
                   <a href="../../../2025/03/16/Kaggle/panda/">
                     03-16 Panda basic
+                    
                   </a>
                 </div>
               
@@ -203,6 +235,7 @@
                   <i class="fas fa-file-alt"></i>
                   <a href="../../../2025/02/23/Image%20Generation/Scalable%20Diffusion%20Models%20with%20Transformers/">
                     02-23 Scalable Diffusion Models with Transformers
+                    
                   </a>
                 </div>
               
@@ -210,6 +243,7 @@
                   <i class="fas fa-file-alt"></i>
                   <a href="../../../2025/02/23/Kaggle/Intermediate%20Machine%20Learning/">
                     02-23 machine learning basic
+                    
                   </a>
                 </div>
               
@@ -217,6 +251,7 @@
                   <i class="fas fa-file-alt"></i>
                   <a href="../../../2025/02/23/Kaggle/machine%20learning%20basic/">
                     02-23 machine learning basic
+                    
                   </a>
                 </div>
               
@@ -261,7 +296,10 @@
                     04-07
                   </div>
                   <div class="post-info">
-                    <a href="../../../2025/04/07/Kaggle/data%20cleaning/">Data Cleaning</a>
+                    <a href="../../../2025/04/07/Kaggle/data%20cleaning/">
+                      Data Cleaning
+                      
+                    </a>
                     <div class="post-meta">
                       
                         <span class="category">
@@ -285,7 +323,10 @@
                     03-16
                   </div>
                   <div class="post-info">
-                    <a href="../../../2025/03/16/Kaggle/introduction%20to%20ai%20ethics/">Intro to AI Ethics</a>
+                    <a href="../../../2025/03/16/Kaggle/introduction%20to%20ai%20ethics/">
+                      Intro to AI Ethics
+                      
+                    </a>
                     <div class="post-meta">
                       
                         <span class="category">
@@ -309,7 +350,10 @@
                     03-16
                   </div>
                   <div class="post-info">
-                    <a href="../../../2025/03/16/Kaggle/panda/">Panda basic</a>
+                    <a href="../../../2025/03/16/Kaggle/panda/">
+                      Panda basic
+                      
+                    </a>
                     <div class="post-meta">
                       
                         <span class="category">
@@ -333,7 +377,10 @@
                     02-23
                   </div>
                   <div class="post-info">
-                    <a href="../../../2025/02/23/Image%20Generation/Scalable%20Diffusion%20Models%20with%20Transformers/">Scalable Diffusion Models with Transformers</a>
+                    <a href="../../../2025/02/23/Image%20Generation/Scalable%20Diffusion%20Models%20with%20Transformers/">
+                      Scalable Diffusion Models with Transformers
+                      
+                    </a>
                     <div class="post-meta">
                       
                         <span class="category">
@@ -357,7 +404,10 @@
                     02-23
                   </div>
                   <div class="post-info">
-                    <a href="../../../2025/02/23/Kaggle/Intermediate%20Machine%20Learning/">machine learning basic</a>
+                    <a href="../../../2025/02/23/Kaggle/Intermediate%20Machine%20Learning/">
+                      machine learning basic
+                      
+                    </a>
                     <div class="post-meta">
                       
                         <span class="category">
@@ -381,7 +431,10 @@
                     02-23
                   </div>
                   <div class="post-info">
-                    <a href="../../../2025/02/23/Kaggle/machine%20learning%20basic/">machine learning basic</a>
+                    <a href="../../../2025/02/23/Kaggle/machine%20learning%20basic/">
+                      machine learning basic
+                      
+                    </a>
                     <div class="post-meta">
                       
                         <span class="category">
@@ -420,7 +473,7 @@
     </div>
     <div class="status-item">
       <i class="fas fa-clock"></i>
-      2025-04-14
+      2026-06-16
     </div>
     <div class="status-item">
       Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
@@ -433,24 +486,19 @@
   </div>
 </footer>
 
-    
-    <!-- 全局配置 -->
+
+    <!-- 搜索专用配置 (HEXO_CONFIG 在 scripts.ejs 中统一定义) -->
     <script>
-      window.HEXO_CONFIG = {
-        language: "zh-CN",
-        root: "/blog/"
-      };
-      
-      // 特定于搜索的配置
       window.VSC4T_SEARCH = {
         root: "/blog/"
       };
     </script>
-    
-    <script src="//cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/highlight.js@11.7.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
+
+    <!-- 外部脚本 - 统一使用 cdnjs CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" crossorigin="anonymous"></script>
+    <script>if(typeof hljs !== 'undefined') hljs.highlightAll();</script>
     <!-- 这里可以放置自定义脚本 -->
 <script>
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -492,16 +540,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
   });
 });
 </script>
-<script src="../../../js/toc.js"></script>
 
 <!-- Scripts -->
 <script>
-  // 将语言文件中的翻译传递给前端
+  // 全局配置 - 包含 i18n 字符串和主题配置
   window.HEXO_CONFIG = {
     language: "zh-CN",
+    root: "/blog/",
+    
+    theme_switch: {
+      enabled: false,
+      light_start: "06:00",
+      light_end: "18:00"
+    },
+    
+    // Search i18n strings
     search_placeholder: "输入关键词搜索...",
     search_no_results: "未找到相关结果",
-    search_result: "نتيجة",
+    search_result: "resultado",
     search_results: "搜索结果",
     search_results_found: "找到 undefined 个结果",
     search_in: "搜索范围",
@@ -513,22 +569,88 @@ document.addEventListener('DOMContentLoaded', (event) => {
     search_recent: "最近搜索",
     search_clear: "清除",
     search_loading: "加载中...",
-    search_error: "加载搜索数据时出错"
+    search_error: "加载搜索数据时出错",
+    // Encryption i18n strings
+    encrypt_badge: "受保护",
+    encrypt_title: "受保护的内容",
+    encrypt_description: "请输入密码以解锁本文，密码会在本设备本地保存，直到你选择重新加密。",
+    encrypt_label: "密码",
+    encrypt_placeholder: "输入密码解锁内容",
+    encrypt_button: "解锁",
+    encrypt_button_loading: "解锁中...",
+    encrypt_hint: "按 Enter 提交，密码会在本设备上记住。",
+    encrypt_success: "内容解锁成功！",
+    encrypt_unlocked_note: "内容已解锁，可随时重新加密。",
+    encrypt_again: "重新加密",
+    encrypt_wrong_password: "密码错误，请重试。",
+    encrypt_show_password: "显示密码",
+    encrypt_hide_password: "隐藏密码",
+    // Sidebar i18n strings
+    sidebar_about: "关于",
+    sidebar_categories: "分类",
+    sidebar_tags: "标签",
+    // Post page i18n strings
+    post_toc: "目录",
+    post_category_posts: "同分类文章",
+    post_article_tags: "文章标签"
   };
 </script>
 
 
 
 <!-- 添加所有需要的脚本 -->
-<script src="../../../js/main.js"></script>
 <script src="../../../js/search.js"></script>
+<script src="../../../js/theme-switch.js"></script>
 
+<script src="../../../js/password-protect.js?v=1781612876012"></script>
 
     <script>
       // 移动端菜单切换
       $(document).ready(function() {
-        $('.mobile-menu-toggle').click(function() {
-          $('.sidebar-explorer').toggleClass('show');
+        var $body = $('body');
+        var $sidebar = $('.sidebar-explorer');
+        var $overlay = $('.sidebar-overlay');
+        var $toggle = $('.mobile-menu-toggle');
+
+        function openSidebar() {
+          $sidebar.addClass('show');
+          $overlay.addClass('show');
+          $toggle.addClass('active');
+          $body.addClass('sidebar-open');
+        }
+
+        function closeSidebar() {
+          $sidebar.removeClass('show');
+          $overlay.removeClass('show');
+          $toggle.removeClass('active');
+          $body.removeClass('sidebar-open');
+        }
+
+        // 汉堡按钮点击切换
+        $toggle.on('click', function(e) {
+          e.stopPropagation();
+          if ($sidebar.hasClass('show')) {
+            closeSidebar();
+          } else {
+            openSidebar();
+          }
+        });
+
+        // 点击遮罩层关闭
+        $overlay.on('click', function() {
+          closeSidebar();
+        });
+
+        // ESC 键关闭
+        $(document).on('keydown', function(e) {
+          if (e.key === 'Escape' && $sidebar.hasClass('show')) {
+            closeSidebar();
+          }
+        });
+
+        // 点击侧边栏内的链接时自动关闭侧边栏，确保锚点跳转正常
+        $sidebar.on('click', 'a', function() {
+          closeSidebar();
         });
       });
     </script>
