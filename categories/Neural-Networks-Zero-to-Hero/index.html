@@ -46,7 +46,7 @@
   <link rel="stylesheet" href="../../css/mermaid.css">
 
   <link rel="stylesheet" href="../../css/vs-code.css">
-  <link rel="stylesheet" href="../../css/post.css?v=1781612876018">
+  <link rel="stylesheet" href="../../css/post.css?v=1786098469361">
   <link rel="stylesheet" href="../../css/tag.css">
   <link rel="stylesheet" href="../../css/categories.css">
   <link rel="stylesheet" href="../../css/archive.css">
@@ -92,11 +92,11 @@
         <i class="fas fa-archive"></i>
         <span>归档</span>
       </a>
-      <a href="/blog/categories/" class="nav-item ">
+      <a href="/blog/categories/" class="nav-item active">
         <i class="fas fa-folder"></i>
         <span>分类</span>
       </a>
-      <a href="/blog/tags/" class="nav-item active">
+      <a href="/blog/tags/" class="nav-item ">
         <i class="fas fa-tags"></i>
         <span>标签</span>
       </a>
@@ -162,59 +162,21 @@
 </script>
 
 
-
-
 <div class="vscode-container">
   <!-- 左侧资源管理器 -->
   <div class="sidebar-explorer">
     <div class="explorer-section">
       <div class="section-header">
-        <i class="fas fa-tags"></i>
-        <span>ALL TAGS</span>
+        <i class="fas fa-folder-open"></i>
+        <span>CATEGORIES</span>
       </div>
       <div class="section-content">
         
-          <div class="tag-item ">
-            <i class="fas fa-tag"></i>
-            <a href="../ai/">ai</a>
-            <span class="count">(4)</span>
-          </div>
-        
-          <div class="tag-item ">
-            <i class="fas fa-tag"></i>
-            <a href="../AI/">AI</a>
-            <span class="count">(2)</span>
-          </div>
-        
-          <div class="tag-item ">
-            <i class="fas fa-tag"></i>
-            <a href="../image-generation/">image-generation</a>
+          <a class="category-item active" href="">
+            <i class="fas fa-folder"></i>
+            <span>Neural-Networks-Zero-to-Hero</span>
             <span class="count">(1)</span>
-          </div>
-        
-          <div class="tag-item ">
-            <i class="fas fa-tag"></i>
-            <a href="../kaggle/">kaggle</a>
-            <span class="count">(3)</span>
-          </div>
-        
-          <div class="tag-item active">
-            <i class="fas fa-tag"></i>
-            <a href="">Kaggle</a>
-            <span class="count">(2)</span>
-          </div>
-        
-          <div class="tag-item ">
-            <i class="fas fa-tag"></i>
-            <a href="../Machine-learning/">Machine learning</a>
-            <span class="count">(2)</span>
-          </div>
-        
-          <div class="tag-item ">
-            <i class="fas fa-tag"></i>
-            <a href="../machine-learning/">machine learning</a>
-            <span class="count">(1)</span>
-          </div>
+          </a>
         
       </div>
     </div>
@@ -224,106 +186,57 @@
   <div class="editor-content">
     <div class="tab-bar">
       <div class="tab active">
-        <i class="fas fa-tag"></i>
-        <span>tag: Kaggle.md</span>
+        <i class="fas fa-folder-open"></i>
+        <span>Neural-Networks-Zero-to-Hero.md</span>
       </div>
     </div>
     
     <div class="content-area">
-      <div class="tag-header">
-        <h1>
-          <i class="fas fa-tag"></i>
-          Tag: Kaggle
-        </h1>
-        <span class="tag-count">2 posts</span>
-      </div>
-
-      <div class="posts-container">
-        
-          <div class="post-card">
-            <div class="post-header">
-              <i class="fas fa-file-alt"></i>
-              <span class="post-title">
-                <a href="../../2025/02/23/Kaggle/Intermediate%20Machine%20Learning/">machine learning basic</a>
-              </span>
-            </div>
-            
-            <div class="post-meta">
-              <span class="date">
-                <i class="fas fa-calendar-alt"></i>
-                2025-02-23
-              </span>
-              
-                <span class="category">
-                  <i class="fas fa-folder"></i>
-                  <a class="category-link" href="../../categories/Kaggle%E7%B3%BB%E5%88%97/">Kaggle系列</a>
-                </span>
-              
-            </div>
-            
-            <div class="post-excerpt">
-              Missing Values数据缺失值常见产生途径：
-
-数据采集不完整或设备故障  
-录入错误或人为省略  
-无效或不适用的数据项  
-不同数据源合并时的对齐缺失  
-隐私或保密原因导致的信息遮蔽
-
-如果尝试使用缺失值数据建立模型，大多数机器学习库（包括 scikit-learn）都会出错。
-Drop Columns with Missing Values 删除有缺失值的列除非列中的大部分值都为缺...
-            </div>
-            
-            <div class="post-footer">
-              <a href="../../2025/02/23/Kaggle/Intermediate%20Machine%20Learning/" class="read-more">
-                <i class="fas fa-code"></i>
-                Read More
-              </a>
-            </div>
-          </div>
-        
-          <div class="post-card">
-            <div class="post-header">
-              <i class="fas fa-file-alt"></i>
-              <span class="post-title">
-                <a href="../../2025/02/23/Kaggle/machine%20learning%20basic/">machine learning basic</a>
-              </span>
-            </div>
-            
-            <div class="post-meta">
-              <span class="date">
-                <i class="fas fa-calendar-alt"></i>
-                2025-02-23
-              </span>
-              
-                <span class="category">
-                  <i class="fas fa-folder"></i>
-                  <a class="category-link" href="../../categories/Kaggle%E7%B3%BB%E5%88%97/">Kaggle系列</a>
-                </span>
-              
-            </div>
-            
-            <div class="post-excerpt">
-              (本博客内容基于Kaggle教程，感谢：https://www.kaggle.com/learn/intro-to-machine-learning)
-机器学习是啥？简单说，就是让电脑从数据里学习，找到规律，然后用这些规律来做预测。
-机器学习的几个步骤：
-定义模型： 就像搭积木，选择用什么样的积木（算法）来搭建。
-喂数据： 把数据给模型学习，让它找到数据里的规律。
-做预测： 学习完后，让模型用学到...
-            </div>
-            
-            <div class="post-footer">
-              <a href="../../2025/02/23/Kaggle/machine%20learning%20basic/" class="read-more">
-                <i class="fas fa-code"></i>
-                Read More
-              </a>
-            </div>
-          </div>
-        
-      </div>
-
       
 
+      <!-- 分类 Hero 横幅 -->
+      <div class="category-detail-hero">
+        
+        <div class="category-detail-hero-overlay"></div>
+        <div class="category-detail-hero-content">
+          <div class="category-detail-hero-icon">
+            <i class="fas fa-folder-open"></i>
+          </div>
+          <h1 class="category-detail-hero-title">Neural-Networks-Zero-to-Hero</h1>
+          
+          <div class="category-detail-hero-meta">
+            <span class="category-detail-hero-count">
+              <i class="fas fa-file-alt"></i>
+              1 posts
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 文章列表 -->
+      <div class="category-detail-posts">
+        
+          
+          <a href="../../2026/08/07/Neural-Networks-Zero-to-Hero/micrograd/" class="category-detail-card">
+            <div class="category-detail-card-body">
+              <div class="category-detail-card-header">
+                <i class="fas fa-file-alt"></i>
+                <span class="category-detail-card-title">micrograd</span>
+                
+              </div>
+              <div class="category-detail-card-meta">
+                <span><i class="fas fa-calendar-alt"></i> 2026-08-07</span>
+                
+              </div>
+              <p class="category-detail-card-excerpt">
+                building microgradAI基础 神经网络首先先从最基础的神经元开始说起
+神经元就是一个 $f(x_1,x_2,x_3,…)$ 一个函数 输入了一堆数字然后每个input 都会跟着一个weight 权重 就是 最主要是一个常数高...
+              </p>
+            </div>
+            
+          </a>
+        
+      </div>
     </div>
   </div>
 </div>
@@ -341,7 +254,7 @@ Drop Columns with Missing Values 删除有缺失值的列除非列中的大部�
     </div>
     <div class="status-item">
       <i class="fas fa-clock"></i>
-      2026-06-16
+      2026-08-07
     </div>
     <div class="status-item">
       Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
@@ -425,7 +338,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Search i18n strings
     search_placeholder: "输入关键词搜索...",
     search_no_results: "未找到相关结果",
-    search_result: "resultado",
+    search_result: "نتيجة",
     search_results: "搜索结果",
     search_results_found: "找到 undefined 个结果",
     search_in: "搜索范围",
@@ -470,7 +383,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 <script src="../../js/search.js"></script>
 <script src="../../js/theme-switch.js"></script>
 
-<script src="../../js/password-protect.js?v=1781612876018"></script>
+<script src="../../js/password-protect.js?v=1786098469362"></script>
 
     <script>
       // 移动端菜单切换
