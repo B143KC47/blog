@@ -17,7 +17,7 @@
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://B143KC47.github.io/blog">
   <meta property="og:site_name" content="BlackCat">
-  <meta property="article:published_time" content="2026-08-07T10:54:14.000Z">
+  <meta property="article:published_time" content="2026-08-08T04:16:20.000Z">
 
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary">
@@ -46,7 +46,7 @@
   <link rel="stylesheet" href="../../../../../css/mermaid.css">
 
   <link rel="stylesheet" href="../../../../../css/vs-code.css">
-  <link rel="stylesheet" href="../../../../../css/post.css?v=1786107606611">
+  <link rel="stylesheet" href="../../../../../css/post.css?v=1786194013179">
   <link rel="stylesheet" href="../../../../../css/tag.css">
   <link rel="stylesheet" href="../../../../../css/categories.css">
   <link rel="stylesheet" href="../../../../../css/archive.css">
@@ -209,12 +209,12 @@
           <div class="post-meta">
             <span class="date">
               <i class="fas fa-calendar-alt"></i>
-              2026-08-07
+              2026-08-08
             </span>
             
             <span class="updated-date">
               <i class="fas fa-sync-alt"></i>
-              更新于 2026-08-07
+              更新于 2026-08-08
             </span>
                         
               <span class="categories">
@@ -548,6 +548,7 @@
 </script>
 
 <p>拖动c₁到c₄的滑条 可以看到分段线性的曲线可以一点点逼近sin(x)<br>神经元的数量越多 拐弯的点越多 就能逼近越复杂的函数<br>这就是为什么神经网络一定要加Activation function</p>
+<p>简单介绍完基本的神经网络结构就可以来说一下 micrograd 了</p>
 <p>micrograd 是一个 autograd engine 就是自动梯度的机器 </p>
 <ul>
 <li>也就是Implement backpropagation 向后传播</li>
@@ -557,7 +558,10 @@
 <p>然后看看结果如何</p>
 <p>那如何衡量结果 我们就需要loss function </p>
 <p>有了 loss function 之后 知道做的好不好了 </p>
-<p>我们就需要去改良 （也就是把</p>
+<p>我们就需要去改良 (也就是去调整权重和bias)</p>
+<p>举出一个简单的例子</p>
+<p>Mean Squared Error - MSE</p>
+<p>$$<br>MSE &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n}(y_i-\hat{y}_i)^2<br>$$</p>
 
         </div>
         
@@ -670,7 +674,7 @@
     </div>
     <div class="status-item">
       <i class="fas fa-clock"></i>
-      2026-08-07
+      2026-08-08
     </div>
     <div class="status-item">
       Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
@@ -754,7 +758,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Search i18n strings
     search_placeholder: "输入关键词搜索...",
     search_no_results: "未找到相关结果",
-    search_result: "نتيجة",
+    search_result: "result",
     search_results: "搜索结果",
     search_results_found: "找到 undefined 个结果",
     search_in: "搜索范围",
@@ -799,7 +803,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 <script src="../../../../../js/search.js"></script>
 <script src="../../../../../js/theme-switch.js"></script>
 
-<script src="../../../../../js/password-protect.js?v=1786107606611"></script>
+<script src="../../../../../js/password-protect.js?v=1786194013179"></script>
 
     <script>
       // 移动端菜单切换
