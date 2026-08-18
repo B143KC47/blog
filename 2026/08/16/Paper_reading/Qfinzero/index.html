@@ -3,7 +3,7 @@
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>micrograd | BlackCat</title>
+  <title>Qfinzero | BlackCat</title>
 
   <!-- SEO Meta Tags -->
   <meta name="description" content="A simple dark Hexo theme inspired by code.">
@@ -12,16 +12,16 @@
   <link rel="canonical" href="https://B143KC47.github.io/blog">
 
   <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="micrograd | BlackCat">
+  <meta property="og:title" content="Qfinzero | BlackCat">
   <meta property="og:description" content="A simple dark Hexo theme inspired by code.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://B143KC47.github.io/blog">
   <meta property="og:site_name" content="BlackCat">
-  <meta property="article:published_time" content="2026-08-08T04:16:20.000Z">
+  <meta property="article:published_time" content="2026-08-16T15:01:06.000Z">
 
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="micrograd | BlackCat">
+  <meta name="twitter:title" content="Qfinzero | BlackCat">
   <meta name="twitter:description" content="A simple dark Hexo theme inspired by code.">
 
   <!-- Favicon 配置 -->
@@ -46,7 +46,7 @@
   <link rel="stylesheet" href="../../../../../css/mermaid.css">
 
   <link rel="stylesheet" href="../../../../../css/vs-code.css">
-  <link rel="stylesheet" href="../../../../../css/post.css?v=1786885217848">
+  <link rel="stylesheet" href="../../../../../css/post.css?v=1787058010471">
   <link rel="stylesheet" href="../../../../../css/tag.css">
   <link rel="stylesheet" href="../../../../../css/categories.css">
   <link rel="stylesheet" href="../../../../../css/archive.css">
@@ -172,7 +172,7 @@
         <span>目录</span>
       </div>
       <div class="section-content">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#building-micrograd"><span class="toc-text">building micrograd</span></a></li></ol>
+        
       </div>
     </div>
 
@@ -184,6 +184,16 @@
         <span>同分类文章</span>
       </div>
       <div class="section-content">
+        
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="../../../17/Paper_reading/Alphabench/">Alphabench</a>
+          </div>
+        
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="../Evoalpha/">Evoalpha</a>
+          </div>
         
       </div>
     </div>
@@ -198,29 +208,29 @@
     <div class="tab-bar">
       <div class="tab active">
         <i class="fas fa-file-alt"></i>
-        <span>micrograd.md</span>
+        <span>Qfinzero.md</span>
       </div>
     </div>
     
     <div class="content-area">
       <article class="post-content">
         <div class="post-header">
-          <h1>micrograd</h1>
+          <h1>Qfinzero</h1>
           <div class="post-meta">
             <span class="date">
               <i class="fas fa-calendar-alt"></i>
-              2026-08-08
+              2026-08-16
             </span>
             
             <span class="updated-date">
               <i class="fas fa-sync-alt"></i>
-              更新于 2026-08-16
+              更新于 2026-08-18
             </span>
                         
               <span class="categories">
                 <i class="fas fa-folder"></i>
                 <div class="categories-list">
-                  <ul class="category-item-post-list"><li class="category-item-post-list-item"><a class="category-item-post-list-link" href="../../../../../categories/Neural-Networks-Zero-to-Hero/">Neural-Networks-Zero-to-Hero</a></li></ul>
+                  <ul class="category-item-post-list"><li class="category-item-post-list-item"><a class="category-item-post-list-link" href="../../../../../categories/Paper-reading/">Paper_reading</a></li></ul>
                 </div>
               </span>
             
@@ -229,350 +239,200 @@
         </div>
         
         <div class="post-body vscode-markdown">
-          <h1 id="building-micrograd"><a href="#building-micrograd" class="headerlink" title="building micrograd"></a>building micrograd</h1><p>AI基础 神经网络<br>首先先从最基础的神经元开始说起</p>
-<p>神经元就是一个 $f(x_1,x_2,x_3,…)$ 一个函数 输入了一堆数字<br>然后每个input 都会跟着一个weight 权重 就是 最主要是一个常数<br>高就代表这个输入很重要<br>低就代表没那么重要<br>当然也要看正负 可以看出是负影响 还是 正影响</p>
-<p>基本结构：<br>$f(x_1,x_2,x_3,…) &#x3D; Activation_function(w_1 \times x_1 + w_2\times x_2 + … + bias)$</p>
-<p>这里可以看到在刚刚输入×权重后 还要加一个bias<br>而bias的作用是什么 为什么 + 一个bias呢</p>
-<p>bias 从几何意义上来理解<br>y &#x3D; mx + c<br>c 也就是代表着这条线可以在整个空间里面平移 </p>
-<p>机器学习 最主要是学习数据关系<br>也就是 输入 和 输出的对应关系<br>如果不允许平移 那么 如果真实数据里面是 y&#x3D; 2x + 100<br>在 输入永远 &#x3D; 0 的时候<br>如果没有bias 永远拟合不了线性的真实数据</p>
-<p>而我们最终的目的也就是 确保 x轴上  每一个x 只要调整 w 和 bias 可以触及 任意的y<br>因为我们要拟合 世界上 任意的对应关系 任何的数据形态 </p>
-<p>但是单单只有一条 直线 是不够的<br>所以我们要引入 非线性</p>
-<p>也就是 Activation function(激活函数)</p>
-<p>我们先介绍第一种 Activation function<br>ReLU:</p>
-<style>
-.desmos-graph {
-  border-radius: 12px;
-  overflow: hidden;
-  background: #000;
-  margin: 16px 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
-}
-</style>
-<div id="desmos-graph-1" class="desmos-graph" style="width:100%;height:400px;"></div>
-<script>
-(function () {
-  window.__desmosQueue = window.__desmosQueue || [];
-  window.__desmosQueue.push({ id: "desmos-graph-1", expressions: [{"latex":"y=\\max(0,x)"}] });
-
-  function initDesmos() {
-    window.__desmosQueue.forEach(function (item) {
-      if (item.sliders) return; // {% graph %} 标签的条目由它自己的初始化逻辑处理
-      var elt = document.getElementById(item.id);
-      if (!elt || elt.__desmosInit) return;
-      elt.__desmosInit = true;
-      // ChatGPT 风格：深色坐标纸 + 左侧表达式面板 + 无小键盘/设置菜单
-      Desmos.GraphingCalculator(elt, {
-        invertedColors: true,
-        expressionsTopbar: true,
-        expressionsCollapsed: false,
-        keypad: false,
-        settingsMenu: false,
-        border: false
-      }).setExpressions(item.expressions);
-    });
-  }
-
-  if (window.Desmos) { initDesmos(); return; }
-
-  var existing = document.getElementById('desmos-api-script');
-  if (existing) {
-    var prev = existing.onload;
-    existing.onload = function () { if (prev) prev(); initDesmos(); };
-    return;
-  }
-
-  var s = document.createElement('script');
-  s.id = 'desmos-api-script';
-  s.src = 'https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6';
-  s.onload = initDesmos;
-  document.head.appendChild(s);
-})();
-</script>
-
-<p>其实也就是创造一个折点 在几何意义上</p>
-<p>那我们现在画一个最简单的神经网络 长这样(2个输入 3个隐藏神经元 1个输出):</p>
-<p><img src="nn-diagram.svg" alt="最简单的神经网络：2输入 3隐藏 1输出"></p>
-<p>每条连线就是一个权重w 每个神经元做的是 加权求和 再过一个Activation function</p>
-<p>为什么一定要非线性?<br>如果每个神经元都只是线性加权求和 那不管叠多少层 组合起来还是一条直线:</p>
-<style>
-.gpt-graph{display:flex;border-radius:12px;overflow:hidden;background:#000;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.45);}
-.gpt-graph-panel{width:240px;flex:none;background:#2d2d2e;padding:20px 16px;display:flex;flex-direction:column;gap:20px;}
-.gpt-graph-title{font-size:20px;text-align:center;color:#e8e8e8;padding:4px 0;}
-.gpt-slider{display:flex;flex-direction:column;gap:8px;color:#d4d4d4;font-size:14px;}
-.gpt-slider-row{display:flex;justify-content:space-between;align-items:center;}
-.gpt-slider-value{background:#3f3f40;border-radius:6px;padding:1px 10px;font-size:13px;min-width:36px;text-align:center;}
-.gpt-slider input[type=range]{width:100%;accent-color:#ffffff;cursor:pointer;}
-.gpt-graph-canvas{flex:1;min-width:0;}
-@media (max-width:640px){.gpt-graph{flex-direction:column;}.gpt-graph-panel{width:auto;}}
-</style>
-<div class="gpt-graph" id="gpt-graph-1" style="height:380px;">
-  <div class="gpt-graph-panel">
-    <div class="gpt-graph-title">y = mx + b</div>
-    
-    <div class="gpt-slider">
-      <div class="gpt-slider-row">
-        <span>m（斜率）</span>
-        <span class="gpt-slider-value" data-slider-value="0">1</span>
-      </div>
-      <input type="range" data-slider="0" min="-10" max="10" step="0.1" value="1">
-    </div>
-    <div class="gpt-slider">
-      <div class="gpt-slider-row">
-        <span>b（y截距）</span>
-        <span class="gpt-slider-value" data-slider-value="1">0.5</span>
-      </div>
-      <input type="range" data-slider="1" min="-10" max="10" step="0.1" value="0.5">
-    </div>
-  </div>
-  <div class="gpt-graph-canvas" id="gpt-graph-1-canvas"></div>
-</div>
-<script>
-(function () {
-  window.__desmosQueue = window.__desmosQueue || [];
-  var config = {
-    id: "gpt-graph-1",
-    expressions: [{"latex":"y=mx+b","color":"#4a9eff"},{"latex":"y=\\sin(x)","color":"#608b4e"}],
-    sliders: [{"label":"m（斜率）","varName":"m","init":1,"min":-10,"max":10,"step":0.1},{"label":"b（y截距）","varName":"b","init":0.5,"min":-10,"max":10,"step":0.1}]
-  };
-  window.__desmosQueue.push(config);
-
-  function initOne(item) {
-    var canvas = document.getElementById(item.id + '-canvas');
-    if (!canvas || canvas.__desmosInit) return;
-    canvas.__desmosInit = true;
-    // 只显示坐标纸，表达式面板由我们自己的滑条代替
-    var calc = Desmos.GraphingCalculator(canvas, {
-      invertedColors: true,
-      expressions: false,
-      keypad: false,
-      settingsMenu: false,
-      border: false
-    });
-    calc.setExpressions(item.expressions);
-    item.sliders.forEach(function (s, i) {
-      calc.setExpression({ id: 'slider-' + i, latex: s.varName + '=' + s.init });
-    });
-
-    var root = document.getElementById(item.id);
-    root.querySelectorAll('input[data-slider]').forEach(function (input) {
-      input.addEventListener('input', function () {
-        var i = Number(input.getAttribute('data-slider'));
-        var value = input.value;
-        calc.setExpression({ id: 'slider-' + i, latex: item.sliders[i].varName + '=' + value });
-        var badge = root.querySelector('[data-slider-value="' + i + '"]');
-        if (badge) badge.textContent = value;
-      });
-    });
-
-    // 标题按 LaTeX 渲染；页面没加载 MathJax 时自己从 CDN 加载
-    renderTitle(root);
-  }
-
-  function renderTitle(root) {
-    var titleEl = root.querySelector('.gpt-graph-title');
-    if (!titleEl || !titleEl.textContent) return;
-    ensureMathJax(function () {
-      var raw = titleEl.textContent;
-      titleEl.textContent = '\(' + raw + '\)';
-      MathJax.typesetPromise([titleEl]).catch(function () { titleEl.textContent = raw; });
-    });
-  }
-
-  function ensureMathJax(cb) {
-    if (window.MathJax && MathJax.typesetPromise) { cb(); return; }
-    // 先于库本体设置配置，MathJax 加载时会读取
-    window.MathJax = window.MathJax || { tex: { inlineMath: [['\(', '\)']] } };
-    var existing = document.getElementById('mathjax-cdn-script');
-    if (existing) {
-      var prev = existing.onload;
-      existing.onload = function () { if (prev) prev(); cb(); };
-      return;
-    }
-    var s = document.createElement('script');
-    s.id = 'mathjax-cdn-script';
-    s.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js';
-    s.onload = cb;
-    document.head.appendChild(s);
-  }
-
-  function initDesmos() {
-    window.__desmosQueue.forEach(function (item) {
-      if (item.sliders) initOne(item);
-    });
-  }
-
-  if (window.Desmos) { initDesmos(); return; }
-
-  var existing = document.getElementById('desmos-api-script');
-  if (existing) {
-    var prev = existing.onload;
-    existing.onload = function () { if (prev) prev(); initDesmos(); };
-    return;
-  }
-
-  var s = document.createElement('script');
-  s.id = 'desmos-api-script';
-  s.src = 'https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6';
-  s.onload = initDesmos;
-  document.head.appendChild(s);
-})();
-</script>
-
-<p>拖动左边m b的滑条 怎么调都只是一条直线 永远拟合不了sin(x)</p>
-<p>但是只要加上ReLU这种非线性 把几个ReLU加起来 曲线就开始拐弯了:</p>
-<div class="gpt-graph" id="gpt-graph-2" style="height:380px;">
-  <div class="gpt-graph-panel">
-    <div class="gpt-graph-title">y = \sum_{i=1}^{4} c_i \max(0, x - p_i)</div>
-    
-    <div class="gpt-slider">
-      <div class="gpt-slider-row">
-        <span>c₁</span>
-        <span class="gpt-slider-value" data-slider-value="0">1</span>
-      </div>
-      <input type="range" data-slider="0" min="-3" max="3" step="0.1" value="1">
-    </div>
-    <div class="gpt-slider">
-      <div class="gpt-slider-row">
-        <span>c₂</span>
-        <span class="gpt-slider-value" data-slider-value="1">-0.8</span>
-      </div>
-      <input type="range" data-slider="1" min="-3" max="3" step="0.1" value="-0.8">
-    </div>
-    <div class="gpt-slider">
-      <div class="gpt-slider-row">
-        <span>c₃</span>
-        <span class="gpt-slider-value" data-slider-value="2">0.5</span>
-      </div>
-      <input type="range" data-slider="2" min="-3" max="3" step="0.1" value="0.5">
-    </div>
-    <div class="gpt-slider">
-      <div class="gpt-slider-row">
-        <span>c₄</span>
-        <span class="gpt-slider-value" data-slider-value="3">-0.3</span>
-      </div>
-      <input type="range" data-slider="3" min="-3" max="3" step="0.1" value="-0.3">
-    </div>
-  </div>
-  <div class="gpt-graph-canvas" id="gpt-graph-2-canvas"></div>
-</div>
-<script>
-(function () {
-  window.__desmosQueue = window.__desmosQueue || [];
-  var config = {
-    id: "gpt-graph-2",
-    expressions: [{"latex":"y=c_{1}\\max(0,x+3)+c_{2}\\max(0,x+1)+c_{3}\\max(0,x-1)+c_{4}\\max(0,x-3)","color":"#4a9eff"},{"latex":"y=\\sin(x)","color":"#608b4e"}],
-    sliders: [{"label":"c₁","varName":"c_{1}","init":1,"min":-3,"max":3,"step":0.1},{"label":"c₂","varName":"c_{2}","init":-0.8,"min":-3,"max":3,"step":0.1},{"label":"c₃","varName":"c_{3}","init":0.5,"min":-3,"max":3,"step":0.1},{"label":"c₄","varName":"c_{4}","init":-0.3,"min":-3,"max":3,"step":0.1}]
-  };
-  window.__desmosQueue.push(config);
-
-  function initOne(item) {
-    var canvas = document.getElementById(item.id + '-canvas');
-    if (!canvas || canvas.__desmosInit) return;
-    canvas.__desmosInit = true;
-    // 只显示坐标纸，表达式面板由我们自己的滑条代替
-    var calc = Desmos.GraphingCalculator(canvas, {
-      invertedColors: true,
-      expressions: false,
-      keypad: false,
-      settingsMenu: false,
-      border: false
-    });
-    calc.setExpressions(item.expressions);
-    item.sliders.forEach(function (s, i) {
-      calc.setExpression({ id: 'slider-' + i, latex: s.varName + '=' + s.init });
-    });
-
-    var root = document.getElementById(item.id);
-    root.querySelectorAll('input[data-slider]').forEach(function (input) {
-      input.addEventListener('input', function () {
-        var i = Number(input.getAttribute('data-slider'));
-        var value = input.value;
-        calc.setExpression({ id: 'slider-' + i, latex: item.sliders[i].varName + '=' + value });
-        var badge = root.querySelector('[data-slider-value="' + i + '"]');
-        if (badge) badge.textContent = value;
-      });
-    });
-
-    // 标题按 LaTeX 渲染；页面没加载 MathJax 时自己从 CDN 加载
-    renderTitle(root);
-  }
-
-  function renderTitle(root) {
-    var titleEl = root.querySelector('.gpt-graph-title');
-    if (!titleEl || !titleEl.textContent) return;
-    ensureMathJax(function () {
-      var raw = titleEl.textContent;
-      titleEl.textContent = '\(' + raw + '\)';
-      MathJax.typesetPromise([titleEl]).catch(function () { titleEl.textContent = raw; });
-    });
-  }
-
-  function ensureMathJax(cb) {
-    if (window.MathJax && MathJax.typesetPromise) { cb(); return; }
-    // 先于库本体设置配置，MathJax 加载时会读取
-    window.MathJax = window.MathJax || { tex: { inlineMath: [['\(', '\)']] } };
-    var existing = document.getElementById('mathjax-cdn-script');
-    if (existing) {
-      var prev = existing.onload;
-      existing.onload = function () { if (prev) prev(); cb(); };
-      return;
-    }
-    var s = document.createElement('script');
-    s.id = 'mathjax-cdn-script';
-    s.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js';
-    s.onload = cb;
-    document.head.appendChild(s);
-  }
-
-  function initDesmos() {
-    window.__desmosQueue.forEach(function (item) {
-      if (item.sliders) initOne(item);
-    });
-  }
-
-  if (window.Desmos) { initDesmos(); return; }
-
-  var existing = document.getElementById('desmos-api-script');
-  if (existing) {
-    var prev = existing.onload;
-    existing.onload = function () { if (prev) prev(); initDesmos(); };
-    return;
-  }
-
-  var s = document.createElement('script');
-  s.id = 'desmos-api-script';
-  s.src = 'https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6';
-  s.onload = initDesmos;
-  document.head.appendChild(s);
-})();
-</script>
-
-<p>拖动c₁到c₄的滑条 可以看到分段线性的曲线可以一点点逼近sin(x)<br>神经元的数量越多 拐弯的点越多 就能逼近越复杂的函数<br>这就是为什么神经网络一定要加Activation function</p>
-<p>简单介绍完基本的神经网络结构就可以来说一下 micrograd 了</p>
-<p>micrograd 是一个 autograd engine 就是自动梯度的机器 </p>
-<ul>
-<li>也就是Implement backpropagation 向后传播</li>
-</ul>
-<p>backpropagation 向后传播解释</p>
-<p>整个Neural Network的目的例如说 我们想要这个神经网络去拟合一种数据分布对吧<br>首先整个的流程就是<br>Feed input -&gt; Process -&gt; Output </p>
-<p>然后看看结果如何</p>
-<p>那如何衡量结果 我们就需要loss function </p>
-<p>有了 loss function 之后 知道做的好不好了 </p>
-<p>我们就需要去改良 (也就是去调整权重和bias)</p>
-<p>举出一个简单的例子</p>
-<p>Mean Squared Error - MSE</p>
-<p>$$<br>MSE &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n}(y_i-\hat{y}_i)^2<br>$$</p>
-
+          
         </div>
         
         <!-- 文章导航 - 只在同分类有多篇文章时显示 -->
         
         
         
+        <nav class="post-nav">
+          
+            <a class="prev" href="../Evoalpha/">
+              <i class="fas fa-chevron-left"></i>
+              Evoalpha
+            </a>
+          
+          
+        </nav>
+        
         
         <!-- 推荐文章 -->
         
 
+
+<div class="vs-recommended-posts">
+  <div class="vs-recommended-header">
+    <div class="section-header">
+      <i class="fas fa-lightbulb"></i>
+      <span>相关文章</span>
+    </div>
+  </div>
+  
+  <div class="vs-recommended-grid">
+    
+      <div class="vs-recommended-item" data-index="0" tabindex="0">
+        <a href="../Evoalpha/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>Evoalpha</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  8月 16
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  1 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      <div class="vs-recommended-item" data-index="1" tabindex="0">
+        <a href="../../../17/Paper_reading/Alphabench/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>Alphabench</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              ALPHABENCH: BENCHMARKING LARGE LANGUAGE MODELS IN FORMULAIC ALPHA FACTOR MINING研究的问题： 在“ Alpha 因子挖掘”的完整工作流中，大语言模型究竟适合扮演什...
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  8月 17
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  2 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      <div class="vs-recommended-item" data-index="2" tabindex="0">
+        <a href="../../../18/Neural-Networks-Zero-to-Hero/micrograd/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>micrograd</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              building microgradAI基础 神经网络首先先从最基础的神经元开始说起 神经元就是一个 $f(x_1,x_2,x_3,…)$ 一个函数 输入了一堆数字然后每个input 都会跟着一个weight 权重 就是 最主要是一个常数高...
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  8月 18
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  5 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+  </div>
+  
+  <!-- 查看更多 -->
+  <div class="vs-recommended-footer">
+    <a href="../../../../../archives/" class="vs-view-more">
+      <i class="fas fa-folder-open"></i>
+      <span>查看更多文章</span>
+      <i class="fas fa-chevron-right"></i>
+    </a>
+  </div>
+</div>
+
+<script>
+// 键盘导航支持
+document.addEventListener('DOMContentLoaded', function() {
+  const items = document.querySelectorAll('.vs-recommended-item');
+  let currentIndex = -1;
+  
+  // 键盘事件
+  document.addEventListener('keydown', function(e) {
+    if (!items.length) return;
+    
+    if (e.key === 'Tab') {
+      // Tab键导航由浏览器处理
+      return;
+    }
+    
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      
+      // 移除当前高亮
+      if (currentIndex >= 0) {
+        items[currentIndex].classList.remove('vs-focused');
+      }
+      
+      // 更新索引
+      if (e.key === 'ArrowRight') {
+        currentIndex = (currentIndex + 1) % items.length;
+      } else {
+        currentIndex = currentIndex <= 0 ? items.length - 1 : currentIndex - 1;
+      }
+      
+      // 添加新高亮
+      items[currentIndex].classList.add('vs-focused');
+      items[currentIndex].focus();
+    }
+    
+    if (e.key === 'Enter' && currentIndex >= 0) {
+      const link = items[currentIndex].querySelector('a');
+      if (link) link.click();
+    }
+  });
+  
+  // 鼠标悬停时更新当前索引
+  items.forEach((item, index) => {
+    item.addEventListener('mouseenter', function() {
+      currentIndex = index;
+      items.forEach(i => i.classList.remove('vs-focused'));
+      item.classList.add('vs-focused');
+    });
+  });
+});
+</script>
 
         
         <!-- 评论区 -->
@@ -674,7 +534,7 @@
     </div>
     <div class="status-item">
       <i class="fas fa-clock"></i>
-      2026-08-16
+      2026-08-18
     </div>
     <div class="status-item">
       Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
@@ -803,7 +663,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 <script src="../../../../../js/search.js"></script>
 <script src="../../../../../js/theme-switch.js"></script>
 
-<script src="../../../../../js/password-protect.js?v=1786885217849"></script>
+<script src="../../../../../js/password-protect.js?v=1787058010472"></script>
 
     <script>
       // 移动端菜单切换
