@@ -17,7 +17,7 @@
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://B143KC47.github.io/blog">
   <meta property="og:site_name" content="BlackCat">
-  <meta property="article:published_time" content="2026-08-18T11:32:27.000Z">
+  <meta property="article:published_time" content="2026-08-18T14:01:11.000Z">
 
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary">
@@ -46,7 +46,7 @@
   <link rel="stylesheet" href="../../../../../css/mermaid.css">
 
   <link rel="stylesheet" href="../../../../../css/vs-code.css">
-  <link rel="stylesheet" href="../../../../../css/post.css?v=1787058010469">
+  <link rel="stylesheet" href="../../../../../css/post.css?v=1787144410234">
   <link rel="stylesheet" href="../../../../../css/tag.css">
   <link rel="stylesheet" href="../../../../../css/categories.css">
   <link rel="stylesheet" href="../../../../../css/archive.css">
@@ -214,7 +214,7 @@
             
             <span class="updated-date">
               <i class="fas fa-sync-alt"></i>
-              更新于 2026-08-18
+              更新于 2026-08-19
             </span>
                         
               <span class="categories">
@@ -564,6 +564,11 @@
 <p>$$<br>MSE &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n}(y_i-\hat{y}_i)^2<br>$$</p>
 <p>有了Loss function 之后 我们的步骤就到了如何改进<br>那么改进 需要 gradient (也就是导数)</p>
 <p>导数的意思就是在 那一点的斜率 也就是 加了一个变化率</p>
+<p>让L 作为 Loss function</p>
+<p>dL&#x2F;dL 是1 </p>
+<p>L &#x3D; tanh(wx + c)</p>
+<p>dL&#x2F;dw &#x3D; dL&#x2F;d(wx+c) d(wx +c)&#x2F;dw<br>只要用chain rule 就可以算出 某个具体变量的 导数</p>
+<p>知道 导数是 x 增加一个dx y的上涨<br>那么为了最小化L 可以学习率乘一个负导数<br>因为x 如果+dx是增加 L 那么 -dx 就是减少L 这样可以让Loss function 变小<br>而学习率就是变小多少 防止直接跳过了minimum</p>
 
         </div>
         
@@ -849,7 +854,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     <div class="status-item">
       <i class="fas fa-clock"></i>
-      2026-08-18
+      2026-08-19
     </div>
     <div class="status-item">
       Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
@@ -933,7 +938,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Search i18n strings
     search_placeholder: "输入关键词搜索...",
     search_no_results: "未找到相关结果",
-    search_result: "Ergebnis",
+    search_result: "نتيجة",
     search_results: "搜索结果",
     search_results_found: "找到 undefined 个结果",
     search_in: "搜索范围",
@@ -978,7 +983,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 <script src="../../../../../js/search.js"></script>
 <script src="../../../../../js/theme-switch.js"></script>
 
-<script src="../../../../../js/password-protect.js?v=1787058010470"></script>
+<script src="../../../../../js/password-protect.js?v=1787144410234"></script>
 
     <script>
       // 移动端菜单切换
