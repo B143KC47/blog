@@ -38,29 +38,29 @@
   <script defer src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" crossorigin="anonymous"></script>
 
   <!-- 主题样式 -->
-  <link rel="stylesheet" href="../../../css/theme-colors.css">
-  <link rel="stylesheet" href="../../../css/main.css">
-  <link rel="stylesheet" href="../../../css/code.css">
-  <link rel="stylesheet" href="../../../css/code-custom.css">
-  <link rel="stylesheet" href="../../../css/code-languages.css">
-  <link rel="stylesheet" href="../../../css/mermaid.css">
+  <link rel="stylesheet" href="../../css/theme-colors.css">
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/code-custom.css">
+  <link rel="stylesheet" href="../../css/code-languages.css">
+  <link rel="stylesheet" href="../../css/mermaid.css">
 
-  <link rel="stylesheet" href="../../../css/vs-code.css">
-  <link rel="stylesheet" href="../../../css/post.css?v=1787230809980">
-  <link rel="stylesheet" href="../../../css/tag.css">
-  <link rel="stylesheet" href="../../../css/categories.css">
-  <link rel="stylesheet" href="../../../css/archive.css">
-  <link rel="stylesheet" href="../../../css/search.css">
-  <link rel="stylesheet" href="../../../css/mobile.css">  <link rel="stylesheet" href="../../../css/responsive.css">
-  <link rel="stylesheet" href="../../../css/elements.css">
+  <link rel="stylesheet" href="../../css/vs-code.css">
+  <link rel="stylesheet" href="../../css/post.css?v=1787230809980">
+  <link rel="stylesheet" href="../../css/tag.css">
+  <link rel="stylesheet" href="../../css/categories.css">
+  <link rel="stylesheet" href="../../css/archive.css">
+  <link rel="stylesheet" href="../../css/search.css">
+  <link rel="stylesheet" href="../../css/mobile.css">  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="../../css/elements.css">
 
   <!-- 添加 JetBrains Mono 字体 -->  
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- Add any custom head content here -->
 
-  <script defer src="../../../js/explorer.js"></script>
-  <script defer src="../../../js/code-enhance.js"></script>
+  <script defer src="../../js/explorer.js"></script>
+  <script defer src="../../js/code-enhance.js"></script>
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
@@ -88,11 +88,11 @@
         <i class="fas fa-home"></i>
         <span>首页</span>
       </a>
-      <a href="/blog/archives/" class="nav-item active">
+      <a href="/blog/archives/" class="nav-item ">
         <i class="fas fa-archive"></i>
         <span>归档</span>
       </a>
-      <a href="/blog/categories/" class="nav-item ">
+      <a href="/blog/categories/" class="nav-item active">
         <i class="fas fa-folder"></i>
         <span>分类</span>
       </a>
@@ -167,84 +167,28 @@
   <div class="sidebar-explorer">
     <div class="explorer-section">
       <div class="section-header">
-        <i class="fas fa-clock"></i>
-        <span>ARCHIVES</span>
+        <i class="fas fa-folder-open"></i>
+        <span>CATEGORIES</span>
       </div>
       <div class="section-content">
         
+          <a class="category-item " href="../Neural-Networks-Zero-to-Hero/">
+            <i class="fas fa-folder"></i>
+            <span>Neural-Networks-Zero-to-Hero</span>
+            <span class="count">(1)</span>
+          </a>
         
-          
-          
-          
+          <a class="category-item " href="../Paper-reading/">
+            <i class="fas fa-folder"></i>
+            <span>Paper_reading</span>
+            <span class="count">(3)</span>
+          </a>
         
-          
-          
-          
-        
-          
-          
-          
-        
-          
-          
-          
-        
-          
-          
-          
-        
-        
-        
-          <div class="archive-year">
-            <div class="folder">
-              <i class="fas fa-folder"></i>
-              <span>2026</span>
-              <span class="count">(5)</span>
-            </div>
-            <div class="archive-posts">
-              
-                <div class="file ">
-                  <i class="fas fa-file-alt"></i>
-                  <a href="../../../2026/08/20/%E7%A5%9E%E7%BB%8F%E7%A7%91%E5%AD%A6/Roadmap/">
-                    08-20 Roadmap
-                    
-                  </a>
-                </div>
-              
-                <div class="file ">
-                  <i class="fas fa-file-alt"></i>
-                  <a href="../../../2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/">
-                    08-18 micrograd
-                    
-                  </a>
-                </div>
-              
-                <div class="file ">
-                  <i class="fas fa-file-alt"></i>
-                  <a href="../../../2026/08/17/Paper_reading/Alphabench/">
-                    08-17 Alphabench
-                    
-                  </a>
-                </div>
-              
-                <div class="file ">
-                  <i class="fas fa-file-alt"></i>
-                  <a href="../../../2026/08/16/Paper_reading/Evoalpha/">
-                    08-16 Evoalpha
-                    
-                  </a>
-                </div>
-              
-                <div class="file ">
-                  <i class="fas fa-file-alt"></i>
-                  <a href="../../../2026/08/16/Paper_reading/Qfinzero/">
-                    08-16 Qfinzero
-                    
-                  </a>
-                </div>
-              
-            </div>
-          </div>
+          <a class="category-item active" href="">
+            <i class="fas fa-folder"></i>
+            <span>神经科学</span>
+            <span class="count">(1)</span>
+          </a>
         
       </div>
     </div>
@@ -254,142 +198,54 @@
   <div class="editor-content">
     <div class="tab-bar">
       <div class="tab active">
-        <i class="fas fa-archive"></i>
-        <span>archives.md</span>
+        <i class="fas fa-folder-open"></i>
+        <span>神经科学.md</span>
       </div>
     </div>
     
     <div class="content-area">
-      <div class="archive-header">
-        <h1>
-          <i class="fas fa-archive"></i>
-          Archives
-        </h1>
-        <span class="archive-count">5 posts</span>
+      
+
+      <!-- 分类 Hero 横幅 -->
+      <div class="category-detail-hero">
+        
+        <div class="category-detail-hero-overlay"></div>
+        <div class="category-detail-hero-content">
+          <div class="category-detail-hero-icon">
+            <i class="fas fa-folder-open"></i>
+          </div>
+          <h1 class="category-detail-hero-title">神经科学</h1>
+          
+          <div class="category-detail-hero-meta">
+            <span class="category-detail-hero-count">
+              <i class="fas fa-file-alt"></i>
+              1 posts
+            </span>
+          </div>
+        </div>
       </div>
 
-      <div class="timeline-container">
+      <!-- 文章列表 -->
+      <div class="category-detail-posts">
         
-          <div class="timeline-year">
-            <div class="year-header">
-              <i class="fas fa-calendar-alt"></i>
-              2026
-              <span class="year-count">(5 posts)</span>
+          
+          <a href="../../2026/08/20/%E7%A5%9E%E7%BB%8F%E7%A7%91%E5%AD%A6/Roadmap/" class="category-detail-card">
+            <div class="category-detail-card-body">
+              <div class="category-detail-card-header">
+                <i class="fas fa-file-alt"></i>
+                <span class="category-detail-card-title">Roadmap</span>
+                
+              </div>
+              <div class="category-detail-card-meta">
+                <span><i class="fas fa-calendar-alt"></i> 2026-08-20</span>
+                
+              </div>
+              <p class="category-detail-card-excerpt">
+                ...
+              </p>
             </div>
-            <div class="year-posts">
-              
-                <div class="timeline-post">
-                  <div class="post-date">
-                    <i class="fas fa-clock"></i>
-                    08-20
-                  </div>
-                  <div class="post-info">
-                    <a href="../../../2026/08/20/%E7%A5%9E%E7%BB%8F%E7%A7%91%E5%AD%A6/Roadmap/">
-                      Roadmap
-                      
-                    </a>
-                    <div class="post-meta">
-                      
-                        <span class="category">
-                          <i class="fas fa-folder"></i>
-                          <a class="category-link" href="../../../categories/%E7%A5%9E%E7%BB%8F%E7%A7%91%E5%AD%A6/">神经科学</a>
-                        </span>
-                      
-                      
-                    </div>
-                  </div>
-                </div>
-              
-                <div class="timeline-post">
-                  <div class="post-date">
-                    <i class="fas fa-clock"></i>
-                    08-18
-                  </div>
-                  <div class="post-info">
-                    <a href="../../../2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/">
-                      micrograd
-                      
-                    </a>
-                    <div class="post-meta">
-                      
-                        <span class="category">
-                          <i class="fas fa-folder"></i>
-                          <a class="category-link" href="../../../categories/Neural-Networks-Zero-to-Hero/">Neural-Networks-Zero-to-Hero</a>
-                        </span>
-                      
-                      
-                    </div>
-                  </div>
-                </div>
-              
-                <div class="timeline-post">
-                  <div class="post-date">
-                    <i class="fas fa-clock"></i>
-                    08-17
-                  </div>
-                  <div class="post-info">
-                    <a href="../../../2026/08/17/Paper_reading/Alphabench/">
-                      Alphabench
-                      
-                    </a>
-                    <div class="post-meta">
-                      
-                        <span class="category">
-                          <i class="fas fa-folder"></i>
-                          <a class="category-link" href="../../../categories/Paper-reading/">Paper_reading</a>
-                        </span>
-                      
-                      
-                    </div>
-                  </div>
-                </div>
-              
-                <div class="timeline-post">
-                  <div class="post-date">
-                    <i class="fas fa-clock"></i>
-                    08-16
-                  </div>
-                  <div class="post-info">
-                    <a href="../../../2026/08/16/Paper_reading/Evoalpha/">
-                      Evoalpha
-                      
-                    </a>
-                    <div class="post-meta">
-                      
-                        <span class="category">
-                          <i class="fas fa-folder"></i>
-                          <a class="category-link" href="../../../categories/Paper-reading/">Paper_reading</a>
-                        </span>
-                      
-                      
-                    </div>
-                  </div>
-                </div>
-              
-                <div class="timeline-post">
-                  <div class="post-date">
-                    <i class="fas fa-clock"></i>
-                    08-16
-                  </div>
-                  <div class="post-info">
-                    <a href="../../../2026/08/16/Paper_reading/Qfinzero/">
-                      Qfinzero
-                      
-                    </a>
-                    <div class="post-meta">
-                      
-                        <span class="category">
-                          <i class="fas fa-folder"></i>
-                          <a class="category-link" href="../../../categories/Paper-reading/">Paper_reading</a>
-                        </span>
-                      
-                      
-                    </div>
-                  </div>
-                </div>
-              
-            </div>
-          </div>
+            
+          </a>
         
       </div>
     </div>
@@ -535,10 +391,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
 <!-- 添加所有需要的脚本 -->
-<script src="../../../js/search.js"></script>
-<script src="../../../js/theme-switch.js"></script>
+<script src="../../js/search.js"></script>
+<script src="../../js/theme-switch.js"></script>
 
-<script src="../../../js/password-protect.js?v=1787230809980"></script>
+<script src="../../js/password-protect.js?v=1787230809981"></script>
 
     <script>
       // 移动端菜单切换
