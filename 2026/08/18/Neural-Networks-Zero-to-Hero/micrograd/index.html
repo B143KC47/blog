@@ -6,14 +6,14 @@
   <title>micrograd | BlackCat</title>
 
   <!-- SEO Meta Tags -->
-  <meta name="description" content="A simple dark Hexo theme inspired by code.">
+  <meta name="description" content="从零搭建 micrograd：神经元、权重、bias、激活函数（ReLU）与反向传播的直观解释，配可交互函数图像。">
   <meta name="keywords" content="">
   <meta name="author" content="B143KC47">
   <link rel="canonical" href="https://B143KC47.github.io/blog">
 
   <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="micrograd | BlackCat">
-  <meta property="og:description" content="A simple dark Hexo theme inspired by code.">
+  <meta property="og:description" content="从零搭建 micrograd：神经元、权重、bias、激活函数（ReLU）与反向传播的直观解释，配可交互函数图像。">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://B143KC47.github.io/blog">
   <meta property="og:site_name" content="BlackCat">
@@ -22,9 +22,25 @@
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="micrograd | BlackCat">
-  <meta name="twitter:description" content="A simple dark Hexo theme inspired by code.">
+  <meta name="twitter:description" content="从零搭建 micrograd：神经元、权重、bias、激活函数（ReLU）与反向传播的直观解释，配可交互函数图像。">
 
   <!-- Favicon 配置 -->
+  
+    
+      <link rel="icon" type="image/x-icon" href="../../../../../favicon.ico">
+    
+    
+      <link rel="icon" type="image/png" sizes="16x16" href="../../../../../favicon-16x16.png">
+    
+    
+      <link rel="icon" type="image/png" sizes="32x32" href="../../../../../favicon-32x32.png">
+    
+    
+      <link rel="icon" type="image/png" sizes="192x192" href="../../../../../favicon-192x192.png">
+    
+    
+      <link rel="apple-touch-icon" sizes="180x180" href="../../../../../apple-touch-icon.png">
+    
   
 
   <!-- 外部样式 - 统一使用 jsdelivr CDN -->
@@ -46,7 +62,7 @@
   <link rel="stylesheet" href="../../../../../css/mermaid.css">
 
   <link rel="stylesheet" href="../../../../../css/vs-code.css">
-  <link rel="stylesheet" href="../../../../../css/post.css?v=1787230809966">
+  <link rel="stylesheet" href="../../../../../css/post.css?v=1787317212134">
   <link rel="stylesheet" href="../../../../../css/tag.css">
   <link rel="stylesheet" href="../../../../../css/categories.css">
   <link rel="stylesheet" href="../../../../../css/archive.css">
@@ -62,10 +78,19 @@
   <script defer src="../../../../../js/explorer.js"></script>
   <script defer src="../../../../../js/code-enhance.js"></script>
 <!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+};
+</script>
+<script async id="mathjax-cdn-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link rel="stylesheet" href="/blog/css/reading.css"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
 
   <body>
     <div class="wrapper">
@@ -214,7 +239,7 @@
             
             <span class="updated-date">
               <i class="fas fa-sync-alt"></i>
-              更新于 2026-08-20
+              更新于 2026-08-21
             </span>
                         
               <span class="categories">
@@ -230,8 +255,8 @@
         
         <div class="post-body vscode-markdown">
           <h1 id="building-micrograd"><a href="#building-micrograd" class="headerlink" title="building micrograd"></a>building micrograd</h1><p>AI基础 神经网络<br>首先先从最基础的神经元开始说起</p>
-<p>神经元就是一个 $f(x_1,x_2,x_3,…)$ 一个函数 输入了一堆数字<br>然后每个input 都会跟着一个weight 权重 就是 最主要是一个常数<br>高就代表这个输入很重要<br>低就代表没那么重要<br>当然也要看正负 可以看出是负影响 还是 正影响</p>
-<p>基本结构：<br>$f(x_1,x_2,x_3,…) &#x3D; Activation_function(w_1 \times x_1 + w_2\times x_2 + … + bias)$</p>
+<p>神经元就是一个 $f(x_1,x_2,x_3,...)$ 一个函数 输入了一堆数字<br>然后每个input 都会跟着一个weight 权重 就是 最主要是一个常数<br>高就代表这个输入很重要<br>低就代表没那么重要<br>当然也要看正负 可以看出是负影响 还是 正影响</p>
+<p>基本结构：<br>$f(x_1,x_2,x_3,...) &#x3D; Activation_function(w_1 \times x_1 + w_2\times x_2 + ... + bias)$</p>
 <p>这里可以看到在刚刚输入×权重后 还要加一个bias<br>而bias的作用是什么 为什么 + 一个bias呢</p>
 <p>bias 从几何意义上来理解<br>y &#x3D; mx + c<br>c 也就是代表着这条线可以在整个空间里面平移 </p>
 <p>机器学习 最主要是学习数据关系<br>也就是 输入 和 输出的对应关系<br>如果不允许平移 那么 如果真实数据里面是 y&#x3D; 2x + 100<br>在 输入永远 &#x3D; 0 的时候<br>如果没有bias 永远拟合不了线性的真实数据</p>
@@ -291,7 +316,7 @@
 
 <p>其实也就是创造一个折点 在几何意义上</p>
 <p>那我们现在画一个最简单的神经网络 长这样(2个输入 3个隐藏神经元 1个输出):</p>
-<p><img src="nn-diagram.svg" alt="最简单的神经网络：2输入 3隐藏 1输出"></p>
+<p><img src="/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/nn-diagram.svg" alt="最简单的神经网络：2输入 3隐藏 1输出"></p>
 <p>每条连线就是一个权重w 每个神经元做的是 加权求和 再过一个Activation function</p>
 <p>为什么一定要非线性?<br>如果每个神经元都只是线性加权求和 那不管叠多少层 组合起来还是一条直线:</p>
 <style>
@@ -381,7 +406,7 @@
   function ensureMathJax(cb) {
     if (window.MathJax && MathJax.typesetPromise) { cb(); return; }
     // 先于库本体设置配置，MathJax 加载时会读取
-    window.MathJax = window.MathJax || { tex: { inlineMath: [['\(', '\)']] } };
+    window.MathJax = window.MathJax || { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
     var existing = document.getElementById('mathjax-cdn-script');
     if (existing) {
       var prev = existing.onload;
@@ -510,7 +535,7 @@
   function ensureMathJax(cb) {
     if (window.MathJax && MathJax.typesetPromise) { cb(); return; }
     // 先于库本体设置配置，MathJax 加载时会读取
-    window.MathJax = window.MathJax || { tex: { inlineMath: [['\(', '\)']] } };
+    window.MathJax = window.MathJax || { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
     var existing = document.getElementById('mathjax-cdn-script');
     if (existing) {
       var prev = existing.onload;
@@ -601,7 +626,7 @@
             </div>
             
             <div class="vs-recommended-excerpt">
-              
+              神经科学学习路线图（内容整理中）。
             </div>
             
             <div class="vs-recommended-meta">
@@ -634,7 +659,7 @@
             </div>
             
             <div class="vs-recommended-excerpt">
-              ALPHABENCH: BENCHMARKING LARGE LANGUAGE MODELS IN FORMULAIC ALPHA FACTOR MINING研究的问题： 在“ Alpha 因子挖掘”的完整工作流中，大语言模型究竟适合扮演什...
+              论文笔记：AlphaBench —— 大语言模型在公式化 Alpha 因子挖掘工作流中的三种角色：因子生成器、因子评审员与搜索器。
             </div>
             
             <div class="vs-recommended-meta">
@@ -667,7 +692,7 @@
             </div>
             
             <div class="vs-recommended-excerpt">
-              
+              论文笔记：EvoAlpha（内容整理中）。
             </div>
             
             <div class="vs-recommended-meta">
@@ -700,7 +725,7 @@
             </div>
             
             <div class="vs-recommended-excerpt">
-              
+              论文笔记：QFinZero（内容整理中）。
             </div>
             
             <div class="vs-recommended-meta">
@@ -716,6 +741,39 @@
                 <span class="vs-reading-time">
                   <i class="fas fa-clock"></i>
                   1 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      <div class="vs-recommended-item" data-index="4" tabindex="0">
+        <a href="../../../21/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>持续学习</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              持续学习（Continual Learning）截至 2026 年的技术总体认知：零遗忘不等于好的持续学习系统，评估需同时考虑知识吸收、能力保持、迁移与成本。
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  8月 21
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  12 min
                 </span>
               </span>
             </div>
@@ -790,85 +848,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         <!-- 评论区 -->
         
-  <div class="vs-comments-section">
-    <div class="section-header">
-      <i class="fas fa-comments"></i>
-      <span>评论</span>
-    </div>
-    
-    
-      <!-- Waline 评论系统 -->
-      <div id="waline"></div>
-      <script>
-        // 加载 Waline CSS
-        const walineCSS = document.createElement('link');
-        walineCSS.rel = 'stylesheet';
-        walineCSS.href = 'https://unpkg.com/@waline/client@v3/dist/waline.css';
-        document.head.appendChild(walineCSS);
-        
-        // 加载 Waline JS
-        const walineScript = document.createElement('script');
-        walineScript.type = 'module';
-        walineScript.onload = function() {
-          // 确保 Waline 加载后再初始化
-          import('https://unpkg.com/@waline/client@v3/dist/waline.js').then(({ init }) => {
-            const waline = init({
-              el: '#waline',
-              serverURL: 'https://vsc4tblackcat1337.vercel.app/',
-              lang: 'zh-CN',
-              locale: {},
-              emoji: ["https://unpkg.com/@waline/emojis@1.2.0/weibo","https://unpkg.com/@waline/emojis@1.2.0/alus"],
-              requiredMeta: [],
-              login: 'disable',
-              wordLimit: 0,
-              pageSize: 10,
-              imageUploader: false,
-              highlighter: true,
-              texRenderer: false,
-              search: false,
-              pageview: false,
-              comment: true,
-              copyright: false,
-              
-              // 自动适配主题
-              dark: document.documentElement.getAttribute('data-theme') === 'dark' ? 'auto' : false,
-              
-              // 评论框占位符
-              placeholder: '欢迎留言，无需登录即可评论~',
-              
-              // 元数据配置
-              meta: ['nick', 'mail', 'link'],
-              
-              // 表情配置
-              emojiCDN: 'https://unpkg.com/@waline/emojis@1.2.0/',
-            });
-            
-            // 监听主题变化
-            const observer = new MutationObserver((mutations) => {
-              mutations.forEach((mutation) => {
-                if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
-                  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-                  // Waline 会自动处理主题切换
-                  if (waline) {
-                    waline.update({ dark: isDark ? 'auto' : false });
-                  }
-                }
-              });
-            });
-            
-            observer.observe(document.documentElement, {
-              attributes: true,
-              attributeFilter: ['data-theme']
-            });
-          });
-        };
-        walineScript.src = 'https://unpkg.com/@waline/client@v3/dist/waline.js';
-        document.body.appendChild(walineScript);
-      </script>
-    
-    
-  </div>
-
       </article>
     </div>
   </div>
@@ -887,7 +866,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     <div class="status-item">
       <i class="fas fa-clock"></i>
-      2026-08-20
+      2026-08-21
     </div>
     <div class="status-item">
       Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
@@ -971,7 +950,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Search i18n strings
     search_placeholder: "输入关键词搜索...",
     search_no_results: "未找到相关结果",
-    search_result: "risultato",
+    search_result: "Ergebnis",
     search_results: "搜索结果",
     search_results_found: "找到 undefined 个结果",
     search_in: "搜索范围",
@@ -1016,7 +995,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 <script src="../../../../../js/search.js"></script>
 <script src="../../../../../js/theme-switch.js"></script>
 
-<script src="../../../../../js/password-protect.js?v=1787230809967"></script>
+<script src="../../../../../js/password-protect.js?v=1787317212134"></script>
 
     <script>
       // 移动端菜单切换

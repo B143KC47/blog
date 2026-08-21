@@ -6,14 +6,14 @@
   <title>Roadmap | BlackCat</title>
 
   <!-- SEO Meta Tags -->
-  <meta name="description" content="A simple dark Hexo theme inspired by code.">
+  <meta name="description" content="神经科学学习路线图（内容整理中）。">
   <meta name="keywords" content="">
   <meta name="author" content="B143KC47">
   <link rel="canonical" href="https://B143KC47.github.io/blog">
 
   <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="Roadmap | BlackCat">
-  <meta property="og:description" content="A simple dark Hexo theme inspired by code.">
+  <meta property="og:description" content="神经科学学习路线图（内容整理中）。">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://B143KC47.github.io/blog">
   <meta property="og:site_name" content="BlackCat">
@@ -22,9 +22,25 @@
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Roadmap | BlackCat">
-  <meta name="twitter:description" content="A simple dark Hexo theme inspired by code.">
+  <meta name="twitter:description" content="神经科学学习路线图（内容整理中）。">
 
   <!-- Favicon 配置 -->
+  
+    
+      <link rel="icon" type="image/x-icon" href="../../../../../favicon.ico">
+    
+    
+      <link rel="icon" type="image/png" sizes="16x16" href="../../../../../favicon-16x16.png">
+    
+    
+      <link rel="icon" type="image/png" sizes="32x32" href="../../../../../favicon-32x32.png">
+    
+    
+      <link rel="icon" type="image/png" sizes="192x192" href="../../../../../favicon-192x192.png">
+    
+    
+      <link rel="apple-touch-icon" sizes="180x180" href="../../../../../apple-touch-icon.png">
+    
   
 
   <!-- 外部样式 - 统一使用 jsdelivr CDN -->
@@ -46,7 +62,7 @@
   <link rel="stylesheet" href="../../../../../css/mermaid.css">
 
   <link rel="stylesheet" href="../../../../../css/vs-code.css">
-  <link rel="stylesheet" href="../../../../../css/post.css?v=1787230809965">
+  <link rel="stylesheet" href="../../../../../css/post.css?v=1787317212133">
   <link rel="stylesheet" href="../../../../../css/tag.css">
   <link rel="stylesheet" href="../../../../../css/categories.css">
   <link rel="stylesheet" href="../../../../../css/archive.css">
@@ -62,10 +78,19 @@
   <script defer src="../../../../../js/explorer.js"></script>
   <script defer src="../../../../../js/code-enhance.js"></script>
 <!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+};
+</script>
+<script async id="mathjax-cdn-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link rel="stylesheet" href="/blog/css/reading.css"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
 
   <body>
     <div class="wrapper">
@@ -214,7 +239,7 @@
             
             <span class="updated-date">
               <i class="fas fa-sync-alt"></i>
-              更新于 2026-08-20
+              更新于 2026-08-21
             </span>
                         
               <span class="categories">
@@ -252,6 +277,39 @@
   <div class="vs-recommended-grid">
     
       <div class="vs-recommended-item" data-index="0" tabindex="0">
+        <a href="../../../21/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>持续学习</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              持续学习（Continual Learning）截至 2026 年的技术总体认知：零遗忘不等于好的持续学习系统，评估需同时考虑知识吸收、能力保持、迁移与成本。
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  8月 21
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  12 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      <div class="vs-recommended-item" data-index="1" tabindex="0">
         <a href="../../../18/Neural-Networks-Zero-to-Hero/micrograd/" class="vs-recommended-link">
           <!-- 文章信息 -->
           <div class="vs-recommended-content">
@@ -261,7 +319,7 @@
             </div>
             
             <div class="vs-recommended-excerpt">
-              building microgradAI基础 神经网络首先先从最基础的神经元开始说起 神经元就是一个 $f(x_1,x_2,x_3,…)$ 一个函数 输入了一堆数字然后每个input 都会跟着一个weight 权重 就是 最主要是一个常数高...
+              从零搭建 micrograd：神经元、权重、bias、激活函数（ReLU）与反向传播的直观解释，配可交互函数图像。
             </div>
             
             <div class="vs-recommended-meta">
@@ -284,7 +342,7 @@
         </a>
       </div>
     
-      <div class="vs-recommended-item" data-index="1" tabindex="0">
+      <div class="vs-recommended-item" data-index="2" tabindex="0">
         <a href="../../../17/Paper_reading/Alphabench/" class="vs-recommended-link">
           <!-- 文章信息 -->
           <div class="vs-recommended-content">
@@ -294,7 +352,7 @@
             </div>
             
             <div class="vs-recommended-excerpt">
-              ALPHABENCH: BENCHMARKING LARGE LANGUAGE MODELS IN FORMULAIC ALPHA FACTOR MINING研究的问题： 在“ Alpha 因子挖掘”的完整工作流中，大语言模型究竟适合扮演什...
+              论文笔记：AlphaBench —— 大语言模型在公式化 Alpha 因子挖掘工作流中的三种角色：因子生成器、因子评审员与搜索器。
             </div>
             
             <div class="vs-recommended-meta">
@@ -317,7 +375,7 @@
         </a>
       </div>
     
-      <div class="vs-recommended-item" data-index="2" tabindex="0">
+      <div class="vs-recommended-item" data-index="3" tabindex="0">
         <a href="../../../16/Paper_reading/Evoalpha/" class="vs-recommended-link">
           <!-- 文章信息 -->
           <div class="vs-recommended-content">
@@ -327,7 +385,7 @@
             </div>
             
             <div class="vs-recommended-excerpt">
-              
+              论文笔记：EvoAlpha（内容整理中）。
             </div>
             
             <div class="vs-recommended-meta">
@@ -350,7 +408,7 @@
         </a>
       </div>
     
-      <div class="vs-recommended-item" data-index="3" tabindex="0">
+      <div class="vs-recommended-item" data-index="4" tabindex="0">
         <a href="../../../16/Paper_reading/Qfinzero/" class="vs-recommended-link">
           <!-- 文章信息 -->
           <div class="vs-recommended-content">
@@ -360,7 +418,7 @@
             </div>
             
             <div class="vs-recommended-excerpt">
-              
+              论文笔记：QFinZero（内容整理中）。
             </div>
             
             <div class="vs-recommended-meta">
@@ -450,85 +508,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         <!-- 评论区 -->
         
-  <div class="vs-comments-section">
-    <div class="section-header">
-      <i class="fas fa-comments"></i>
-      <span>评论</span>
-    </div>
-    
-    
-      <!-- Waline 评论系统 -->
-      <div id="waline"></div>
-      <script>
-        // 加载 Waline CSS
-        const walineCSS = document.createElement('link');
-        walineCSS.rel = 'stylesheet';
-        walineCSS.href = 'https://unpkg.com/@waline/client@v3/dist/waline.css';
-        document.head.appendChild(walineCSS);
-        
-        // 加载 Waline JS
-        const walineScript = document.createElement('script');
-        walineScript.type = 'module';
-        walineScript.onload = function() {
-          // 确保 Waline 加载后再初始化
-          import('https://unpkg.com/@waline/client@v3/dist/waline.js').then(({ init }) => {
-            const waline = init({
-              el: '#waline',
-              serverURL: 'https://vsc4tblackcat1337.vercel.app/',
-              lang: 'zh-CN',
-              locale: {},
-              emoji: ["https://unpkg.com/@waline/emojis@1.2.0/weibo","https://unpkg.com/@waline/emojis@1.2.0/alus"],
-              requiredMeta: [],
-              login: 'disable',
-              wordLimit: 0,
-              pageSize: 10,
-              imageUploader: false,
-              highlighter: true,
-              texRenderer: false,
-              search: false,
-              pageview: false,
-              comment: true,
-              copyright: false,
-              
-              // 自动适配主题
-              dark: document.documentElement.getAttribute('data-theme') === 'dark' ? 'auto' : false,
-              
-              // 评论框占位符
-              placeholder: '欢迎留言，无需登录即可评论~',
-              
-              // 元数据配置
-              meta: ['nick', 'mail', 'link'],
-              
-              // 表情配置
-              emojiCDN: 'https://unpkg.com/@waline/emojis@1.2.0/',
-            });
-            
-            // 监听主题变化
-            const observer = new MutationObserver((mutations) => {
-              mutations.forEach((mutation) => {
-                if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
-                  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-                  // Waline 会自动处理主题切换
-                  if (waline) {
-                    waline.update({ dark: isDark ? 'auto' : false });
-                  }
-                }
-              });
-            });
-            
-            observer.observe(document.documentElement, {
-              attributes: true,
-              attributeFilter: ['data-theme']
-            });
-          });
-        };
-        walineScript.src = 'https://unpkg.com/@waline/client@v3/dist/waline.js';
-        document.body.appendChild(walineScript);
-      </script>
-    
-    
-  </div>
-
       </article>
     </div>
   </div>
@@ -547,7 +526,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     <div class="status-item">
       <i class="fas fa-clock"></i>
-      2026-08-20
+      2026-08-21
     </div>
     <div class="status-item">
       Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
@@ -631,7 +610,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Search i18n strings
     search_placeholder: "输入关键词搜索...",
     search_no_results: "未找到相关结果",
-    search_result: "risultato",
+    search_result: "Ergebnis",
     search_results: "搜索结果",
     search_results_found: "找到 undefined 个结果",
     search_in: "搜索范围",
@@ -676,7 +655,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 <script src="../../../../../js/search.js"></script>
 <script src="../../../../../js/theme-switch.js"></script>
 
-<script src="../../../../../js/password-protect.js?v=1787230809966"></script>
+<script src="../../../../../js/password-protect.js?v=1787317212133"></script>
 
     <script>
       // 移动端菜单切换

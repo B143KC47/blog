@@ -1,0 +1,26 @@
+/* 阅读体验优化（站点级覆盖，主题 fast-forward 更新不受影响） */
+
+/* 正文：中英混排更顺眼的字体栈 + 更宽松的字号/行高 */
+.vscode-markdown {
+  font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    'Noto Sans CJK SC', -apple-system, BlinkMacSystemFont, Roboto,
+    'Helvetica Neue', sans-serif;
+  font-size: 17px;
+  line-height: 1.85;
+  letter-spacing: 0.02em;
+}
+
+/* 段落之间留出明确间隔，长文不糊成一团 */
+.vscode-markdown p {
+  margin: 0 0 1.1em;
+}
+
+/* 数学公式略放大，与 17px 的中文正文视觉对齐 */
+.vscode-markdown mjx-container {
+  font-size: 104%;
+}
+
+/* 限制正文列宽：宽屏下一行 100+ 字符很难读，46em ≈ 每行 40 来个汉字 */
+.vscode-markdown {
+  max-width: 46em;
+}

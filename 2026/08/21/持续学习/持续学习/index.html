@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>持续学习 | BlackCat</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="持续学习（Continual Learning）截至 2026 年的技术总体认知：零遗忘不等于好的持续学习系统，评估需同时考虑知识吸收、能力保持、迁移与成本。">
+  <meta name="keywords" content="">
+  <meta name="author" content="B143KC47">
+  <link rel="canonical" href="https://B143KC47.github.io/blog">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="持续学习 | BlackCat">
+  <meta property="og:description" content="持续学习（Continual Learning）截至 2026 年的技术总体认知：零遗忘不等于好的持续学习系统，评估需同时考虑知识吸收、能力保持、迁移与成本。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://B143KC47.github.io/blog">
+  <meta property="og:site_name" content="BlackCat">
+  <meta property="article:published_time" content="2026-08-21T04:58:58.000Z">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="持续学习 | BlackCat">
+  <meta name="twitter:description" content="持续学习（Continual Learning）截至 2026 年的技术总体认知：零遗忘不等于好的持续学习系统，评估需同时考虑知识吸收、能力保持、迁移与成本。">
+
+  <!-- Favicon 配置 -->
+  
+    
+      <link rel="icon" type="image/x-icon" href="../../../../../favicon.ico">
+    
+    
+      <link rel="icon" type="image/png" sizes="16x16" href="../../../../../favicon-16x16.png">
+    
+    
+      <link rel="icon" type="image/png" sizes="32x32" href="../../../../../favicon-32x32.png">
+    
+    
+      <link rel="icon" type="image/png" sizes="192x192" href="../../../../../favicon-192x192.png">
+    
+    
+      <link rel="apple-touch-icon" sizes="180x180" href="../../../../../apple-touch-icon.png">
+    
+  
+
+  <!-- 外部样式 - 统一使用 jsdelivr CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" crossorigin="anonymous">
+
+  <!-- 代码高亮样式 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.min.css" crossorigin="anonymous">
+
+  <!-- Mermaid.js 库 (defer加载) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" crossorigin="anonymous"></script>
+
+  <!-- 主题样式 -->
+  <link rel="stylesheet" href="../../../../../css/theme-colors.css">
+  <link rel="stylesheet" href="../../../../../css/main.css">
+  <link rel="stylesheet" href="../../../../../css/code.css">
+  <link rel="stylesheet" href="../../../../../css/code-custom.css">
+  <link rel="stylesheet" href="../../../../../css/code-languages.css">
+  <link rel="stylesheet" href="../../../../../css/mermaid.css">
+
+  <link rel="stylesheet" href="../../../../../css/vs-code.css">
+  <link rel="stylesheet" href="../../../../../css/post.css?v=1787317212132">
+  <link rel="stylesheet" href="../../../../../css/tag.css">
+  <link rel="stylesheet" href="../../../../../css/categories.css">
+  <link rel="stylesheet" href="../../../../../css/archive.css">
+  <link rel="stylesheet" href="../../../../../css/search.css">
+  <link rel="stylesheet" href="../../../../../css/mobile.css">  <link rel="stylesheet" href="../../../../../css/responsive.css">
+  <link rel="stylesheet" href="../../../../../css/elements.css">
+
+  <!-- 添加 JetBrains Mono 字体 -->  
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Add any custom head content here -->
+
+  <script defer src="../../../../../js/explorer.js"></script>
+  <script defer src="../../../../../js/code-enhance.js"></script>
+<!-- hexo injector head_end start -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+};
+</script>
+<script async id="mathjax-cdn-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link rel="stylesheet" href="/blog/css/reading.css"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    <div class="wrapper">
+      <div class="mobile-menu-toggle" aria-label="Toggle sidebar menu" role="button" tabindex="0">
+        <i class="fas fa-bars"></i>
+      </div>
+      <!-- 移动端侧边栏遮罩层 -->
+      <div class="sidebar-overlay" aria-hidden="true"></div>
+      <header class="vs-header">
+  <nav class="vs-nav">
+    <div class="nav-left">
+      <a href="/blog/" class="nav-brand">
+        <i class="fas fa-terminal"></i>
+        BlackCat
+      </a>
+    </div>
+    
+    <div class="nav-right">
+      <a href="/blog/" class="nav-item ">
+        <i class="fas fa-home"></i>
+        <span>首页</span>
+      </a>
+      <a href="/blog/archives/" class="nav-item ">
+        <i class="fas fa-archive"></i>
+        <span>归档</span>
+      </a>
+      <a href="/blog/categories/" class="nav-item ">
+        <i class="fas fa-folder"></i>
+        <span>分类</span>
+      </a>
+      <a href="/blog/tags/" class="nav-item ">
+        <i class="fas fa-tags"></i>
+        <span>标签</span>
+      </a>
+      <a href="/blog/search/" class="nav-item ">
+        <i class="fas fa-search"></i>
+        <span>搜索</span>
+      </a>
+      <a href="/blog/about/" class="nav-item ">
+        <i class="fas fa-info-circle"></i>
+        <span>关于</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  function smoothScroll(event, target) {
+    event.preventDefault();
+    const targetId = target.substring(target.indexOf('#') + 1);
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop - 50, // 调整偏移量
+        behavior: 'smooth'
+      });
+    } else {
+      window.location.href = target;
+    }
+  }
+
+  window.addEventListener('scroll', function() {
+    const header = document.querySelector('.vs-header');
+    const nav = document.querySelector('.vs-nav');
+    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    
+    nav.style.setProperty('--scroll-percent', `${scrollPercent}%`);
+    
+    if (window.scrollY > 0) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // 添加标签页切换动画
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      ripple.classList.add('nav-ripple');
+      this.appendChild(ripple);
+      
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+      
+      setTimeout(() => ripple.remove(), 1000);
+    });
+  });
+</script>
+
+
+<div class="vscode-container">
+  <!-- 左侧资源管理器 -->
+  <div class="sidebar-explorer">
+    <!-- TOC导航 -->
+    <div class="explorer-section">
+      <div class="section-header">
+        <i class="fas fa-list"></i>
+        <span>目录</span>
+      </div>
+      <div class="section-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0%EF%BC%88Continual-Learning%EF%BC%89%EF%BC%9A%E6%88%AA%E8%87%B3-2026-%E5%B9%B4%E7%9A%84%E6%8A%80%E6%9C%AF%E6%80%BB%E4%BD%93%E8%AE%A4%E7%9F%A5"><span class="toc-text">持续学习（Continual Learning）：截至 2026 年的技术总体认知</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%9A%E9%97%AE%E9%A2%98%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">第一部分：问题到底是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9A%E4%B9%89"><span class="toc-text">1. 持续学习的技术定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%B8%80%E4%B8%AA%E5%A4%9A%E7%9B%AE%E6%A0%87%E4%BC%98%E5%8C%96%E8%A7%86%E8%A7%92"><span class="toc-text">1.1 一个多目标优化视角</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-CL-%E4%B8%8E%E7%9B%B8%E9%82%BB%E6%A6%82%E5%BF%B5%E7%9A%84%E8%BE%B9%E7%95%8C"><span class="toc-text">2. CL 与相邻概念的边界</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E2%80%9C%E9%9B%B6%E9%81%97%E5%BF%98%E2%80%9D%E4%B8%8D%E6%98%AF%E5%85%85%E5%88%86%E6%9D%A1%E4%BB%B6"><span class="toc-text">2.1 为什么“零遗忘”不是充分条件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%BC%9A%E5%BF%98"><span class="toc-text">第二部分：为什么神经网络会忘</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%9C%80%E5%B0%8F%E8%A7%A3%E9%87%8A%EF%BC%9A%E5%85%B1%E4%BA%AB%E5%8F%82%E6%95%B0%E4%B8%8A%E7%9A%84%E6%A2%AF%E5%BA%A6%E5%B9%B2%E6%89%B0"><span class="toc-text">3. 最小解释：共享参数上的梯度干扰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%81%97%E5%BF%98%E8%87%B3%E5%B0%91%E6%9C%89%E5%85%AD%E4%B8%AA%E6%8A%80%E6%9C%AF%E5%B1%82%E6%AC%A1"><span class="toc-text">4. 遗忘至少有六个技术层次</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%8F%82%E6%95%B0%E5%B9%B2%E6%89%B0"><span class="toc-text">4.1 参数干扰</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E8%A1%A8%E5%BE%81%E6%BC%82%E7%A7%BB%EF%BC%88representation-drift%EF%BC%89"><span class="toc-text">4.2 表征漂移（representation drift）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E7%B1%BB%E5%88%AB%E4%B8%8D%E5%B9%B3%E8%A1%A1%E4%B8%8E-logit-%E5%81%8F%E7%BD%AE"><span class="toc-text">4.3 类别不平衡与 logit 偏置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E4%BC%98%E5%8C%96%E5%99%A8%E4%B8%8E%E5%BD%92%E4%B8%80%E5%8C%96%E7%BB%9F%E8%AE%A1%E6%BC%82%E7%A7%BB"><span class="toc-text">4.4 优化器与归一化统计漂移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-%E8%B7%AF%E7%94%B1%E5%A4%B1%E8%B4%A5"><span class="toc-text">4.5 路由失败</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-LLM-%E7%9A%84%E8%AE%BF%E9%97%AE%E4%B8%8E%E5%AF%B9%E9%BD%90%E5%A4%B1%E8%B4%A5"><span class="toc-text">4.6 LLM 的访问与对齐失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86%EF%BC%9A%E5%85%88%E6%8A%8A%E5%AE%9E%E9%AA%8C%E5%9C%BA%E6%99%AF%E8%AF%B4%E6%B8%85%E6%A5%9A"><span class="toc-text">第三部分：先把实验场景说清楚</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E4%B8%89%E7%A7%8D%E7%BB%8F%E5%85%B8%E5%A2%9E%E9%87%8F%E5%9C%BA%E6%99%AF"><span class="toc-text">5. 三种经典增量场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Task-IL"><span class="toc-text">Task-IL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Domain-IL"><span class="toc-text">Domain-IL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-IL"><span class="toc-text">Class-IL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%8E%B0%E5%AE%9E%E8%AE%BE%E5%AE%9A%E8%BF%98%E9%9C%80%E8%A6%81%E5%8F%A6%E5%A4%96%E5%9B%9B%E4%B8%AA%E8%BD%B4"><span class="toc-text">6. 现实设定还需要另外四个轴</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE"><span class="toc-text">6.1 数据访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E6%95%B0%E6%8D%AE%E9%81%8D%E5%8E%86%E6%AC%A1%E6%95%B0"><span class="toc-text">6.2 数据遍历次数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E4%BB%BB%E5%8A%A1%E8%BE%B9%E7%95%8C"><span class="toc-text">6.3 任务边界</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-%E8%B5%84%E6%BA%90%E5%A2%9E%E9%95%BF"><span class="toc-text">6.4 资源增长</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E9%83%A8%E5%88%86%EF%BC%9A%E6%80%8E%E6%A0%B7%E6%AD%A3%E7%A1%AE%E8%AF%84%E6%B5%8B-CL"><span class="toc-text">第四部分：怎样正确评测 CL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%80%A7%E8%83%BD%E7%9F%A9%E9%98%B5"><span class="toc-text">7. 性能矩阵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E6%A0%B8%E5%BF%83%E6%8C%87%E6%A0%87"><span class="toc-text">8. 核心指标</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E6%9C%80%E7%BB%88%E5%B9%B3%E5%9D%87%E7%B2%BE%E5%BA%A6%EF%BC%88ACC%EF%BC%89"><span class="toc-text">8.1 最终平均精度（ACC）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-%E5%8F%8D%E5%90%91%E8%BF%81%E7%A7%BB%EF%BC%88BWT%EF%BC%89"><span class="toc-text">8.2 反向迁移（BWT）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-%E6%AD%A3%E5%90%91%E8%BF%81%E7%A7%BB%EF%BC%88FWT%EF%BC%89"><span class="toc-text">8.3 正向迁移（FWT）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-4-%E5%B9%B3%E5%9D%87%E9%81%97%E5%BF%98%EF%BC%88Average-Forgetting%EF%BC%89"><span class="toc-text">8.4 平均遗忘（Average Forgetting）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E5%8F%AA%E6%8A%A5%E5%91%8A-ACC-Forgetting-%E4%BB%8D%E7%84%B6%E4%B8%8D%E5%A4%9F"><span class="toc-text">9. 只报告 ACC&#x2F;Forgetting 仍然不够</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E4%B8%80%E4%B8%AA%E5%8F%AF%E4%BF%A1-CL-%E5%AE%9E%E9%AA%8C%E5%BF%85%E9%A1%BB%E5%8C%85%E5%90%AB%E7%9A%84%E5%9F%BA%E7%BA%BF"><span class="toc-text">10. 一个可信 CL 实验必须包含的基线</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E9%83%A8%E5%88%86%EF%BC%9A%E7%BB%8F%E5%85%B8%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF"><span class="toc-text">第五部分：经典技术路线</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E6%AD%A3%E5%88%99%E5%8C%96%EF%BC%9A%E9%99%90%E5%88%B6%E5%93%AA%E4%BA%9B%E5%8F%82%E6%95%B0%E6%88%96%E5%87%BD%E6%95%B0%E5%8F%AF%E4%BB%A5%E6%94%B9%E5%8F%98"><span class="toc-text">11. 正则化：限制哪些参数或函数可以改变</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-1-EWC%EF%BC%9A%E7%94%A8%E5%B1%80%E9%83%A8%E5%90%8E%E9%AA%8C%E6%9B%B2%E7%8E%87%E4%BF%9D%E6%8A%A4%E9%87%8D%E8%A6%81%E5%8F%82%E6%95%B0"><span class="toc-text">11.1 EWC：用局部后验曲率保护重要参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E6%91%98%E5%BD%95%EF%BC%9AOnline-EWC-%E7%9A%84%E6%83%A9%E7%BD%9A%E9%A1%B9"><span class="toc-text">开源代码摘录：Online EWC 的惩罚项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EWC-%E7%9A%84%E5%81%87%E8%AE%BE%E4%B8%8E%E5%B1%80%E9%99%90"><span class="toc-text">EWC 的假设与局限</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-LwF%EF%BC%9A%E4%BF%9D%E6%8A%A4%E5%87%BD%E6%95%B0%E8%BE%93%E5%87%BA%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E5%8F%82%E6%95%B0%E4%BD%8D%E7%BD%AE"><span class="toc-text">11.2 LwF：保护函数输出，而不是参数位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-3-SI-%E4%B8%8E-MAS-%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-text">11.3 SI 与 MAS 的位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-4-%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E6%AD%A3%E5%88%99%E5%8C%96%E5%80%BC%E5%BE%97%E4%BC%98%E5%85%88%E8%80%83%E8%99%91"><span class="toc-text">11.4 什么时候正则化值得优先考虑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E5%9B%9E%E6%94%BE%EF%BC%9A%E6%8A%8A%E6%97%A7%E8%AE%AD%E7%BB%83%E4%BF%A1%E5%8F%B7%E9%87%8D%E6%96%B0%E6%94%BE%E5%9B%9E%E4%BC%98%E5%8C%96%E8%BF%87%E7%A8%8B"><span class="toc-text">12. 回放：把旧训练信号重新放回优化过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#12-1-Reservoir-Sampling%EF%BC%9A%E5%9B%BA%E5%AE%9A%E7%BC%93%E5%86%B2%E5%A6%82%E4%BD%95%E4%BB%A3%E8%A1%A8%E6%95%B4%E4%B8%AA%E5%8E%86%E5%8F%B2%E6%B5%81"><span class="toc-text">12.1 Reservoir Sampling：固定缓冲如何代表整个历史流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E6%91%98%E5%BD%95%EF%BC%9AMammoth-Buffer"><span class="toc-text">开源代码摘录：Mammoth Buffer</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-2-%E7%BC%93%E5%86%B2%E9%87%8C%E7%A9%B6%E7%AB%9F%E5%AD%98%E4%BB%80%E4%B9%88"><span class="toc-text">12.2 缓冲里究竟存什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-3-DER-%EF%BC%9A%E6%A0%B7%E6%9C%AC%E6%A0%87%E7%AD%BE%E4%B8%8E%E5%8E%86%E5%8F%B2-logit-%E5%90%8C%E6%97%B6%E5%9B%9E%E6%94%BE"><span class="toc-text">12.3 DER++：样本标签与历史 logit 同时回放</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E6%91%98%E5%BD%95%EF%BC%9ADER"><span class="toc-text">开源代码摘录：DER++</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-4-GEM-A-GEM%EF%BC%9A%E4%B8%8D%E6%98%AF%E7%9B%B4%E6%8E%A5%E6%B7%B7%E5%90%88%E6%8D%9F%E5%A4%B1%EF%BC%8C%E8%80%8C%E6%98%AF%E7%BA%A6%E6%9D%9F%E6%A2%AF%E5%BA%A6"><span class="toc-text">12.4 GEM &#x2F; A-GEM：不是直接混合损失，而是约束梯度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E6%91%98%E5%BD%95%EF%BC%9AA-GEM-%E6%8A%95%E5%BD%B1"><span class="toc-text">开源代码摘录：A-GEM 投影</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-5-%E5%9B%9E%E6%94%BE%E7%A0%94%E7%A9%B6%E7%9C%9F%E6%AD%A3%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AD%90%E9%97%AE%E9%A2%98"><span class="toc-text">12.5 回放研究真正的三个子问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-%E5%8F%82%E6%95%B0%E9%9A%94%E7%A6%BB%E4%B8%8E%E6%9E%B6%E6%9E%84%E6%89%A9%E5%B1%95%EF%BC%9A%E8%AE%A9%E4%BB%BB%E5%8A%A1%E5%B0%91%E5%85%B1%E4%BA%AB%E6%88%96%E4%B8%8D%E5%85%B1%E4%BA%AB%E5%8F%82%E6%95%B0"><span class="toc-text">13. 参数隔离与架构扩展：让任务少共享或不共享参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#13-1-%E4%B8%BB%E8%A6%81%E5%BD%A2%E6%80%81"><span class="toc-text">13.1 主要形态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-2-%E5%8F%82%E6%95%B0%E9%9A%94%E7%A6%BB%E5%B9%B6%E6%B2%A1%E6%9C%89%E6%B6%88%E9%99%A4%E6%89%80%E6%9C%89%E9%97%AE%E9%A2%98"><span class="toc-text">13.2 参数隔离并没有消除所有问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-%E4%B8%89%E5%A4%A7%E6%96%B9%E6%B3%95%E5%AE%B6%E6%97%8F%E4%B8%8D%E6%98%AF%E4%BA%92%E6%96%A5%E7%9A%84"><span class="toc-text">14. 三大方法家族不是互斥的</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E9%83%A8%E5%88%86%EF%BC%9A%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E9%87%8D%E6%9E%84-CL"><span class="toc-text">第六部分：预训练模型如何重构 CL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#15-%E4%BB%8E%E2%80%9C%E4%BF%9D%E6%8A%A4%E8%A1%A8%E5%BE%81%E2%80%9D%E8%BD%AC%E5%90%91%E2%80%9C%E5%88%A9%E7%94%A8%E8%A1%A8%E5%BE%81%E2%80%9D"><span class="toc-text">15. 从“保护表征”转向“利用表征”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-Prototype-NCM%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E7%AE%80%E5%8D%95%E6%96%B9%E6%B3%95%E4%BC%9A%E5%BE%88%E5%BC%BA"><span class="toc-text">16. Prototype &#x2F; NCM：为什么简单方法会很强</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#16-1-%E8%BF%99%E4%B8%8D%E7%AD%89%E4%BA%8E-CL-%E5%B7%B2%E7%BB%8F%E8%A7%A3%E5%86%B3"><span class="toc-text">16.1 这不等于 CL 已经解决</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17-L2P%EF%BC%9A%E6%8A%8A%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0%E7%8A%B6%E6%80%81%E6%94%BE%E8%BF%9B%E5%8F%AF%E6%A3%80%E7%B4%A2-Prompt-Pool"><span class="toc-text">17. L2P：把持续学习状态放进可检索 Prompt Pool</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#17-1-%E6%8C%89%E5%9B%BE%E9%80%90%E6%AD%A5%E8%A7%A3%E8%AF%BB"><span class="toc-text">17.1 按图逐步解读</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-2-%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E6%91%98%E5%BD%95%EF%BC%9Atop-k-Prompt-%E6%A3%80%E7%B4%A2"><span class="toc-text">17.2 开源代码摘录：top-k Prompt 检索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-3-%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%90%AB%E4%B9%89"><span class="toc-text">17.3 关键技术含义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#18-DualPrompt%EF%BC%9A%E5%85%B1%E4%BA%AB%E7%9F%A5%E8%AF%86%E4%B8%8E%E4%BB%BB%E5%8A%A1%E7%89%B9%E5%BC%82%E7%9F%A5%E8%AF%86%E5%88%86%E5%BC%80"><span class="toc-text">18. DualPrompt：共享知识与任务特异知识分开</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#18-1-%E5%9B%BE%E4%B8%AD%E7%9A%84%E4%B8%A4%E7%B1%BB-Prompt"><span class="toc-text">18.1 图中的两类 Prompt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-2-%E5%AE%83%E5%9C%A8%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88"><span class="toc-text">18.2 它在解决什么</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#19-Adapter-LoRA-%E5%AD%90%E7%A9%BA%E9%97%B4%E9%9A%94%E7%A6%BB"><span class="toc-text">19. Adapter &#x2F; LoRA &#x2F; 子空间隔离</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E9%83%A8%E5%88%86%EF%BC%9ALLM-%E7%9A%84%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0"><span class="toc-text">第七部分：LLM 的持续学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#20-%E4%B8%BA%E4%BB%80%E4%B9%88-LLM-CL-%E4%B8%8D%E8%83%BD%E7%9B%B4%E6%8E%A5%E7%85%A7%E6%90%AC-Split-CIFAR"><span class="toc-text">20. 为什么 LLM-CL 不能直接照搬 Split CIFAR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#21-%E6%8C%81%E7%BB%AD%E9%A2%84%E8%AE%AD%E7%BB%83%EF%BC%9A%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%8F%98%E9%87%8F%E4%B8%8D%E5%8F%AA%E6%9C%89%E6%95%B0%E6%8D%AE"><span class="toc-text">21. 持续预训练：真正的变量不只有数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22-%E6%8C%81%E7%BB%AD%E6%8C%87%E4%BB%A4%E5%BE%AE%E8%B0%83%EF%BC%9A%E6%8A%80%E8%83%BD%E4%B8%8E%E4%BB%BB%E5%8A%A1%E5%AF%B9%E9%BD%90%E5%90%8C%E6%97%B6%E5%8F%98%E5%8C%96"><span class="toc-text">22. 持续指令微调：技能与任务对齐同时变化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#23-Spurious-Forgetting%EF%BC%9A%E5%85%88%E5%88%A4%E6%96%AD%E7%9F%A5%E8%AF%86%E6%98%AF%E5%90%A6%E7%9C%9F%E7%9A%84%E6%B6%88%E5%A4%B1"><span class="toc-text">23. Spurious Forgetting：先判断知识是否真的消失</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#24-LLaMA-Pro%EF%BC%9A%E7%94%A8-Block-Expansion-%E5%A2%9E%E5%8A%A0%E6%96%B0%E5%AE%B9%E9%87%8F"><span class="toc-text">24. LLaMA Pro：用 Block Expansion 增加新容量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#25-RAG%E3%80%81%E6%A8%A1%E5%9E%8B%E7%BC%96%E8%BE%91%E3%80%81%E6%A8%A1%E5%9E%8B%E8%9E%8D%E5%90%88%E4%B8%8E-LLM-CL-%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">25. RAG、模型编辑、模型融合与 LLM-CL 的关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#25-1-RAG"><span class="toc-text">25.1 RAG</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#25-2-%E6%A8%A1%E5%9E%8B%E7%BC%96%E8%BE%91"><span class="toc-text">25.2 模型编辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#25-3-%E6%A8%A1%E5%9E%8B%E8%9E%8D%E5%90%88"><span class="toc-text">25.3 模型融合</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%85%AB%E9%83%A8%E5%88%86%EF%BC%9AAgent-%E4%B8%8E%E5%AE%9E%E9%99%85%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E8%AE%B0%E5%BF%86%E5%B1%82%E7%BA%A7"><span class="toc-text">第八部分：Agent 与实际系统中的记忆层级</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#26-%E2%80%9C%E4%BF%9D%E5%AD%98%E7%BB%8F%E5%8E%86%E2%80%9D%E4%B8%8E%E2%80%9C%E6%94%B9%E5%8F%98%E8%83%BD%E5%8A%9B%E2%80%9D%E5%BF%85%E9%A1%BB%E5%88%86%E5%BC%80"><span class="toc-text">26. “保存经历”与“改变能力”必须分开</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#27-%E4%B8%80%E4%B8%AA%E8%BE%83%E7%8E%B0%E5%AE%9E%E7%9A%84%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-text">27. 一个较现实的持续学习系统架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#28-CL-%E5%AF%B9-AGI-RSI-%E7%9A%84%E7%9C%9F%E5%AE%9E%E6%84%8F%E4%B9%89"><span class="toc-text">28. CL 对 AGI &#x2F; RSI 的真实意义</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B9%9D%E9%83%A8%E5%88%86%EF%BC%9A%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E4%B8%8E%E5%A4%8D%E7%8E%B0%E5%AE%9E%E9%AA%8C"><span class="toc-text">第九部分：开源代码与复现实验</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#29-%E6%9C%AC%E6%96%87%E4%BB%A3%E7%A0%81%E6%9D%A5%E6%BA%90%E6%B8%85%E5%8D%95"><span class="toc-text">29. 本文代码来源清单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#30-%E7%94%A8-Mammoth-%E8%B7%91%E4%B8%80%E4%B8%AA-DER-%E5%9F%BA%E7%BA%BF"><span class="toc-text">30. 用 Mammoth 跑一个 DER++ 基线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#30-1-%E4%B8%8D%E8%A6%81%E5%8F%AA%E2%80%9C%E8%B7%91%E9%80%9A%E2%80%9D%EF%BC%8C%E8%A6%81%E8%AE%B0%E5%BD%95%E5%AE%8C%E6%95%B4%E5%AE%9E%E9%AA%8C%E5%A5%91%E7%BA%A6"><span class="toc-text">30.1 不要只“跑通”，要记录完整实验契约</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#31-%E5%B7%A5%E5%85%B7%E9%80%89%E6%8B%A9"><span class="toc-text">31. 工具选择</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mammoth"><span class="toc-text">Mammoth</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Avalanche"><span class="toc-text">Avalanche</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PyCIL"><span class="toc-text">PyCIL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PILOT"><span class="toc-text">PILOT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Google-Research-L2P"><span class="toc-text">Google Research L2P</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%8D%81%E9%83%A8%E5%88%86%EF%BC%9A%E6%80%8E%E6%A0%B7%E8%AE%BE%E8%AE%A1%E4%B8%80%E9%A1%B9%E5%8F%AF%E4%BF%A1%E7%A0%94%E7%A9%B6"><span class="toc-text">第十部分：怎样设计一项可信研究</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#32-%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%86%99%E6%B8%85%E2%80%9C%E9%97%AE%E9%A2%98%E5%90%88%E5%90%8C%E2%80%9D"><span class="toc-text">32. 第一步：写清“问题合同”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#33-%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%BB%BA%E7%AB%8B%E6%9C%80%E5%B0%8F%E4%BD%86%E5%BC%BA%E7%9A%84%E5%9F%BA%E7%BA%BF%E7%9F%A9%E9%98%B5"><span class="toc-text">33. 第二步：建立最小但强的基线矩阵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#34-%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E5%81%9A%E8%83%BD%E8%A7%A3%E9%87%8A%E6%9C%BA%E5%88%B6%E7%9A%84%E6%B6%88%E8%9E%8D"><span class="toc-text">34. 第三步：做能解释机制的消融</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#35-%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E6%8A%8A%E7%BB%93%E6%9E%9C%E5%88%86%E8%A7%A3%E4%B8%BA%E5%9B%9B%E7%A7%8D%E5%A4%B1%E8%B4%A5"><span class="toc-text">35. 第四步：把结果分解为四种失败</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%9A%E7%9B%AE%E5%89%8D%E5%93%AA%E4%BA%9B%E9%97%AE%E9%A2%98%E5%B7%B2%E7%BB%8F%E8%BE%83%E6%88%90%E7%86%9F%EF%BC%8C%E5%93%AA%E4%BA%9B%E4%BB%8D%E6%9C%AA%E8%A7%A3%E5%86%B3"><span class="toc-text">第十一部分：目前哪些问题已经较成熟，哪些仍未解决</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#36-%E7%9B%B8%E5%AF%B9%E6%88%90%E7%86%9F%E7%9A%84%E9%83%A8%E5%88%86"><span class="toc-text">36. 相对成熟的部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#37-%E4%BB%8D%E7%84%B6%E5%BC%80%E6%94%BE%E7%9A%84%E6%A0%B8%E5%BF%83%E9%97%AE%E9%A2%98"><span class="toc-text">37. 仍然开放的核心问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#37-1-%E9%95%BF%E6%97%B6%E9%97%B4%E5%B0%BA%E5%BA%A6%E4%B8%8E%E6%9C%89%E7%95%8C%E8%B5%84%E6%BA%90"><span class="toc-text">37.1 长时间尺度与有界资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#37-2-%E6%9C%AA%E7%9F%A5%E4%BB%BB%E5%8A%A1%E8%BE%B9%E7%95%8C"><span class="toc-text">37.2 未知任务边界</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#37-3-%E7%9F%A5%E8%AF%86%E5%86%B2%E7%AA%81%E4%B8%8E%E6%9C%89%E7%9B%8A%E9%81%97%E5%BF%98"><span class="toc-text">37.3 知识冲突与有益遗忘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#37-4-%E7%9F%A5%E8%AF%86%E5%AD%98%E5%82%A8%E4%B8%8E%E8%AE%BF%E9%97%AE%E7%9A%84%E5%8F%AF%E8%AF%8A%E6%96%AD%E6%80%A7"><span class="toc-text">37.4 知识存储与访问的可诊断性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#37-5-Foundation-Model-%E5%9F%BA%E5%87%86%E6%B1%A1%E6%9F%93"><span class="toc-text">37.5 Foundation Model 基准污染</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#37-6-LLM-Agent-%E7%9A%84%E5%AE%89%E5%85%A8%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0"><span class="toc-text">37.6 LLM&#x2F;Agent 的安全持续学习</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%8D%81%E4%BA%8C%E9%83%A8%E5%88%86%EF%BC%9A%E6%96%B9%E6%B3%95%E9%80%89%E6%8B%A9%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%86%B3%E7%AD%96%E8%A1%A8"><span class="toc-text">第十二部分：方法选择的工程决策表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA%EF%BC%9A%E5%BD%93%E5%89%8D-CL-%E7%9A%84%E6%9C%80%E5%87%86%E7%A1%AE%E6%8A%80%E6%9C%AF%E5%9B%BE%E6%99%AF"><span class="toc-text">结论：当前 CL 的最准确技术图景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99%E4%B8%8E%E5%BC%80%E6%BA%90%E8%B5%84%E6%BA%90"><span class="toc-text">主要参考资料与开源资源</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E4%BD%93%E4%B8%8E%E8%AF%84%E6%B5%8B"><span class="toc-text">总体与评测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E6%96%B9%E6%B3%95"><span class="toc-text">经典方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B"><span class="toc-text">预训练模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LLM-%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0"><span class="toc-text">LLM 持续学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E6%BA%90%E4%BB%93%E5%BA%93"><span class="toc-text">开源仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%BD%92%E5%B1%9E%E8%AF%B4%E6%98%8E"><span class="toc-text">图片与代码归属说明</span></a></li></ol></li></ol>
+      </div>
+    </div>
+
+    <!-- 同分类文章 -->
+    
+    <div class="explorer-section">
+      <div class="section-header">
+        <i class="fas fa-folder"></i>
+        <span>同分类文章</span>
+      </div>
+      <div class="section-content">
+        
+      </div>
+    </div>
+    
+    
+    <!-- 标签列表 -->
+    
+  </div>
+
+  <!-- 主要内容区域 -->
+  <div class="editor-content">
+    <div class="tab-bar">
+      <div class="tab active">
+        <i class="fas fa-file-alt"></i>
+        <span>持续学习.md</span>
+      </div>
+    </div>
+    
+    <div class="content-area">
+      <article class="post-content">
+        <div class="post-header">
+          <h1>持续学习</h1>
+          <div class="post-meta">
+            <span class="date">
+              <i class="fas fa-calendar-alt"></i>
+              2026-08-21
+            </span>
+            
+            <span class="updated-date">
+              <i class="fas fa-sync-alt"></i>
+              更新于 2026-08-21
+            </span>
+                        
+              <span class="categories">
+                <i class="fas fa-folder"></i>
+                <div class="categories-list">
+                  <ul class="category-item-post-list"><li class="category-item-post-list-item"><a class="category-item-post-list-link" href="../../../../../categories/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0/">持续学习</a></li></ul>
+                </div>
+              </span>
+            
+            
+          </div>
+        </div>
+        
+        <div class="post-body vscode-markdown">
+          <h1 id="持续学习（Continual-Learning）：截至-2026-年的技术总体认知"><a href="#持续学习（Continual-Learning）：截至-2026-年的技术总体认知" class="headerlink" title="持续学习（Continual Learning）：截至 2026 年的技术总体认知"></a>持续学习（Continual Learning）：截至 2026 年的技术总体认知</h1><blockquote>
+<p><strong>版本日期</strong>：2026-08-21  </p>
+</blockquote>
+<hr>
+<p><strong>持续学习不是单纯“防止遗忘”，而是在受限资源下进行顺序优化。</strong> </p>
+<p>顺序指的是数据&#x2F;任务经验按照时间顺序到来，模型随着时间不端更新，优化梯度的问题。 </p>
+<p>受限资源意味着不能每次都从来开始训练，这样虽然最不容易遗忘，但是资源利用效率太低。</p>
+<p>一个完全冻结、什么都学不到的模型可以做到零遗忘，但它显然不是好的持续学习系统。评价必须同时考虑新知识吸收、旧能力保持、前后向迁移、训练与存储成本。</p>
+<p><strong>不先声明场景，讨论某个 CL 方法“更好”几乎没有意义。</strong> Task-IL、Domain-IL、Class-IL、Online CL、Task-free CL 的困难来源不同；是否提供 task ID、是否允许保存旧样本、缓冲区按样本数还是字节数计算，也都会彻底改变结论。</p>
+<ol start="3">
+<li><p><strong>在允许保存少量历史数据时，回放仍然是最可靠、最难击败的通用机制之一。</strong> 但这里应说“强默认基线”，而不是“任何场景下的唯一最优解”。隐私、数据治理、存储和额外训练计算会限制它。</p>
+</li>
+<li><p><strong>强预训练模型改变了问题的主导变量。</strong> 过去研究的核心是“怎样保护从零学到的表征”；今天很多视觉 CIL 问题的核心变成“怎样正确利用已经很强的冻结表征，并避免分类器偏置、路由错误和下游分布差异”。因此任何新方法都应与“冻结 backbone + prototype &#x2F; linear head”比较。</p>
+</li>
+<li><p><strong>LLM 的遗忘不是一个单一现象。</strong> 性能下降可能来自参数知识被覆盖、表征改变、读取头或路由失配、指令格式偏移、生成策略改变、安全&#x2F;对齐目标改变。2025 年关于 <em>spurious forgetting</em> 的工作进一步表明，一部分表面遗忘是“知识仍在，但访问方式失配”。</p>
+</li>
+<li><p><strong>实际可部署的 CL 系统通常是混合系统。</strong> 常见组合不是“只用 EWC”或“只用 Prompt”，而是：冻结主干、PEFT 模块、受限回放、蒸馏、外部检索记忆、周期性巩固、回归测试、版本化与回滚。</p>
+</li>
+<li><p><strong>真正开放式、长期、有界资源的终身学习仍未解决。</strong> 目前方法在短任务序列、预先切分的数据集或有限域更新上已经很有用；但在未知任务边界、长时间尺度、知识会过期、需要安全更新且资源不能持续增长的真实环境中，还没有统一解法。</p>
+</li>
+</ol>
+<hr>
+<h1 id="第一部分：问题到底是什么"><a href="#第一部分：问题到底是什么" class="headerlink" title="第一部分：问题到底是什么"></a>第一部分：问题到底是什么</h1><h2 id="1-持续学习的技术定义"><a href="#1-持续学习的技术定义" class="headerlink" title="1. 持续学习的技术定义"></a>1. 持续学习的技术定义</h2><p>设数据按顺序到达：</p>
+<p>[<br>D_1, D_2, \ldots, D_T, \qquad D_t \sim P_t(X,Y)<br>]</p>
+<p>其中分布 (P_t) 可以发生变化。变化可能表现为：</p>
+<ul>
+<li>新类别出现；</li>
+<li>输入风格或传感器变化；</li>
+<li>新领域语料到达；</li>
+<li>标签含义、奖励函数或用户偏好变化；</li>
+<li>任务边界明确、模糊，甚至根本不存在。</li>
+</ul>
+<p>模型在第 (t) 个阶段不只有参数 (\theta_t)，更完整的状态应该写成：</p>
+<p>[<br>S_t &#x3D; \big(\theta_t,; o_t,; M_t,; A_t,; E_t\big)<br>]</p>
+<p>其中：</p>
+<ul>
+<li>(\theta_t)：主模型参数；</li>
+<li>(o_t)：优化器状态，例如 Adam 的一阶、二阶动量；</li>
+<li>(M_t)：回放缓冲或样本统计；</li>
+<li>(A_t)：Prompt、Adapter、LoRA、mask、专家模块等可插拔参数；</li>
+<li>(E_t)：RAG 数据库、Agent episodic memory 等外部记忆。</li>
+</ul>
+<p>持续学习算法执行更新：</p>
+<p>[<br>S_t &#x3D; \mathcal{A}(S_{t-1},D_t;B)<br>]</p>
+<p>这里的 (B) 是资源约束，例如：</p>
+<p>[<br>B&#x3D;(\text{memory bytes},\text{train FLOPs},\text{latency},\text{privacy},\text{model growth})<br>]</p>
+<p>因此，一个更完整的定义是：</p>
+<blockquote>
+<p><strong>持续学习是模型在非平稳、按序到达的数据或经验上持续更新，在无法反复依赖全部历史数据与无限计算的条件下，兼顾新知识吸收、旧能力保持、知识迁移和资源有界增长。</strong></p>
+</blockquote>
+<p>这个定义比“不断学习新知识而不忘旧知识”更精确，因为它明确了：</p>
+<ol>
+<li>数据分布不一定按清晰任务切分；</li>
+<li>旧数据不是绝对不可访问，而通常是访问受限；</li>
+<li>资源约束属于问题本身；</li>
+<li>旧知识不一定都应永久保存；过期、错误或不安全的知识有时应被主动修改或遗忘。</li>
+</ol>
+<h3 id="1-1-一个多目标优化视角"><a href="#1-1-一个多目标优化视角" class="headerlink" title="1.1 一个多目标优化视角"></a>1.1 一个多目标优化视角</h3><p>可以把 CL 写成多目标问题：</p>
+<p>[<br>\min_{S_t};<br>\underbrace{R_t(S_t)}<em>{\text{当前适应}}<br>+\lambda</em>{\text{old}}\underbrace{R_{1:t-1}(S_t)}<em>{\text{历史保持}}<br>-\lambda</em>{\text{transfer}}\underbrace{T(S_t)}<em>{\text{迁移收益}}<br>+\lambda</em>{\text{resource}}\underbrace{C(S_t)}_{\text{资源代价}}<br>]</p>
+<p>这不是某一篇论文的统一训练式，而是理解领域的工程抽象：</p>
+<ul>
+<li>只压低当前风险，得到 naïve sequential fine-tuning，容易遗忘；</li>
+<li>只保护旧任务，模型会僵化，无法学习新任务；</li>
+<li>不惩罚资源，最简单的办法是每个任务复制一整套模型；</li>
+<li>不考虑迁移，系统只是保存一堆孤立任务，并没有形成可复用知识。</li>
+</ul>
+<h2 id="2-CL-与相邻概念的边界"><a href="#2-CL-与相邻概念的边界" class="headerlink" title="2. CL 与相邻概念的边界"></a>2. CL 与相邻概念的边界</h2><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>主要目标</th>
+<th align="right">是否通常更新参数</th>
+<th align="right">是否强调保留旧能力</th>
+<th>与 CL 的关系</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Joint &#x2F; offline training</td>
+<td>在全部数据上统一训练</td>
+<td align="right">是</td>
+<td align="right">隐式保留</td>
+<td>常作为近似上界，但违反“历史数据受限”条件</td>
+</tr>
+<tr>
+<td>Online learning</td>
+<td>数据流上逐步优化</td>
+<td align="right">是</td>
+<td align="right">不一定</td>
+<td>CL 是更强调长期保持与迁移的一类在线学习问题</td>
+</tr>
+<tr>
+<td>Transfer learning</td>
+<td>从源任务迁移到目标任务</td>
+<td align="right">是</td>
+<td align="right">通常不要求</td>
+<td>多为单向适应，不一定有长序列</td>
+</tr>
+<tr>
+<td>Domain adaptation</td>
+<td>适应目标域</td>
+<td align="right">是或否</td>
+<td align="right">不一定</td>
+<td>Domain-IL 可视为其顺序、多阶段版本</td>
+</tr>
+<tr>
+<td>Test-time adaptation</td>
+<td>部署时适应当前测试分布</td>
+<td align="right">通常是</td>
+<td align="right">常被忽略</td>
+<td>若要求长期稳定，就与 Online CL 汇合</td>
+</tr>
+<tr>
+<td>Model editing</td>
+<td>局部修改事实或行为</td>
+<td align="right">是或外挂参数</td>
+<td align="right">强调局部性</td>
+<td>连续多次编辑会演化成 lifelong editing 问题</td>
+</tr>
+<tr>
+<td>RAG</td>
+<td>更新外部知识库并检索</td>
+<td align="right">通常不改主参数</td>
+<td align="right">主参数天然不忘</td>
+<td>是实用“外部记忆更新”，但不等于参数持续学习</td>
+</tr>
+<tr>
+<td>Model merging</td>
+<td>合并多个任务模型或任务向量</td>
+<td align="right">合并参数</td>
+<td align="right">取决于冲突</td>
+<td>是知识累积的互补路线，不自动解决顺序更新</td>
+</tr>
+<tr>
+<td>Agent memory</td>
+<td>保存对话、轨迹、反思或工具结果</td>
+<td align="right">通常外部存储</td>
+<td align="right">依赖检索</td>
+<td>可成为 CL 系统的 episodic memory，但“记住”不等于“学会”</td>
+</tr>
+</tbody></table>
+<h3 id="2-1-为什么“零遗忘”不是充分条件"><a href="#2-1-为什么“零遗忘”不是充分条件" class="headerlink" title="2.1 为什么“零遗忘”不是充分条件"></a>2.1 为什么“零遗忘”不是充分条件</h3><p>假设模型参数完全冻结：</p>
+<p>[<br>\theta_t&#x3D;\theta_0,\quad \forall t<br>]</p>
+<p>它不会因为新训练而忘记旧任务，但也无法吸收参数知识。于是：</p>
+<p>[<br>\text{Forgetting}&#x3D;0 \not\Rightarrow \text{Continual Learning is good}<br>]</p>
+<p>同样，如果允许每个任务复制一个无限大的模型，并在测试时提供完美 task ID，也可以接近零遗忘；但其参数量随任务线性增长：</p>
+<p>[<br>|\theta_{1:T}|&#x3D;O(TP)<br>]</p>
+<p>这说明 CL 的真正难点来自<strong>共同参数、未知路由和有界资源同时存在</strong>。</p>
+<hr>
+<h1 id="第二部分：为什么神经网络会忘"><a href="#第二部分：为什么神经网络会忘" class="headerlink" title="第二部分：为什么神经网络会忘"></a>第二部分：为什么神经网络会忘</h1><h2 id="3-最小解释：共享参数上的梯度干扰"><a href="#3-最小解释：共享参数上的梯度干扰" class="headerlink" title="3. 最小解释：共享参数上的梯度干扰"></a>3. 最小解释：共享参数上的梯度干扰</h2><p>模型学完旧任务后位于 (\theta)。新任务的一步更新为：</p>
+<p>[<br>\theta&#39; &#x3D; \theta - \eta g_{\text{new}}<br>]</p>
+<p>对旧任务损失做一阶展开：</p>
+<p>[<br>L_{\text{old}}(\theta&#39;)<br>\approx<br>L_{\text{old}}(\theta)<br>-\eta g_{\text{old}}^\top g_{\text{new}}<br>]</p>
+<p>若：</p>
+<p>[<br>g_{\text{old}}^\top g_{\text{new}}&lt;0<br>]</p>
+<p>那么沿新任务梯度更新会使旧任务损失上升。这就是 GEM&#x2F;A-GEM 等梯度约束方法的直接出发点。</p>
+<p>但不能把灾难性遗忘简单等同于“梯度点积为负”。一阶局部近似没有覆盖：</p>
+<ul>
+<li>非线性网络经过多步更新后的路径效应；</li>
+<li>表征层改变导致分类头失效；</li>
+<li>BatchNorm 统计或优化器动量改变；</li>
+<li>类别先验和 logit 尺度漂移；</li>
+<li>Prompt&#x2F;专家路由选错；</li>
+<li>LLM 的答案格式、指令遵循或安全策略改变。</li>
+</ul>
+<h2 id="4-遗忘至少有六个技术层次"><a href="#4-遗忘至少有六个技术层次" class="headerlink" title="4. 遗忘至少有六个技术层次"></a>4. 遗忘至少有六个技术层次</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs mermaid">flowchart TD<br>    A[新数据或新任务到达] --&gt; B[参数更新]<br>    B --&gt; C1[参数干扰]<br>    B --&gt; C2[表征漂移]<br>    B --&gt; C3[分类器/校准偏置]<br>    B --&gt; C4[优化器与统计状态漂移]<br>    B --&gt; C5[路由或任务识别错误]<br>    B --&gt; C6[LLM 输出策略/对齐改变]<br>    C1 --&gt; D[旧任务指标下降]<br>    C2 --&gt; D<br>    C3 --&gt; D<br>    C4 --&gt; D<br>    C5 --&gt; D<br>    C6 --&gt; D<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-1-参数干扰"><a href="#4-1-参数干扰" class="headerlink" title="4.1 参数干扰"></a>4.1 参数干扰</h3><p>同一组权重同时承担多个任务。新任务优化修改了旧任务依赖的方向。</p>
+<h3 id="4-2-表征漂移（representation-drift）"><a href="#4-2-表征漂移（representation-drift）" class="headerlink" title="4.2 表征漂移（representation drift）"></a>4.2 表征漂移（representation drift）</h3><p>旧样本的特征由：</p>
+<p>[<br>z_{\text{old}}&#x3D;\phi_{\theta_{t-1}}(x)<br>]</p>
+<p>变成：</p>
+<p>[<br>z_{\text{new}}&#x3D;\phi_{\theta_t}(x)<br>]</p>
+<p>即使分类器没有变，旧类别在特征空间的位置也可能移动。反过来，即便 backbone 基本保留，分类头偏置也可能造成性能下降。</p>
+<h3 id="4-3-类别不平衡与-logit-偏置"><a href="#4-3-类别不平衡与-logit-偏置" class="headerlink" title="4.3 类别不平衡与 logit 偏置"></a>4.3 类别不平衡与 logit 偏置</h3><p>Class-IL 中，当前阶段包含大量新类样本，却只有少量甚至没有旧类样本。交叉熵会把决策边界推向旧类，产生“新类偏置”。因此很多 CIL 方法中的 classifier alignment、balanced fine-tuning、prototype classifier，并不是直接保护参数，而是在修正输出空间。</p>
+<h3 id="4-4-优化器与归一化统计漂移"><a href="#4-4-优化器与归一化统计漂移" class="headerlink" title="4.4 优化器与归一化统计漂移"></a>4.4 优化器与归一化统计漂移</h3><p>Adam 的动量、学习率调度、BatchNorm running mean&#x2F;variance 都是模型状态。只保存权重、不保存这些状态，或者在新域上重新估计统计量，都可能改变旧任务表现。</p>
+<h3 id="4-5-路由失败"><a href="#4-5-路由失败" class="headerlink" title="4.5 路由失败"></a>4.5 路由失败</h3><p>参数隔离、Prompt Pool、MoE 或 Adapter Pool 依赖“给当前输入选择正确模块”。此时旧知识可能完整保存在某个模块里，但输入被路由到了错误模块。表面指标仍会下降，但问题不是参数被擦除，而是<strong>知识不可达</strong>。</p>
+<h3 id="4-6-LLM-的访问与对齐失败"><a href="#4-6-LLM-的访问与对齐失败" class="headerlink" title="4.6 LLM 的访问与对齐失败"></a>4.6 LLM 的访问与对齐失败</h3><p>LLM 可能仍然能在线性 probe、特定 prompt 或少量校准后输出旧知识，但在原任务格式下失败。ICLR 2025 的 <em>Spurious Forgetting in Continual Learning of Language Models</em> 将一类现象解释为 task alignment 下降，而非知识本体完全消失。因此 LLM-CL 评测必须区分：</p>
+<p>[<br>\text{knowledge storage}<br>\neq<br>\text{knowledge accessibility}<br>\neq<br>\text{generation policy}<br>]</p>
+<hr>
+<h1 id="第三部分：先把实验场景说清楚"><a href="#第三部分：先把实验场景说清楚" class="headerlink" title="第三部分：先把实验场景说清楚"></a>第三部分：先把实验场景说清楚</h1><h2 id="5-三种经典增量场景"><a href="#5-三种经典增量场景" class="headerlink" title="5. 三种经典增量场景"></a>5. 三种经典增量场景</h2><p>van de Ven 等人的标准化工作把经典监督 CL 分为三类。</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th align="right">测试时 task ID</th>
+<th>输出空间</th>
+<th>核心难点</th>
+<th>常见误区</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Task-Incremental Learning</td>
+<td align="right">给定</td>
+<td>通常每任务独立 head 或 mask</td>
+<td>保护旧任务参数</td>
+<td>task ID 是强 oracle，掩盖了任务识别问题</td>
+</tr>
+<tr>
+<td>Domain-Incremental Learning</td>
+<td align="right">不给定</td>
+<td>标签语义保持不变，共享 head</td>
+<td>同一任务在不同上下文&#x2F;域中稳定</td>
+<td>“无需推断 task ID”不是说域变化不存在，而是无需选择任务专属输出头</td>
+</tr>
+<tr>
+<td>Class-Incremental Learning</td>
+<td align="right">不给定</td>
+<td>类别集合持续扩大，共享 head</td>
+<td>同时识别所有已见类；新类偏置</td>
+<td>最终精度混合了表征、分类器和平衡问题</td>
+</tr>
+</tbody></table>
+<p>形式化地：</p>
+<h3 id="Task-IL"><a href="#Task-IL" class="headerlink" title="Task-IL"></a>Task-IL</h3><p>[<br>f(x,t)\rightarrow y<br>]</p>
+<p>测试时提供任务上下文 (t)。</p>
+<h3 id="Domain-IL"><a href="#Domain-IL" class="headerlink" title="Domain-IL"></a>Domain-IL</h3><p>[<br>f(x)\rightarrow y, \qquad \mathcal{Y}_t&#x3D;\mathcal{Y}<br>]</p>
+<p>标签空间保持一致，但 (P_t(X)) 或 (P_t(X,Y)) 变化。</p>
+<h3 id="Class-IL"><a href="#Class-IL" class="headerlink" title="Class-IL"></a>Class-IL</h3><p>[<br>\mathcal{Y}<em>1\subset \mathcal{Y}</em>{1:2}\subset\cdots\subset\mathcal{Y}_{1:T}<br>]</p>
+<p>模型必须在所有已见类别上做一次统一预测。</p>
+<h2 id="6-现实设定还需要另外四个轴"><a href="#6-现实设定还需要另外四个轴" class="headerlink" title="6. 现实设定还需要另外四个轴"></a>6. 现实设定还需要另外四个轴</h2><p>只写“Class-IL”仍然不够。实验至少还要声明：</p>
+<h3 id="6-1-数据访问"><a href="#6-1-数据访问" class="headerlink" title="6.1 数据访问"></a>6.1 数据访问</h3><ul>
+<li><strong>Full replay</strong>：可访问全部历史数据，接近 joint retraining；</li>
+<li><strong>Bounded raw replay</strong>：保存固定数量或固定字节的原始样本；</li>
+<li><strong>Feature replay</strong>：保存中间特征；</li>
+<li><strong>Logit replay</strong>：保存旧模型输出；</li>
+<li><strong>Generative replay</strong>：保存生成器并合成旧样本；</li>
+<li><strong>Replay-free &#x2F; exemplar-free</strong>：不保留历史样本。</li>
+</ul>
+<h3 id="6-2-数据遍历次数"><a href="#6-2-数据遍历次数" class="headerlink" title="6.2 数据遍历次数"></a>6.2 数据遍历次数</h3><ul>
+<li>多 epoch task-wise CL；</li>
+<li>单遍 online CL；</li>
+<li>小批次流式更新；</li>
+<li>完全 one-example-at-a-time。</li>
+</ul>
+<h3 id="6-3-任务边界"><a href="#6-3-任务边界" class="headerlink" title="6.3 任务边界"></a>6.3 任务边界</h3><ul>
+<li>已知清晰边界；</li>
+<li>训练时已知、测试时未知；</li>
+<li>模糊边界；</li>
+<li>无边界 task-free &#x2F; general CL。</li>
+</ul>
+<h3 id="6-4-资源增长"><a href="#6-4-资源增长" class="headerlink" title="6.4 资源增长"></a>6.4 资源增长</h3><p>必须分别报告：</p>
+<p>[<br>\text{raw memory},\quad<br>\text{feature&#x2F;logit memory},\quad<br>\text{trainable params},\quad<br>\text{total params},\quad<br>\text{FLOPs},\quad<br>\text{latency}<br>]</p>
+<p>“每类保存 20 个样本”与“总共保存 2,000 个样本”不是同一个约束；“每任务增加一个 LoRA”也不能称为严格常数内存。</p>
+<hr>
+<h1 id="第四部分：怎样正确评测-CL"><a href="#第四部分：怎样正确评测-CL" class="headerlink" title="第四部分：怎样正确评测 CL"></a>第四部分：怎样正确评测 CL</h1><h2 id="7-性能矩阵"><a href="#7-性能矩阵" class="headerlink" title="7. 性能矩阵"></a>7. 性能矩阵</h2><p>设 (R_{i,j}) 表示模型学完第 (i) 个任务后，在第 (j) 个任务测试集上的性能。</p>
+<p>[<br>R&#x3D;<br>\begin{bmatrix}<br>R_{1,1} &amp; R_{1,2} &amp; \cdots &amp; R_{1,T}\<br>R_{2,1} &amp; R_{2,2} &amp; \cdots &amp; R_{2,T}\<br>\vdots &amp; \vdots &amp; \ddots &amp; \vdots\<br>R_{T,1} &amp; R_{T,2} &amp; \cdots &amp; R_{T,T}<br>\end{bmatrix}<br>]</p>
+<p>矩阵的对角线衡量每个任务刚学完时的能力；最后一行衡量整个序列结束后的保留情况；下三角反映学习后续任务对前面任务的影响。</p>
+<h2 id="8-核心指标"><a href="#8-核心指标" class="headerlink" title="8. 核心指标"></a>8. 核心指标</h2><h3 id="8-1-最终平均精度（ACC）"><a href="#8-1-最终平均精度（ACC）" class="headerlink" title="8.1 最终平均精度（ACC）"></a>8.1 最终平均精度（ACC）</h3><p>[<br>\mathrm{ACC}&#x3D;\frac{1}{T}\sum_{j&#x3D;1}^{T}R_{T,j}<br>]</p>
+<p>它是最直观的最终综合表现，但不能告诉你模型是“学不会新任务”还是“学会后又忘了”。</p>
+<h3 id="8-2-反向迁移（BWT）"><a href="#8-2-反向迁移（BWT）" class="headerlink" title="8.2 反向迁移（BWT）"></a>8.2 反向迁移（BWT）</h3><p>常用定义为：</p>
+<p>[<br>\mathrm{BWT}&#x3D;\frac{1}{T-1}\sum_{j&#x3D;1}^{T-1}\left(R_{T,j}-R_{j,j}\right)<br>]</p>
+<ul>
+<li>BWT &lt; 0：后续学习伤害旧任务；</li>
+<li>BWT &#x3D; 0：旧任务最终表现与刚学完时相同；</li>
+<li>BWT &gt; 0：后续学习反而提升旧任务。</li>
+</ul>
+<h3 id="8-3-正向迁移（FWT）"><a href="#8-3-正向迁移（FWT）" class="headerlink" title="8.3 正向迁移（FWT）"></a>8.3 正向迁移（FWT）</h3><p>一种常见定义是：</p>
+<p>[<br>\mathrm{FWT}&#x3D;\frac{1}{T-1}\sum_{j&#x3D;2}^{T}\left(R_{j-1,j}-b_j\right)<br>]</p>
+<p>其中 (b_j) 是未学习该任务时的基线。FWT 高意味着过去经验让模型在正式训练新任务前已经更有准备。</p>
+<p><strong>注意</strong>：不同论文对 BWT&#x2F;FWT 的下标和基线约定可能不同，比较数字前必须核对公式。</p>
+<h3 id="8-4-平均遗忘（Average-Forgetting）"><a href="#8-4-平均遗忘（Average-Forgetting）" class="headerlink" title="8.4 平均遗忘（Average Forgetting）"></a>8.4 平均遗忘（Average Forgetting）</h3><p>任务 (j) 的遗忘可写为：</p>
+<p>[<br>F_j&#x3D;\max_{l\in{j,\ldots,T-1}}R_{l,j}-R_{T,j}<br>]</p>
+<p>然后：</p>
+<p>[<br>\overline F&#x3D;\frac{1}{T-1}\sum_{j&#x3D;1}^{T-1}F_j<br>]</p>
+<p>它比较旧任务历史最佳值与最终值。若模型后续获得正向修正，(F_j) 也可能为负或接近零。</p>
+<h2 id="9-只报告-ACC-Forgetting-仍然不够"><a href="#9-只报告-ACC-Forgetting-仍然不够" class="headerlink" title="9. 只报告 ACC&#x2F;Forgetting 仍然不够"></a>9. 只报告 ACC&#x2F;Forgetting 仍然不够</h2><p>现实系统还应报告：</p>
+<ul>
+<li><strong>Anytime performance</strong>：训练过程中任意时间点的平均能力，而不仅是最终一步；</li>
+<li><strong>Adaptation speed</strong>：新任务达到某阈值需要多少样本或更新步；</li>
+<li><strong>Calibration</strong>：置信度、ECE、旧类&#x2F;新类 logit 偏置；</li>
+<li><strong>Memory in bytes</strong>：不要只报“样本数”；图像、token、feature、logit 的体积不同；</li>
+<li><strong>训练 FLOPs 和 wall-clock</strong>：回放会让每步训练量上升；</li>
+<li><strong>推理延迟与路由代价</strong>：模块池、ensemble、KNN、RAG 都可能增加推理成本；</li>
+<li><strong>参数增长率</strong>：每任务新增参数是否是 (O(1))、(O(T)) 或更高；</li>
+<li><strong>隐私风险</strong>：原始样本回放可能记住个人数据；生成式回放也不天然隐私安全；</li>
+<li><strong>安全与通用能力回归</strong>：对 LLM 尤其重要。</li>
+</ul>
+<h2 id="10-一个可信-CL-实验必须包含的基线"><a href="#10-一个可信-CL-实验必须包含的基线" class="headerlink" title="10. 一个可信 CL 实验必须包含的基线"></a>10. 一个可信 CL 实验必须包含的基线</h2><p>至少应有：</p>
+<ol>
+<li><strong>Naïve sequential fine-tuning</strong>：遗忘下界&#x2F;基本对照；</li>
+<li><strong>Joint training</strong>：在全部数据可用时的近似上界，而不是同等约束下的竞争者；</li>
+<li><strong>ER + reservoir sampling</strong>：允许回放时的强简单基线；</li>
+<li><strong>DER++</strong>：回放 + 历史 logit 的强基线；</li>
+<li><strong>EWC 或 LwF</strong>：无原始回放的经典基线；</li>
+<li><strong>Frozen pretrained backbone + prototype&#x2F;linear head</strong>：Foundation Model 时代不可缺少；</li>
+<li><strong>一个 PEFT 基线</strong>：例如 Prompt、Adapter 或 LoRA。</li>
+</ol>
+<p>还应控制：</p>
+<ul>
+<li>相同 backbone 和预训练权重；</li>
+<li>相同旧数据字节预算；</li>
+<li>相同超参数搜索预算；</li>
+<li>多个任务顺序与随机种子；</li>
+<li>不使用测试 task ID 泄漏；</li>
+<li>明确预训练集与评测集是否重叠；</li>
+<li>不在最终测试序列上选择超参数。</li>
+</ul>
+<hr>
+<h1 id="第五部分：经典技术路线"><a href="#第五部分：经典技术路线" class="headerlink" title="第五部分：经典技术路线"></a>第五部分：经典技术路线</h1><h2 id="11-正则化：限制哪些参数或函数可以改变"><a href="#11-正则化：限制哪些参数或函数可以改变" class="headerlink" title="11. 正则化：限制哪些参数或函数可以改变"></a>11. 正则化：限制哪些参数或函数可以改变</h2><p>正则化方法的统一思想是：</p>
+<p>[<br>L_t(\theta)&#x3D;L_{\text{new}}(\theta)+\lambda,\Omega(\theta,\theta^*_{\text{old}})<br>]</p>
+<p>根据保护对象，可分为：</p>
+<ul>
+<li><strong>参数正则化</strong>：EWC、SI、MAS 等，保护“重要参数”；</li>
+<li><strong>函数正则化</strong>：LwF、logit distillation 等，保护旧模型的输入—输出行为。</li>
+</ul>
+<h3 id="11-1-EWC：用局部后验曲率保护重要参数"><a href="#11-1-EWC：用局部后验曲率保护重要参数" class="headerlink" title="11.1 EWC：用局部后验曲率保护重要参数"></a>11.1 EWC：用局部后验曲率保护重要参数</h3><p>EWC 的经典目标为：</p>
+<p>[<br>L(\theta)&#x3D;L_{\text{new}}(\theta)<br>+\frac{\lambda}{2}\sum_i F_i(\theta_i-\theta_i^*)^2<br>]</p>
+<p>其中：</p>
+<ul>
+<li>(\theta_i^*)：旧任务训练结束时的参数；</li>
+<li>(F_i)：Fisher 信息矩阵的对角近似，作为参数重要性；</li>
+<li>(\lambda)：稳定性与可塑性的权衡。</li>
+</ul>
+<p>直观解释：</p>
+<ul>
+<li>若 (F_i) 大，移动参数 (\theta_i) 的代价高；</li>
+<li>若 (F_i) 小，该参数可更多用于新任务；</li>
+<li>这不是把重要参数绝对冻结，而是施加“弹性锚定”。</li>
+</ul>
+<h4 id="开源代码摘录：Online-EWC-的惩罚项"><a href="#开源代码摘录：Online-EWC-的惩罚项" class="headerlink" title="开源代码摘录：Online EWC 的惩罚项"></a>开源代码摘录：Online EWC 的惩罚项</h4><p><strong>出处</strong>：Mammoth，<code>models/ewc_on.py</code>，MIT License。<br><strong>实现身份</strong>：权威 CL 框架复现；不是 EWC 原作者仓库。<br><strong>原始行</strong>：<a target="_blank" rel="noopener" href="https://github.com/aimagelab/mammoth/blob/master/models/ewc_on.py#L30-L35">源码 L30–L35</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">penalty = <span class="hljs-variable language_">self</span>.args.e_lambda * (<span class="hljs-variable language_">self</span>.fish * ((<span class="hljs-variable language_">self</span>.net.get_params() - <span class="hljs-variable language_">self</span>.checkpoint) ** <span class="hljs-number">2</span>)).<span class="hljs-built_in">sum</span>()<br></code></pre></td></tr></table></figure>
+
+<p>逐项对应：</p>
+<ul>
+<li><code>self.net.get_params() - self.checkpoint</code> 对应 (\theta-\theta^*)；</li>
+<li><code>** 2</code> 是二次距离；</li>
+<li><code>self.fish * ...</code> 让 Fisher 大的参数受到更强约束；</li>
+<li><code>.sum()</code> 对全部参数累加；</li>
+<li><code>e_lambda</code> 控制保护强度。</li>
+</ul>
+<p>Online EWC 还会递归衰减和累积 Fisher：</p>
+<p>[<br>F_t \leftarrow \gamma F_{t-1}+\widehat F_t<br>]</p>
+<p>这样不必为每个历史任务保存一整套 Fisher 和锚点，但压缩历史曲率也会丢失任务细节。</p>
+<h4 id="EWC-的假设与局限"><a href="#EWC-的假设与局限" class="headerlink" title="EWC 的假设与局限"></a>EWC 的假设与局限</h4><ol>
+<li>使用对角 Fisher，忽略参数间相关性；</li>
+<li>在旧最优点附近做局部二次近似，长距离更新时近似会变差；</li>
+<li>长任务序列中越来越多参数被判定为重要，模型可能逐渐失去可塑性；</li>
+<li>它保护参数位置，不保证旧函数在所有输入区域都保持；</li>
+<li>Class-IL 中的分类器偏置并不会因为 Fisher 惩罚自动解决。</li>
+</ol>
+<h3 id="11-2-LwF：保护函数输出，而不是参数位置"><a href="#11-2-LwF：保护函数输出，而不是参数位置" class="headerlink" title="11.2 LwF：保护函数输出，而不是参数位置"></a>11.2 LwF：保护函数输出，而不是参数位置</h3><p>LwF 保存旧模型 (f_{\theta^-})，在新数据 (x\sim D_t) 上要求新模型输出接近旧模型：</p>
+<p>[<br>L&#x3D;L_{\text{new-label}}<br>+\lambda T^2,<br>\mathrm{KL}\left(<br>\sigma(z^- &#x2F;T);|;\sigma(z&#x2F;T)<br>\right)<br>]</p>
+<p>优点是无需原始旧数据；局限是蒸馏只发生在<strong>新数据覆盖的输入区域</strong>。若新旧任务输入支持集几乎不重叠，旧模型在新数据上的输出不足以约束旧域函数。</p>
+<h3 id="11-3-SI-与-MAS-的位置"><a href="#11-3-SI-与-MAS-的位置" class="headerlink" title="11.3 SI 与 MAS 的位置"></a>11.3 SI 与 MAS 的位置</h3><ul>
+<li><strong>SI</strong> 沿优化轨迹累计每个参数对损失下降的贡献；</li>
+<li><strong>MAS</strong> 用模型输出对参数扰动的敏感度衡量重要性，可在无标签数据上估计；</li>
+<li>二者与 EWC 的区别主要是“如何估计重要性”，而不是保护目标的根本改变。</li>
+</ul>
+<h3 id="11-4-什么时候正则化值得优先考虑"><a href="#11-4-什么时候正则化值得优先考虑" class="headerlink" title="11.4 什么时候正则化值得优先考虑"></a>11.4 什么时候正则化值得优先考虑</h3><p>适合：</p>
+<ul>
+<li>不能保存原始数据；</li>
+<li>任务序列不太长；</li>
+<li>参数和计算预算严格；</li>
+<li>新旧任务有较强共享结构；</li>
+<li>作为 replay&#x2F;PEFT 系统中的辅助项。</li>
+</ul>
+<p>不适合单独承担：</p>
+<ul>
+<li>很长、差异很大的任务序列；</li>
+<li>强 Class-IL 新类偏置；</li>
+<li>需要精确保留大量细粒度旧样本；</li>
+<li>旧数据分布与新数据几乎不重叠。</li>
+</ul>
+<hr>
+<h2 id="12-回放：把旧训练信号重新放回优化过程"><a href="#12-回放：把旧训练信号重新放回优化过程" class="headerlink" title="12. 回放：把旧训练信号重新放回优化过程"></a>12. 回放：把旧训练信号重新放回优化过程</h2><p>经验回放的基本目标是：</p>
+<p>[<br>L &#x3D;<br>\mathbb E_{(x,y)\sim D_t}\ell(f_\theta(x),y)<br>+\lambda<br>\mathbb E_{(x,y)\sim M_t}\ell(f_\theta(x),y)<br>]</p>
+<p>它直接修复顺序训练的核心缺陷：优化器不再只看到最新分布。</p>
+<h3 id="12-1-Reservoir-Sampling：固定缓冲如何代表整个历史流"><a href="#12-1-Reservoir-Sampling：固定缓冲如何代表整个历史流" class="headerlink" title="12.1 Reservoir Sampling：固定缓冲如何代表整个历史流"></a>12.1 Reservoir Sampling：固定缓冲如何代表整个历史流</h3><p>当已见样本数为 (n)，缓冲容量为 (m) 时，reservoir sampling 使每个历史样本最终进入缓冲的概率为：</p>
+<p>[<br>P(x_i\in M_n)&#x3D;\frac{m}{n}<br>]</p>
+<p>它不需要预先知道数据流总长度。</p>
+<h4 id="开源代码摘录：Mammoth-Buffer"><a href="#开源代码摘录：Mammoth-Buffer" class="headerlink" title="开源代码摘录：Mammoth Buffer"></a>开源代码摘录：Mammoth Buffer</h4><p><strong>出处</strong>：Mammoth，<code>utils/buffer.py</code>，MIT License。<br><strong>实现身份</strong>：框架公共 Buffer 实现。<br><strong>原始行</strong>：<a target="_blank" rel="noopener" href="https://github.com/aimagelab/mammoth/blob/master/utils/buffer.py#L104-L122">源码 L104–L122</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> num_seen_examples &lt; <span class="hljs-variable language_">self</span>.buffer_size:<br>    <span class="hljs-keyword">return</span> num_seen_examples<br><br>rand = np.random.randint(<span class="hljs-number">0</span>, num_seen_examples + <span class="hljs-number">1</span>)<br><span class="hljs-keyword">if</span> rand &lt; <span class="hljs-variable language_">self</span>.buffer_size:<br>    <span class="hljs-keyword">return</span> rand<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<p>逐步解释：</p>
+<ol>
+<li>缓冲未满时，当前样本直接进入下一个空位；</li>
+<li>缓冲满后，在 ([0,n]) 中均匀抽一个整数；</li>
+<li>只有抽到前 (m) 个位置时才替换缓冲中的某项；</li>
+<li>否则返回 <code>-1</code>，丢弃当前样本。</li>
+</ol>
+<p>Reservoir 的优势是简单、无偏和 task-free；不足是它不关心类别平衡、困难度、梯度多样性或隐私价值。数据流严重不平衡时，“全历史均匀”不一定等于“对最终任务最有用”。</p>
+<h3 id="12-2-缓冲里究竟存什么"><a href="#12-2-缓冲里究竟存什么" class="headerlink" title="12.2 缓冲里究竟存什么"></a>12.2 缓冲里究竟存什么</h3><table>
+<thead>
+<tr>
+<th>存储对象</th>
+<th>优点</th>
+<th>风险&#x2F;代价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>原始样本 + 标签</td>
+<td>训练信号最完整</td>
+<td>隐私、版权、存储大</td>
+</tr>
+<tr>
+<td>压缩样本</td>
+<td>减少空间</td>
+<td>压缩伪影、实现复杂</td>
+</tr>
+<tr>
+<td>中间特征</td>
+<td>更小、可能更隐私</td>
+<td>backbone 漂移后旧特征失配</td>
+</tr>
+<tr>
+<td>历史 logits</td>
+<td>保存“暗知识”与类关系</td>
+<td>依赖旧输出维度和校准</td>
+</tr>
+<tr>
+<td>梯度&#x2F;低秩子空间</td>
+<td>直接约束更新方向</td>
+<td>计算和存储可能随模型规模上升</td>
+</tr>
+<tr>
+<td>生成器</td>
+<td>不直接存真实数据</td>
+<td>生成器也会遗忘；合成分布可能偏移</td>
+</tr>
+</tbody></table>
+<h3 id="12-3-DER-：样本标签与历史-logit-同时回放"><a href="#12-3-DER-：样本标签与历史-logit-同时回放" class="headerlink" title="12.3 DER++：样本标签与历史 logit 同时回放"></a>12.3 DER++：样本标签与历史 logit 同时回放</h3><p>DER++ 的典型目标可写成：</p>
+<p>[<br>L_{	ext{DER++}}<br>&#x3D;L_{\text{CE,new}}<br>+\alpha|f_\theta(x_m)-z_m|<em>2^2<br>+\beta,L</em>{\text{CE}}(f_\theta(x_m),y_m)<br>]</p>
+<p>其中缓冲保存 ((x_m,y_m,z_m))，(z_m) 是样本进入缓冲时的历史 logits。</p>
+<h4 id="开源代码摘录：DER"><a href="#开源代码摘录：DER" class="headerlink" title="开源代码摘录：DER++"></a>开源代码摘录：DER++</h4><p><strong>出处</strong>：Mammoth，<code>models/derpp.py</code>，MIT License。<br><strong>实现身份</strong>：Mammoth 是 DER&#x2F;DER++ 论文团队的官方代码库。<br><strong>原始行</strong>：<a target="_blank" rel="noopener" href="https://github.com/aimagelab/mammoth/blob/master/models/derpp.py#L36-L52">源码 L36–L52</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">loss_mse = <span class="hljs-variable language_">self</span>.args.alpha * F.mse_loss(buf_outputs, buf_logits)<br>loss += loss_mse<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">loss_ce = <span class="hljs-variable language_">self</span>.args.beta * <span class="hljs-variable language_">self</span>.loss(buf_outputs, buf_labels)<br>loss += loss_ce<br></code></pre></td></tr></table></figure>
+
+<p>第一项让当前模型复现历史函数输出；第二项用真实标签防止旧 logits 中的错误永久固化。</p>
+<p>为什么 logits 有用？硬标签只告诉模型正确类，而历史 logits 还保留：</p>
+<ul>
+<li>类别间相似性；</li>
+<li>决策边界附近的相对置信度；</li>
+<li>当时模型的函数状态。</li>
+</ul>
+<p>但 DER++ 仍受缓冲代表性、logit 校准漂移和输出空间扩展影响。</p>
+<h3 id="12-4-GEM-A-GEM：不是直接混合损失，而是约束梯度"><a href="#12-4-GEM-A-GEM：不是直接混合损失，而是约束梯度" class="headerlink" title="12.4 GEM &#x2F; A-GEM：不是直接混合损失，而是约束梯度"></a>12.4 GEM &#x2F; A-GEM：不是直接混合损失，而是约束梯度</h3><p>GEM 希望新任务更新不能增加每个旧任务记忆集的损失：</p>
+<p>[<br>\langle g,g_k\rangle \ge 0,\qquad \forall k&lt;t<br>]</p>
+<p>若违反约束，就把新梯度投影到可行区域。A-GEM 用一个参考记忆梯度 (g_{\text{ref}}) 代替多个旧任务约束：</p>
+<p>[<br>\tilde g&#x3D;<br>\begin{cases}<br>g,&amp;g^\top g_{\text{ref}}\ge 0\<br>g-\frac{g^\top g_{\text{ref}}}{g_{\text{ref}}^\top g_{\text{ref}}}g_{\text{ref}},&amp;g^\top g_{\text{ref}}&lt;0<br>\end{cases}<br>]</p>
+<h4 id="开源代码摘录：A-GEM-投影"><a href="#开源代码摘录：A-GEM-投影" class="headerlink" title="开源代码摘录：A-GEM 投影"></a>开源代码摘录：A-GEM 投影</h4><p><strong>出处</strong>：Mammoth，<code>models/agem.py</code>，MIT License。<br><strong>实现身份</strong>：框架复现。<br><strong>原始行</strong>：<a target="_blank" rel="noopener" href="https://github.com/aimagelab/mammoth/blob/master/models/agem.py#L13-L15">源码 L13–L15</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">corr = torch.dot(gxy, ger) / torch.dot(ger, ger)<br><span class="hljs-keyword">return</span> gxy - corr * ger<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>gxy</code>：当前批次梯度；</li>
+<li><code>ger</code>：回放参考梯度；</li>
+<li><code>corr * ger</code>：当前梯度在冲突参考方向上的分量；</li>
+<li>相减后得到位于边界上的投影梯度。</li>
+</ul>
+<p>限制包括：</p>
+<ul>
+<li>大模型上提取、拼接并投影全参数梯度很昂贵；</li>
+<li>一个随机参考批次未必代表全部旧知识；</li>
+<li>“不提高当前记忆批次损失”不等于不伤害整个旧分布；</li>
+<li>强约束会抑制有必要的表示重构。</li>
+</ul>
+<h3 id="12-5-回放研究真正的三个子问题"><a href="#12-5-回放研究真正的三个子问题" class="headerlink" title="12.5 回放研究真正的三个子问题"></a>12.5 回放研究真正的三个子问题</h3><ol>
+<li><strong>存什么</strong>：reservoir、类别平衡、coreset、梯度多样性；</li>
+<li><strong>取什么</strong>：随机检索、MIR 的最大干扰样本、难例优先；</li>
+<li><strong>怎样训练</strong>：标签 CE、logit 蒸馏、对比学习、梯度约束、校准。</li>
+</ol>
+<p>这比“回放 &#x3D; 把几张旧图混进来”更完整。</p>
+<hr>
+<h2 id="13-参数隔离与架构扩展：让任务少共享或不共享参数"><a href="#13-参数隔离与架构扩展：让任务少共享或不共享参数" class="headerlink" title="13. 参数隔离与架构扩展：让任务少共享或不共享参数"></a>13. 参数隔离与架构扩展：让任务少共享或不共享参数</h2><p>核心形式可以抽象为：</p>
+<p>[<br>f(x)&#x3D;f_{\theta_{\text{shared}},A_{r(x)}}(x)<br>]</p>
+<p>其中 (A_k) 是任务模块、mask、Prompt、Adapter、LoRA 或专家，(r(x)) 是路由器。</p>
+<h3 id="13-1-主要形态"><a href="#13-1-主要形态" class="headerlink" title="13.1 主要形态"></a>13.1 主要形态</h3><table>
+<thead>
+<tr>
+<th>形态</th>
+<th>代表思路</th>
+<th>如何防遗忘</th>
+<th>主要代价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>整列扩展</td>
+<td>Progressive Networks</td>
+<td>旧列冻结，新任务加新列</td>
+<td>参数近线性增长</td>
+</tr>
+<tr>
+<td>动态神经元&#x2F;层</td>
+<td>DEN、Block Expansion</td>
+<td>新知识进入新容量</td>
+<td>模型和推理成本增长</td>
+</tr>
+<tr>
+<td>剪枝后占位</td>
+<td>PackNet</td>
+<td>旧任务权重冻结，新任务使用剩余权重</td>
+<td>容量逐渐耗尽；需 task ID</td>
+</tr>
+<tr>
+<td>二值 mask</td>
+<td>Piggyback、HAT、SupSup</td>
+<td>每任务使用不同子网络</td>
+<td>mask&#x2F;路由管理；共享容量冲突</td>
+</tr>
+<tr>
+<td>Prompt&#x2F;Adapter&#x2F;LoRA 池</td>
+<td>L2P、EASE、O-LoRA 等</td>
+<td>冻结 backbone，隔离增量参数</td>
+<td>模块增长、检索错误</td>
+</tr>
+</tbody></table>
+<h3 id="13-2-参数隔离并没有消除所有问题"><a href="#13-2-参数隔离并没有消除所有问题" class="headerlink" title="13.2 参数隔离并没有消除所有问题"></a>13.2 参数隔离并没有消除所有问题</h3><p>它把问题从“参数是否被覆盖”转移为：</p>
+<ul>
+<li>如何发现新任务；</li>
+<li>如何选择正确模块；</li>
+<li>模块是否可复用；</li>
+<li>总容量怎样保持有界；</li>
+<li>多模块输出如何校准；</li>
+<li>跨任务共享是否被过度削弱。</li>
+</ul>
+<p>若测试时直接提供 task ID，许多参数隔离方法的难度会显著下降。因此 Task-IL 的高分不能自动推导出真实 task-agnostic 场景的可靠性。</p>
+<hr>
+<h2 id="14-三大方法家族不是互斥的"><a href="#14-三大方法家族不是互斥的" class="headerlink" title="14. 三大方法家族不是互斥的"></a>14. 三大方法家族不是互斥的</h2><p>现代方法往往同时使用：</p>
+<p>[<br>\boxed{\text{frozen backbone}}<br>+\boxed{\text{PEFT module}}<br>+\boxed{\text{small replay}}<br>+\boxed{\text{distillation}}<br>+\boxed{\text{classifier calibration}}<br>]</p>
+<p>例如：</p>
+<ul>
+<li>replay 提供旧输入覆盖；</li>
+<li>distillation 保持历史函数；</li>
+<li>LoRA&#x2F;Adapter 减少主干改动；</li>
+<li>正交约束减少模块间干扰；</li>
+<li>prototype 或 balanced head 修复新类偏置。</li>
+</ul>
+<p>所以把一个方法只归为“正则化”或“架构法”，更多是历史上的主机制分类，而不是当代系统的完整描述。</p>
+<hr>
+<h1 id="第六部分：预训练模型如何重构-CL"><a href="#第六部分：预训练模型如何重构-CL" class="headerlink" title="第六部分：预训练模型如何重构 CL"></a>第六部分：预训练模型如何重构 CL</h1><h2 id="15-从“保护表征”转向“利用表征”"><a href="#15-从“保护表征”转向“利用表征”" class="headerlink" title="15. 从“保护表征”转向“利用表征”"></a>15. 从“保护表征”转向“利用表征”</h2><p>传统 CL 默认从随机初始化开始：</p>
+<p>[<br>\phi_{\theta_0}\text{ 很弱}<br>]</p>
+<p>因此每个任务都必须修改 backbone，而遗忘主要发生在表征层。</p>
+<p>Foundation Model 时代，预训练表示可能已经具有很强的可迁移性：</p>
+<p>[<br>\phi_{\text{PTM}}(x)\text{ 已经线性可分或近似可分}<br>]</p>
+<p>如果冻结 (\phi)，只更新类别统计或轻量分类器，就不存在 backbone 参数遗忘。此时问题转化为：</p>
+<ul>
+<li>预训练表征是否覆盖下游分布；</li>
+<li>类原型是否稳定；</li>
+<li>新旧类别的统计是否可比；</li>
+<li>分类器如何处理类数量扩张；</li>
+<li>需不需要轻量适配来缩小分布差距。</li>
+</ul>
+<h2 id="16-Prototype-NCM：为什么简单方法会很强"><a href="#16-Prototype-NCM：为什么简单方法会很强" class="headerlink" title="16. Prototype &#x2F; NCM：为什么简单方法会很强"></a>16. Prototype &#x2F; NCM：为什么简单方法会很强</h2><p>对类别 (c)，累积归一化特征均值：</p>
+<p>[<br>\mu_c&#x3D;rac{1}{N_c}\sum_{i:y_i&#x3D;c}<br>\frac{\phi(x_i)}{|\phi(x_i)|_2}<br>]</p>
+<p>预测：</p>
+<p>[<br>\hat y&#x3D;\arg\max_c<br>\frac{\phi(x)^\top\mu_c}<br>{|\phi(x)|_2|\mu_c|_2}<br>]</p>
+<p>如果 backbone 冻结，旧样本的特征坐标系不会漂移，类原型可在线累计。因此 SimpleCIL 一类方法可以在不训练下游 backbone 的条件下形成很强的 CIL 基线。RanPAC 进一步加入固定随机投影和非线性扩维，以提高线性可分性，再累计原型&#x2F;统计。</p>
+<h3 id="16-1-这不等于-CL-已经解决"><a href="#16-1-这不等于-CL-已经解决" class="headerlink" title="16.1 这不等于 CL 已经解决"></a>16.1 这不等于 CL 已经解决</h3><p>冻结表征绕开了参数干扰，却仍可能失败于：</p>
+<ul>
+<li>新领域超出预训练分布；</li>
+<li>细粒度类别需要专门特征；</li>
+<li>类内分布随时间漂移，单均值原型不足；</li>
+<li>预训练数据与 benchmark 重叠，结果被高估；</li>
+<li>新任务需要的是生成、推理或控制技能，而不是静态分类。</li>
+</ul>
+<p>因此 Foundation Model 时代的新方法必须回答：</p>
+<blockquote>
+<p>相对“冻结 PTM + 极简统计分类器”，你的复杂模块究竟增加了什么？增加的精度是否值得训练、存储、路由与调参成本？</p>
+</blockquote>
+<hr>
+<h2 id="17-L2P：把持续学习状态放进可检索-Prompt-Pool"><a href="#17-L2P：把持续学习状态放进可检索-Prompt-Pool" class="headerlink" title="17. L2P：把持续学习状态放进可检索 Prompt Pool"></a>17. L2P：把持续学习状态放进可检索 Prompt Pool</h2><p><img src="/blog/2026/08/21/持续学习/持续学习/assets/l2p_illustration.png" alt="L2P 官方架构图"></p>
+<p><strong>图片出处</strong>：Google Research <code>google-research/l2p</code> 官方仓库，Apache-2.0 License。</p>
+<h3 id="17-1-按图逐步解读"><a href="#17-1-按图逐步解读" class="headerlink" title="17.1 按图逐步解读"></a>17.1 按图逐步解读</h3><ol>
+<li>输入先经过预训练 embedding &#x2F; query function，得到查询向量；</li>
+<li>Prompt Pool 中每个 Prompt 与一个 key 关联；</li>
+<li>查询向量和 key 做相似度匹配；</li>
+<li>选出的 top-k Prompt 被前置到输入 token embedding；</li>
+<li>预训练 Transformer 主干保持冻结或基本冻结；</li>
+<li>Prompt 和分类器承担下游顺序学习。</li>
+</ol>
+<p>这相当于把“长期可学习状态”从巨大的 backbone 转移到一个小型、可检索的键值模块中。</p>
+<h3 id="17-2-开源代码摘录：top-k-Prompt-检索"><a href="#17-2-开源代码摘录：top-k-Prompt-检索" class="headerlink" title="17.2 开源代码摘录：top-k Prompt 检索"></a>17.2 开源代码摘录：top-k Prompt 检索</h3><p><strong>出处</strong>：Google Research L2P，<code>models/prompt.py</code>，Apache-2.0 License。<br><strong>实现身份</strong>：论文作者官方 JAX 实现。<br><strong>原始行</strong>：<a target="_blank" rel="noopener" href="https://github.com/google-research/l2p/blob/main/models/prompt.py#L191-L225">源码 L191–L225</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">(sim_top_k, idx) = jax.lax.top_k(sim, <span class="hljs-variable language_">self</span>.top_k)<br></code></pre></td></tr></table></figure>
+
+<p>选定索引后，从 Prompt Pool 取出对应参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">batched_prompt_raw = jnp.take(<br>    prompt, idx,<br>    axis=<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+
+<p>将 Prompt 加到输入序列前方的官方实现为：</p>
+<p><strong>原始行</strong>：<a target="_blank" rel="noopener" href="https://github.com/google-research/l2p/blob/main/models/prompt.py#L35-L45">源码 L35–L45</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">return</span> jnp.concatenate([prompt, x_embed], axis=<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+
+<h3 id="17-3-关键技术含义"><a href="#17-3-关键技术含义" class="headerlink" title="17.3 关键技术含义"></a>17.3 关键技术含义</h3><ul>
+<li><code>top_k</code> 不是 task ID；它是由输入特征动态决定的路由；</li>
+<li>Prompt Pool 是参数记忆，不是原始样本回放；</li>
+<li>backbone 冻结降低了表征遗忘，但 Prompt 之间仍会竞争；</li>
+<li>如果 query 与 key 匹配错误，知识虽然存在，也会不可达；</li>
+<li>固定 pool 会容量不足，动态扩展又会造成长期内存增长。</li>
+</ul>
+<hr>
+<h2 id="18-DualPrompt：共享知识与任务特异知识分开"><a href="#18-DualPrompt：共享知识与任务特异知识分开" class="headerlink" title="18. DualPrompt：共享知识与任务特异知识分开"></a>18. DualPrompt：共享知识与任务特异知识分开</h2><p><img src="/blog/2026/08/21/持续学习/持续学习/assets/dualprompt_illustration.png" alt="DualPrompt 官方架构图"></p>
+<p><strong>图片出处</strong>：Google Research <code>google-research/l2p</code> 官方仓库，Apache-2.0 License。</p>
+<h3 id="18-1-图中的两类-Prompt"><a href="#18-1-图中的两类-Prompt" class="headerlink" title="18.1 图中的两类 Prompt"></a>18.1 图中的两类 Prompt</h3><ul>
+<li><strong>G-Prompt（General Prompt）</strong>：跨任务共享，学习通用知识；</li>
+<li><strong>E-Prompt（Expert Prompt）</strong>：与特定任务&#x2F;输入簇相关，通过 key 匹配选择。</li>
+</ul>
+<p>图右侧展示 Prompt 如何注入多头自注意力（MSA）：Prompt 可以被拆分并附着到 key&#x2F;value 路径，而不是只在最外层拼接 token。</p>
+<h3 id="18-2-它在解决什么"><a href="#18-2-它在解决什么" class="headerlink" title="18.2 它在解决什么"></a>18.2 它在解决什么</h3><p>L2P 把所有知识放进一个池，容易出现共享不足或 prompt collision。DualPrompt 显式分解：</p>
+<p>[<br>P(x)&#x3D;P_G+P_{E,r(x)}<br>]</p>
+<ul>
+<li>(P_G) 负责跨任务共享；</li>
+<li>(P_E) 负责隔离任务特异变化；</li>
+<li>路由器 (r(x)) 负责选择专家 Prompt。</li>
+</ul>
+<p>这是一种参数级的“稳定—可塑”分工，但它仍依赖路由可靠性、Prompt 容量和预训练 backbone 的可迁移性。</p>
+<hr>
+<h2 id="19-Adapter-LoRA-子空间隔离"><a href="#19-Adapter-LoRA-子空间隔离" class="headerlink" title="19. Adapter &#x2F; LoRA &#x2F; 子空间隔离"></a>19. Adapter &#x2F; LoRA &#x2F; 子空间隔离</h2><p>LoRA 将权重更新写为低秩增量：</p>
+<p>[<br>W&#39;&#x3D;W+\Delta W,\qquad \Delta W&#x3D;BA,<br>]</p>
+<p>其中秩 (r\ll d)。冻结 (W) 后，只训练 (A,B)，可以显著减少可训练参数。</p>
+<p>持续学习中的关键不是“用了 LoRA 就不会忘”，而是：</p>
+<ul>
+<li>多任务是否共用同一 LoRA；</li>
+<li>每任务是否新建 LoRA；</li>
+<li>如何路由和合并；</li>
+<li>不同 LoRA 子空间是否干扰；</li>
+<li>模块数量是否有界。</li>
+</ul>
+<p>InfLoRA、O-LoRA 等方法试图让新任务增量位于与旧任务重要梯度&#x2F;子空间正交的方向：</p>
+<p>[<br>\Delta W_t\perp \mathcal{G}_{1:t-1}<br>]</p>
+<p>但严格正交会随任务增多消耗可用子空间；近似梯度空间的质量也决定了真实保护程度。</p>
+<hr>
+<h1 id="第七部分：LLM-的持续学习"><a href="#第七部分：LLM-的持续学习" class="headerlink" title="第七部分：LLM 的持续学习"></a>第七部分：LLM 的持续学习</h1><h2 id="20-为什么-LLM-CL-不能直接照搬-Split-CIFAR"><a href="#20-为什么-LLM-CL-不能直接照搬-Split-CIFAR" class="headerlink" title="20. 为什么 LLM-CL 不能直接照搬 Split CIFAR"></a>20. 为什么 LLM-CL 不能直接照搬 Split CIFAR</h2><p>LLM 的“任务”通常不是清晰的十分类：</p>
+<ul>
+<li>领域语料持续到达；</li>
+<li>新事实与旧事实发生时间冲突；</li>
+<li>新工具、新语言、新格式和新技能加入；</li>
+<li>SFT、偏好优化和安全对齐目标反复改变；</li>
+<li>同一个 prompt 同时依赖知识、推理、指令遵循与输出策略。</li>
+</ul>
+<p>因此当前 LLM-CL 通常按模型生命周期分成三个阶段：</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>主要数据</th>
+<th>典型损失</th>
+<th>主要遗忘对象</th>
+<th>常见机制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Continual Pre-Training（CPT）</td>
+<td>新领域&#x2F;新时间段无标注 token</td>
+<td>next-token loss</td>
+<td>通用语言能力、旧领域知识</td>
+<td>旧数据混合、学习率重预热、扩层、正则化</td>
+</tr>
+<tr>
+<td>Continual Fine&#x2F;Instruction Tuning（CFT&#x2F;CIT）</td>
+<td>指令—回答、任务数据</td>
+<td>SFT CE</td>
+<td>旧技能、格式、通用能力</td>
+<td>replay、distillation、LoRA&#x2F;Adapter Pool、正交子空间</td>
+</tr>
+<tr>
+<td>Continual Alignment</td>
+<td>偏好、安全、奖励数据</td>
+<td>DPO&#x2F;RLHF&#x2F;策略目标</td>
+<td>helpfulness、安全边界、知识可达性</td>
+<td>数据混合、参考模型约束、在线合并、回归测试</td>
+</tr>
+</tbody></table>
+<p>2026 年的 LLM-CL 综述也普遍采用“持续预训练—持续微调—持续对齐”的阶段化结构。</p>
+<h2 id="21-持续预训练：真正的变量不只有数据"><a href="#21-持续预训练：真正的变量不只有数据" class="headerlink" title="21. 持续预训练：真正的变量不只有数据"></a>21. 持续预训练：真正的变量不只有数据</h2><p>CPT 的更新可写为：</p>
+<p>[<br>L_{\text{CPT}}&#x3D;<br>\mathbb E_{x\sim \alpha P_{\text{new}}+(1-\alpha)P_{\text{replay}}}<br>[-\log p_\theta(x)]<br>]</p>
+<p>其中 (\alpha) 是新旧数据混合比例。工程上至少要同时设计：</p>
+<ol>
+<li><strong>数据混合比例</strong>：新领域太高会覆盖旧能力，太低则适应慢；</li>
+<li><strong>学习率重预热</strong>：旧模型已经处于衰减学习率末端，直接继续训练可能缺乏可塑性；</li>
+<li><strong>优化器状态</strong>：保留还是重置 Adam moments 会改变更新轨迹；</li>
+<li><strong>token 顺序与去重</strong>：持续语料可能与旧数据重复或时间冲突；</li>
+<li><strong>tokenizer&#x2F;embedding 扩展</strong>：新语言、新符号可能需要新 token；</li>
+<li><strong>评测矩阵</strong>：不能只看新领域 perplexity，还要看通用、推理、安全和旧域。</li>
+</ol>
+<p>实践中，“重预热 + 少量旧数据混合”是必须认真比较的简单基线。复杂 CL 方法若没有超过这一基线，往往没有足够工程价值。</p>
+<h2 id="22-持续指令微调：技能与任务对齐同时变化"><a href="#22-持续指令微调：技能与任务对齐同时变化" class="headerlink" title="22. 持续指令微调：技能与任务对齐同时变化"></a>22. 持续指令微调：技能与任务对齐同时变化</h2><p>CIT 训练的是：</p>
+<p>[<br>p_\theta(y\mid x,\text{instruction})<br>]</p>
+<p>性能下降可能来自：</p>
+<ul>
+<li>旧技能参数被覆盖；</li>
+<li>指令模板变化；</li>
+<li>当前数据过度强化某一种回答风格；</li>
+<li>旧任务输出标签&#x2F;格式不再被生成策略优先选择；</li>
+<li>LoRA 合并或路由错误。</li>
+</ul>
+<p>因此只测一个 exact-match 分数，很难判断“知识没了”还是“输出方式变了”。</p>
+<h2 id="23-Spurious-Forgetting：先判断知识是否真的消失"><a href="#23-Spurious-Forgetting：先判断知识是否真的消失" class="headerlink" title="23. Spurious Forgetting：先判断知识是否真的消失"></a>23. Spurious Forgetting：先判断知识是否真的消失</h2><p>一个更可靠的诊断流程是：</p>
+<ol>
+<li><strong>原始任务评测</strong>：旧任务指标是否下降；</li>
+<li><strong>固定表征 probe</strong>：旧知识是否还能被线性读取；</li>
+<li><strong>head&#x2F;calibration reset</strong>：重新校准小型输出层后能否恢复；</li>
+<li><strong>prompt rescue</strong>：更明确的任务描述或 few-shot 示例能否恢复；</li>
+<li><strong>logit&#x2F;representation analysis</strong>：旧答案是否仍有较高但未胜出的概率；</li>
+<li><strong>再训练成本</strong>：只用极少旧样本是否快速恢复。</li>
+</ol>
+<p>若知识很容易被重新读取，问题更接近访问或对齐；若连内部 probe 都显著失效，才更像参数知识被覆盖。</p>
+<p>这一区分会改变治疗方式：</p>
+<ul>
+<li>真正参数遗忘 → replay、正则、隔离、扩容；</li>
+<li>读取&#x2F;校准失败 → head alignment、routing、prompt、decoding 修正；</li>
+<li>安全&#x2F;策略漂移 → alignment 数据与目标重新平衡。</li>
+</ul>
+<h2 id="24-LLaMA-Pro：用-Block-Expansion-增加新容量"><a href="#24-LLaMA-Pro：用-Block-Expansion-增加新容量" class="headerlink" title="24. LLaMA Pro：用 Block Expansion 增加新容量"></a>24. LLaMA Pro：用 Block Expansion 增加新容量</h2><p>LLaMA Pro 的思路是把原 Transformer 层保留并冻结，在层间插入新块。残差块可写为：</p>
+<p>[<br>h_{l+1}&#x3D;h_l+F_l(h_l)<br>]</p>
+<p>如果新增块初始化为：</p>
+<p>[<br>F_{\text{new}}(h)\approx 0,<br>]</p>
+<p>那么插入时近似恒等映射：</p>
+<p>[<br>h_{l+1}\approx h_l<br>]</p>
+<p>之后只训练新增块，使新领域知识主要进入新容量，继承参数尽量不动。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mermaid">flowchart LR<br>    I[输入] --&gt; O1[冻结旧 Block 1]<br>    O1 --&gt; N1[新增可训练 Block A&lt;br/&gt;初始近似恒等]<br>    N1 --&gt; O2[冻结旧 Block 2]<br>    O2 --&gt; N2[新增可训练 Block B&lt;br/&gt;初始近似恒等]<br>    N2 --&gt; O3[冻结旧 Block 3]<br>    O3 --&gt; Y[输出]<br></code></pre></td></tr></table></figure>
+
+<p><strong>官方开源实现</strong>：TencentARC <code>LLaMA-Pro</code>，<code>scripts/block_expansion.py</code>，Apache-2.0 License。</p>
+<p>这种方法的优势是结构性保护继承参数；代价是：</p>
+<ul>
+<li>参数和推理 FLOPs 增长；</li>
+<li>新旧知识仍要经过整个网络共同组合；</li>
+<li>连续多轮扩展是否保持有界尚未解决；</li>
+<li>“旧参数不动”不等于输出行为绝对不变，因为新增块会改变后续激活。</li>
+</ul>
+<h2 id="25-RAG、模型编辑、模型融合与-LLM-CL-的关系"><a href="#25-RAG、模型编辑、模型融合与-LLM-CL-的关系" class="headerlink" title="25. RAG、模型编辑、模型融合与 LLM-CL 的关系"></a>25. RAG、模型编辑、模型融合与 LLM-CL 的关系</h2><h3 id="25-1-RAG"><a href="#25-1-RAG" class="headerlink" title="25.1 RAG"></a>25.1 RAG</h3><p>RAG 更新：</p>
+<p>[<br>E_t \leftarrow E_{t-1}\cup \Delta E_t<br>]</p>
+<p>而主参数 (\theta) 可以不变。它特别适合：</p>
+<ul>
+<li>频繁变化的事实；</li>
+<li>需要来源和可删除性的知识；</li>
+<li>用户或组织私有数据；</li>
+<li>低延迟更新。</li>
+</ul>
+<p>但它不会自动让模型学会新的推理程序、语言模式或工具策略。检索失败、索引过期和上下文容量仍是瓶颈。</p>
+<h3 id="25-2-模型编辑"><a href="#25-2-模型编辑" class="headerlink" title="25.2 模型编辑"></a>25.2 模型编辑</h3><p>编辑适合局部事实或行为修正，但大量顺序编辑可能产生：</p>
+<ul>
+<li>局部性下降；</li>
+<li>编辑间干扰；</li>
+<li>目标事实与关联事实不一致；</li>
+<li>参数补丁持续增长。</li>
+</ul>
+<p>因此 lifelong model editing 是 CL 的邻近子问题，而不是已经替代 CL 的万能方案。</p>
+<h3 id="25-3-模型融合"><a href="#25-3-模型融合" class="headerlink" title="25.3 模型融合"></a>25.3 模型融合</h3><p>任务向量可写为：</p>
+<p>[<br>\tau_t&#x3D;\theta_t-\theta_0<br>]</p>
+<p>融合尝试：</p>
+<p>[<br>\theta_{\text{merge}}&#x3D;\theta_0+\sum_t\alpha_t\tau_t<br>]</p>
+<p>它可以免原始数据合并多个专长模型，但参数方向冲突、尺度差异和路由问题仍然存在。它更像离线知识整合，与在线顺序学习互补。</p>
+<hr>
+<h1 id="第八部分：Agent-与实际系统中的记忆层级"><a href="#第八部分：Agent-与实际系统中的记忆层级" class="headerlink" title="第八部分：Agent 与实际系统中的记忆层级"></a>第八部分：Agent 与实际系统中的记忆层级</h1><h2 id="26-“保存经历”与“改变能力”必须分开"><a href="#26-“保存经历”与“改变能力”必须分开" class="headerlink" title="26. “保存经历”与“改变能力”必须分开"></a>26. “保存经历”与“改变能力”必须分开</h2><p>一个 Agent 可以把每次轨迹存进数据库，但这只说明它有外部记忆：</p>
+<p>[<br>\text{remembered episode}\not\Rightarrow\text{internalized skill}<br>]</p>
+<p>更完整的记忆层级是：</p>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>载体</th>
+<th>时间尺度</th>
+<th>优势</th>
+<th>局限</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Working memory</td>
+<td>当前 context</td>
+<td>秒—分钟</td>
+<td>即时、无需训练</td>
+<td>上下文有限，结束即消失</td>
+</tr>
+<tr>
+<td>Episodic memory</td>
+<td>对话&#x2F;轨迹&#x2F;样本 Buffer</td>
+<td>天—长期</td>
+<td>可追溯、可回放</td>
+<td>检索成本和隐私风险</td>
+</tr>
+<tr>
+<td>Semantic external memory</td>
+<td>RAG&#x2F;知识图谱</td>
+<td>长期</td>
+<td>易更新、可删除、可引用</td>
+<td>不改变参数能力</td>
+</tr>
+<tr>
+<td>Procedural&#x2F;module memory</td>
+<td>Prompt&#x2F;LoRA&#x2F;Adapter&#x2F;技能模块</td>
+<td>中长期</td>
+<td>轻量适配、可路由</td>
+<td>模块增长与冲突</td>
+</tr>
+<tr>
+<td>Parametric memory</td>
+<td>主模型权重</td>
+<td>长期</td>
+<td>低延迟泛化、隐式整合</td>
+<td>更新昂贵、难删除、会干扰</td>
+</tr>
+</tbody></table>
+<h2 id="27-一个较现实的持续学习系统架构"><a href="#27-一个较现实的持续学习系统架构" class="headerlink" title="27. 一个较现实的持续学习系统架构"></a>27. 一个较现实的持续学习系统架构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs mermaid">flowchart TD<br>    A[持续到达的数据/轨迹] --&gt; B[质量、隐私与安全过滤]<br>    B --&gt; C[短期 episodic buffer]<br>    B --&gt; D[可检索语义记忆 RAG]<br>    C --&gt; E[样本选择与回放调度]<br>    D --&gt; F[训练数据构造/自蒸馏]<br>    E --&gt; G[冻结主干 + PEFT/可扩展模块]<br>    F --&gt; G<br>    G --&gt; H[旧能力/新能力/安全回归测试]<br>    H --&gt;|通过| I[版本化部署]<br>    H --&gt;|失败| J[回滚、调混合比、扩大回放]<br>    I --&gt; K[线上反馈与漂移监测]<br>    K --&gt; A<br>    C --&gt; L[周期性 consolidation]<br>    D --&gt; L<br>    L --&gt; G<br></code></pre></td></tr></table></figure>
+
+<p>关键工程原则：</p>
+<ol>
+<li><strong>即时事实优先进入外部记忆</strong>，不必每次改参数；</li>
+<li><strong>重复、高价值、可泛化的经验才进入参数巩固</strong>；</li>
+<li><strong>训练前做数据治理和去重</strong>；</li>
+<li><strong>更新后必须通过旧能力、新能力、安全和延迟门控</strong>；</li>
+<li><strong>每次更新都可回滚</strong>；</li>
+<li><strong>模块、Buffer 和索引都有淘汰&#x2F;压缩策略</strong>；</li>
+<li><strong>长期资源必须可计量，而不是隐式无限增长</strong>。</li>
+</ol>
+<h2 id="28-CL-对-AGI-RSI-的真实意义"><a href="#28-CL-对-AGI-RSI-的真实意义" class="headerlink" title="28. CL 对 AGI &#x2F; RSI 的真实意义"></a>28. CL 对 AGI &#x2F; RSI 的真实意义</h2><p>持续学习是长期自主智能的必要组成，但不是充分条件。RSI 或开放式 Agent 还需要：</p>
+<ul>
+<li>自动发现能力缺口；</li>
+<li>选择有信息价值的经验；</li>
+<li>构造课程与实验；</li>
+<li>判断新更新是否真的改善；</li>
+<li>识别奖励欺骗、数据污染和安全回归；</li>
+<li>把具体经历抽象为可迁移技能；</li>
+<li>决定何时外部记忆、何时参数巩固、何时删除。</li>
+</ul>
+<p>因此更完整的闭环是：</p>
+<p>[<br>\text{experience}<br>\rightarrow\text{evaluation}<br>\rightarrow\text{selection}<br>\rightarrow\text{update}<br>\rightarrow\text{regression testing}<br>\rightarrow\text{deployment}<br>]</p>
+<p>而不仅是“继续梯度下降”。</p>
+<hr>
+<h1 id="第九部分：开源代码与复现实验"><a href="#第九部分：开源代码与复现实验" class="headerlink" title="第九部分：开源代码与复现实验"></a>第九部分：开源代码与复现实验</h1><h2 id="29-本文代码来源清单"><a href="#29-本文代码来源清单" class="headerlink" title="29. 本文代码来源清单"></a>29. 本文代码来源清单</h2><table>
+<thead>
+<tr>
+<th>机制</th>
+<th>仓库</th>
+<th>文件</th>
+<th>实现身份</th>
+<th>许可证</th>
+<th>本文用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Online EWC</td>
+<td><code>aimagelab/mammoth</code></td>
+<td><code>models/ewc_on.py</code></td>
+<td>CL 框架复现</td>
+<td>MIT</td>
+<td>解释 Fisher 加权二次惩罚</td>
+</tr>
+<tr>
+<td>Reservoir Sampling</td>
+<td><code>aimagelab/mammoth</code></td>
+<td><code>utils/buffer.py</code></td>
+<td>框架公共实现</td>
+<td>MIT</td>
+<td>解释固定容量流式采样</td>
+</tr>
+<tr>
+<td>DER++</td>
+<td><code>aimagelab/mammoth</code></td>
+<td><code>models/derpp.py</code></td>
+<td>论文团队官方代码库</td>
+<td>MIT</td>
+<td>解释 logit + label 双回放</td>
+</tr>
+<tr>
+<td>A-GEM</td>
+<td><code>aimagelab/mammoth</code></td>
+<td><code>models/agem.py</code></td>
+<td>CL 框架复现</td>
+<td>MIT</td>
+<td>解释冲突梯度投影</td>
+</tr>
+<tr>
+<td>L2P &#x2F; DualPrompt</td>
+<td><code>google-research/l2p</code></td>
+<td><code>models/prompt.py</code></td>
+<td>论文作者官方 JAX 实现</td>
+<td>Apache-2.0</td>
+<td>解释 Prompt 检索和前置</td>
+</tr>
+<tr>
+<td>LLaMA Pro</td>
+<td><code>TencentARC/LLaMA-Pro</code></td>
+<td><code>scripts/block_expansion.py</code></td>
+<td>论文作者官方实现</td>
+<td>Apache-2.0</td>
+<td>说明 Transformer Block Expansion</td>
+</tr>
+</tbody></table>
+<p><strong>重要区分</strong>：</p>
+<ul>
+<li>“开源”只表示代码公开并有相应许可证；</li>
+<li>“论文作者官方实现”与“权威框架复现”不是同一概念；</li>
+<li>EWC 和 A-GEM 在本文使用的是 Mammoth 复现，不冒充原作者源码；</li>
+<li>本文没有为“无官方代码”的方法自行补写实现。</li>
+</ul>
+<h2 id="30-用-Mammoth-跑一个-DER-基线"><a href="#30-用-Mammoth-跑一个-DER-基线" class="headerlink" title="30. 用 Mammoth 跑一个 DER++ 基线"></a>30. 用 Mammoth 跑一个 DER++ 基线</h2><p>下面命令逐字来自 Mammoth 官方 README：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python main.py --model derpp --dataset seq-cifar100 --alpha 0.5 --beta 0.5 --lr 0.001 --buffer_size 500<br></code></pre></td></tr></table></figure>
+
+<p>官方 README 同时提醒，这组超参数只是运行示例；更规范的比较应使用仓库提供的配置和复现记录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python main.py --model derpp --dataset seq-cifar100 --model_config best<br></code></pre></td></tr></table></figure>
+
+<h3 id="30-1-不要只“跑通”，要记录完整实验契约"><a href="#30-1-不要只“跑通”，要记录完整实验契约" class="headerlink" title="30.1 不要只“跑通”，要记录完整实验契约"></a>30.1 不要只“跑通”，要记录完整实验契约</h3><p>建议每个实验保存：</p>
+<ul>
+<li>git commit；</li>
+<li>数据集版本与切分；</li>
+<li>任务顺序；</li>
+<li>预训练 checkpoint；</li>
+<li>Buffer 的样本数与实际字节；</li>
+<li>所有超参数；</li>
+<li>随机种子；</li>
+<li>每阶段性能矩阵 (R)；</li>
+<li>FLOPs、显存、训练时间；</li>
+<li>最终模型与优化器状态；</li>
+<li>是否使用 task ID；</li>
+<li>是否在测试集上选择超参数。</li>
+</ul>
+<h2 id="31-工具选择"><a href="#31-工具选择" class="headerlink" title="31. 工具选择"></a>31. 工具选择</h2><h3 id="Mammoth"><a href="#Mammoth" class="headerlink" title="Mammoth"></a>Mammoth</h3><p>适合：快速比较大量经典和现代方法。其官方 README 在 2026 年列出 70+ 方法和 20 个数据集，并提供模型配置与复现记录。</p>
+<h3 id="Avalanche"><a href="#Avalanche" class="headerlink" title="Avalanche"></a>Avalanche</h3><p>适合：从 benchmark stream、训练策略、评测指标到日志的端到端实验；其模块化 API 很适合学习 CL 协议或构造自定义数据流。</p>
+<h3 id="PyCIL"><a href="#PyCIL" class="headerlink" title="PyCIL"></a>PyCIL</h3><p>适合：以 Class-Incremental Learning 为主的复现，尤其是传统 CIL 与预训练模型 CIL。仓库在 2026 年仍有新工具和方法更新记录。</p>
+<h3 id="PILOT"><a href="#PILOT" class="headerlink" title="PILOT"></a>PILOT</h3><p>适合：预训练模型驱动的 CIL 方法，便于比较 Prompt、Adapter、prototype 等路线。</p>
+<h3 id="Google-Research-L2P"><a href="#Google-Research-L2P" class="headerlink" title="Google Research L2P"></a>Google Research L2P</h3><p>适合：理解 L2P&#x2F;DualPrompt 的原始 JAX 设计。它是方法官方实现，不应把其中 TPU&#x2F;JAX 环境假设直接等同于通用 PyTorch 工程模板。</p>
+<hr>
+<h1 id="第十部分：怎样设计一项可信研究"><a href="#第十部分：怎样设计一项可信研究" class="headerlink" title="第十部分：怎样设计一项可信研究"></a>第十部分：怎样设计一项可信研究</h1><h2 id="32-第一步：写清“问题合同”"><a href="#32-第一步：写清“问题合同”" class="headerlink" title="32. 第一步：写清“问题合同”"></a>32. 第一步：写清“问题合同”</h2><p>在写模型前先回答：</p>
+<ol>
+<li>数据是 task-wise 还是无边界流？</li>
+<li>测试时是否提供 task ID？</li>
+<li>允许重访多少旧数据，按样本还是字节？</li>
+<li>是否允许存特征、logit、生成器？</li>
+<li>模型参数能否随任务增长？</li>
+<li>新旧知识冲突时，哪个版本应被视为正确？</li>
+<li>需要保留哪些通用能力和安全属性？</li>
+<li>训练与推理预算是多少？</li>
+</ol>
+<p>没有这些条件，“解决 catastrophic forgetting”是不可证伪的宽泛表述。</p>
+<h2 id="33-第二步：建立最小但强的基线矩阵"><a href="#33-第二步：建立最小但强的基线矩阵" class="headerlink" title="33. 第二步：建立最小但强的基线矩阵"></a>33. 第二步：建立最小但强的基线矩阵</h2><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>最小基线</th>
+<th>要回答的问题</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>无保护</td>
+<td>Naïve FT</td>
+<td>原始遗忘有多严重？</td>
+</tr>
+<tr>
+<td>上界</td>
+<td>Joint</td>
+<td>如果历史数据完全可用，最高能到哪里？</td>
+</tr>
+<tr>
+<td>回放</td>
+<td>ER-reservoir</td>
+<td>复杂方法能否超过最简单回放？</td>
+</tr>
+<tr>
+<td>回放+蒸馏</td>
+<td>DER++</td>
+<td>历史函数信息是否有额外价值？</td>
+</tr>
+<tr>
+<td>正则</td>
+<td>EWC&#x2F;LwF</td>
+<td>不存旧样本时能保留多少？</td>
+</tr>
+<tr>
+<td>Foundation baseline</td>
+<td>Frozen PTM + prototype</td>
+<td>提升是否主要来自预训练？</td>
+</tr>
+<tr>
+<td>PEFT</td>
+<td>Prompt&#x2F;LoRA&#x2F;Adapter</td>
+<td>轻量参数是否足以适应？</td>
+</tr>
+</tbody></table>
+<h2 id="34-第三步：做能解释机制的消融"><a href="#34-第三步：做能解释机制的消融" class="headerlink" title="34. 第三步：做能解释机制的消融"></a>34. 第三步：做能解释机制的消融</h2><p>至少应测试：</p>
+<ul>
+<li>去掉 replay；</li>
+<li>去掉 distillation；</li>
+<li>固定与更新 backbone；</li>
+<li>不同 Buffer 字节预算；</li>
+<li>随机采样 vs 类别平衡&#x2F;困难样本；</li>
+<li>task ID 有&#x2F;无；</li>
+<li>正常路由 vs oracle 路由；</li>
+<li>只评 classifier vs 重训练一个 probe；</li>
+<li>不同任务顺序；</li>
+<li>预训练数据重叠排查。</li>
+</ul>
+<p>一个方法若只在单一顺序、单一 seed、单一 buffer size 上胜出，不能说明其总体机制可靠。</p>
+<h2 id="35-第四步：把结果分解为四种失败"><a href="#35-第四步：把结果分解为四种失败" class="headerlink" title="35. 第四步：把结果分解为四种失败"></a>35. 第四步：把结果分解为四种失败</h2><p>当旧任务分数下降时，依次问：</p>
+<ol>
+<li><strong>没学会新任务？</strong> 看当前任务学习曲线；</li>
+<li><strong>学会后参数遗忘？</strong> 看旧表征 probe 和旧样本损失；</li>
+<li><strong>分类器&#x2F;校准偏置？</strong> 看 feature separability、balanced head、NCM；</li>
+<li><strong>路由&#x2F;对齐失败？</strong> 用 oracle module、prompt rescue、head reset 测试。</li>
+</ol>
+<p>这比只报告“遗忘率下降 2%”更能产生可迁移知识。</p>
+<hr>
+<h1 id="第十一部分：目前哪些问题已经较成熟，哪些仍未解决"><a href="#第十一部分：目前哪些问题已经较成熟，哪些仍未解决" class="headerlink" title="第十一部分：目前哪些问题已经较成熟，哪些仍未解决"></a>第十一部分：目前哪些问题已经较成熟，哪些仍未解决</h1><h2 id="36-相对成熟的部分"><a href="#36-相对成熟的部分" class="headerlink" title="36. 相对成熟的部分"></a>36. 相对成熟的部分</h2><p>在以下条件下，CL 已经有可用的工程解：</p>
+<ul>
+<li>任务序列较短；</li>
+<li>任务边界或类别增量协议明确；</li>
+<li>允许固定小 Buffer；</li>
+<li>评测是监督分类；</li>
+<li>backbone 和数据规模适中；</li>
+<li>可以接受少量模块增长。</li>
+</ul>
+<p>此时 ER、DER++、prototype、PEFT 和简单校准往往能构成强系统。</p>
+<h2 id="37-仍然开放的核心问题"><a href="#37-仍然开放的核心问题" class="headerlink" title="37. 仍然开放的核心问题"></a>37. 仍然开放的核心问题</h2><h3 id="37-1-长时间尺度与有界资源"><a href="#37-1-长时间尺度与有界资源" class="headerlink" title="37.1 长时间尺度与有界资源"></a>37.1 长时间尺度与有界资源</h3><p>很多方法的隐藏状态随任务增长：</p>
+<p>[<br>|M_T|,|A_T|,|\text{statistics}_T|&#x3D;O(T)<br>]</p>
+<p>真正终身学习需要长期压缩、合并、淘汰和重构，而不是无限增加 Prompt、LoRA 或样本。</p>
+<h3 id="37-2-未知任务边界"><a href="#37-2-未知任务边界" class="headerlink" title="37.2 未知任务边界"></a>37.2 未知任务边界</h3><p>现实分布可能缓慢漂移，也可能突然改变。系统必须决定：</p>
+<ul>
+<li>何时创建新模块；</li>
+<li>何时复用旧模块；</li>
+<li>何时只是噪声；</li>
+<li>何时旧概念已失效。</li>
+</ul>
+<h3 id="37-3-知识冲突与有益遗忘"><a href="#37-3-知识冲突与有益遗忘" class="headerlink" title="37.3 知识冲突与有益遗忘"></a>37.3 知识冲突与有益遗忘</h3><p>“旧知识”不总是正确：法律、价格、医学指南、用户偏好和安全政策会更新。系统需要时间和来源建模，而不是无条件把新旧信息平均。</p>
+<h3 id="37-4-知识存储与访问的可诊断性"><a href="#37-4-知识存储与访问的可诊断性" class="headerlink" title="37.4 知识存储与访问的可诊断性"></a>37.4 知识存储与访问的可诊断性</h3><p>需要更好地区分：</p>
+<ul>
+<li>参数中是否还存在知识；</li>
+<li>哪个层级保存了知识；</li>
+<li>路由能否访问；</li>
+<li>生成策略为何不输出；</li>
+<li>恢复需要多少数据和计算。</li>
+</ul>
+<h3 id="37-5-Foundation-Model-基准污染"><a href="#37-5-Foundation-Model-基准污染" class="headerlink" title="37.5 Foundation Model 基准污染"></a>37.5 Foundation Model 基准污染</h3><p>预训练模型可能见过 ImageNet 派生数据、任务文本或公开评测。复杂 CL 方法的提升必须与数据重叠和 backbone 能力解耦。</p>
+<h3 id="37-6-LLM-Agent-的安全持续学习"><a href="#37-6-LLM-Agent-的安全持续学习" class="headerlink" title="37.6 LLM&#x2F;Agent 的安全持续学习"></a>37.6 LLM&#x2F;Agent 的安全持续学习</h3><p>在线吸收经验会扩大：</p>
+<ul>
+<li>数据投毒；</li>
+<li>prompt injection 被巩固；</li>
+<li>隐私记忆；</li>
+<li>reward hacking；</li>
+<li>安全边界回退；</li>
+<li>用户个性化与全局模型污染。</li>
+</ul>
+<p>因此实际系统不能让线上反馈直接无门控地更新主模型。</p>
+<hr>
+<h1 id="第十二部分：方法选择的工程决策表"><a href="#第十二部分：方法选择的工程决策表" class="headerlink" title="第十二部分：方法选择的工程决策表"></a>第十二部分：方法选择的工程决策表</h1><table>
+<thead>
+<tr>
+<th>现实需求</th>
+<th>优先路线</th>
+<th>原因</th>
+<th>需要警惕</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>只需更新频繁变化事实</td>
+<td>RAG &#x2F; 外部知识库</td>
+<td>快、可引用、可删除</td>
+<td>检索失败，不会自动内化技能</td>
+</tr>
+<tr>
+<td>允许保存少量旧样本</td>
+<td>ER &#x2F; DER++</td>
+<td>强、简单、通用</td>
+<td>隐私与额外训练成本</td>
+</tr>
+<tr>
+<td>禁止保存原始数据</td>
+<td>蒸馏、EWC&#x2F;SI&#x2F;MAS、feature&#x2F;logit replay</td>
+<td>不依赖原始旧样本</td>
+<td>新数据支持集不足、近似误差</td>
+</tr>
+<tr>
+<td>强预训练视觉分类</td>
+<td>Frozen PTM + prototype，之后再考虑 PEFT</td>
+<td>简单基线可能已很强</td>
+<td>分布外细粒度任务</td>
+</tr>
+<tr>
+<td>多个可识别任务</td>
+<td>Adapter&#x2F;LoRA&#x2F;Prompt Pool</td>
+<td>模块化隔离</td>
+<td>task 路由、参数增长</td>
+</tr>
+<tr>
+<td>新领域 LLM 语料</td>
+<td>CPT + 数据混合 + LR 重预热 + 回归评测</td>
+<td>直接更新语言模型分布</td>
+<td>通用能力与对齐回退</td>
+</tr>
+<tr>
+<td>新指令&#x2F;技能</td>
+<td>CIT + PEFT + 少量 replay&#x2F;distill</td>
+<td>成本较低、便于版本化</td>
+<td>格式偏移、LoRA 冲突</td>
+</tr>
+<tr>
+<td>长期 Agent</td>
+<td>外部 episodic&#x2F;semantic memory + 周期巩固</td>
+<td>兼顾快速记忆和慢速内化</td>
+<td>检索污染、无界增长、安全</td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="结论：当前-CL-的最准确技术图景"><a href="#结论：当前-CL-的最准确技术图景" class="headerlink" title="结论：当前 CL 的最准确技术图景"></a>结论：当前 CL 的最准确技术图景</h1><p>持续学习的核心不应被概括为一句“让模型不断学习且不遗忘”。更准确的图景是：</p>
+<p>[<br>\boxed{<br>\text{在非平稳数据流上，管理参数、模块、样本与外部记忆的长期状态更新}<br>}<br>]</p>
+<p>经典正则化、回放和参数隔离分别回答：</p>
+<ul>
+<li>哪些方向不能随便改；</li>
+<li>哪些旧训练信号必须重现；</li>
+<li>哪些知识应放入独立容量。</li>
+</ul>
+<p>预训练模型时代又增加了两个问题：</p>
+<ul>
+<li>何时根本不应修改强 backbone；</li>
+<li>如何在 Prompt&#x2F;LoRA&#x2F;Adapter&#x2F;原型之间组织和路由知识。</li>
+</ul>
+<p>LLM 与 Agent 时代进一步要求系统区分：</p>
+<p>[<br>\text{参数知识}<br>+\text{外部语义记忆}<br>+\text{情景经历}<br>+\text{程序性技能}<br>+\text{生成与安全策略}<br>]</p>
+<p>因此，目前最有前景的方向不是寻找一个单一“永不遗忘损失函数”，而是设计一个<strong>有界、可诊断、可回滚、分层记忆、能够周期巩固的学习系统</strong>。</p>
+<p>真正的终身学习是否实现，应由以下问题决定：</p>
+<ol>
+<li>它能否持续学到新能力，而不只是存储新文本？</li>
+<li>它能否知道哪些旧知识应保留、修改或删除？</li>
+<li>它能否在没有 task ID 的情况下访问正确知识？</li>
+<li>它的内存、参数和计算是否长期有界？</li>
+<li>它能否证明更新没有破坏通用能力和安全性？</li>
+<li>它能否从具体经历形成可迁移的抽象，而不是无限堆积样本？</li>
+</ol>
+<p>在这些问题被同时解决之前，CL 仍然是从静态模型走向真正长期智能的核心开放领域。</p>
+<hr>
+<h1 id="主要参考资料与开源资源"><a href="#主要参考资料与开源资源" class="headerlink" title="主要参考资料与开源资源"></a>主要参考资料与开源资源</h1><h2 id="总体与评测"><a href="#总体与评测" class="headerlink" title="总体与评测"></a>总体与评测</h2><ul>
+<li>Lopez-Paz &amp; Ranzato, <em>Gradient Episodic Memory for Continual Learning</em>, NeurIPS 2017: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.08840">https://arxiv.org/abs/1706.08840</a></li>
+<li>van de Ven et al., <em>Three Types of Incremental Learning</em>, Nature Machine Intelligence 2022: <a target="_blank" rel="noopener" href="https://www.nature.com/articles/s42256-022-00568-3">https://www.nature.com/articles/s42256-022-00568-3</a></li>
+<li>van de Ven, Soures &amp; Kudithipudi, <em>Continual Learning and Catastrophic Forgetting</em>: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2403.05175">https://arxiv.org/abs/2403.05175</a></li>
+<li>Wang et al., <em>A Comprehensive Survey of Continual Learning: Theory, Method and Application</em>, TPAMI 2024: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2302.00487">https://arxiv.org/abs/2302.00487</a></li>
+</ul>
+<h2 id="经典方法"><a href="#经典方法" class="headerlink" title="经典方法"></a>经典方法</h2><ul>
+<li>Kirkpatrick et al., <em>Overcoming Catastrophic Forgetting in Neural Networks</em>（EWC）: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1612.00796">https://arxiv.org/abs/1612.00796</a></li>
+<li>Li &amp; Hoiem, <em>Learning without Forgetting</em>: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1606.09282">https://arxiv.org/abs/1606.09282</a></li>
+<li>Buzzega et al., <em>Dark Experience for General Continual Learning</em>: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2004.07211">https://arxiv.org/abs/2004.07211</a></li>
+<li>Chaudhry et al., <em>Efficient Lifelong Learning with A-GEM</em>: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1812.00420">https://arxiv.org/abs/1812.00420</a></li>
+</ul>
+<h2 id="预训练模型"><a href="#预训练模型" class="headerlink" title="预训练模型"></a>预训练模型</h2><ul>
+<li>Wang et al., <em>Learning to Prompt for Continual Learning</em>: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2112.08654">https://arxiv.org/abs/2112.08654</a></li>
+<li>Wang et al., <em>DualPrompt</em>: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2204.04799">https://arxiv.org/abs/2204.04799</a></li>
+<li>Zhou et al., <em>Revisiting Class-Incremental Learning with Pre-Trained Models</em>: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2303.07338">https://arxiv.org/abs/2303.07338</a></li>
+<li>McDonnell et al., <em>RanPAC</em>: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2307.02251">https://arxiv.org/abs/2307.02251</a></li>
+<li>Liang &amp; Li, <em>InfLoRA</em>: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2404.00228">https://arxiv.org/abs/2404.00228</a></li>
+</ul>
+<h2 id="LLM-持续学习"><a href="#LLM-持续学习" class="headerlink" title="LLM 持续学习"></a>LLM 持续学习</h2><ul>
+<li>Shi et al., <em>Continual Learning of Large Language Models: A Comprehensive Survey</em>: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2404.16789">https://arxiv.org/abs/2404.16789</a></li>
+<li>Wu et al., <em>Continual Learning for Large Language Models: A Survey</em>: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2402.01364">https://arxiv.org/abs/2402.01364</a></li>
+<li>Chen et al., <em>Continual Learning in Large Language Models: Methods, Challenges, and Opportunities</em>（2026）: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2603.12658">https://arxiv.org/abs/2603.12658</a></li>
+<li>Zheng et al., <em>Spurious Forgetting in Continual Learning of Language Models</em>, ICLR 2025: <a target="_blank" rel="noopener" href="https://openreview.net/forum?id=ScI7IlKGdI">https://openreview.net/forum?id=ScI7IlKGdI</a></li>
+<li>Wu et al., <em>LLaMA Pro: Progressive LLaMA with Block Expansion</em>: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2401.02415">https://arxiv.org/abs/2401.02415</a></li>
+</ul>
+<h2 id="开源仓库"><a href="#开源仓库" class="headerlink" title="开源仓库"></a>开源仓库</h2><ul>
+<li>Mammoth（MIT）: <a target="_blank" rel="noopener" href="https://github.com/aimagelab/mammoth">https://github.com/aimagelab/mammoth</a></li>
+<li>Avalanche（MIT）: <a target="_blank" rel="noopener" href="https://github.com/ContinualAI/avalanche">https://github.com/ContinualAI/avalanche</a></li>
+<li>PyCIL: <a target="_blank" rel="noopener" href="https://github.com/LAMDA-CL/PyCIL">https://github.com/LAMDA-CL/PyCIL</a></li>
+<li>PILOT: <a target="_blank" rel="noopener" href="https://github.com/LAMDA-CL/LAMDA-PILOT">https://github.com/LAMDA-CL/LAMDA-PILOT</a></li>
+<li>Google Research L2P &#x2F; DualPrompt（Apache-2.0）: <a target="_blank" rel="noopener" href="https://github.com/google-research/l2p">https://github.com/google-research/l2p</a></li>
+<li>TencentARC LLaMA Pro（Apache-2.0）: <a target="_blank" rel="noopener" href="https://github.com/TencentARC/LLaMA-Pro">https://github.com/TencentARC/LLaMA-Pro</a></li>
+<li>LLM-CL Survey 动态论文列表: <a target="_blank" rel="noopener" href="https://github.com/Wang-ML-Lab/llm-continual-learning-survey">https://github.com/Wang-ML-Lab/llm-continual-learning-survey</a></li>
+</ul>
+<hr>
+<h2 id="图片与代码归属说明"><a href="#图片与代码归属说明" class="headerlink" title="图片与代码归属说明"></a>图片与代码归属说明</h2><ul>
+<li><code>assets/l2p_illustration.png</code> 与 <code>assets/dualprompt_illustration.png</code> 来自 Google Research L2P 官方开源仓库，随仓库 Apache-2.0 License 发布。</li>
+<li>代码摘录版权归相应仓库贡献者所有；本文仅摘录理解算法所需的最短连续源码，并保留来源与许可证信息。</li>
+<li>Mermaid 流程图为本文用于解释的原创结构图，不是任何论文原图。</li>
+</ul>
+
+        </div>
+        
+        <!-- 文章导航 - 只在同分类有多篇文章时显示 -->
+        
+        
+        
+        
+        <!-- 推荐文章 -->
+        
+
+
+<div class="vs-recommended-posts">
+  <div class="vs-recommended-header">
+    <div class="section-header">
+      <i class="fas fa-lightbulb"></i>
+      <span>相关文章</span>
+    </div>
+  </div>
+  
+  <div class="vs-recommended-grid">
+    
+      <div class="vs-recommended-item" data-index="0" tabindex="0">
+        <a href="../../../20/%E7%A5%9E%E7%BB%8F%E7%A7%91%E5%AD%A6/Roadmap/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>Roadmap</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              神经科学学习路线图（内容整理中）。
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  8月 20
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  1 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      <div class="vs-recommended-item" data-index="1" tabindex="0">
+        <a href="../../../18/Neural-Networks-Zero-to-Hero/micrograd/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>micrograd</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              从零搭建 micrograd：神经元、权重、bias、激活函数（ReLU）与反向传播的直观解释，配可交互函数图像。
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  8月 18
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  5 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      <div class="vs-recommended-item" data-index="2" tabindex="0">
+        <a href="../../../17/Paper_reading/Alphabench/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>Alphabench</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              论文笔记：AlphaBench —— 大语言模型在公式化 Alpha 因子挖掘工作流中的三种角色：因子生成器、因子评审员与搜索器。
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  8月 17
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  2 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      <div class="vs-recommended-item" data-index="3" tabindex="0">
+        <a href="../../../16/Paper_reading/Evoalpha/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>Evoalpha</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              论文笔记：EvoAlpha（内容整理中）。
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  8月 16
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  1 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      <div class="vs-recommended-item" data-index="4" tabindex="0">
+        <a href="../../../16/Paper_reading/Qfinzero/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>Qfinzero</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              论文笔记：QFinZero（内容整理中）。
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  8月 16
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  1 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+  </div>
+  
+  <!-- 查看更多 -->
+  <div class="vs-recommended-footer">
+    <a href="../../../../../archives/" class="vs-view-more">
+      <i class="fas fa-folder-open"></i>
+      <span>查看更多文章</span>
+      <i class="fas fa-chevron-right"></i>
+    </a>
+  </div>
+</div>
+
+<script>
+// 键盘导航支持
+document.addEventListener('DOMContentLoaded', function() {
+  const items = document.querySelectorAll('.vs-recommended-item');
+  let currentIndex = -1;
+  
+  // 键盘事件
+  document.addEventListener('keydown', function(e) {
+    if (!items.length) return;
+    
+    if (e.key === 'Tab') {
+      // Tab键导航由浏览器处理
+      return;
+    }
+    
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      
+      // 移除当前高亮
+      if (currentIndex >= 0) {
+        items[currentIndex].classList.remove('vs-focused');
+      }
+      
+      // 更新索引
+      if (e.key === 'ArrowRight') {
+        currentIndex = (currentIndex + 1) % items.length;
+      } else {
+        currentIndex = currentIndex <= 0 ? items.length - 1 : currentIndex - 1;
+      }
+      
+      // 添加新高亮
+      items[currentIndex].classList.add('vs-focused');
+      items[currentIndex].focus();
+    }
+    
+    if (e.key === 'Enter' && currentIndex >= 0) {
+      const link = items[currentIndex].querySelector('a');
+      if (link) link.click();
+    }
+  });
+  
+  // 鼠标悬停时更新当前索引
+  items.forEach((item, index) => {
+    item.addEventListener('mouseenter', function() {
+      currentIndex = index;
+      items.forEach(i => i.classList.remove('vs-focused'));
+      item.classList.add('vs-focused');
+    });
+  });
+});
+</script>
+
+        
+        <!-- 评论区 -->
+        
+      </article>
+    </div>
+  </div>
+</div>
+
+    </div>
+    <footer class="footer">
+  <div class="status-bar">
+    <div class="status-item">
+      <i class="fas fa-code-branch"></i>
+      master
+    </div>
+    <div class="status-item">
+      <i class="fas fa-sync"></i>
+      B143KC47
+    </div>
+    <div class="status-item">
+      <i class="fas fa-clock"></i>
+      2026-08-21
+    </div>
+    <div class="status-item">
+      Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
+    </div>
+    <div class="status-item github">
+      <a href="#" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- 搜索专用配置 (HEXO_CONFIG 在 scripts.ejs 中统一定义) -->
+    <script>
+      window.VSC4T_SEARCH = {
+        root: "/blog/"
+      };
+    </script>
+
+    <!-- 外部脚本 - 统一使用 cdnjs CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" crossorigin="anonymous"></script>
+    <script>if(typeof hljs !== 'undefined') hljs.highlightAll();</script>
+    <!-- 这里可以放置自定义脚本 -->
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+  // Apply smooth scroll to non-TOC anchor links
+  document.querySelectorAll('a[href^="#"]:not(.toc-link)').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      // Check if querySelector is valid before using it
+      try {
+        const targetSelector = this.getAttribute('href');
+        // Basic check for potentially invalid selectors (though not exhaustive)
+        if (targetSelector && targetSelector.length > 1) { 
+          const targetElement = document.querySelector(targetSelector);
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth'
+            });
+          } else {
+            console.warn('Smooth scroll target not found:', targetSelector);
+          }
+        } else {
+           console.warn('Invalid href for smooth scroll:', targetSelector);
+        }
+      } catch (error) {
+        console.error('Error during smooth scroll:', error, 'Selector:', this.getAttribute('href'));
+        // Fallback or alternative behavior if needed
+        // For example, try getElementById if it's just an ID
+        const targetId = this.getAttribute('href').slice(1);
+        try {
+            const targetElementById = document.getElementById(decodeURIComponent(targetId));
+            if (targetElementById) {
+                targetElementById.scrollIntoView({ behavior: 'smooth' });
+            }
+        } catch (idError) {
+             console.error('Fallback getElementById also failed:', idError);
+        }
+      }
+    });
+  });
+});
+</script>
+
+<!-- Scripts -->
+<script>
+  // 全局配置 - 包含 i18n 字符串和主题配置
+  window.HEXO_CONFIG = {
+    language: "zh-CN",
+    root: "/blog/",
+    
+    theme_switch: {
+      enabled: false,
+      light_start: "06:00",
+      light_end: "18:00"
+    },
+    
+    // Search i18n strings
+    search_placeholder: "输入关键词搜索...",
+    search_no_results: "未找到相关结果",
+    search_result: "Ergebnis",
+    search_results: "搜索结果",
+    search_results_found: "找到 undefined 个结果",
+    search_in: "搜索范围",
+    search_in_title: "标题",
+    search_in_content: "内容",
+    search_in_tags: "标签",
+    search_in_categories: "分类",
+    search_filters: "搜索过滤器",
+    search_recent: "最近搜索",
+    search_clear: "清除",
+    search_loading: "加载中...",
+    search_error: "加载搜索数据时出错",
+    // Encryption i18n strings
+    encrypt_badge: "受保护",
+    encrypt_title: "受保护的内容",
+    encrypt_description: "请输入密码以解锁本文，密码会在本设备本地保存，直到你选择重新加密。",
+    encrypt_label: "密码",
+    encrypt_placeholder: "输入密码解锁内容",
+    encrypt_button: "解锁",
+    encrypt_button_loading: "解锁中...",
+    encrypt_hint: "按 Enter 提交，密码会在本设备上记住。",
+    encrypt_success: "内容解锁成功！",
+    encrypt_unlocked_note: "内容已解锁，可随时重新加密。",
+    encrypt_again: "重新加密",
+    encrypt_wrong_password: "密码错误，请重试。",
+    encrypt_show_password: "显示密码",
+    encrypt_hide_password: "隐藏密码",
+    // Sidebar i18n strings
+    sidebar_about: "关于",
+    sidebar_categories: "分类",
+    sidebar_tags: "标签",
+    // Post page i18n strings
+    post_toc: "目录",
+    post_category_posts: "同分类文章",
+    post_article_tags: "文章标签"
+  };
+</script>
+
+
+
+<!-- 添加所有需要的脚本 -->
+<script src="../../../../../js/search.js"></script>
+<script src="../../../../../js/theme-switch.js"></script>
+
+<script src="../../../../../js/password-protect.js?v=1787317212132"></script>
+
+    <script>
+      // 移动端菜单切换
+      $(document).ready(function() {
+        var $body = $('body');
+        var $sidebar = $('.sidebar-explorer');
+        var $overlay = $('.sidebar-overlay');
+        var $toggle = $('.mobile-menu-toggle');
+
+        function openSidebar() {
+          $sidebar.addClass('show');
+          $overlay.addClass('show');
+          $toggle.addClass('active');
+          $body.addClass('sidebar-open');
+        }
+
+        function closeSidebar() {
+          $sidebar.removeClass('show');
+          $overlay.removeClass('show');
+          $toggle.removeClass('active');
+          $body.removeClass('sidebar-open');
+        }
+
+        // 汉堡按钮点击切换
+        $toggle.on('click', function(e) {
+          e.stopPropagation();
+          if ($sidebar.hasClass('show')) {
+            closeSidebar();
+          } else {
+            openSidebar();
+          }
+        });
+
+        // 点击遮罩层关闭
+        $overlay.on('click', function() {
+          closeSidebar();
+        });
+
+        // ESC 键关闭
+        $(document).on('keydown', function(e) {
+          if (e.key === 'Escape' && $sidebar.hasClass('show')) {
+            closeSidebar();
+          }
+        });
+
+        // 点击侧边栏内的链接时自动关闭侧边栏，确保锚点跳转正常
+        $sidebar.on('click', 'a', function() {
+          closeSidebar();
+        });
+      });
+    </script>
+  </body>
+</html>
