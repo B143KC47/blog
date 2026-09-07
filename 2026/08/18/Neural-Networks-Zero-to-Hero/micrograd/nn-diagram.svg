@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="'JetBrains Mono', Consolas, monospace">
+  <defs>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-opacity="0.55"/>
+    </filter>
+  </defs>
+
+  <!-- 卡片背景 -->
+  <rect x="1" y="1" width="758" height="418" rx="12" fill="#252526" stroke="#3c3c3c"/>
+
+  <!-- 顶部公式 -->
+  <text x="380" y="44" text-anchor="middle" font-size="18" fill="#d4d4d4" font-style="italic">h = ReLU( w·x + b )</text>
+
+  <!-- 连线：输入层 → 隐藏层 -->
+  <g stroke="#8a8a8a" stroke-width="1.5" opacity="0.4" fill="none">
+    <path d="M 140 150 C 260 150, 260 100, 380 100"/>
+    <path d="M 140 150 C 260 150, 260 210, 380 210"/>
+    <path d="M 140 150 C 260 150, 260 320, 380 320"/>
+    <path d="M 140 290 C 260 290, 260 100, 380 100"/>
+    <path d="M 140 290 C 260 290, 260 210, 380 210"/>
+    <path d="M 140 290 C 260 290, 260 320, 380 320"/>
+  </g>
+  <!-- 连线：隐藏层 → 输出层 -->
+  <g stroke="#8a8a8a" stroke-width="1.5" opacity="0.4" fill="none">
+    <path d="M 380 100 C 500 100, 500 210, 620 210"/>
+    <path d="M 380 210 C 500 210, 500 210, 620 210"/>
+    <path d="M 380 320 C 500 320, 500 210, 620 210"/>
+  </g>
+
+  <!-- 权重标注（示例两条） -->
+  <text x="252" y="112" text-anchor="middle" font-size="12" fill="#9a9a9a">w₁</text>
+  <text x="252" y="305" text-anchor="middle" font-size="12" fill="#9a9a9a">w₂</text>
+
+  <!-- 输入层 -->
+  <g filter="url(#glow)">
+    <circle cx="140" cy="150" r="26" fill="#2d2d2e" stroke="#569cd6" stroke-width="2.5" style="filter:drop-shadow(0 0 6px #569cd6)"/>
+    <circle cx="140" cy="290" r="26" fill="#2d2d2e" stroke="#569cd6" stroke-width="2.5" style="filter:drop-shadow(0 0 6px #569cd6)"/>
+  </g>
+  <text x="140" y="156" text-anchor="middle" font-size="18" font-weight="bold" fill="#569cd6">x₁</text>
+  <text x="140" y="296" text-anchor="middle" font-size="18" font-weight="bold" fill="#569cd6">x₂</text>
+
+  <!-- 隐藏层 -->
+  <g>
+    <circle cx="380" cy="100" r="26" fill="#2d2d2e" stroke="#e8912d" stroke-width="2.5" style="filter:drop-shadow(0 0 6px #e8912d)"/>
+    <circle cx="380" cy="210" r="26" fill="#2d2d2e" stroke="#e8912d" stroke-width="2.5" style="filter:drop-shadow(0 0 6px #e8912d)"/>
+    <circle cx="380" cy="320" r="26" fill="#2d2d2e" stroke="#e8912d" stroke-width="2.5" style="filter:drop-shadow(0 0 6px #e8912d)"/>
+  </g>
+  <text x="380" y="106" text-anchor="middle" font-size="18" font-weight="bold" fill="#e8912d">h₁</text>
+  <text x="380" y="216" text-anchor="middle" font-size="18" font-weight="bold" fill="#e8912d">h₂</text>
+  <text x="380" y="326" text-anchor="middle" font-size="18" font-weight="bold" fill="#e8912d">h₃</text>
+
+  <!-- 输出层 -->
+  <circle cx="620" cy="210" r="26" fill="#2d2d2e" stroke="#608b4e" stroke-width="2.5" style="filter:drop-shadow(0 0 6px #608b4e)"/>
+  <text x="620" y="216" text-anchor="middle" font-size="18" font-weight="bold" fill="#608b4e">y</text>
+
+  <!-- 层标注 -->
+  <text x="140" y="392" text-anchor="middle" font-size="14" fill="#9a9a9a">输入层</text>
+  <text x="380" y="392" text-anchor="middle" font-size="14" fill="#9a9a9a">隐藏层（激活函数）</text>
+  <text x="620" y="392" text-anchor="middle" font-size="14" fill="#9a9a9a">输出层</text>
+</svg>
