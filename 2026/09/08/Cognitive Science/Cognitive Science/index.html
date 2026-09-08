@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Cognitive Science | BlackCat</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Cognitive Science这是对 Paul Thagard《Cognitive Science》的阅读笔记。原文点 Source 打开；译文点开再读。">
+  <meta name="keywords" content="">
+  <meta name="author" content="B143KC47">
+  <link rel="canonical" href="https://B143KC47.github.io/blog">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Cognitive Science | BlackCat">
+  <meta property="og:description" content="Cognitive Science这是对 Paul Thagard《Cognitive Science》的阅读笔记。原文点 Source 打开；译文点开再读。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://B143KC47.github.io/blog">
+  <meta property="og:site_name" content="BlackCat">
+  <meta property="article:published_time" content="2026-09-08T13:00:05.970Z">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Cognitive Science | BlackCat">
+  <meta name="twitter:description" content="Cognitive Science这是对 Paul Thagard《Cognitive Science》的阅读笔记。原文点 Source 打开；译文点开再读。">
+
+  <!-- Favicon 配置 -->
+  
+    
+      <link rel="icon" type="image/x-icon" href="../../../../../favicon.ico">
+    
+    
+      <link rel="icon" type="image/png" sizes="16x16" href="../../../../../favicon-16x16.png">
+    
+    
+      <link rel="icon" type="image/png" sizes="32x32" href="../../../../../favicon-32x32.png">
+    
+    
+      <link rel="icon" type="image/png" sizes="192x192" href="../../../../../favicon-192x192.png">
+    
+    
+      <link rel="apple-touch-icon" sizes="180x180" href="../../../../../apple-touch-icon.png">
+    
+  
+
+  <!-- 外部样式 - 统一使用 jsdelivr CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" crossorigin="anonymous">
+
+  <!-- 代码高亮样式 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-dark.min.css" crossorigin="anonymous">
+
+  <!-- Mermaid.js 库 (defer加载) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" crossorigin="anonymous"></script>
+
+  <!-- 主题样式 -->
+  <link rel="stylesheet" href="../../../../../css/theme-colors.css">
+  <link rel="stylesheet" href="../../../../../css/main.css">
+  <link rel="stylesheet" href="../../../../../css/code.css">
+  <link rel="stylesheet" href="../../../../../css/code-custom.css">
+  <link rel="stylesheet" href="../../../../../css/code-languages.css">
+  <link rel="stylesheet" href="../../../../../css/mermaid.css">
+
+  <link rel="stylesheet" href="../../../../../css/vs-code.css">
+  <link rel="stylesheet" href="../../../../../css/post.css?v=1788872411493">
+  <link rel="stylesheet" href="../../../../../css/tag.css">
+  <link rel="stylesheet" href="../../../../../css/categories.css">
+  <link rel="stylesheet" href="../../../../../css/archive.css">
+  <link rel="stylesheet" href="../../../../../css/search.css">
+  <link rel="stylesheet" href="../../../../../css/mobile.css">  <link rel="stylesheet" href="../../../../../css/responsive.css">
+  <link rel="stylesheet" href="../../../../../css/elements.css">
+
+  <!-- 添加 JetBrains Mono 字体 -->  
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Add any custom head content here -->
+
+  <script defer src="../../../../../js/explorer.js"></script>
+  <script defer src="../../../../../js/code-enhance.js"></script>
+<!-- hexo injector head_end start --><link rel="stylesheet" href="/blog/css/reading.css">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+};
+</script>
+<script async id="mathjax-cdn-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    <div class="wrapper">
+      <div class="mobile-menu-toggle" aria-label="Toggle sidebar menu" role="button" tabindex="0">
+        <i class="fas fa-bars"></i>
+      </div>
+      <!-- 移动端侧边栏遮罩层 -->
+      <div class="sidebar-overlay" aria-hidden="true"></div>
+      <header class="vs-header">
+  <nav class="vs-nav">
+    <div class="nav-left">
+      <a href="/blog/" class="nav-brand">
+        <i class="fas fa-terminal"></i>
+        BlackCat
+      </a>
+    </div>
+    
+    <div class="nav-right">
+      <a href="/blog/" class="nav-item ">
+        <i class="fas fa-home"></i>
+        <span>首页</span>
+      </a>
+      <a href="/blog/archives/" class="nav-item ">
+        <i class="fas fa-archive"></i>
+        <span>归档</span>
+      </a>
+      <a href="/blog/categories/" class="nav-item ">
+        <i class="fas fa-folder"></i>
+        <span>分类</span>
+      </a>
+      <a href="/blog/tags/" class="nav-item ">
+        <i class="fas fa-tags"></i>
+        <span>标签</span>
+      </a>
+      <a href="/blog/search/" class="nav-item ">
+        <i class="fas fa-search"></i>
+        <span>搜索</span>
+      </a>
+      <a href="/blog/about/" class="nav-item ">
+        <i class="fas fa-info-circle"></i>
+        <span>关于</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  function smoothScroll(event, target) {
+    event.preventDefault();
+    const targetId = target.substring(target.indexOf('#') + 1);
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop - 50, // 调整偏移量
+        behavior: 'smooth'
+      });
+    } else {
+      window.location.href = target;
+    }
+  }
+
+  window.addEventListener('scroll', function() {
+    const header = document.querySelector('.vs-header');
+    const nav = document.querySelector('.vs-nav');
+    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    
+    nav.style.setProperty('--scroll-percent', `${scrollPercent}%`);
+    
+    if (window.scrollY > 0) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // 添加标签页切换动画
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      ripple.classList.add('nav-ripple');
+      this.appendChild(ripple);
+      
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+      
+      setTimeout(() => ripple.remove(), 1000);
+    });
+  });
+</script>
+
+
+<div class="vscode-container">
+  <!-- 左侧资源管理器 -->
+  <div class="sidebar-explorer">
+    <!-- TOC导航 -->
+    <div class="explorer-section">
+      <div class="section-header">
+        <i class="fas fa-list"></i>
+        <span>目录</span>
+      </div>
+      <div class="section-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Cognitive-Science"><span class="toc-text">Cognitive Science</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AA%E4%BA%BA%E5%88%86%E6%9E%90"><span class="toc-text">个人分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Behaviorism"><span class="toc-text">Behaviorism</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cognitive-Science-1"><span class="toc-text">Cognitive Science</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%A4%E7%9F%A5%E7%A7%91%E5%AD%A6"><span class="toc-text">认知科学</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%8E%86%E5%8F%B2"><span class="toc-text">1. 历史</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E6%96%B9%E6%B3%95"><span class="toc-text">2. 方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E8%A1%A8%E5%BE%81%E4%B8%8E%E8%AE%A1%E7%AE%97"><span class="toc-text">3. 表征与计算</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E7%90%86%E8%AE%BA%E6%96%B9%E6%B3%95"><span class="toc-text">4. 理论方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E5%BD%A2%E5%BC%8F%E9%80%BB%E8%BE%91"><span class="toc-text">4.1 形式逻辑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A6%81%E8%A7%A3%E9%87%8A%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">要解释的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E6%A8%A1%E5%BC%8F"><span class="toc-text">解释模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E8%A7%84%E5%88%99"><span class="toc-text">4.2 规则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A6%81%E8%A7%A3%E9%87%8A%E7%9A%84%E9%97%AE%E9%A2%98-1"><span class="toc-text">要解释的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E6%A8%A1%E5%BC%8F-1"><span class="toc-text">解释模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E6%A6%82%E5%BF%B5"><span class="toc-text">4.3 概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A6%81%E8%A7%A3%E9%87%8A%E7%9A%84%E9%97%AE%E9%A2%98-2"><span class="toc-text">要解释的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E6%A8%A1%E5%BC%8F-2"><span class="toc-text">解释模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-%E7%B1%BB%E6%AF%94"><span class="toc-text">4.4 类比</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A6%81%E8%A7%A3%E9%87%8A%E7%9A%84%E9%97%AE%E9%A2%98-3"><span class="toc-text">要解释的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E6%A8%A1%E5%BC%8F-3"><span class="toc-text">解释模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-%E6%84%8F%E8%B1%A1"><span class="toc-text">4.5 意象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A6%81%E8%A7%A3%E9%87%8A%E7%9A%84%E9%97%AE%E9%A2%98-4"><span class="toc-text">要解释的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E6%A8%A1%E5%BC%8F-4"><span class="toc-text">解释模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-6-%E8%81%94%E7%BB%93%E4%B8%BB%E4%B9%89"><span class="toc-text">4.6 联结主义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A6%81%E8%A7%A3%E9%87%8A%E7%9A%84%E9%97%AE%E9%A2%98-5"><span class="toc-text">要解释的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E6%A8%A1%E5%BC%8F-5"><span class="toc-text">解释模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7-%E7%90%86%E8%AE%BA%E7%A5%9E%E7%BB%8F%E7%A7%91%E5%AD%A6"><span class="toc-text">4.7 理论神经科学</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A6%81%E8%A7%A3%E9%87%8A%E7%9A%84%E9%97%AE%E9%A2%98-6"><span class="toc-text">要解释的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E6%A8%A1%E5%BC%8F-6"><span class="toc-text">解释模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-8-%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%96%B9%E6%B3%95"><span class="toc-text">4.8 贝叶斯方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A6%81%E8%A7%A3%E9%87%8A%E7%9A%84%E9%97%AE%E9%A2%98-7"><span class="toc-text">要解释的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E6%A8%A1%E5%BC%8F-7"><span class="toc-text">解释模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-9-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"><span class="toc-text">4.9 深度学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A6%81%E8%A7%A3%E9%87%8A%E7%9A%84%E9%97%AE%E9%A2%98-8"><span class="toc-text">要解释的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E6%A8%A1%E5%BC%8F-8"><span class="toc-text">解释模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-10-%E9%A2%84%E6%B5%8B%E5%8A%A0%E5%B7%A5%E4%B8%8E%E4%B8%BB%E5%8A%A8%E6%8E%A8%E6%96%AD"><span class="toc-text">4.10 预测加工与主动推断</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A6%81%E8%A7%A3%E9%87%8A%E7%9A%84%E9%97%AE%E9%A2%98-9"><span class="toc-text">要解释的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E6%A8%A1%E5%BC%8F-9"><span class="toc-text">解释模式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E5%93%B2%E5%AD%A6%E6%84%8F%E4%B9%89"><span class="toc-text">5. 哲学意义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-1-%E5%93%B2%E5%AD%A6%E5%BA%94%E7%94%A8"><span class="toc-text">5.1 哲学应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%88%E5%A4%A9%E6%80%A7"><span class="toc-text">先天性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E7%BB%B4%E8%AF%AD%E8%A8%80"><span class="toc-text">思维语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%83%E7%90%86%E6%84%8F%E8%B1%A1"><span class="toc-text">心理意象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B0%91%E9%97%B4%E5%BF%83%E7%90%86%E5%AD%A6"><span class="toc-text">民间心理学</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%84%8F%E4%B9%89"><span class="toc-text">意义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%83%E8%84%91%E5%90%8C%E4%B8%80%E6%80%A7"><span class="toc-text">心脑同一性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E7%94%B1%E6%84%8F%E5%BF%97"><span class="toc-text">自由意志</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%93%E5%BE%B7%E5%BF%83%E7%90%86%E5%AD%A6"><span class="toc-text">道德心理学</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E7%9A%84%E6%84%8F%E4%B9%89"><span class="toc-text">生命的意义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%83%85%E7%BB%AA"><span class="toc-text">情绪</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%84%8F%E8%AF%86"><span class="toc-text">意识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B2%BE%E7%A5%9E%E9%9A%9C%E7%A2%8D"><span class="toc-text">精神障碍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A5%E8%A7%89%E4%B8%8E%E7%8E%B0%E5%AE%9E"><span class="toc-text">知觉与现实</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A5%E8%A7%89%E4%B8%8E%E8%AE%A4%E7%9F%A5"><span class="toc-text">知觉与认知</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E5%9C%A8%E8%AE%BA"><span class="toc-text">实在论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF"><span class="toc-text">信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BE%E4%BC%9A%E7%A7%91%E5%AD%A6"><span class="toc-text">社会科学</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-2-%E5%AF%B9%E8%AE%A4%E7%9F%A5%E7%A7%91%E5%AD%A6%E7%9A%84%E6%89%B9%E5%88%A4"><span class="toc-text">5.2 对认知科学的批判</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%83%85%E7%BB%AA%E6%8C%91%E6%88%98"><span class="toc-text">1. 情绪挑战</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%84%8F%E8%AF%86%E6%8C%91%E6%88%98"><span class="toc-text">2. 意识挑战</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%B8%96%E7%95%8C%E6%8C%91%E6%88%98"><span class="toc-text">3. 世界挑战</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%BA%AB%E4%BD%93%E6%8C%91%E6%88%98"><span class="toc-text">4. 身体挑战</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%8A%A8%E5%8A%9B%E7%B3%BB%E7%BB%9F%E6%8C%91%E6%88%98"><span class="toc-text">5. 动力系统挑战</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%A4%BE%E4%BC%9A%E6%8C%91%E6%88%98"><span class="toc-text">6. 社会挑战</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E6%95%B0%E5%AD%A6%E6%8C%91%E6%88%98"><span class="toc-text">7. 数学挑战</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E8%B7%A8%E5%AD%A6%E7%A7%91%E6%8C%91%E6%88%98"><span class="toc-text">8. 跨学科挑战</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-3-%E8%AE%A4%E7%9F%A5%E7%A7%91%E5%AD%A6%E5%93%B2%E5%AD%A6"><span class="toc-text">5.3 认知科学哲学</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-text">参考文献</span></a></li></ol>
+      </div>
+    </div>
+
+    <!-- 同分类文章 -->
+    
+    <div class="explorer-section">
+      <div class="section-header">
+        <i class="fas fa-folder"></i>
+        <span>同分类文章</span>
+      </div>
+      <div class="section-content">
+        
+      </div>
+    </div>
+    
+    
+    <!-- 标签列表 -->
+    
+  </div>
+
+  <!-- 主要内容区域 -->
+  <div class="editor-content">
+    <div class="tab-bar">
+      <div class="tab active">
+        <i class="fas fa-file-alt"></i>
+        <span>Cognitive Science.md</span>
+      </div>
+    </div>
+    
+    <div class="content-area">
+      <article class="post-content">
+        <div class="post-header">
+          <h1>Cognitive Science</h1>
+          <div class="post-meta">
+            <span class="date">
+              <i class="fas fa-calendar-alt"></i>
+              2026-09-08
+            </span>
+                        
+              <span class="categories">
+                <i class="fas fa-folder"></i>
+                <div class="categories-list">
+                  <ul class="category-item-post-list"><li class="category-item-post-list-item"><a class="category-item-post-list-link" href="../../../../../categories/Cognitive-Science/">Cognitive Science</a></li></ul>
+                </div>
+              </span>
+            
+            
+          </div>
+        </div>
+        
+        <div class="post-body vscode-markdown">
+          <h1 id="Cognitive-Science"><a href="#Cognitive-Science" class="headerlink" title="Cognitive Science"></a>Cognitive Science</h1><p>这是对 Paul Thagard《Cognitive Science》的阅读笔记。<strong>原文</strong>点 Source 打开；<strong>译文</strong>点开再读。</p>
+<span id="more"></span>
+
+<h2 id="个人分析"><a href="#个人分析" class="headerlink" title="个人分析"></a>个人分析</h2><blockquote>
+<p>[!timeline]<br>古希腊 | 哲学研究心智<br>柏拉图、亚里士多德讨论知识的本质。</p>
+<p>19 世纪 | 实验心理学<br>冯特把心理过程带进实验室。</p>
+<p>20 世纪上半叶 | 行为主义主导<br>只研究可观察的刺激与反应，心智被当成黑箱。</p>
+<p>1956 前后 | 认知科学兴起<br>Miller、McCarthy、Minsky、Newell、Simon、Chomsky：表征 + 计算。</p>
+</blockquote>
+<h3 id="Behaviorism"><a href="#Behaviorism" class="headerlink" title="Behaviorism"></a>Behaviorism</h3><ul>
+<li>观察：刺激 → 所导致的行为</li>
+<li>脑内部处理 ≈ 黑箱</li>
+<li>原因：当时无法直接观测大脑，便放弃内部机制</li>
+</ul>
+<h3 id="Cognitive-Science-1"><a href="#Cognitive-Science-1" class="headerlink" title="Cognitive Science"></a>Cognitive Science</h3><p>George Miller 研究记忆，发现短期记忆容量有限，大约只能处理几个单位的信息。但人可以用 chunking（组块化）提高效率。</p>
+<p>例如很难记：</p>
+<p><code>1 9 4 5 2 0 2 6</code></p>
+<p>理解成：</p>
+<p><code>1945 | 2026</code></p>
+<p>至少说明人脑不是单纯的 刺激 → 行为。当时人工智能提供了一个比喻：人脑更像信息系统——输入 → 内部表征 → 加工 → 输出。</p>
+<p>Miller, George A. (1956). “The Magical Number Seven, Plus or Minus Two.” <em>Psychological Review</em>, 63, 81–97.</p>
+<p><a target="_blank" rel="noopener" href="https://plato.stanford.edu/archives/win2023/entries/cognitive-science/">Cognitive Science</a><br>Paul Thagard · Stanford Encyclopedia of Philosophy, Winter 2023</p>
+<details>
+<summary>打开译文</summary>
+
+<h1 id="认知科学"><a href="#认知科学" class="headerlink" title="认知科学"></a>认知科学</h1><p>认知科学（cognitive science）是一门研究**心智（mind）与智能（intelligence）**的跨学科领域，涵盖哲学、心理学、人工智能、神经科学、语言学和人类学。</p>
+<p>它在思想上的起源可以追溯到 20 世纪 50 年代中期。当时，不同领域的研究者开始发展一种新的心智理论：把心智理解为依赖于复杂的<strong>表征（representations）<strong>以及作用于这些表征之上的</strong>计算过程（computational procedures）</strong>。</p>
+<p>它在组织制度上的起源则是在 20 世纪 70 年代中期。当时，认知科学学会（Cognitive Science Society）成立，同时学术期刊《Cognitive Science》创刊。</p>
+<p>此后，北美、欧洲、亚洲和澳大利亚已有一百多所大学建立了认知科学专业或项目，另外还有许多大学开设了认知科学课程。</p>
+<hr>
+<h1 id="1-历史"><a href="#1-历史" class="headerlink" title="1. 历史"></a>1. 历史</h1><p>人类试图理解心智及其运作方式的历史，至少可以追溯到古希腊时期。当时，柏拉图、亚里士多德等哲学家已经尝试解释<strong>人类知识的本质</strong>。</p>
+<p>直到 19 世纪以前，对心智的研究基本上仍然属于哲学的范畴。到了 19 世纪，实验心理学开始发展。威廉·冯特（Wilhelm Wundt）及其学生开始采用实验室方法，更系统地研究各种心理过程。</p>
+<p>然而，仅仅几十年之后，实验心理学便逐渐被**行为主义（behaviorism）**所主导。行为主义实际上几乎否认了“心智”作为科学研究对象的存在。</p>
+<p>按照 J. B. 华生（J. B. Watson）等行为主义者的观点，心理学应该把研究限制在：</p>
+<p><strong>可观察的刺激，与可观察的行为反应之间的关系。</strong></p>
+<p>关于**意识（consciousness）<strong>以及</strong>心理表征（mental representations）**的讨论，一度被排除在严肃的科学讨论之外。</p>
+<p>尤其是在北美，行为主义一直主导着心理学界，直到 20 世纪 50 年代。</p>
+<p>大约在 1956 年，整个思想格局开始发生剧烈变化。</p>
+<p>乔治·米勒（George Miller）总结了大量研究，指出人类思维的信息处理能力是有限的。例如，短期记忆能够同时容纳的项目大约只有七个。</p>
+<p>他进一步提出，可以通过将信息重新编码成**组块（chunks）**来克服这种记忆限制。组块是一种心理表征，而对组块的使用需要相应的心理过程来完成信息的编码和解码。</p>
+<p>在当时，早期计算机问世还只有几年，但约翰·麦卡锡（John McCarthy）、马文·明斯基（Marvin Minsky）、艾伦·纽厄尔（Allen Newell）和赫伯特·西蒙（Herbert Simon）等先驱已经开始奠定**人工智能（artificial intelligence）**这一领域。</p>
+<p>与此同时，诺姆·乔姆斯基（Noam Chomsky）反对行为主义把语言视为一种通过学习形成的习惯的观点。</p>
+<p>他提出，语言理解应当通过一种由规则构成的**心理语法（mental grammar）**来解释。</p>
+<p>本段提到的六位思想家——</p>
+<p>George Miller、John McCarthy、Marvin Minsky、Allen Newell、Herbert Simon 和 Noam Chomsky——</p>
+<p>都可以被视为认知科学的奠基者。</p>
+<hr>
+<h1 id="2-方法"><a href="#2-方法" class="headerlink" title="2. 方法"></a>2. 方法</h1><p>认知科学虽然具有一些统一性的理论思想，但我们也必须认识到，不同领域的研究者在研究心智和智能时，会带来非常不同的观点和方法。</p>
+<p>虽然今天的认知心理学家经常从事理论建构和计算建模，但他们最主要的方法仍然是对<strong>人类参与者进行实验</strong>。</p>
+<p>实验参与者——往往是为了完成课程要求而参加实验的大学本科生——会被带进实验室，在受控条件下研究不同类型的思维活动。</p>
+<p>例如，心理学家通过实验研究过：</p>
+<ul>
+<li><p>人们在演绎推理中会犯哪些错误；</p>
+</li>
+<li><p>人们如何形成并运用概念；</p>
+</li>
+<li><p>人们使用心理意象进行思考时的速度；</p>
+</li>
+<li><p>人们通过类比解决问题时的表现。</p>
+</li>
+</ul>
+<p>我们对于心智如何运作的结论，不能仅仅建立在“常识”和内省之上，因为二者都有可能让我们对心理过程形成误导性的认识。</p>
+<p>事实上，许多心理过程并不能被意识直接察觉。</p>
+<p>如今，心理学家越来越多地通过 Amazon Mechanical Turk 等平台，以及来自不同文化背景的人群招募实验参与者。</p>
+<p>因此，如果认知科学想成为真正的科学，就必须通过设计严谨的心理实验，从多个不同方向研究心理过程。</p>
+<p>实验也是**实验哲学（experimental philosophy）**采用的一种研究方法。</p>
+<p>虽然<strong>没有实验的理论是空洞的，但没有理论的实验也是盲目的。</strong></p>
+<p>如果我们希望回答有关心智本质的关键问题，那么心理学实验就必须能够被放进某种理论框架中解释，而这个理论框架通常需要假设存在某些心理表征以及作用于这些表征上的过程。</p>
+<p>发展理论框架的最好方法之一，是构建并检验那些试图模拟心理过程的<strong>计算模型（computational models）</strong>。</p>
+<p>为了补充关于演绎推理、概念形成、心理意象和类比问题解决的心理实验，研究者已经开发了计算模型，用来模拟人类行为表现的某些方面。</p>
+<p>设计、构建以及测试计算模型，是人工智能这一计算机科学分支的核心方法。</p>
+<p>理想情况下，在认知科学中：</p>
+<p><strong>计算模型与心理学实验应该彼此配合。</strong></p>
+<p>不过，人工智能领域中许多重要研究，实际上是在相对脱离实验心理学的情况下，独立研究各种不同的<strong>知识表征方式</strong>究竟具有多大能力。</p>
+<p>有些语言学家也会进行心理实验或者构建计算模型，但目前大多数语言学家采用的方法有所不同。</p>
+<p>对于乔姆斯基传统的语言学家而言，最主要的理论任务，是识别那些构成人类语言基本结构的<strong>语法原则</strong>。</p>
+<p>研究者通常通过观察合语法和不合语法表达之间的细微差异来识别这些原则。</p>
+<p>例如，在英语中：</p>
+<p>“She hit the ball.”</p>
+<p>以及</p>
+<p>“What do you like?”</p>
+<p>是合乎语法的。</p>
+<p>但：</p>
+<p>“She the hit ball.”</p>
+<p>以及</p>
+<p>“What does you like?”</p>
+<p>则是不合语法的。</p>
+<p>一个关于英语的语法理论，应该能够解释为什么前两句话可以接受，而后两句话不可以。</p>
+<p>另一种研究路线叫做<strong>认知语言学（cognitive linguistics）</strong>。它不像乔姆斯基式语言学那样强调句法，而更重视<strong>语义和概念</strong>。</p>
+<p>和认知心理学家一样，神经科学家也经常进行受控实验。</p>
+<p>但是，他们所观察的对象非常不同，因为神经科学家直接关注的是<strong>大脑本身的性质</strong>。</p>
+<p>对于非人类实验对象，研究人员可以植入电极并记录单个神经元的放电。</p>
+<p>对于人类而言，这种技术过于具有侵入性，因此现在通常使用磁共振以及正电子扫描设备，观察人在执行不同心理任务时，大脑各个区域发生了什么。</p>
+<p>例如，脑成像研究已经识别出参与心理意象和词语理解的脑区。</p>
+<p>有关大脑功能的另一类证据，来自观察那些大脑受到明确损伤的人的行为表现。</p>
+<p>例如，如果中风损伤了大脑中负责语言的某个区域，就可能产生诸如无法说出完整句子等功能缺陷。</p>
+<p>与认知心理学一样，神经科学通常既是实验性的，也是理论性的。</p>
+<p>理论的发展也经常通过建立<strong>神经元群体行为的计算模型</strong>得到帮助。</p>
+<p>**认知人类学（cognitive anthropology）**把对人类思维的研究扩展到不同文化环境之中，研究思维在不同文化背景下如何运作。</p>
+<p>显然，对心智的研究不能只局限于英语使用者如何思考，还应该考虑不同文化之间可能存在的思维方式差异。</p>
+<p>认知科学越来越意识到，研究心智运作时，需要把它放在具体的<strong>物理环境与社会环境</strong>之中理解。</p>
+<p>对于文化人类学家而言，最主要的方法是<strong>民族志（ethnography）</strong>。</p>
+<p>民族志要求研究者长期生活在一个文化群体之中，与这个群体的成员互动，直到研究者能够理解其中的社会系统和认知系统。</p>
+<p>例如，认知人类学家研究过不同文化在<strong>颜色词汇</strong>方面存在的相似性和差异。</p>
+<p>传统上，哲学家通常既不会进行系统性的经验观察，也不会构建计算模型，不过近年来实验哲学的研究已经越来越多。</p>
+<p>然而，哲学对于认知科学依然非常重要，因为它处理的是实验方法和计算方法背后的一些根本问题。</p>
+<p>比如：</p>
+<ul>
+<li><p>什么是表征？</p>
+</li>
+<li><p>什么是计算？</p>
+</li>
+</ul>
+<p>这类抽象问题未必需要在心理学或者人工智能的日常研究中直接处理。</p>
+<p>但当研究者深入思考自己究竟在做什么时，这些问题不可避免地会出现。</p>
+<p>哲学也研究一些普遍问题，例如：</p>
+<ul>
+<li><p>心智与身体之间是什么关系？</p>
+</li>
+<li><p>认知科学中的“解释”究竟是什么？</p>
+</li>
+</ul>
+<p>此外，哲学不仅关心描述性问题，即：</p>
+<p><strong>人实际上是如何思考的？</strong></p>
+<p>它也关心规范性问题，即：</p>
+<p><strong>人应该如何思考？</strong></p>
+<p>除了理解人类思维这个理论目标之外，认知科学还可以具有一个实践目标：</p>
+<p><strong>改善人类思维。</strong></p>
+<p>而如果要改善思维，我们就必须对“我们希望思维变成什么样”进行规范性的反思。</p>
+<p>心灵哲学并没有一种完全独立的方法，但它应当像其他领域中最优秀的理论研究一样，认真对待经验研究结果。</p>
+<p>在最弱的意义上，认知科学不过是下列几个学科的总和：</p>
+<ul>
+<li><p>心理学；</p>
+</li>
+<li><p>人工智能；</p>
+</li>
+<li><p>语言学；</p>
+</li>
+<li><p>神经科学；</p>
+</li>
+<li><p>人类学；</p>
+</li>
+<li><p>哲学。</p>
+</li>
+</ul>
+<p>但真正有意义的跨学科研究，是当不同领域在理论和实验上逐渐汇聚，并且对<strong>心智的本质</strong>形成相互支持的结论。</p>
+<p>例如，心理学与人工智能可以通过建立计算模型，模拟人在心理实验中的行为，从而结合起来。</p>
+<p>如果想掌握人类思维的复杂性，最好的方法是采用多种方法，尤其包括：</p>
+<ul>
+<li><p>心理学实验；</p>
+</li>
+<li><p>神经科学实验；</p>
+</li>
+<li><p>计算模型。</p>
+</li>
+</ul>
+<p>在理论层面，到目前为止最富有成果的研究方式，是根据<strong>表征与计算</strong>来理解心智。</p>
+<hr>
+<h1 id="3-表征与计算"><a href="#3-表征与计算" class="headerlink" title="3. 表征与计算"></a>3. 表征与计算</h1><p>认知科学的核心假设是：</p>
+<p><strong>理解思维的最好方式，是把它看作由心智中的表征结构，以及作用在这些结构之上的计算过程所构成。</strong></p>
+<p>虽然研究者对于究竟什么样的表征和计算构成了思维存在大量分歧，但这个核心假设足够宽泛，可以涵盖目前认知科学中的各种观点。</p>
+<p>其中也包括**联结主义（connectionism）**理论，即使用人工神经网络来模拟思维的理论。</p>
+<p>认知科学中的大多数研究都假设，心智拥有某些类似于计算机数据结构的<strong>心理表征</strong>，同时具有类似于计算算法的计算过程。</p>
+<p>认知理论家提出，心智可能包含许多不同形式的心理表征，例如：</p>
+<ul>
+<li><p>逻辑命题；</p>
+</li>
+<li><p>规则；</p>
+</li>
+<li><p>概念；</p>
+</li>
+<li><p>意象；</p>
+</li>
+<li><p>类比。</p>
+</li>
+</ul>
+<p>与此同时，心智还可能使用各种心理过程，例如：</p>
+<ul>
+<li><p>演绎；</p>
+</li>
+<li><p>搜索；</p>
+</li>
+<li><p>匹配；</p>
+</li>
+<li><p>旋转；</p>
+</li>
+<li><p>提取。</p>
+</li>
+</ul>
+<p>长期以来，认知科学最主要的类比是：</p>
+<p><strong>心智 ≈ 计算机。</strong></p>
+<p>但随着脑科学的发展，这个类比又增加了一个新的对象：</p>
+<p><strong>大脑。</strong></p>
+<p>联结主义者针对表征和计算提出了新的思想。</p>
+<p>他们以<strong>神经元及其连接</strong>作为数据结构的灵感来源，并以**神经元放电和激活扩散（spreading activation）**作为算法的灵感来源。</p>
+<p>于是，认知科学开始围绕一个复杂的三方类比工作：</p>
+<p><strong>心智 —— 大脑 —— 计算机。</strong></p>
+<p>心智、大脑和计算三者，都可以为理解另外两者提供新的思想。</p>
+<p>并不存在唯一一种“心智计算模型”。</p>
+<p>原因在于，不同类型的计算机和不同的编程方式，会启发人们提出不同的心智运作模型。</p>
+<p>我们今天日常使用的大多数计算机都属于<strong>串行处理器（serial processors）</strong>，一次执行一条指令。</p>
+<p>但是，大脑以及一些较新的计算机属于<strong>并行处理系统（parallel processors）</strong>，能够同时执行大量操作。</p>
+<p>当前认知科学的一个主要趋势，是把神经科学与心理学的多个分支整合起来，包括：</p>
+<ul>
+<li><p>认知心理学；</p>
+</li>
+<li><p>社会心理学；</p>
+</li>
+<li><p>发展心理学；</p>
+</li>
+<li><p>临床心理学。</p>
+</li>
+</ul>
+<p>这种整合一部分来自实验技术的发展。</p>
+<p>用于研究大脑的新工具大量出现，例如：</p>
+<ul>
+<li><p>功能性磁共振成像（fMRI）；</p>
+</li>
+<li><p>经颅磁刺激（TMS）；</p>
+</li>
+<li><p>光遗传学（optogenetics）。</p>
+</li>
+</ul>
+<p>这种整合同时也是理论性的。</p>
+<p>我们对于<strong>大规模神经元群体如何完成过去通常由规则、概念等认知理论解释的任务</strong>的理解，正在不断提高。</p>
+<hr>
+<h1 id="4-理论方法"><a href="#4-理论方法" class="headerlink" title="4. 理论方法"></a>4. 理论方法</h1><p>下面对当前关于“什么样的表征和计算能够解释心智如何运作”的主要理论，做一个概要性的总结。</p>
+<hr>
+<h2 id="4-1-形式逻辑"><a href="#4-1-形式逻辑" class="headerlink" title="4.1 形式逻辑"></a>4.1 形式逻辑</h2><p>**形式逻辑（formal logic）**为研究表征与计算的性质提供了一些非常强大的工具。</p>
+<p>命题演算和谓词演算能够表达许多复杂类型的知识。</p>
+<p>许多推理过程，也可以被理解为使用类似**肯定前件式（modus ponens）**这样的推理规则所进行的逻辑演绎。</p>
+<p>逻辑方法的解释模式如下：</p>
+<h3 id="要解释的问题"><a href="#要解释的问题" class="headerlink" title="要解释的问题"></a>要解释的问题</h3><p>为什么人们会做出他们实际做出的那些推理？</p>
+<h3 id="解释模式"><a href="#解释模式" class="headerlink" title="解释模式"></a>解释模式</h3><ul>
+<li><p>人拥有类似于谓词逻辑句子的心理表征；</p>
+</li>
+<li><p>人拥有作用于这些句子上的演绎与归纳过程；</p>
+</li>
+<li><p>当这些演绎与归纳过程作用于这些句子时，就产生了具体的推理结果。</p>
+</li>
+</ul>
+<p>不过，我们并不能确定逻辑是否真的提供了认知科学所需要的、关于表征和计算的最核心思想。</p>
+<p>因为要解释真实的人类思维，我们可能需要效率更高、在心理层面也更加自然的计算方法。</p>
+<hr>
+<h2 id="4-2-规则"><a href="#4-2-规则" class="headerlink" title="4.2 规则"></a>4.2 规则</h2><p>人类大量知识都可以自然地描述成：</p>
+<p><strong>IF……THEN……</strong></p>
+<p>也就是：</p>
+<p><strong>如果……那么……</strong></p>
+<p>这样的规则形式。</p>
+<p>许多类型的思维活动，例如规划（planning），都可以通过基于规则的系统进行建模。</p>
+<p>其解释模式如下：</p>
+<h3 id="要解释的问题-1"><a href="#要解释的问题-1" class="headerlink" title="要解释的问题"></a>要解释的问题</h3><p>为什么人会表现出某种特定类型的智能行为？</p>
+<h3 id="解释模式-1"><a href="#解释模式-1" class="headerlink" title="解释模式"></a>解释模式</h3><ul>
+<li><p>人拥有心理规则；</p>
+</li>
+<li><p>人拥有利用这些规则搜索可能解空间的过程，同时也拥有生成新规则的过程；</p>
+</li>
+<li><p>运用规则和形成规则的这些过程，共同产生了相应的行为。</p>
+</li>
+</ul>
+<p>基于规则的计算模型已经能够详细模拟大量心理学实验。</p>
+<p>这些研究范围从：</p>
+<ul>
+<li><p>密码算术问题求解；</p>
+</li>
+<li><p>技能习得；</p>
+</li>
+<li><p>到语言使用。</p>
+</li>
+</ul>
+<p>基于规则的系统也具有重要的实际价值。</p>
+<p>例如，它们能够启发我们：</p>
+<ul>
+<li><p>如何改善学习；</p>
+</li>
+<li><p>如何开发智能机器系统。</p>
+</li>
+</ul>
+<hr>
+<h2 id="4-3-概念"><a href="#4-3-概念" class="headerlink" title="4.3 概念"></a>4.3 概念</h2><p>**概念（concepts）**是一类重要的心理表征。</p>
+<p>它们在一定程度上对应于口语和书面语言中的词。</p>
+<p>从计算和心理学两个角度来看，我们都有理由放弃那种认为概念必须拥有严格定义的经典观点。</p>
+<p>相反，可以把概念理解为：</p>
+<p><strong>一组典型特征（typical features）。</strong></p>
+<p>那么，应用一个概念，就变成了在概念与现实世界之间寻找一种<strong>近似匹配</strong>。</p>
+<p>**图式（schemas）<strong>和</strong>脚本（scripts）**比与单个词对应的概念更加复杂。</p>
+<p>但它们与概念相似，因为它们同样由一组特征构成，而这些特征可以与新的情境进行匹配并应用于新的情境。</p>
+<p>基于概念的系统所采用的解释模式如下：</p>
+<h3 id="要解释的问题-2"><a href="#要解释的问题-2" class="headerlink" title="要解释的问题"></a>要解释的问题</h3><p>为什么人会表现出某种特定类型的智能行为？</p>
+<h3 id="解释模式-2"><a href="#解释模式-2" class="headerlink" title="解释模式"></a>解释模式</h3><ul>
+<li><p>人拥有一组概念，这些概念通过类别层级、部分层级以及其他关联组织起来；</p>
+</li>
+<li><p>人拥有一组应用概念的过程，包括激活扩散、匹配和继承；</p>
+</li>
+<li><p>这些过程作用于概念，从而产生相应行为；</p>
+</li>
+<li><p>概念可以被转化为规则，但是概念组织信息的方式和规则集合不同，因此允许使用不同的计算过程。</p>
+</li>
+</ul>
+<hr>
+<h2 id="4-4-类比"><a href="#4-4-类比" class="headerlink" title="4.4 类比"></a>4.4 类比</h2><p>**类比（analogies）**在人类思维中具有非常重要的作用。</p>
+<p>它们广泛存在于：</p>
+<ul>
+<li><p>问题解决；</p>
+</li>
+<li><p>决策；</p>
+</li>
+<li><p>解释；</p>
+</li>
+<li><p>语言交流。</p>
+</li>
+</ul>
+<p>计算模型可以模拟人们如何：</p>
+<ol>
+<li><p>从记忆中提取一个源类比；</p>
+</li>
+<li><p>把源情境中的结构映射到目标情境；</p>
+</li>
+<li><p>再将它调整后应用于新的问题。</p>
+</li>
+</ol>
+<p>类比推理的解释模式如下：</p>
+<h3 id="要解释的问题-3"><a href="#要解释的问题-3" class="headerlink" title="要解释的问题"></a>要解释的问题</h3><p>为什么人会产生某种特定的智能行为？</p>
+<h3 id="解释模式-3"><a href="#解释模式-3" class="headerlink" title="解释模式"></a>解释模式</h3><ul>
+<li><p>人拥有关于各种情境的语言表征与视觉表征，它们可以作为案例或类比来源；</p>
+</li>
+<li><p>人拥有作用于这些类比之上的提取、映射与适应过程；</p>
+</li>
+<li><p>这些类比过程作用于类比表征，从而产生相应的行为。</p>
+</li>
+</ul>
+<p><strong>相似性、结构和目的</strong>这三类约束，有助于解决一个困难问题：</p>
+<p><strong>我们究竟怎样从过去大量经验中，找到对当前新问题有用的经验？</strong></p>
+<p>并非所有思维都是类比性的。</p>
+<p>错误的类比甚至可能妨碍思考。</p>
+<p>但类比可以在教育、设计等应用领域非常有效。</p>
+<hr>
+<h2 id="4-5-意象"><a href="#4-5-意象" class="headerlink" title="4.5 意象"></a>4.5 意象</h2><p>视觉意象以及其他形式的意象在人类思维中发挥重要作用。</p>
+<p>与冗长的语言描述相比，<strong>图像式表征</strong>可以以更加容易使用的形式保存视觉和空间信息。</p>
+<p>特别适合视觉表征的计算过程包括：</p>
+<ul>
+<li><p>检视；</p>
+</li>
+<li><p>寻找；</p>
+</li>
+<li><p>放大；</p>
+</li>
+<li><p>旋转；</p>
+</li>
+<li><p>变换。</p>
+</li>
+</ul>
+<p>在适合使用图像表征的领域，这些操作可以非常有效地帮助人们产生计划和解释。</p>
+<p>视觉表征的解释模式如下：</p>
+<h3 id="要解释的问题-4"><a href="#要解释的问题-4" class="headerlink" title="要解释的问题"></a>要解释的问题</h3><p>为什么人会表现出某种特定形式的智能行为？</p>
+<h3 id="解释模式-4"><a href="#解释模式-4" class="headerlink" title="解释模式"></a>解释模式</h3><ul>
+<li><p>人拥有关于情境的视觉意象；</p>
+</li>
+<li><p>人拥有扫描、旋转等作用于这些意象上的过程；</p>
+</li>
+<li><p>构造和操纵这些意象的过程产生智能行为。</p>
+</li>
+</ul>
+<p>意象可以帮助学习。</p>
+<p>语言中的某些隐喻性成分，也可能源于意象。</p>
+<p>心理实验表明，扫描和旋转等视觉过程会使用心理意象。</p>
+<p>神经生理学研究进一步确认：</p>
+<p><strong>使用心理意象进行推理，与真实知觉之间，在物理层面存在密切联系。</strong></p>
+<p>意象也不仅限于视觉。</p>
+<p>它还可以涉及：</p>
+<ul>
+<li><p>听觉；</p>
+</li>
+<li><p>触觉；</p>
+</li>
+<li><p>嗅觉；</p>
+</li>
+<li><p>味觉；</p>
+</li>
+<li><p>疼痛；</p>
+</li>
+<li><p>平衡感；</p>
+</li>
+<li><p>恶心；</p>
+</li>
+<li><p>饱腹感；</p>
+</li>
+<li><p>情绪。</p>
+</li>
+</ul>
+<hr>
+<h2 id="4-6-联结主义"><a href="#4-6-联结主义" class="headerlink" title="4.6 联结主义"></a>4.6 联结主义</h2><p>由简单节点及节点之间连接构成的<strong>联结主义网络（connectionist networks）</strong>，非常适合用来理解涉及**并行约束满足（parallel constraint satisfaction）**的心理过程。</p>
+<p>这类过程包括：</p>
+<ul>
+<li><p>视觉；</p>
+</li>
+<li><p>决策；</p>
+</li>
+<li><p>解释选择；</p>
+</li>
+<li><p>语言理解中的意义形成。</p>
+</li>
+</ul>
+<p>联结主义模型可以通过多种方法模拟学习，其中包括：</p>
+<ul>
+<li><p>赫布学习（Hebbian learning）；</p>
+</li>
+<li><p>反向传播（backpropagation）。</p>
+</li>
+</ul>
+<p>联结主义的解释模式如下：</p>
+<h3 id="要解释的问题-5"><a href="#要解释的问题-5" class="headerlink" title="要解释的问题"></a>要解释的问题</h3><p>为什么人会表现出某种特定类型的智能行为？</p>
+<h3 id="解释模式-5"><a href="#解释模式-5" class="headerlink" title="解释模式"></a>解释模式</h3><ul>
+<li><p>人拥有由简单处理单元组成的表征，这些单元通过兴奋性连接和抑制性连接彼此连接；</p>
+</li>
+<li><p>人拥有通过这些连接在不同单元之间传播激活的过程，同时也拥有修改连接的过程；</p>
+</li>
+<li><p>对这些单元进行激活扩散和学习，就产生了相应行为。</p>
+</li>
+</ul>
+<p>大量心理实验模拟已经表明，联结主义模型具有心理学上的解释价值。</p>
+<p>不过，这些模型仍然只是对真实神经网络非常粗略的近似。</p>
+<hr>
+<h2 id="4-7-理论神经科学"><a href="#4-7-理论神经科学" class="headerlink" title="4.7 理论神经科学"></a>4.7 理论神经科学</h2><p>**理论神经科学（theoretical neuroscience）**试图建立关于人类和其他动物大脑结构与过程的数学理论和计算模型。</p>
+<p>它与联结主义有所不同，因为理论神经科学试图在生物学层面更加准确。</p>
+<p>它会模拟大量更接近真实情况的神经元，并把这些神经元组织成具有实际功能意义的脑区。</p>
+<p>大脑的计算模型正在变得越来越具有生物学真实性。</p>
+<p>这主要体现在两个方面。</p>
+<p>第一，模型使用了更加真实的神经元，例如：</p>
+<ul>
+<li><p>会产生脉冲放电的神经元；</p>
+</li>
+<li><p>拥有化学通路的神经元。</p>
+</li>
+</ul>
+<p>第二，模型开始模拟不同脑区之间的相互作用，例如：</p>
+<ul>
+<li><p>海马体；</p>
+</li>
+<li><p>大脑皮层。</p>
+</li>
+</ul>
+<p>这些模型并不是对逻辑、规则、概念、类比、意象和联结等计算解释的彻底替代。</p>
+<p>相反，它们应该与这些解释结合起来，并说明：</p>
+<p><strong>心理功能究竟如何在神经层面得到实现。</strong></p>
+<p>理论神经科学的解释模式如下：</p>
+<h3 id="要解释的问题-6"><a href="#要解释的问题-6" class="headerlink" title="要解释的问题"></a>要解释的问题</h3><p>大脑如何执行认知任务等功能？</p>
+<h3 id="解释模式-6"><a href="#解释模式-6" class="headerlink" title="解释模式"></a>解释模式</h3><ul>
+<li><p>大脑拥有大量神经元，这些神经元通过突触连接组织成神经元群体以及脑区；</p>
+</li>
+<li><p>神经元群体拥有特定的脉冲放电模式，这些模式会受到感觉输入以及其他神经元群体放电模式的影响和转化；</p>
+</li>
+<li><p>神经元群体之间的相互作用实现包括认知任务在内的各种功能。</p>
+</li>
+</ul>
+<p>从理论神经科学的角度看：</p>
+<p><strong>心理表征就是神经活动模式。</strong></p>
+<p>而：</p>
+<p><strong>推理就是这些神经活动模式之间的转换。</strong></p>
+<hr>
+<h2 id="4-8-贝叶斯方法"><a href="#4-8-贝叶斯方法" class="headerlink" title="4.8 贝叶斯方法"></a>4.8 贝叶斯方法</h2><p>**贝叶斯模型（Bayesian models）**在认知科学中非常重要。</p>
+<p>它们已经被应用于许多心理现象，包括：</p>
+<ul>
+<li><p>学习；</p>
+</li>
+<li><p>视觉；</p>
+</li>
+<li><p>运动控制；</p>
+</li>
+<li><p>语言；</p>
+</li>
+<li><p>社会认知。</p>
+</li>
+</ul>
+<p>它们在机器人学中也取得了有效应用。</p>
+<p>贝叶斯方法假定：</p>
+<p><strong>认知过程大致按照概率论，以接近最优的方式运行。</strong></p>
+<p>其中尤其重要的是贝叶斯定理。</p>
+<p>贝叶斯定理指出：</p>
+<p>在给定证据的情况下，一个假设的概率等于：</p>
+<p><strong>该假设的先验概率 × 在该假设成立条件下观察到该证据的条件概率 ÷ 该证据本身的概率。</strong></p>
+<p>用公式表示：</p>
+<p>P(H∣E)&#x3D;P(E∣H)P(H)P(E)P(H|E)&#x3D;\frac{P(E|H)P(H)}{P(E)}</p>
+<p>贝叶斯认知的解释模式如下：</p>
+<h3 id="要解释的问题-7"><a href="#要解释的问题-7" class="headerlink" title="要解释的问题"></a>要解释的问题</h3><p>心智如何执行推理等功能？</p>
+<h3 id="解释模式-7"><a href="#解释模式-7" class="headerlink" title="解释模式"></a>解释模式</h3><ul>
+<li><p>心智拥有关于统计相关性和条件概率的表征；</p>
+</li>
+<li><p>心智拥有进行概率计算的能力，例如应用贝叶斯定理；</p>
+</li>
+<li><p>将概率计算应用于统计表征，就能够完成推理等心理任务。</p>
+</li>
+</ul>
+<p>虽然贝叶斯方法已经成功应用于大量现象，但它在心理学上是否真实可信仍然存在争议。</p>
+<p>原因是这类理论往往假设：</p>
+<ul>
+<li><p>人类认知接近最优；</p>
+</li>
+<li><p>心智能够完成复杂的概率论计算。</p>
+</li>
+</ul>
+<p>这些假设是否符合真实的人类心理机制，并不明确。</p>
+<hr>
+<h2 id="4-9-深度学习"><a href="#4-9-深度学习" class="headerlink" title="4.9 深度学习"></a>4.9 深度学习</h2><p>自 20 世纪 50 年代以来，人工智能一直是认知科学的重要组成部分。</p>
+<p>而近年来人工智能最显著的进步，来自<strong>深度学习（deep learning）</strong>。</p>
+<p>深度学习已经在许多领域带来了重大突破，例如：</p>
+<ul>
+<li><p>游戏；</p>
+</li>
+<li><p>物体识别；</p>
+</li>
+<li><p>翻译。</p>
+</li>
+</ul>
+<p>深度学习建立在联结主义和理论神经科学的一些思想之上。</p>
+<p>但是，它使用：</p>
+<ul>
+<li><p>层数更多的神经网络；</p>
+</li>
+<li><p>更先进的算法；</p>
+</li>
+<li><p>更快的计算机；</p>
+</li>
+<li><p>更大规模的训练数据。</p>
+</li>
+</ul>
+<p>另一个重要创新，是把<strong>基于样本的学习</strong>与**强化学习（reinforcement learning）**结合起来。</p>
+<p>到 2016 年，这种结合产生了当时世界上最强的围棋系统 AlphaGo。</p>
+<p>深度学习中的思想如今也开始反过来影响神经科学，并逐步影响认知心理学研究。</p>
+<p>深度学习的解释模式如下：</p>
+<h3 id="要解释的问题-8"><a href="#要解释的问题-8" class="headerlink" title="要解释的问题"></a>要解释的问题</h3><p>大脑如何执行认知任务等功能？</p>
+<h3 id="解释模式-8"><a href="#解释模式-8" class="headerlink" title="解释模式"></a>解释模式</h3><ul>
+<li><p>大脑拥有大量神经元，并被组织成大约 6 至 20 层；</p>
+</li>
+<li><p>大脑具有强大的从样本中学习的机制，同时具有通过成功结果强化行动的机制；</p>
+</li>
+<li><p>将这些学习机制作用于多层神经网络，就可能产生达到人类水平、甚至在某些任务上超过人类的表现。</p>
+</li>
+</ul>
+<p>尽管深度学习已经极大改善了一些人工智能系统，但我们尚不清楚它究竟如何解释人类思维中的某些方面，例如：</p>
+<ul>
+<li><p>因果推理；</p>
+</li>
+<li><p>意象；</p>
+</li>
+<li><p>情绪；</p>
+</li>
+<li><p>类比。</p>
+</li>
+</ul>
+<hr>
+<h2 id="4-10-预测加工与主动推断"><a href="#4-10-预测加工与主动推断" class="headerlink" title="4.10 预测加工与主动推断"></a>4.10 预测加工与主动推断</h2><p>**预测加工（predictive processing）**是一种理论神经科学方法。</p>
+<p>它把大脑理解成一个不断：</p>
+<p><strong>生成环境模型 → 预测 → 接收信息 → 更新模型</strong></p>
+<p>的系统。</p>
+<p>大脑建立和持续更新关于环境的模型，是为了预测：</p>
+<ul>
+<li><p>即将发生的知觉；</p>
+</li>
+<li><p>自己行动所产生的结果。</p>
+</li>
+</ul>
+<p>**主动推断（active inference）**是预测加工的一种形式。</p>
+<p>它提出，大脑利用贝叶斯计算来最小化所谓的<strong>自由能（free energy）</strong>。</p>
+<p>这里的自由能大致包括：</p>
+<p><strong>预期与实际观察之间的不一致。</strong></p>
+<p>生物体之所以能够生存，是因为大脑能够通过两种方式减少预测误差：</p>
+<p>第一：</p>
+<p><strong>改变自己对环境的模型。</strong></p>
+<p>第二：</p>
+<p><strong>通过行动改变环境。</strong></p>
+<p>主动推断的解释模式如下：</p>
+<h3 id="要解释的问题-9"><a href="#要解释的问题-9" class="headerlink" title="要解释的问题"></a>要解释的问题</h3><p>大脑如何运作，从而支持知觉和行动？</p>
+<h3 id="解释模式-9"><a href="#解释模式-9" class="headerlink" title="解释模式"></a>解释模式</h3><ul>
+<li><p>大脑是一台预测机器，它通过概率模型预测知觉以及行动的结果；</p>
+</li>
+<li><p>为了减少预测误差，大脑使用贝叶斯更新修改自身模型，同时通过行动，例如移动身体，改变外部环境；</p>
+</li>
+<li><p>有效的推理、知觉和行动，来自这种持续降低预测误差的过程。</p>
+</li>
+</ul>
+<p>不过，主动推断面临许多挑战。</p>
+<p>例如：</p>
+<p><strong>大脑的真实运作机制，真的是贝叶斯更新吗？</strong></p>
+<p>还是更接近：</p>
+<ul>
+<li><p>联结主义的约束满足？</p>
+</li>
+<li><p>深度强化学习？</p>
+</li>
+</ul>
+<p>另一个问题是：</p>
+<p>预测加工是否真的能够统一解释其他脑功能，例如：</p>
+<ul>
+<li><p>模式识别；</p>
+</li>
+<li><p>解释；</p>
+</li>
+<li><p>情绪评价；</p>
+</li>
+<li><p>记忆；</p>
+</li>
+<li><p>沟通？</p>
+</li>
+</ul>
+<p>主动推断是否能够解释更加高级的认知过程，例如：</p>
+<ul>
+<li><p>因果推理；</p>
+</li>
+<li><p>语言；</p>
+</li>
+<li><p>创造力？</p>
+</li>
+</ul>
+<p>这些问题目前仍然存在争议。</p>
+<hr>
+<h1 id="5-哲学意义"><a href="#5-哲学意义" class="headerlink" title="5. 哲学意义"></a>5. 哲学意义</h1><p>某些哲学研究，尤其是<strong>自然主义的心灵哲学（naturalistic philosophy of mind）</strong>，本身就是认知科学的一部分。</p>
+<p>但认知科学这个跨学科领域与哲学之间还有其他几方面的重要联系。</p>
+<p>第一，认知科学在心理学、计算模型以及其他领域取得的成果，可能对传统哲学问题产生重要影响。</p>
+<p>这些哲学领域包括：</p>
+<ul>
+<li><p>认识论；</p>
+</li>
+<li><p>形而上学；</p>
+</li>
+<li><p>伦理学。</p>
+</li>
+</ul>
+<p>第二，认知科学本身也可以成为哲学批判的对象。</p>
+<p>尤其可以批判认知科学的一个核心假设：</p>
+<p><strong>思维本质上是表征性的和计算性的。</strong></p>
+<p>第三，更具建设性的是：</p>
+<p>我们可以把认知科学本身当作<strong>科学哲学</strong>的研究对象，从而研究：</p>
+<ul>
+<li><p>它采用什么方法；</p>
+</li>
+<li><p>它隐藏了哪些预设；</p>
+</li>
+<li><p>它究竟如何构成科学解释。</p>
+</li>
+</ul>
+<hr>
+<h1 id="5-1-哲学应用"><a href="#5-1-哲学应用" class="headerlink" title="5.1 哲学应用"></a>5.1 哲学应用</h1><p>今天很多哲学研究都采取自然主义立场。</p>
+<p>这种观点认为，哲学研究与心理学等经验科学领域之间并不存在彻底的断裂。</p>
+<p>从自然主义角度来看，心灵哲学与认知科学中的理论研究和实验研究高度相关。</p>
+<p>关于心智本质的形而上学结论，不应通过纯粹的先验思辨得出。</p>
+<p>相反，它们应该建立在对心理学、神经科学、计算机科学等领域科学进展的充分理解之上。</p>
+<p>同样，认识论也不应该被理解为一个完全独立的纯概念分析领域。</p>
+<p>它需要依赖，并且能够受益于科学对于：</p>
+<ul>
+<li><p>心理结构；</p>
+</li>
+<li><p>学习过程</p>
+</li>
+</ul>
+<p>的发现。</p>
+<p>伦理学同样可以利用我们对于<strong>道德思维心理机制</strong>的更深入理解，来研究例如：</p>
+<p><strong>人们如何判断什么是正确、什么是错误？</strong></p>
+<p>下面是一些与认知科学发展高度相关的哲学问题。</p>
+<h3 id="先天性"><a href="#先天性" class="headerlink" title="先天性"></a>先天性</h3><p>知识在多大程度上是先天的？</p>
+<p>又有多大程度来自经验？</p>
+<p>人类行为主要由：</p>
+<p><strong>天性（nature）</strong></p>
+<p>还是：</p>
+<p><strong>养育与环境（nurture）</strong></p>
+<p>塑造？</p>
+<h3 id="思维语言"><a href="#思维语言" class="headerlink" title="思维语言"></a>思维语言</h3><p>人脑是否使用某种类似语言的内部编码？</p>
+<p>还是说，它使用一种更一般的联结主义架构？</p>
+<p>使用规则和概念的<strong>符号认知模型</strong>，与使用神经网络的<strong>次符号模型</strong>之间究竟是什么关系？</p>
+<h3 id="心理意象"><a href="#心理意象" class="headerlink" title="心理意象"></a>心理意象</h3><p>人类心智是否真的通过视觉以及其他类型的意象进行思考？</p>
+<p>还是说，我们只使用类似语言的表征？</p>
+<h3 id="民间心理学"><a href="#民间心理学" class="headerlink" title="民间心理学"></a>民间心理学</h3><p>普通人在日常生活中理解其他人的能力，究竟来自：</p>
+<p><strong>拥有一套关于他人心智的理论</strong></p>
+<p>还是来自：</p>
+<p><strong>在自己的心智中模拟他人的状态？</strong></p>
+<h3 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h3><p>心理表征是如何获得意义或者心理内容的？</p>
+<p>一个表征的意义，在多大程度上取决于：</p>
+<ul>
+<li><p>它与其他表征之间的关系？</p>
+</li>
+<li><p>它与外部世界的关系？</p>
+</li>
+<li><p>它与某个思考者共同体之间的关系？</p>
+</li>
+</ul>
+<h3 id="心脑同一性"><a href="#心脑同一性" class="headerlink" title="心脑同一性"></a>心脑同一性</h3><p>心理状态是不是脑状态？</p>
+<p>还是说，同一种心理状态可以通过多种不同的物质状态得到实现？</p>
+<p>心理学与神经科学之间是什么关系？</p>
+<p>唯物主义是否正确？</p>
+<h3 id="自由意志"><a href="#自由意志" class="headerlink" title="自由意志"></a>自由意志</h3><p>人类行动是真正自由的吗？</p>
+<p>还是说，它们只不过是大脑事件造成的结果？</p>
+<h3 id="道德心理学"><a href="#道德心理学" class="headerlink" title="道德心理学"></a>道德心理学</h3><p>心智和大脑究竟如何做出伦理判断？</p>
+<h3 id="生命的意义"><a href="#生命的意义" class="headerlink" title="生命的意义"></a>生命的意义</h3><p>如果我们以自然主义方式，把心智理解成大脑，那么这样的心智如何找到价值与人生意义？</p>
+<h3 id="情绪"><a href="#情绪" class="headerlink" title="情绪"></a>情绪</h3><p>情绪究竟是什么？</p>
+<p>情绪在思维中发挥什么作用？</p>
+<h3 id="意识"><a href="#意识" class="headerlink" title="意识"></a>意识</h3><p>主观意识经验能否得到科学解释？</p>
+<p>例如，能否通过意识神经科学进行解释？</p>
+<h3 id="精神障碍"><a href="#精神障碍" class="headerlink" title="精神障碍"></a>精神障碍</h3><p>什么是精神障碍？</p>
+<p>心理过程与神经过程如何参与它们的形成、解释和治疗？</p>
+<h3 id="知觉与现实"><a href="#知觉与现实" class="headerlink" title="知觉与现实"></a>知觉与现实</h3><p>心智和大脑如何构建并评价关于外部世界的表征？</p>
+<h3 id="知觉与认知"><a href="#知觉与认知" class="headerlink" title="知觉与认知"></a>知觉与认知</h3><p>从表征格式以及认知正当性的角度看，知觉与其他类型的认知究竟有什么不同？</p>
+<h3 id="实在论"><a href="#实在论" class="headerlink" title="实在论"></a>实在论</h3><p>认知科学是否能够与“心智能够把握真实世界”的观点相容？</p>
+<p>心智是否可能只是计算机模拟？</p>
+<p>虚拟现实是否也是一种现实？</p>
+<h3 id="信息"><a href="#信息" class="headerlink" title="信息"></a>信息</h3><p>认知科学如何帮助我们理解：</p>
+<ul>
+<li><p>信息；</p>
+</li>
+<li><p>错误信息</p>
+</li>
+</ul>
+<p>在个人心智以及社会中的运作？</p>
+<h3 id="社会科学"><a href="#社会科学" class="headerlink" title="社会科学"></a>社会科学</h3><p>解释个体心智的运作，与解释群体和社会的运作之间是什么关系？</p>
+<p>除此之外，对当前认知科学方法本身的预设进行分析，还会产生更多哲学问题。</p>
+<hr>
+<h1 id="5-2-对认知科学的批判"><a href="#5-2-对认知科学的批判" class="headerlink" title="5.2 对认知科学的批判"></a>5.2 对认知科学的批判</h1><p>“人类心智通过表征和计算运作”这一观点，本质上仍然只是一个<strong>经验性假说</strong>。</p>
+<p>因此，它有可能是错误的。</p>
+<p>虽然**计算—表征主义方法（computational-representational approach）**已经成功解释了人类：</p>
+<ul>
+<li><p>问题解决；</p>
+</li>
+<li><p>学习；</p>
+</li>
+<li><p>语言使用</p>
+</li>
+</ul>
+<p>中的许多现象，但一些哲学批评者认为，这种方法从根本上就是错误的。</p>
+<p>针对认知科学的主要挑战包括：</p>
+<h3 id="1-情绪挑战"><a href="#1-情绪挑战" class="headerlink" title="1. 情绪挑战"></a>1. 情绪挑战</h3><p>认知科学忽视了情绪在人类思维中的重要作用。</p>
+<h3 id="2-意识挑战"><a href="#2-意识挑战" class="headerlink" title="2. 意识挑战"></a>2. 意识挑战</h3><p>认知科学忽视了意识在人类思维中的重要性。</p>
+<h3 id="3-世界挑战"><a href="#3-世界挑战" class="headerlink" title="3. 世界挑战"></a>3. 世界挑战</h3><p>认知科学忽略了物理环境在人类思维中的重要作用。</p>
+<p>人的思维实际上嵌入世界之中，甚至可以延伸到世界之中。</p>
+<h3 id="4-身体挑战"><a href="#4-身体挑战" class="headerlink" title="4. 身体挑战"></a>4. 身体挑战</h3><p>认知科学忽视了**具身性（embodiment）**对于人类思维和行动的贡献。</p>
+<h3 id="5-动力系统挑战"><a href="#5-动力系统挑战" class="headerlink" title="5. 动力系统挑战"></a>5. 动力系统挑战</h3><p>心智是一个<strong>动力系统（dynamical system）</strong>，而不是计算系统。</p>
+<h3 id="6-社会挑战"><a href="#6-社会挑战" class="headerlink" title="6. 社会挑战"></a>6. 社会挑战</h3><p>人类思维在本质上具有社会性，而认知科学忽略了这一点。</p>
+<h3 id="7-数学挑战"><a href="#7-数学挑战" class="headerlink" title="7. 数学挑战"></a>7. 数学挑战</h3><p>某些数学结果似乎表明，人类思维不可能按照标准意义上的计算方式运行。</p>
+<p>因此，大脑可能采取了完全不同的运作方式，例如类似量子计算机。</p>
+<h3 id="8-跨学科挑战"><a href="#8-跨学科挑战" class="headerlink" title="8. 跨学科挑战"></a>8. 跨学科挑战</h3><p>认知科学虽然集合了大量学科，但始终没有形成一个真正统一这些领域的核心理论。</p>
+<p>对于前五种挑战，目前越来越多的研究试图通过神经机制解释：</p>
+<ul>
+<li><p>情绪；</p>
+</li>
+<li><p>意识；</p>
+</li>
+<li><p>行动；</p>
+</li>
+<li><p>具身性。</p>
+</li>
+</ul>
+<p>社会性挑战则开始通过建立<strong>多个相互作用智能体的计算模型</strong>来处理。</p>
+<p>所谓数学挑战，在很大程度上来自对**哥德尔定理（Gödel’s theorem）**的误解，以及对量子理论与神经过程之间相关性的夸大。</p>
+<p>至于跨学科挑战，我们必须承认：</p>
+<p>认知科学目前仍然存在大量彼此竞争的理论方法。</p>
+<p>它还没有形成像：</p>
+<ul>
+<li><p>进化论；</p>
+</li>
+<li><p>遗传学</p>
+</li>
+</ul>
+<p>对于生物学那样强大的统一理论框架。</p>
+<p>不过，心理学、神经科学、语言学、哲学、人类学以及计算建模之间的互动，已经在许多认知问题上带来了理论和经验上的进步。</p>
+<p>例如，**计算哲学（computational philosophy）**开始通过程序化模型研究：</p>
+<ul>
+<li><p>认识论；</p>
+</li>
+<li><p>伦理学；</p>
+</li>
+<li><p>其他哲学领域中的问题。</p>
+</li>
+</ul>
+<hr>
+<h1 id="5-3-认知科学哲学"><a href="#5-3-认知科学哲学" class="headerlink" title="5.3 认知科学哲学"></a>5.3 认知科学哲学</h1><p>认知科学提出了许多非常值得科学哲学家研究的方法论问题。</p>
+<p>例如：</p>
+<p><strong>什么是表征？</strong></p>
+<p><strong>计算模型在认知理论的发展中究竟发挥什么作用？</strong></p>
+<p>关于心智的不同理论——</p>
+<ul>
+<li><p>符号处理；</p>
+</li>
+<li><p>神经网络；</p>
+</li>
+<li><p>动力系统——</p>
+</li>
+</ul>
+<p>之间究竟是什么关系？</p>
+<p>认知科学内部的不同领域，例如：</p>
+<ul>
+<li><p>心理学；</p>
+</li>
+<li><p>语言学；</p>
+</li>
+<li><p>神经科学</p>
+</li>
+</ul>
+<p>之间又是什么关系？</p>
+<p>心理现象能否通过神经科学得到<strong>还原性解释（reductionist explanation）</strong>？</p>
+<p>解释层次最好根据什么划分？</p>
+<p>是按照<strong>本体论层级</strong>：</p>
+<ul>
+<li><p>分子层；</p>
+</li>
+<li><p>神经层；</p>
+</li>
+<li><p>心理层；</p>
+</li>
+<li><p>社会层；</p>
+</li>
+</ul>
+<p>还是按照<strong>方法论层级</strong>：</p>
+<ul>
+<li><p>计算层；</p>
+</li>
+<li><p>算法层；</p>
+</li>
+<li><p>物理层？</p>
+</li>
+</ul>
+<p>神经解释在认知心理学、社会心理学、发展心理学和临床心理学中越来越重要。</p>
+<p>这提出了一些关于：</p>
+<ul>
+<li><p>科学解释；</p>
+</li>
+<li><p>还原</p>
+</li>
+</ul>
+<p>的重要哲学问题。</p>
+<p>一种叫做**反还原论（anti-reductionism）**的观点认为：</p>
+<p>心理学解释与神经科学解释完全彼此独立。</p>
+<p>这种观点现在正变得越来越难以成立。</p>
+<p>但是：</p>
+<p><strong>心理学究竟能够在多大程度上被还原成神经科学以及分子生物学？</strong></p>
+<p>依然是一个具有争议的问题。</p>
+<p>要回答“什么是还原”，首先必须理解：</p>
+<p><strong>什么是科学解释。</strong></p>
+<p>心理学、神经科学以及更广泛的生物学中的解释，可以合理地理解为对**机制（mechanisms）**的描述。</p>
+<p>所谓机制，是由多个彼此连接的组成部分构成的系统。</p>
+<p>这些部分通过相互作用，产生有规律的变化。</p>
+<p>在心理学解释中：</p>
+<ul>
+<li><p>系统中的“部分”是心理表征；</p>
+</li>
+<li><p>这些表征通过计算过程相互作用；</p>
+</li>
+<li><p>从而产生新的表征。</p>
+</li>
+</ul>
+<p>在神经科学解释中：</p>
+<ul>
+<li><p>系统中的“部分”是神经元群体；</p>
+</li>
+<li><p>神经元群体通过电化学过程相互作用；</p>
+</li>
+<li><p>产生新的神经活动；</p>
+</li>
+<li><p>这些神经活动进一步导致行为。</p>
+</li>
+</ul>
+<p>如果理论神经科学继续取得进展，我们未来应该能够更加直接地把心理学解释与神经科学解释连接起来。</p>
+<p>例如，我们也许能够解释：</p>
+<p><strong>“概念”这样的心理表征，究竟如何由神经元群体的活动所构成。</strong></p>
+<p>以及：</p>
+<p><strong>概念之间的激活扩散这样的计算过程，究竟如何由真实的神经过程实现。</strong></p>
+<p>认知心理学与神经科学之间日益深入的结合，也为**心脑同一论（mind-brain identity theory）**提供了一些支持。</p>
+<p>按照这种观点：</p>
+<p><strong>心理过程本身就是神经性的、表征性的和计算性的过程。</strong></p>
+<p>其他哲学家则反对这种同一化。</p>
+<p>他们认为：</p>
+<p>心智并不仅存在于大脑中。</p>
+<p>心智是：</p>
+<p><strong>具身于生物系统之中的，并且延伸到外部世界之中的。</strong></p>
+<p>不过，一些相对温和的具身认知观点，并不一定与心脑同一论冲突。</p>
+<p>原因是，大脑中的表征本身就可以采取多种模态，例如：</p>
+<ul>
+<li><p>视觉表征；</p>
+</li>
+<li><p>运动表征。</p>
+</li>
+</ul>
+<p>这些表征使心智能够与外部世界相互作用。</p>
+<p>除心脑同一论之外，还有另一种唯物主义方案。</p>
+<p>这种观点指出：</p>
+<p>解释心智时，我们不仅需要：</p>
+<ul>
+<li><p>神经机制；</p>
+</li>
+<li><p>表征机制；</p>
+</li>
+</ul>
+<p>还需要：</p>
+<ul>
+<li><p>分子机制；</p>
+</li>
+<li><p>社会机制。</p>
+</li>
+</ul>
+<p>因此，对心智的完整解释可能本身就是一种<strong>跨越多个层次的机制性解释</strong>。</p>
+<hr>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>以下参考文献保留原始作者、年份、书名和出版信息，以避免对正式文献名称进行不必要的改写：</p>
+<ul>
+<li><p>Anderson, J. R., 2007. <em>How Can the Mind Occur in the Physical Universe?</em>, Oxford: Oxford University Press.</p>
+</li>
+<li><p>Anderson, J. R., 2010. <em>Cognitive Psychology and its Implications</em>, 7th edition, New York: Worth.</p>
+</li>
+<li><p>Bechtel, W., 2008. <em>Mental Mechanisms: Philosophical Perspectives on Cognitive Neurosciences</em>, New York: Routledge.</p>
+</li>
+<li><p>Bechtel, W., &amp; Graham, G. (eds.), 1998. <em>A Companion to Cognitive Science</em>, Malden, MA: Blackwell.</p>
+</li>
+<li><p>Bechtel, W., Mandik, P., Mundale, J., &amp; Stufflebeam, R. S. (eds.), 2001. <em>Philosophy and the Neurosciences: A Reader</em>, Malden, MA: Blackwell.</p>
+</li>
+<li><p>Bermúdez, J. L., 2022. <em>Cognitive Science: An Introduction to the Science of the Mind</em>, 4th edition, Cambridge: Cambridge University Press.</p>
+</li>
+<li><p>Blouw, P., Solodkin, E., Thagard, P., &amp; Eliasmith, C., 2016. “Concepts as Semantic Pointers: A Framework and Computational Model,” <em>Cognitive Science</em>, 40: 1128–1162.</p>
+</li>
+<li><p>Chalmers, D. J., 2022. <em>Reality+: Virtual Worlds and the Problems of Philosophy</em>, New York: Norton.</p>
+</li>
+<li><p>Boden, M. A., 2006. <em>Mind as Machine: A History of Cognitive Science</em>, Oxford: Clarendon.</p>
+</li>
+<li><p>Chemero, A., 2009. <em>Radical Embodied Cognitive Science</em>, Cambridge, MA: MIT Press.</p>
+</li>
+<li><p>Churchland, P. M., 2007. <em>Neurophilosophy at Work</em>, Cambridge: Cambridge University Press.</p>
+</li>
+<li><p>Churchland, P. S., 2002. <em>Brain-wise: Studies in Neurophilosophy</em>, Cambridge, MA: MIT Press.</p>
+</li>
+<li><p>Clark, A., 2001. <em>Mindware: An Introduction to the Philosophy of Cognitive Science</em>, New York: Oxford University Press.</p>
+</li>
+<li><p>Clark, A., 2008. <em>Supersizing the Mind: Embodiment, Action, and Cognitive Extension</em>, New York: Oxford University Press.</p>
+</li>
+<li><p>Clark, A., 2015. <em>Surfing Uncertainty: Prediction, Action, and the Embodied Mind</em>, Oxford: Oxford University Press.</p>
+</li>
+<li><p>Craver, C. F., 2007. <em>Explaining the Brain</em>, Oxford: Oxford University Press.</p>
+</li>
+<li><p>Dayan, P., &amp; Abbott, L. F., 2001. <em>Theoretical Neuroscience: Computational and Mathematical Modeling of Neural Systems</em>, Cambridge, MA: MIT Press.</p>
+</li>
+<li><p>Dehaene, S., 2014. <em>Consciousness and the Brain: Deciphering How the Brain Codes Our Thoughts</em>, New York: Viking.</p>
+</li>
+<li><p>Doya, K., Ishii, S., Pouget, A., &amp; Rao, A. (eds.), 2007. <em>Bayesian Brain</em>, Cambridge, MA: MIT Press.</p>
+</li>
+<li><p>Dreyfus, H. L., 1992. <em>What Computers Still Can’t Do</em>, 3rd edition, Cambridge, MA: MIT Press.</p>
+</li>
+<li><p>Eliasmith, C., 2013. <em>How to Build a Brain: A Neural Architecture for Biological Cognition</em>, Oxford: Oxford University Press.</p>
+</li>
+<li><p>Eliasmith, C., &amp; Anderson, C. H., 2003. <em>Neural Engineering: Computation, Representation and Dynamics in Neurobiological Systems</em>, Cambridge, MA: MIT Press.</p>
+</li>
+<li><p>Forbus, K. D., Ferguson, R. W., Lovett, A., &amp; Gentner, D., 2017. “Extending SME to Handle Larger-Scale Cognitive Modeling,” <em>Cognitive Science</em>, 41(5): 1152–1201.</p>
+</li>
+<li><p>Friedenberg, J. D., &amp; Silverman, G., 2021. <em>Cognitive Science: An Introduction to the Study of Mind</em>, 4th edition, Thousand Oaks, CA: Sage.</p>
+</li>
+<li><p>Gibbs, R. W., 2005. <em>Embodiment and Cognitive Science</em>, Cambridge: Cambridge University Press.</p>
+</li>
+<li><p>Goldman, A., 1993. <em>Philosophical Applications of Cognitive Science</em>, Boulder: Westview Press.</p>
+</li>
+<li><p>Goodfellow, I., Bengio, Y., &amp; Courville, A., 2016. <em>Deep Learning</em>, Cambridge, MA: MIT Press.</p>
+</li>
+<li><p>Griffiths, T. L., Kemp, C., &amp; Tenenbaum, J. B., 2008. “Bayesian Models of Cognition,” in R. Sun (ed.), <em>The Cambridge Handbook of Computational Psychology</em>, Cambridge: Cambridge University Press, pp. 59–100.</p>
+</li>
+<li><p>Hoffman, D., 2019. <em>The Case against Reality: Why Evolution Hid the Truth From our Eyes</em>, New York: WW Norton &amp; Company.</p>
+</li>
+<li><p>Hofstadter, D., &amp; Sander, E., 2013. <em>Surfaces and Essences: Analogy as the Fuel and Fire of Thinking</em>, New York: Basic Books.</p>
+</li>
+<li><p>Holyoak, K. J., &amp; Morrison, R. G. (eds.), 2012. <em>The Oxford Handbook of Thinking and Reasoning</em>, New York: Oxford University Press.</p>
+</li>
+<li><p>Knobe, J., &amp; Nichols, S. (eds.), 2008. <em>Experimental Philosophy</em>, Oxford: Oxford University Press.</p>
+</li>
+<li><p>Kallens, P. C., Dale, R., &amp; Christiansen, M. H., 2022. “Quantifying Interdisciplinarity in Cognitive Science and Beyond.” <em>Topics in Cognitive Science</em>, 14(3): 634–645.</p>
+</li>
+<li><p>Kosslyn, S. M., Thompson, W. L., &amp; Ganis, G., 2016. <em>The Case for Mental Imagery</em>, New York: Oxford University Press.</p>
+</li>
+<li><p>Laird, J. E., LeBiere, C., &amp; Rosenbloom, P. S., 2017. “A Standard Model of the Mind: Toward a Common Computational Framework across Artificial Intelligence, Cognitive Science, Neuroscience, and Robotics,” <em>AI Magazine</em>, 38(4): 13–26.</p>
+</li>
+<li><p>LeCun, Y., Bengio, Y., &amp; Hinton, G., 2015. “Deep Learning,” <em>Nature</em>, 521(7553): 436–444.</p>
+</li>
+<li><p>Margolis, E. &amp; Laurence, S. (eds.), 2015. <em>The Conceptual Mind: New Directions in the Study of Concepts</em>, Cambridge, MA: MIT Press.</p>
+</li>
+<li><p>McCauley, R. N., 2007. “Reduction: Models of Cross-scientific Relations and their Implications for the Psychology-neuroscience Interface,” in P. Thagard (ed.), <em>Philosophy of Psychology and Cognitive Science</em>, Amsterdam: Elsevier, pp. 105–158.</p>
+</li>
+<li><p>Milkowski, M., 2013. <em>Explaining the Computational Mind</em>, Cambridge, MA: MIT Press.</p>
+</li>
+<li><p>Murphy, D., 2006. <em>Psychiatry in the Scientific Image</em>, Cambridge, MA: MIT Press.</p>
+</li>
+<li><p>Nadel, L. (ed.), 2003. <em>Encyclopedia of Cognitive Science</em>, London: Nature Publishing Group.</p>
+</li>
+<li><p>Nisbett, R., 2003. <em>The Geography of Thought: How Asians and Westerners Think Differently … and Why</em>, New York: Free Press.</p>
+</li>
+<li><p>Núñez, R., Allen, M., Gao, R., Miller Rigoli, C., Relaford-Doyle, J., &amp; Semenuks, A., 2019. “What Happened to Cognitive Science?” <em>Nature Human Behavior</em>, 3(8): 782–791.</p>
+</li>
+<li><p>O’Callaghan, C. <em>A Multisensory Philosophy of Perception</em>. Oxford: Oxford University Press.</p>
+</li>
+<li><p>O’Reilly, R. C., Munakata, Y., Frank, M. J., Hazy, T. E., &amp; Contributors, 2012. <em>Computational Cognitive Neuroscience</em>.</p>
+</li>
+<li><p>Parr, T., Pezzulo, G., &amp; Friston, K. J., 2022. <em>Active Inference: The Free Energy Principle in Mind, Brain, and Behaviour</em>, Cambridge, MA: MIT Press.</p>
+</li>
+<li><p>Pearl, J., &amp; Mackenzie, D., 2018. <em>The Book of Why: The New Science of Cause and Effect</em>, New York: Basic Books.</p>
+</li>
+<li><p>Pessoa, L., 2013. <em>The Cognitive-Emotional Brain: From Interactions to Integration</em>, Cambridge, MA: MIT Press.</p>
+</li>
+<li><p>Piantadosi, S. T., Tenenbaum, J. B., &amp; Goodman, N. D., 2015. “The Logical Primitives of Thought: Empirical Foundations for Compositional Cognitive Models,” <em>Psychological Review</em>, 123(4): 392–424.</p>
+</li>
+<li><p>Polk, T. A., &amp; Seifert, C. M. (eds.), 2002. <em>Cognitive Modeling</em>, Cambridge, MA: MIT Press.</p>
+</li>
+<li><p>Quilty-Dunn, J., 2020. “Perceptual Pluralism,” <em>Noûs</em>, 54(4): 807–838.</p>
+</li>
+<li><p>Rogers, T. T., &amp; McClelland, J. L., 2004. <em>Semantic Cognition: A Parallel Distributed Processing Approach</em>, Cambridge, MA: MIT Press.</p>
+</li>
+<li><p>Russell, S., &amp; Norvig, P., 2020. <em>Artificial Intelligence: A Modern Approach</em>, 4th edition, New York: Pearson.</p>
+</li>
+<li><p>Seth, A., 2021. <em>Being You: A New Science of Consciousness</em>, New York: Dutton.</p>
+</li>
+<li><p>Smith, E. E., &amp; Kosslyn, S. M., 2007. <em>Cognitive Psychology: Mind and Brain</em>, Upper Saddle River, NJ: Pearson Prentice Hall.</p>
+</li>
+<li><p>Sun, R. (ed.), 2008. <em>The Cambridge Handbook of Computational Psychology</em>, Cambridge: Cambridge University Press.</p>
+</li>
+<li><p>Sun, R. (ed.), 2012. <em>Grounding Social Sciences in Cognitive Sciences</em>, Cambridge, MA: MIT Press.</p>
+</li>
+<li><p>Thagard, P., 2005. <em>Mind: Introduction to Cognitive Science</em>, second edition, Cambridge, MA: MIT Press.</p>
+</li>
+<li><p>Thagard, P., 2009. “Why Cognitive Science Needs Philosophy and Vice Versa,” <em>Topics in Cognitive Science</em>, 1: 237–254.</p>
+</li>
+<li><p>Thagard, P., 2010. <em>The Brain and the Meaning of Life</em>, Princeton: Princeton University Press.</p>
+</li>
+<li><p>Thagard, P., 2012. <em>The Cognitive Science of Science: Explanation, Discovery, and Conceptual Change</em>, Cambridge, MA: MIT Press.</p>
+</li>
+<li><p>Thagard, P., 2019a. <em>Brain-Mind: From Neurons to Consciousness and Creativity</em>, Oxford: Oxford University Press.</p>
+</li>
+<li><p>Thagard, P., 2019b. <em>Natural Philosophy: From Social Brains to Knowledge, Reality, Morality, and Beauty</em>, New York: Oxford University Press.</p>
+</li>
+<li><p>[2]Thagard, P., 2021. <em>Bots and Beasts: What Makes Machines, Animals, and People Smart?</em>, Cambridge, MA: MIT Press.</p>
+</li>
+<li><p>Thompson, E., 2007. <em>Mind in Life: Biology, Phenomenology, and the Science of Mind</em>, Cambridge, MA: Harvard University Press.</p>
+</li>
+<li><p>Varela, F. J., Thompson, E., &amp; Rosch, E., 2016. <em>The Embodied Mind: Cognitive Science and Human Experience</em>, revised edition, Cambridge, MA: MIT Press.</p>
+</li>
+<li><p>Wilson, R. A., &amp; Keil, F. C. (eds.), 1999. <em>The MIT Encyclopedia of the Cognitive Sciences</em>, Cambridge, MA: MIT Press.</p>
+</li>
+</ul>
+</details>
+
+        </div>
+        
+        <!-- 文章导航 - 只在同分类有多篇文章时显示 -->
+        
+        
+        
+        
+        <!-- 推荐文章 -->
+        
+
+
+<div class="vs-recommended-posts">
+  <div class="vs-recommended-header">
+    <div class="section-header">
+      <i class="fas fa-lightbulb"></i>
+      <span>相关文章</span>
+    </div>
+  </div>
+  
+  <div class="vs-recommended-grid">
+    
+      <div class="vs-recommended-item" data-index="0" tabindex="0">
+        <a href="../../../../08/21/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>持续学习</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              持续学习（Continual Learning）截至 2026 年的技术总体认知：零遗忘不等于好的持续学习系统，评估需同时考虑知识吸收、能力保持、迁移与成本。
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  8月 21
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  12 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      <div class="vs-recommended-item" data-index="1" tabindex="0">
+        <a href="../../../../08/20/Neuro%20Sceince/Roadmap/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>Roadmap</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              神经科学学习路线图（内容整理中）。
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  8月 20
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  1 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      <div class="vs-recommended-item" data-index="2" tabindex="0">
+        <a href="../../../../08/18/Neural-Networks-Zero-to-Hero/micrograd/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>micrograd</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              从零搭建 micrograd：神经元、权重、bias、激活函数（ReLU）与反向传播的直观解释，配可交互函数图像。
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  8月 18
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  5 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      <div class="vs-recommended-item" data-index="3" tabindex="0">
+        <a href="../../../../08/17/Generative%20AI%20in%20Finance/Alphabench/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>Alphabench</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              论文笔记：AlphaBench —— 大语言模型在公式化 Alpha 因子挖掘工作流中的三种角色：因子生成器、因子评审员与搜索器。
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  8月 17
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  2 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      <div class="vs-recommended-item" data-index="4" tabindex="0">
+        <a href="../../../../08/16/Generative%20AI%20in%20Finance/Evoalpha/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>Evoalpha</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              论文笔记：EvoAlpha（内容整理中）。
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  8月 16
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  1 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      <div class="vs-recommended-item" data-index="5" tabindex="0">
+        <a href="../../../../08/16/Generative%20AI%20in%20Finance/Qfinzero/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>Qfinzero</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              论文笔记：QFinZero（内容整理中）。
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  8月 16
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  1 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+  </div>
+  
+  <!-- 查看更多 -->
+  <div class="vs-recommended-footer">
+    <a href="../../../../../archives/" class="vs-view-more">
+      <i class="fas fa-folder-open"></i>
+      <span>查看更多文章</span>
+      <i class="fas fa-chevron-right"></i>
+    </a>
+  </div>
+</div>
+
+<script>
+// 键盘导航支持
+document.addEventListener('DOMContentLoaded', function() {
+  const items = document.querySelectorAll('.vs-recommended-item');
+  let currentIndex = -1;
+  
+  // 键盘事件
+  document.addEventListener('keydown', function(e) {
+    if (!items.length) return;
+    
+    if (e.key === 'Tab') {
+      // Tab键导航由浏览器处理
+      return;
+    }
+    
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      
+      // 移除当前高亮
+      if (currentIndex >= 0) {
+        items[currentIndex].classList.remove('vs-focused');
+      }
+      
+      // 更新索引
+      if (e.key === 'ArrowRight') {
+        currentIndex = (currentIndex + 1) % items.length;
+      } else {
+        currentIndex = currentIndex <= 0 ? items.length - 1 : currentIndex - 1;
+      }
+      
+      // 添加新高亮
+      items[currentIndex].classList.add('vs-focused');
+      items[currentIndex].focus();
+    }
+    
+    if (e.key === 'Enter' && currentIndex >= 0) {
+      const link = items[currentIndex].querySelector('a');
+      if (link) link.click();
+    }
+  });
+  
+  // 鼠标悬停时更新当前索引
+  items.forEach((item, index) => {
+    item.addEventListener('mouseenter', function() {
+      currentIndex = index;
+      items.forEach(i => i.classList.remove('vs-focused'));
+      item.classList.add('vs-focused');
+    });
+  });
+});
+</script>
+
+        
+        <!-- 评论区 -->
+        
+      </article>
+    </div>
+  </div>
+</div>
+
+    </div>
+    <footer class="footer">
+  <div class="status-bar">
+    <div class="status-item">
+      <i class="fas fa-code-branch"></i>
+      master
+    </div>
+    <div class="status-item">
+      <i class="fas fa-sync"></i>
+      B143KC47
+    </div>
+    <div class="status-item">
+      <i class="fas fa-clock"></i>
+      2026-09-08
+    </div>
+    <div class="status-item">
+      Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
+    </div>
+    <div class="status-item github">
+      <a href="#" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- 搜索专用配置 (HEXO_CONFIG 在 scripts.ejs 中统一定义) -->
+    <script>
+      window.VSC4T_SEARCH = {
+        root: "/blog/"
+      };
+    </script>
+
+    <!-- 外部脚本 - 统一使用 cdnjs CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" crossorigin="anonymous"></script>
+    <script>if(typeof hljs !== 'undefined') hljs.highlightAll();</script>
+    <!-- 这里可以放置自定义脚本 -->
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+  // Apply smooth scroll to non-TOC anchor links
+  document.querySelectorAll('a[href^="#"]:not(.toc-link)').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      // Check if querySelector is valid before using it
+      try {
+        const targetSelector = this.getAttribute('href');
+        // Basic check for potentially invalid selectors (though not exhaustive)
+        if (targetSelector && targetSelector.length > 1) { 
+          const targetElement = document.querySelector(targetSelector);
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth'
+            });
+          } else {
+            console.warn('Smooth scroll target not found:', targetSelector);
+          }
+        } else {
+           console.warn('Invalid href for smooth scroll:', targetSelector);
+        }
+      } catch (error) {
+        console.error('Error during smooth scroll:', error, 'Selector:', this.getAttribute('href'));
+        // Fallback or alternative behavior if needed
+        // For example, try getElementById if it's just an ID
+        const targetId = this.getAttribute('href').slice(1);
+        try {
+            const targetElementById = document.getElementById(decodeURIComponent(targetId));
+            if (targetElementById) {
+                targetElementById.scrollIntoView({ behavior: 'smooth' });
+            }
+        } catch (idError) {
+             console.error('Fallback getElementById also failed:', idError);
+        }
+      }
+    });
+  });
+});
+</script>
+
+<!-- Scripts -->
+<script>
+  // 全局配置 - 包含 i18n 字符串和主题配置
+  window.HEXO_CONFIG = {
+    language: "zh-CN",
+    root: "/blog/",
+    
+    theme_switch: {
+      enabled: false,
+      light_start: "06:00",
+      light_end: "18:00"
+    },
+    
+    // Search i18n strings
+    search_placeholder: "输入关键词搜索...",
+    search_no_results: "未找到相关结果",
+    search_result: "Ergebnis",
+    search_results: "搜索结果",
+    search_results_found: "找到 undefined 个结果",
+    search_in: "搜索范围",
+    search_in_title: "标题",
+    search_in_content: "内容",
+    search_in_tags: "标签",
+    search_in_categories: "分类",
+    search_filters: "搜索过滤器",
+    search_recent: "最近搜索",
+    search_clear: "清除",
+    search_loading: "加载中...",
+    search_error: "加载搜索数据时出错",
+    // Encryption i18n strings
+    encrypt_badge: "受保护",
+    encrypt_title: "受保护的内容",
+    encrypt_description: "请输入密码以解锁本文，密码会在本设备本地保存，直到你选择重新加密。",
+    encrypt_label: "密码",
+    encrypt_placeholder: "输入密码解锁内容",
+    encrypt_button: "解锁",
+    encrypt_button_loading: "解锁中...",
+    encrypt_hint: "按 Enter 提交，密码会在本设备上记住。",
+    encrypt_success: "内容解锁成功！",
+    encrypt_unlocked_note: "内容已解锁，可随时重新加密。",
+    encrypt_again: "重新加密",
+    encrypt_wrong_password: "密码错误，请重试。",
+    encrypt_show_password: "显示密码",
+    encrypt_hide_password: "隐藏密码",
+    // Sidebar i18n strings
+    sidebar_about: "关于",
+    sidebar_categories: "分类",
+    sidebar_tags: "标签",
+    // Post page i18n strings
+    post_toc: "目录",
+    post_category_posts: "同分类文章",
+    post_article_tags: "文章标签"
+  };
+</script>
+
+
+
+<!-- 添加所有需要的脚本 -->
+<script src="../../../../../js/search.js"></script>
+<script src="../../../../../js/theme-switch.js"></script>
+
+<script src="../../../../../js/password-protect.js?v=1788872411494"></script>
+
+    <script>
+      // 移动端菜单切换
+      $(document).ready(function() {
+        var $body = $('body');
+        var $sidebar = $('.sidebar-explorer');
+        var $overlay = $('.sidebar-overlay');
+        var $toggle = $('.mobile-menu-toggle');
+
+        function openSidebar() {
+          $sidebar.addClass('show');
+          $overlay.addClass('show');
+          $toggle.addClass('active');
+          $body.addClass('sidebar-open');
+        }
+
+        function closeSidebar() {
+          $sidebar.removeClass('show');
+          $overlay.removeClass('show');
+          $toggle.removeClass('active');
+          $body.removeClass('sidebar-open');
+        }
+
+        // 汉堡按钮点击切换
+        $toggle.on('click', function(e) {
+          e.stopPropagation();
+          if ($sidebar.hasClass('show')) {
+            closeSidebar();
+          } else {
+            openSidebar();
+          }
+        });
+
+        // 点击遮罩层关闭
+        $overlay.on('click', function() {
+          closeSidebar();
+        });
+
+        // ESC 键关闭
+        $(document).on('keydown', function(e) {
+          if (e.key === 'Escape' && $sidebar.hasClass('show')) {
+            closeSidebar();
+          }
+        });
+
+        // 点击侧边栏内的链接时自动关闭侧边栏，确保锚点跳转正常
+        $sidebar.on('click', 'a', function() {
+          closeSidebar();
+        });
+      });
+    </script>
+  </body>
+</html>

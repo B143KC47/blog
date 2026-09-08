@@ -3,26 +3,26 @@
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Alphabench | BlackCat</title>
+  <title>Qfinzero | BlackCat</title>
 
   <!-- SEO Meta Tags -->
-  <meta name="description" content="论文笔记：AlphaBench —— 大语言模型在公式化 Alpha 因子挖掘工作流中的三种角色：因子生成器、因子评审员与搜索器。">
+  <meta name="description" content="论文笔记：QFinZero（内容整理中）。">
   <meta name="keywords" content="">
   <meta name="author" content="B143KC47">
   <link rel="canonical" href="https://B143KC47.github.io/blog">
 
   <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Alphabench | BlackCat">
-  <meta property="og:description" content="论文笔记：AlphaBench —— 大语言模型在公式化 Alpha 因子挖掘工作流中的三种角色：因子生成器、因子评审员与搜索器。">
+  <meta property="og:title" content="Qfinzero | BlackCat">
+  <meta property="og:description" content="论文笔记：QFinZero（内容整理中）。">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://B143KC47.github.io/blog">
   <meta property="og:site_name" content="BlackCat">
-  <meta property="article:published_time" content="2026-08-16T16:19:02.000Z">
+  <meta property="article:published_time" content="2026-08-16T15:01:06.000Z">
 
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Alphabench | BlackCat">
-  <meta name="twitter:description" content="论文笔记：AlphaBench —— 大语言模型在公式化 Alpha 因子挖掘工作流中的三种角色：因子生成器、因子评审员与搜索器。">
+  <meta name="twitter:title" content="Qfinzero | BlackCat">
+  <meta name="twitter:description" content="论文笔记：QFinZero（内容整理中）。">
 
   <!-- Favicon 配置 -->
   
@@ -62,7 +62,7 @@
   <link rel="stylesheet" href="../../../../../css/mermaid.css">
 
   <link rel="stylesheet" href="../../../../../css/vs-code.css">
-  <link rel="stylesheet" href="../../../../../css/post.css?v=1788786013768">
+  <link rel="stylesheet" href="../../../../../css/post.css?v=1788872411510">
   <link rel="stylesheet" href="../../../../../css/tag.css">
   <link rel="stylesheet" href="../../../../../css/categories.css">
   <link rel="stylesheet" href="../../../../../css/archive.css">
@@ -77,7 +77,7 @@
 
   <script defer src="../../../../../js/explorer.js"></script>
   <script defer src="../../../../../js/code-enhance.js"></script>
-<!-- hexo injector head_end start -->
+<!-- hexo injector head_end start --><link rel="stylesheet" href="/blog/css/reading.css">
 <script>
 window.MathJax = {
   tex: {
@@ -90,7 +90,7 @@ window.MathJax = {
   }
 };
 </script>
-<script async id="mathjax-cdn-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link rel="stylesheet" href="/blog/css/reading.css"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+<script async id="mathjax-cdn-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
 
   <body>
     <div class="wrapper">
@@ -197,7 +197,7 @@ window.MathJax = {
         <span>目录</span>
       </div>
       <div class="section-content">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ALPHABENCH-BENCHMARKING-LARGE-LANGUAGE-MODELS-IN-FORMULAIC-ALPHA-FACTOR-MINING"><span class="toc-text">ALPHABENCH: BENCHMARKING LARGE LANGUAGE MODELS IN FORMULAIC ALPHA FACTOR MINING</span></a></li></ol>
+        
       </div>
     </div>
 
@@ -212,12 +212,12 @@ window.MathJax = {
         
           <div class="file">
             <i class="fas fa-file-code"></i>
-            <a href="../../../16/Paper_reading/Evoalpha/">Evoalpha</a>
+            <a href="../../../17/Generative%20AI%20in%20Finance/Alphabench/">Alphabench</a>
           </div>
         
           <div class="file">
             <i class="fas fa-file-code"></i>
-            <a href="../../../16/Paper_reading/Qfinzero/">Qfinzero</a>
+            <a href="../Evoalpha/">Evoalpha</a>
           </div>
         
       </div>
@@ -233,23 +233,23 @@ window.MathJax = {
     <div class="tab-bar">
       <div class="tab active">
         <i class="fas fa-file-alt"></i>
-        <span>Alphabench.md</span>
+        <span>Qfinzero.md</span>
       </div>
     </div>
     
     <div class="content-area">
       <article class="post-content">
         <div class="post-header">
-          <h1>Alphabench</h1>
+          <h1>Qfinzero</h1>
           <div class="post-meta">
             <span class="date">
               <i class="fas fa-calendar-alt"></i>
-              2026-08-17
+              2026-08-16
             </span>
             
             <span class="updated-date">
               <i class="fas fa-sync-alt"></i>
-              更新于 2026-09-07
+              更新于 2026-09-08
             </span>
                         
               <span class="categories">
@@ -264,89 +264,7 @@ window.MathJax = {
         </div>
         
         <div class="post-body vscode-markdown">
-          <h1 id="ALPHABENCH-BENCHMARKING-LARGE-LANGUAGE-MODELS-IN-FORMULAIC-ALPHA-FACTOR-MINING"><a href="#ALPHABENCH-BENCHMARKING-LARGE-LANGUAGE-MODELS-IN-FORMULAIC-ALPHA-FACTOR-MINING" class="headerlink" title="ALPHABENCH: BENCHMARKING LARGE LANGUAGE MODELS IN FORMULAIC ALPHA FACTOR MINING"></a>ALPHABENCH: BENCHMARKING LARGE LANGUAGE MODELS IN FORMULAIC ALPHA FACTOR MINING</h1><p>研究的问题：</p>
-<p>在“ Alpha 因子挖掘”的完整工作流中，大语言模型究竟适合扮演什么角色？&quot;</p>
-<p>三个角色：</p>
-<ul>
-<li>因子公式生成器</li>
-<li>不看数据、不做回测的因子评审员</li>
-<li>接收回测反馈、不断提出新候选的搜索器</li>
-</ul>
-<p>理解Alpha Factor:</p>
-<p>Alpha Factor 是一个用量化指标（历史价格 成交量）等等有数据的量化指标 计算出来的一个数学表达</p>
-<p>例如 动量因子：<br>$$<br>f_{i,t} &#x3D; \frac{Close_{i,t}-Close_{i,t-20}}{Close_{i,t-20}}<br>$$</p>
-<p>Qlib DSL中：<br>Div(<br>    Sub($close, Ref($close, 20)),<br>    Add(Ref($close, 20), 1e-12)<br>)</p>
-<p>每天对所有股票计算因子的值，然后根据因子值从高到低排名。之后可以构造一个多空组合：</p>
-<p>买入因子值高的股票；<br>卖出或者低配因子值低的股票。</p>
-<p>这是因为因子可能与股价上涨有正相关 值高则上涨的相关性更高 负相关则相反<br>背后也可以有类似的金融逻辑解释<br>动量因子这里 使用 当前收盘价-20天前的收盘价&#x2F;(20天前的收盘价) 这里算的是 新的收盘价上涨的幅度相较于20天前的收盘是百分之多少<br>这里可以合理解释为<br>价格上涨多 -&gt; 市场认为其上涨动力强 -&gt; 更多人追高 -&gt; 价格可能继续上涨</p>
-<p>如何判断因子有没有预测力呢</p>
-<p>论文当中使用 IC (Information coefficient):<br>$$<br>IC_t &#x3D; Corr_i(f_{i,t},r_{i,t+1})<br>$$</p>
-<p>IC的数值理解为<br>IC &gt; 0 : 因子和股价是正相关，越高相关性越高<br>IC &#x3D; 0 : 完全的无相关<br>IC &lt; 0 : 因子和股价是负相关,越负负相关性越高</p>
-<p>ICIR (Information Coefficient Information Ratio) 是预测能力的稳定性</p>
-<ul>
-<li>RankIC</li>
-<li>Win Rate</li>
-<li>Skewness</li>
-</ul>
-<p>论文中建立了什么benchmark</p>
-<table>
-<thead>
-<tr>
-<th>任务</th>
-<th>给 LLM 的输入</th>
-<th>LLM 要输出什么</th>
-<th>实际测量的能力</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Factor Generation</td>
-<td>自然语言因子描述或主题标签</td>
-<td>可执行的因子表达式</td>
-<td>是否能把金融意图翻译成 DSL</td>
-</tr>
-<tr>
-<td>Factor Evaluation</td>
-<td>一个或一组因子公式</td>
-<td>分数、标签或排序</td>
-<td>是否能不经回测判断因子质量</td>
-</tr>
-<tr>
-<td>Factor Searching</td>
-<td>种子因子、搜索历史、回测结果</td>
-<td>改进后的候选因子</td>
-<td>是否能利用反馈搜索更好的因子</td>
-</tr>
-</tbody></table>
-<p>Factor Searching 解释一下 也就是在无穷的组合空间里面搜索一个更好的因子<br>原始因子 -&gt; 反馈IC ICIR -&gt; 改不同的东西 -&gt; 新IC 新ICIR -&gt; 不同搜索看看能不能改进一个更好的因子</p>
-<p>prompt+Operator Library → LLM → Generated Factors→ Qlib Backtest→ Metrics→ Further Search</p>
-<p>Factor Generation:<br>分成两个子任务</p>
-<ul>
-<li>Text2Alpha</li>
-<li>Directional Mining</li>
-</ul>
-<p>Text2Alpha</p>
-<p>例如给一段文字描述：<br>Return the rolling max of close minus current close, divided by volume SMA, default window &#x3D; 25.</p>
-<p>Return Alpha Factor:<br>Div(<br>    Sub(Max($close, 25), $close),<br>    Add(Mean($volume, 25), 1e-12)<br>)</p>
-<p>这个任务主要测试：</p>
-<p>是否理解自然语言；<br>是否选对变量；<br>是否选对操作符；<br>是否使用正确窗口；<br>是否生成可解析、可执行的公式。</p>
-<p>论文将难度分为：</p>
-<p>Easy：单一操作或简单均值、比率；<br>Medium：组合价格与成交量，加入归一化；<br>Hard：多层组合、排名、条件逻辑、多个窗口</p>
-<p>论文中：<br>例如 GPT-5 在 Text2Alpha 的 reliability 几乎一直是 1.00，但 accuracy 从：</p>
-<p>Easy：0.99；<br>Medium：0.68；<br>Hard：0.10。</p>
-<p>也就是说，在困难任务上，它几乎总能输出合法公式，但只有约 10% 被判定为真正满足复杂指令。</p>
-<p>这揭示了两个完全不同的能力：</p>
-<p>Syntax correctness：会不会写合法 DSL；<br>Semantic correctness：写出来的公式是不是用户真正想要的。</p>
-<p>大模型在第一项已经很强，在第二项仍有明显问题</p>
-<p>Directional Mining</p>
-<p>这里不要求复现一个固定公式，而是给模型一个因子方向，例如：</p>
-<p>Momentum；<br>Mean Reversion；<br>Volume Spike；<br>Volatility Breakout；<br>Price–Volume Divergence；<br>Candlestick Pattern；<br>Crash Risk。</p>
-<p>模型需要自行设计属于该方向的公式。</p>
-<p>困难任务可能要求同时融合 3–5 种信号，例如：</p>
-<p>Momentum + Volume Confirmation + Volatility Normalization + Breakout</p>
-<p>这比 Text2Alpha 更开放，也更接近实际因子研究。</p>
-<p>论文构建了一套包含 90 个细分类别的方向 taxonomy，覆盖：</p>
-<p>Trend；<br>Momentum；<br>Mean Reversion；<br>Volume；<br>Volatility；<br>Pattern；<br>Relative Performance；<br>Seasonality；<br>Risk；<br>Microstructure Proxy。</p>
-
+          
         </div>
         
         <!-- 文章导航 - 只在同分类有多篇文章时显示 -->
@@ -355,16 +273,11 @@ window.MathJax = {
         
         <nav class="post-nav">
           
-            <a class="prev" href="../../../18/Neural-Networks-Zero-to-Hero/micrograd/">
+            <a class="prev" href="../Evoalpha/">
               <i class="fas fa-chevron-left"></i>
-              micrograd
-            </a>
-          
-          
-            <a class="next" href="../../../16/Paper_reading/Evoalpha/">
               Evoalpha
-              <i class="fas fa-chevron-right"></i>
             </a>
+          
           
         </nav>
         
@@ -384,7 +297,7 @@ window.MathJax = {
   <div class="vs-recommended-grid">
     
       <div class="vs-recommended-item" data-index="0" tabindex="0">
-        <a href="../../../16/Paper_reading/Evoalpha/" class="vs-recommended-link">
+        <a href="../Evoalpha/" class="vs-recommended-link">
           <!-- 文章信息 -->
           <div class="vs-recommended-content">
             <div class="vs-recommended-title">
@@ -417,16 +330,16 @@ window.MathJax = {
       </div>
     
       <div class="vs-recommended-item" data-index="1" tabindex="0">
-        <a href="../../../16/Paper_reading/Qfinzero/" class="vs-recommended-link">
+        <a href="../../../17/Generative%20AI%20in%20Finance/Alphabench/" class="vs-recommended-link">
           <!-- 文章信息 -->
           <div class="vs-recommended-content">
             <div class="vs-recommended-title">
               <i class="fas fa-file-code"></i>
-              <span>Qfinzero</span>
+              <span>Alphabench</span>
             </div>
             
             <div class="vs-recommended-excerpt">
-              论文笔记：QFinZero（内容整理中）。
+              论文笔记：AlphaBench —— 大语言模型在公式化 Alpha 因子挖掘工作流中的三种角色：因子生成器、因子评审员与搜索器。
             </div>
             
             <div class="vs-recommended-meta">
@@ -437,11 +350,11 @@ window.MathJax = {
               <span class="vs-meta-info">
                 <span class="vs-date">
                   <i class="fas fa-calendar-alt"></i>
-                  8月 16
+                  8月 17
                 </span>
                 <span class="vs-reading-time">
                   <i class="fas fa-clock"></i>
-                  1 min
+                  2 min
                 </span>
               </span>
             </div>
@@ -483,7 +396,7 @@ window.MathJax = {
       </div>
     
       <div class="vs-recommended-item" data-index="3" tabindex="0">
-        <a href="../../../20/%E7%A5%9E%E7%BB%8F%E7%A7%91%E5%AD%A6/Roadmap/" class="vs-recommended-link">
+        <a href="../../../20/Neuro%20Sceince/Roadmap/" class="vs-recommended-link">
           <!-- 文章信息 -->
           <div class="vs-recommended-content">
             <div class="vs-recommended-title">
@@ -541,6 +454,39 @@ window.MathJax = {
                 <span class="vs-reading-time">
                   <i class="fas fa-clock"></i>
                   12 min
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      <div class="vs-recommended-item" data-index="5" tabindex="0">
+        <a href="../../../../09/08/Cognitive%20Science/Cognitive%20Science/" class="vs-recommended-link">
+          <!-- 文章信息 -->
+          <div class="vs-recommended-content">
+            <div class="vs-recommended-title">
+              <i class="fas fa-file-code"></i>
+              <span>Cognitive Science</span>
+            </div>
+            
+            <div class="vs-recommended-excerpt">
+              Cognitive Science这是对 Paul Thagard《Cognitive Science》的阅读笔记。原文点 Source 打开；译文点开再读。
+            </div>
+            
+            <div class="vs-recommended-meta">
+              
+              
+              
+              
+              <span class="vs-meta-info">
+                <span class="vs-date">
+                  <i class="fas fa-calendar-alt"></i>
+                  9月 08
+                </span>
+                <span class="vs-reading-time">
+                  <i class="fas fa-clock"></i>
+                  10 min
                 </span>
               </span>
             </div>
@@ -633,7 +579,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     <div class="status-item">
       <i class="fas fa-clock"></i>
-      2026-09-07
+      2026-09-08
     </div>
     <div class="status-item">
       Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
@@ -717,7 +663,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Search i18n strings
     search_placeholder: "输入关键词搜索...",
     search_no_results: "未找到相关结果",
-    search_result: "نتيجة",
+    search_result: "Ergebnis",
     search_results: "搜索结果",
     search_results_found: "找到 undefined 个结果",
     search_in: "搜索范围",
@@ -762,7 +708,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 <script src="../../../../../js/search.js"></script>
 <script src="../../../../../js/theme-switch.js"></script>
 
-<script src="../../../../../js/password-protect.js?v=1788786013769"></script>
+<script src="../../../../../js/password-protect.js?v=1788872411511"></script>
 
     <script>
       // 移动端菜单切换
