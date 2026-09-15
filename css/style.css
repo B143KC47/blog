@@ -23,6 +23,7 @@
   --wide: 64rem;
   --track: 0.04em;
   --gap: 1.25rem;
+  --gutter: 1.25rem;
 }
 
 *,
@@ -36,6 +37,8 @@ html {
   color-scheme: dark;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 html:focus-within {
@@ -45,6 +48,8 @@ html:focus-within {
 body {
   margin: 0;
   min-height: 100vh;
+  max-width: 100%;
+  overflow-x: hidden;
   background: var(--bg);
   color: var(--text);
   font-family: var(--font);
@@ -60,7 +65,8 @@ body {
 img,
 svg,
 video,
-canvas {
+canvas,
+iframe {
   max-width: 100%;
   height: auto;
   display: block;
@@ -113,12 +119,14 @@ summary:focus-visible {
 }
 
 .measure {
-  width: min(var(--measure), calc(100% - 2.5rem));
+  width: min(var(--measure), calc(100% - 2 * var(--gutter)));
+  max-width: 100%;
   margin-inline: auto;
 }
 
 .measure-wide {
-  width: min(var(--wide), calc(100% - 2.5rem));
+  width: min(var(--wide), calc(100% - 2 * var(--gutter)));
+  max-width: 100%;
   margin-inline: auto;
 }
 
@@ -134,9 +142,11 @@ summary:focus-visible {
 }
 
 .site-bar-inner {
-  width: min(var(--wide), calc(100% - 2.5rem));
+  width: min(var(--wide), calc(100% - 2 * var(--gutter)));
+  max-width: 100%;
   margin-inline: auto;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   min-height: 1.5rem;
@@ -153,8 +163,10 @@ summary:focus-visible {
 
 .site-nav {
   display: flex;
+  flex-wrap: wrap;
   gap: 1.25rem;
   align-items: center;
+  min-width: 0;
 }
 
 .nav-link {
@@ -508,12 +520,22 @@ summary:focus-visible {
 }
 
 /* Post — Kimi K3 column: 760px copy, ~1105px figures */
+.page,
+.post,
+.post-hero,
+.post-well,
+.prose {
+  max-width: 100%;
+  min-width: 0;
+}
+
 .post {
   padding-bottom: 5rem;
 }
 
 .post-well {
-  width: min(1040px, calc(100% - 2.5rem));
+  width: min(1040px, calc(100% - 2 * var(--gutter)));
+  max-width: 100%;
   margin-inline: auto;
 }
 
@@ -557,6 +579,7 @@ summary:focus-visible {
   letter-spacing: -0.01em;
   line-height: 38px;
   text-wrap: pretty;
+  overflow-wrap: anywhere;
 }
 
 .post-cover .post-title {
@@ -578,7 +601,9 @@ summary:focus-visible {
   font-size: 17px;
   line-height: 28px;
   letter-spacing: normal;
-  max-width: none;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .prose-ui {
@@ -675,6 +700,7 @@ summary:focus-visible {
 
 .prose a {
   text-underline-offset: 0.2em;
+  overflow-wrap: anywhere;
 }
 
 .prose img {
@@ -1018,6 +1044,8 @@ summary:focus-visible {
   border: 1px solid var(--line);
   background: #000;
   overflow: hidden;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .desmos-graph {
@@ -1026,6 +1054,7 @@ summary:focus-visible {
 
 .gpt-graph {
   display: flex;
+  min-width: 0;
 }
 
 .gpt-graph-panel {
@@ -1117,6 +1146,8 @@ summary:focus-visible {
 .desmos-graph .dcg-container,
 .gpt-graph-canvas .dcg-container {
   background: #000 !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
 }
 
 .desmos-graph .dcg-grapher,
@@ -1136,8 +1167,23 @@ summary:focus-visible {
 .prose figure,
 .prose .highlight,
 .prose pre,
-.prose table {
+.prose table,
+.prose .desmos-graph,
+.prose .gpt-graph,
+mjx-container {
   max-width: 100%;
+  min-width: 0;
+}
+
+mjx-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+mjx-container[display="true"] {
+  display: block;
+  min-width: 0 !important;
 }
 
 .prose figure {
@@ -1158,6 +1204,12 @@ summary:focus-visible {
   margin: 0 0 1.5em;
 }
 
+.prose > table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .prose th,
 .prose td {
   text-align: left;
@@ -1176,7 +1228,8 @@ summary:focus-visible {
   background: var(--fill);
   padding: 0.08em 0.32em;
   border: 1px solid var(--line);
-  white-space: nowrap;
+  white-space: break-spaces;
+  overflow-wrap: anywhere;
 }
 
 .prose pre code {
@@ -1187,6 +1240,7 @@ summary:focus-visible {
   margin: 0 0 1.5em;
   padding: 1rem 1.1rem;
   overflow-x: auto;
+  max-width: 100%;
   background: var(--fill);
   border: 1px solid var(--line);
   line-height: 1.55;
@@ -1206,6 +1260,7 @@ summary:focus-visible {
   background: var(--fill);
   border: 1px solid var(--line);
   overflow-x: auto;
+  max-width: 100%;
 }
 
 .prose .highlight figcaption {
@@ -1413,13 +1468,34 @@ summary:focus-visible {
 @media (max-width: 640px) {
   :root {
     --read: 1.0625rem;
+    --gutter: max(1rem, env(safe-area-inset-left), env(safe-area-inset-right));
   }
 
   .measure,
   .measure-wide,
   .site-bar-inner,
   .post-well {
-    width: min(var(--wide), calc(100% - 2rem));
+    width: min(var(--wide), calc(100% - 2 * var(--gutter)));
+  }
+
+  .post-copy,
+  .post-foot,
+  .lede,
+  .prose p,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose ul,
+  .prose ol,
+  .prose blockquote,
+  .timeline,
+  .steps,
+  .callout,
+  .source-block,
+  .source-card,
+  .fold,
+  .prose details {
+    max-width: 100%;
   }
 
   .post-title {
@@ -1438,6 +1514,7 @@ summary:focus-visible {
 
   .gpt-graph-panel {
     width: auto;
+    max-width: 100%;
     border-right: 0;
     border-bottom: 1px solid var(--line);
     padding: 1.1rem 1rem;
@@ -1446,6 +1523,7 @@ summary:focus-visible {
   .gpt-graph-canvas {
     min-height: 260px;
     height: var(--graph-h, 320px);
+    max-width: 100%;
   }
 
   .prose h2 {
@@ -1474,11 +1552,6 @@ summary:focus-visible {
     gap: 0.5rem 1rem;
   }
 
-  .prose p code,
-  .prose li code {
-    white-space: break-spaces;
-  }
-
   .block {
     padding-top: 3.25rem;
   }
@@ -1490,6 +1563,10 @@ summary:focus-visible {
   .row {
     flex-direction: column;
     gap: 0.35rem;
+  }
+
+  .row-meta {
+    flex-shrink: 1;
   }
 }
 
