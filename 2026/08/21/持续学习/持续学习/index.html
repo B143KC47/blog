@@ -10,9 +10,7 @@
   <meta name="color-scheme" content="dark">
   <link rel="canonical" href="https://b143kc47.github.io/blog/2026/08/21/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0/index.html">
   <link rel="preload" href="https://cdn.jsdelivr.net/fontsource/fonts/geist-mono:vf@5.3.0/latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  
-<link rel="stylesheet" href="/blog/css/style.css">
-
+  <link rel="stylesheet" href="/blog/css/style.css?v=tables2">
   
   <link rel="icon" href="/blog/avatar.jpg" type="image/jpeg">
   <meta name="description" content="持续学习（Continual Learning）截至 2026 年的技术总体认知：为什么零遗忘不等于好的持续学习系统，评估需同时考虑新知识吸收、旧能力保持、前后向迁移与训练存储成本。">
@@ -165,7 +163,7 @@ window.MathJax = {
 <li>不惩罚资源，最简单的办法是每个任务复制一整套模型；</li>
 <li>不考虑迁移，系统只是保存一堆孤立任务，并没有形成可复用知识。</li>
 </ul>
-<h2 id="2-CL-与相邻概念的边界"><a href="#2-CL-与相邻概念的边界" class="headerlink" title="2. CL 与相邻概念的边界"></a>2. CL 与相邻概念的边界</h2><table>
+<h2 id="2-CL-与相邻概念的边界"><a href="#2-CL-与相邻概念的边界" class="headerlink" title="2. CL 与相邻概念的边界"></a>2. CL 与相邻概念的边界</h2><div class="table-scroll"><table>
 <thead>
 <tr>
 <th>概念</th>
@@ -238,7 +236,7 @@ window.MathJax = {
 <td align="right">依赖检索</td>
 <td>可成为 CL 系统的 episodic memory，但“记住”不等于“学会”</td>
 </tr>
-</tbody></table>
+</tbody></table></div>
 <h3 id="2-1-为什么“零遗忘”不是充分条件"><a href="#2-1-为什么“零遗忘”不是充分条件" class="headerlink" title="2.1 为什么“零遗忘”不是充分条件"></a>2.1 为什么“零遗忘”不是充分条件</h3><p>假设模型参数完全冻结：</p>
 <p>[<br>\theta_t&#x3D;\theta_0,\quad \forall t<br>]</p>
 <p>它不会因为新训练而忘记旧任务，但也无法吸收参数知识。于是：</p>
@@ -291,7 +289,7 @@ window.MathJax = {
 <p>[<br>\text{knowledge storage}<br>\neq<br>\text{knowledge accessibility}<br>\neq<br>\text{generation policy}<br>]</p>
 <hr>
 <h1 id="第三部分：先把实验场景说清楚"><a href="#第三部分：先把实验场景说清楚" class="headerlink" title="第三部分：先把实验场景说清楚"></a>第三部分：先把实验场景说清楚</h1><h2 id="5-三种经典增量场景"><a href="#5-三种经典增量场景" class="headerlink" title="5. 三种经典增量场景"></a>5. 三种经典增量场景</h2><p>van de Ven 等人的标准化工作把经典监督 CL 分为三类。</p>
-<table>
+<div class="table-scroll"><table>
 <thead>
 <tr>
 <th>场景</th>
@@ -322,7 +320,7 @@ window.MathJax = {
 <td>同时识别所有已见类；新类偏置</td>
 <td>最终精度混合了表征、分类器和平衡问题</td>
 </tr>
-</tbody></table>
+</tbody></table></div>
 <p>形式化地：</p>
 <h3 id="Task-IL"><a href="#Task-IL" class="headerlink" title="Task-IL"></a>Task-IL</h3><p>[<br>f(x,t)\rightarrow y<br>]</p>
 <p>测试时提供任务上下文 (t)。</p>
@@ -492,7 +490,7 @@ window.MathJax = {
 <li>否则返回 <code>-1</code>，丢弃当前样本。</li>
 </ol>
 <p>Reservoir 的优势是简单、无偏和 task-free；不足是它不关心类别平衡、困难度、梯度多样性或隐私价值。数据流严重不平衡时，“全历史均匀”不一定等于“对最终任务最有用”。</p>
-<h3 id="12-2-缓冲里究竟存什么"><a href="#12-2-缓冲里究竟存什么" class="headerlink" title="12.2 缓冲里究竟存什么"></a>12.2 缓冲里究竟存什么</h3><table>
+<h3 id="12-2-缓冲里究竟存什么"><a href="#12-2-缓冲里究竟存什么" class="headerlink" title="12.2 缓冲里究竟存什么"></a>12.2 缓冲里究竟存什么</h3><div class="table-scroll"><table>
 <thead>
 <tr>
 <th>存储对象</th>
@@ -530,7 +528,7 @@ window.MathJax = {
 <td>不直接存真实数据</td>
 <td>生成器也会遗忘；合成分布可能偏移</td>
 </tr>
-</tbody></table>
+</tbody></table></div>
 <h3 id="12-3-DER-：样本标签与历史-logit-同时回放"><a href="#12-3-DER-：样本标签与历史-logit-同时回放" class="headerlink" title="12.3 DER++：样本标签与历史 logit 同时回放"></a>12.3 DER++：样本标签与历史 logit 同时回放</h3><p>DER++ 的典型目标可写成：</p>
 <p>[<br>L_{	ext{DER++}}<br>&#x3D;L_{\text{CE,new}}<br>+\alpha|f_\theta(x_m)-z_m|<em>2^2<br>+\beta,L</em>{\text{CE}}(f_\theta(x_m),y_m)<br>]</p>
 <p>其中缓冲保存 ((x_m,y_m,z_m))，(z_m) 是样本进入缓冲时的历史 logits。</p>
@@ -577,7 +575,7 @@ window.MathJax = {
 <h2 id="13-参数隔离与架构扩展：让任务少共享或不共享参数"><a href="#13-参数隔离与架构扩展：让任务少共享或不共享参数" class="headerlink" title="13. 参数隔离与架构扩展：让任务少共享或不共享参数"></a>13. 参数隔离与架构扩展：让任务少共享或不共享参数</h2><p>核心形式可以抽象为：</p>
 <p>[<br>f(x)&#x3D;f_{\theta_{\text{shared}},A_{r(x)}}(x)<br>]</p>
 <p>其中 (A_k) 是任务模块、mask、Prompt、Adapter、LoRA 或专家，(r(x)) 是路由器。</p>
-<h3 id="13-1-主要形态"><a href="#13-1-主要形态" class="headerlink" title="13.1 主要形态"></a>13.1 主要形态</h3><table>
+<h3 id="13-1-主要形态"><a href="#13-1-主要形态" class="headerlink" title="13.1 主要形态"></a>13.1 主要形态</h3><div class="table-scroll"><table>
 <thead>
 <tr>
 <th>形态</th>
@@ -616,7 +614,7 @@ window.MathJax = {
 <td>冻结 backbone，隔离增量参数</td>
 <td>模块增长、检索错误</td>
 </tr>
-</tbody></table>
+</tbody></table></div>
 <h3 id="13-2-参数隔离并没有消除所有问题"><a href="#13-2-参数隔离并没有消除所有问题" class="headerlink" title="13.2 参数隔离并没有消除所有问题"></a>13.2 参数隔离并没有消除所有问题</h3><p>它把问题从“参数是否被覆盖”转移为：</p>
 <ul>
 <li>如何发现新任务；</li>
@@ -740,7 +738,7 @@ window.MathJax = {
 <li>同一个 prompt 同时依赖知识、推理、指令遵循与输出策略。</li>
 </ul>
 <p>因此当前 LLM-CL 通常按模型生命周期分成三个阶段：</p>
-<table>
+<div class="table-scroll"><table>
 <thead>
 <tr>
 <th>阶段</th>
@@ -771,7 +769,7 @@ window.MathJax = {
 <td>helpfulness、安全边界、知识可达性</td>
 <td>数据混合、参考模型约束、在线合并、回归测试</td>
 </tr>
-</tbody></table>
+</tbody></table></div>
 <p>2026 年的 LLM-CL 综述也普遍采用“持续预训练—持续微调—持续对齐”的阶段化结构。</p>
 <h2 id="21-持续预训练：真正的变量不只有数据"><a href="#21-持续预训练：真正的变量不只有数据" class="headerlink" title="21. 持续预训练：真正的变量不只有数据"></a>21. 持续预训练：真正的变量不只有数据</h2><p>CPT 的更新可写为：</p>
 <p>[<br>L_{\text{CPT}}&#x3D;<br>\mathbb E_{x\sim \alpha P_{\text{new}}+(1-\alpha)P_{\text{replay}}}<br>[-\log p_\theta(x)]<br>]</p>
@@ -862,7 +860,7 @@ window.MathJax = {
 <h1 id="第八部分：Agent-与实际系统中的记忆层级"><a href="#第八部分：Agent-与实际系统中的记忆层级" class="headerlink" title="第八部分：Agent 与实际系统中的记忆层级"></a>第八部分：Agent 与实际系统中的记忆层级</h1><h2 id="26-“保存经历”与“改变能力”必须分开"><a href="#26-“保存经历”与“改变能力”必须分开" class="headerlink" title="26. “保存经历”与“改变能力”必须分开"></a>26. “保存经历”与“改变能力”必须分开</h2><p>一个 Agent 可以把每次轨迹存进数据库，但这只说明它有外部记忆：</p>
 <p>[<br>\text{remembered episode}\not\Rightarrow\text{internalized skill}<br>]</p>
 <p>更完整的记忆层级是：</p>
-<table>
+<div class="table-scroll"><table>
 <thead>
 <tr>
 <th>层级</th>
@@ -907,7 +905,7 @@ window.MathJax = {
 <td>低延迟泛化、隐式整合</td>
 <td>更新昂贵、难删除、会干扰</td>
 </tr>
-</tbody></table>
+</tbody></table></div>
 <h2 id="27-一个较现实的持续学习系统架构"><a href="#27-一个较现实的持续学习系统架构" class="headerlink" title="27. 一个较现实的持续学习系统架构"></a>27. 一个较现实的持续学习系统架构</h2><pre class="mermaid">flowchart TD
     A[持续到达的数据/轨迹] --&gt; B[质量、隐私与安全过滤]
     B --&gt; C[短期 episodic buffer]
@@ -949,7 +947,7 @@ window.MathJax = {
 <p>[<br>\text{experience}<br>\rightarrow\text{evaluation}<br>\rightarrow\text{selection}<br>\rightarrow\text{update}<br>\rightarrow\text{regression testing}<br>\rightarrow\text{deployment}<br>]</p>
 <p>而不仅是“继续梯度下降”。</p>
 <hr>
-<h1 id="第九部分：开源代码与复现实验"><a href="#第九部分：开源代码与复现实验" class="headerlink" title="第九部分：开源代码与复现实验"></a>第九部分：开源代码与复现实验</h1><h2 id="29-本文代码来源清单"><a href="#29-本文代码来源清单" class="headerlink" title="29. 本文代码来源清单"></a>29. 本文代码来源清单</h2><table>
+<h1 id="第九部分：开源代码与复现实验"><a href="#第九部分：开源代码与复现实验" class="headerlink" title="第九部分：开源代码与复现实验"></a>第九部分：开源代码与复现实验</h1><h2 id="29-本文代码来源清单"><a href="#29-本文代码来源清单" class="headerlink" title="29. 本文代码来源清单"></a>29. 本文代码来源清单</h2><div class="table-scroll"><table>
 <thead>
 <tr>
 <th>机制</th>
@@ -1008,7 +1006,7 @@ window.MathJax = {
 <td>Apache-2.0</td>
 <td>说明 Transformer Block Expansion</td>
 </tr>
-</tbody></table>
+</tbody></table></div>
 <p><strong>重要区分</strong>：</p>
 <ul>
 <li>“开源”只表示代码公开并有相应许可证；</li>
@@ -1055,7 +1053,7 @@ window.MathJax = {
 <li>训练与推理预算是多少？</li>
 </ol>
 <p>没有这些条件，“解决 catastrophic forgetting”是不可证伪的宽泛表述。</p>
-<h2 id="33-第二步：建立最小但强的基线矩阵"><a href="#33-第二步：建立最小但强的基线矩阵" class="headerlink" title="33. 第二步：建立最小但强的基线矩阵"></a>33. 第二步：建立最小但强的基线矩阵</h2><table>
+<h2 id="33-第二步：建立最小但强的基线矩阵"><a href="#33-第二步：建立最小但强的基线矩阵" class="headerlink" title="33. 第二步：建立最小但强的基线矩阵"></a>33. 第二步：建立最小但强的基线矩阵</h2><div class="table-scroll"><table>
 <thead>
 <tr>
 <th>类别</th>
@@ -1098,7 +1096,7 @@ window.MathJax = {
 <td>Prompt&#x2F;LoRA&#x2F;Adapter</td>
 <td>轻量参数是否足以适应？</td>
 </tr>
-</tbody></table>
+</tbody></table></div>
 <h2 id="34-第三步：做能解释机制的消融"><a href="#34-第三步：做能解释机制的消融" class="headerlink" title="34. 第三步：做能解释机制的消融"></a>34. 第三步：做能解释机制的消融</h2><p>至少应测试：</p>
 <ul>
 <li>去掉 replay；</li>
@@ -1163,7 +1161,7 @@ window.MathJax = {
 </ul>
 <p>因此实际系统不能让线上反馈直接无门控地更新主模型。</p>
 <hr>
-<h1 id="第十二部分：方法选择的工程决策表"><a href="#第十二部分：方法选择的工程决策表" class="headerlink" title="第十二部分：方法选择的工程决策表"></a>第十二部分：方法选择的工程决策表</h1><table>
+<h1 id="第十二部分：方法选择的工程决策表"><a href="#第十二部分：方法选择的工程决策表" class="headerlink" title="第十二部分：方法选择的工程决策表"></a>第十二部分：方法选择的工程决策表</h1><div class="table-scroll"><table>
 <thead>
 <tr>
 <th>现实需求</th>
@@ -1220,7 +1218,7 @@ window.MathJax = {
 <td>兼顾快速记忆和慢速内化</td>
 <td>检索污染、无界增长、安全</td>
 </tr>
-</tbody></table>
+</tbody></table></div>
 <hr>
 <h1 id="结论：当前-CL-的最准确技术图景"><a href="#结论：当前-CL-的最准确技术图景" class="headerlink" title="结论：当前 CL 的最准确技术图景"></a>结论：当前 CL 的最准确技术图景</h1><p>持续学习的核心不应被概括为一句“让模型不断学习且不遗忘”。更准确的图景是：</p>
 <p>[<br>\boxed{<br>\text{在非平稳数据流上，管理参数、模块、样本与外部记忆的长期状态更新}<br>}<br>]</p>

@@ -10,9 +10,7 @@
   <meta name="color-scheme" content="dark">
   <link rel="canonical" href="https://b143kc47.github.io/blog/2026/08/17/Generative%20AI%20in%20Finance/Alphabench/index.html">
   <link rel="preload" href="https://cdn.jsdelivr.net/fontsource/fonts/geist-mono:vf@5.3.0/latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  
-<link rel="stylesheet" href="/blog/css/style.css">
-
+  <link rel="stylesheet" href="/blog/css/style.css?v=tables2">
   
   <link rel="icon" href="/blog/avatar.jpg" type="image/jpeg">
   <meta name="description" content="论文笔记：AlphaBench —— 在公式化 Alpha 因子挖掘的完整工作流中，大语言模型适合扮演什么角色：因子公式生成器、不做回测的因子评审员、接收回测反馈不断提出新候选的搜索器。">
@@ -124,7 +122,7 @@ window.MathJax = {
 <li>Skewness</li>
 </ul>
 <p>论文中建立了什么benchmark</p>
-<table>
+<div class="table-scroll"><table>
 <thead>
 <tr>
 <th>任务</th>
@@ -151,7 +149,7 @@ window.MathJax = {
 <td>改进后的候选因子</td>
 <td>是否能利用反馈搜索更好的因子</td>
 </tr>
-</tbody></table>
+</tbody></table></div>
 <p>Factor Searching 解释一下 也就是在无穷的组合空间里面搜索一个更好的因子<br>原始因子 -&gt; 反馈IC ICIR -&gt; 改不同的东西 -&gt; 新IC 新ICIR -&gt; 不同搜索看看能不能改进一个更好的因子</p>
 <p>prompt+Operator Library → LLM → Generated Factors→ Qlib Backtest→ Metrics→ Further Search</p>
 <p>Factor Generation:<br>分成两个子任务</p>
