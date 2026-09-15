@@ -76,6 +76,98 @@
     timer = window.setTimeout(paintAll, 120);
   });
 
+  function bootMermaid() {
+    const nodes = document.querySelectorAll("pre.mermaid");
+    if (!nodes.length) return;
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js";
+    script.onload = function () {
+      if (!window.mermaid) return;
+      const ink = "#e6e6e6";
+      const mute = "rgba(230,230,230,0.5)";
+      const fill = "#141414";
+      const paper = "#000000";
+      window.mermaid.initialize({
+        startOnLoad: false,
+        theme: "base",
+        securityLevel: "loose",
+        htmlLabels: true,
+        fontFamily: "Geist Mono, ui-monospace, SFMono-Regular, Menlo, Consolas, Noto Sans SC, Microsoft YaHei, sans-serif",
+        fontSize: "14px",
+        themeVariables: {
+          darkMode: true,
+          background: paper,
+          fontFamily: "Geist Mono, ui-monospace, SFMono-Regular, Menlo, Consolas, Noto Sans SC, Microsoft YaHei, sans-serif",
+          fontSize: "14px",
+          primaryColor: fill,
+          primaryTextColor: ink,
+          primaryBorderColor: mute,
+          secondaryColor: "#101010",
+          secondaryTextColor: ink,
+          secondaryBorderColor: mute,
+          tertiaryColor: "#0a0a0a",
+          tertiaryTextColor: ink,
+          tertiaryBorderColor: "rgba(230,230,230,0.22)",
+          lineColor: mute,
+          textColor: ink,
+          mainBkg: fill,
+          nodeBkg: fill,
+          nodeBorder: mute,
+          clusterBkg: "#0a0a0a",
+          clusterBorder: "rgba(230,230,230,0.22)",
+          titleColor: ink,
+          edgeLabelBackground: paper,
+          actorBkg: fill,
+          actorBorder: mute,
+          actorTextColor: ink,
+          actorLineColor: mute,
+          signalColor: mute,
+          signalTextColor: ink,
+          labelBoxBkgColor: fill,
+          labelBoxBorderColor: mute,
+          labelTextColor: ink,
+          loopTextColor: ink,
+          noteBkgColor: fill,
+          noteTextColor: ink,
+          noteBorderColor: mute,
+          activationBkgColor: "#1a1a1a",
+          sequenceNumberColor: paper
+        },
+        flowchart: {
+          htmlLabels: true,
+          curve: "linear",
+          padding: 22,
+          nodeSpacing: 36,
+          rankSpacing: 72,
+          wrappingWidth: 220,
+          diagramPadding: 12,
+          useMaxWidth: true
+        },
+        sequence: {
+          actorMargin: 28,
+          boxMargin: 8,
+          messageMargin: 36,
+          useMaxWidth: true
+        },
+        timeline: {
+          useMaxWidth: true,
+          padding: 16
+        }
+      });
+      function squareNodes() {
+        document.querySelectorAll(".prose .mermaid rect, .mermaid rect").forEach(function (rect) {
+          rect.setAttribute("rx", "0");
+          rect.setAttribute("ry", "0");
+        });
+      }
+      const run = window.mermaid.run({ nodes: nodes });
+      if (run && typeof run.then === "function") run.then(squareNodes);
+      else squareNodes();
+    };
+    document.head.appendChild(script);
+  }
+  bootMermaid();
+
   const results = document.querySelector(".search-results");
   const input = document.querySelector(".search-input");
   const status = document.querySelector(".search-status");

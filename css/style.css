@@ -79,7 +79,8 @@ a:hover {
 
 a:focus-visible,
 button:focus-visible,
-input:focus-visible {
+input:focus-visible,
+summary:focus-visible {
   outline: 1px solid var(--text);
   outline-offset: 3px;
 }
@@ -690,9 +691,326 @@ input:focus-visible {
 }
 
 .prose .desmos-graph,
-.prose .gpt-graph {
+.prose .gpt-graph,
+.prose .timeline,
+.prose .steps,
+.prose .callout,
+.prose pre.mermaid,
+.prose .mermaid {
   margin: 28px 0 8px;
   max-width: 100%;
+}
+
+.timeline {
+  list-style: none;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.25rem 0 0.25rem 0;
+  max-width: 760px;
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 1.75rem 1.4rem;
+  border-left: 1px solid var(--line);
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0.15rem;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 0.45rem;
+  width: 7px;
+  height: 7px;
+  background: var(--text);
+}
+
+.timeline-when {
+  margin: 0 0 0.3rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  letter-spacing: var(--track);
+}
+
+.timeline-title {
+  margin: 0;
+  font-weight: 500;
+}
+
+.timeline-body {
+  margin: 0.4rem 0 0;
+  color: var(--muted);
+}
+
+.timeline-body p {
+  margin-top: 0.35rem;
+  max-width: none;
+}
+
+.steps {
+  list-style: none;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  max-width: 760px;
+}
+
+.step-item {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  gap: 0.85rem;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.step-item:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.step-index {
+  color: var(--muted);
+  letter-spacing: var(--track);
+  padding-top: 0.15rem;
+}
+
+.step-title {
+  margin: 0;
+  font-weight: 500;
+}
+
+.step-body {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+}
+
+.step-body p {
+  margin-top: 0.35rem;
+  max-width: none;
+}
+
+.callout {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--line);
+  background: var(--fill);
+}
+
+.callout p {
+  margin-top: 0;
+  max-width: none;
+}
+
+.callout p + p {
+  margin-top: 0.75rem;
+}
+
+.source-block,
+.source-card,
+.fold,
+.prose details {
+  max-width: 760px;
+  margin: 28px auto 8px;
+  border: 1px solid var(--line);
+}
+
+.source-block {
+  background: transparent;
+}
+
+.source-block .source-card,
+.source-block .fold {
+  margin: 0;
+  max-width: none;
+  border: 0;
+}
+
+.source-block .source-card {
+  border-bottom: 1px solid var(--line);
+}
+
+.source-card {
+  padding: 1.1rem 1.15rem 1.2rem;
+  background: var(--fill);
+}
+
+.source-kicker {
+  margin: 0 0 0.55rem;
+  color: var(--muted);
+  letter-spacing: var(--track);
+}
+
+.source-title {
+  margin: 0;
+  font-weight: 500;
+}
+
+.source-title a {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.source-meta {
+  margin: 0.45rem 0 0;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  letter-spacing: var(--track);
+}
+
+.fold,
+.prose details {
+  background: transparent;
+}
+
+.fold > summary,
+.prose details > summary {
+  padding: 1rem 1.15rem;
+  cursor: pointer;
+  letter-spacing: var(--track);
+  list-style: none;
+}
+
+.fold > summary::-webkit-details-marker,
+.prose details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.fold > summary::after,
+.prose details > summary::after {
+  content: " +";
+  color: var(--muted);
+}
+
+.fold[open] > summary::after,
+.prose details[open] > summary::after {
+  content: " −";
+}
+
+.fold[open] > summary,
+.prose details[open] > summary {
+  border-bottom: 1px solid var(--line);
+}
+
+.fold-body {
+  padding: 1.25rem 1.15rem 1.6rem;
+}
+
+.fold-body > *:first-child {
+  margin-top: 0;
+}
+
+.fold-body h1 {
+  font-size: 22px;
+  line-height: 28px;
+  margin-top: 2rem;
+}
+
+.fold-body h2 {
+  font-size: 18px;
+  line-height: 26px;
+  margin-top: 1.75rem;
+}
+
+.fold-body p {
+  max-width: none;
+}
+
+.prose .source-block,
+.prose .source-card,
+.prose .fold,
+.prose details {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.prose pre.mermaid,
+.prose .mermaid {
+  padding: 1.75rem 1.35rem 1.5rem;
+  overflow-x: auto;
+  background: #000;
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+.prose .mermaid svg {
+  max-width: 100%;
+  height: auto;
+  font-family: var(--font);
+}
+
+.prose .mermaid .node rect,
+.prose .mermaid .node polygon,
+.prose .mermaid .label-container,
+.prose .mermaid .basic.label-container,
+.prose .mermaid .cluster rect {
+  rx: 0 !important;
+  ry: 0 !important;
+}
+
+.prose .mermaid .node rect,
+.prose .mermaid .node polygon,
+.prose .mermaid .label-container {
+  fill: var(--fill) !important;
+  stroke: var(--line) !important;
+  stroke-width: 1px !important;
+}
+
+.prose .mermaid .cluster rect {
+  fill: #0a0a0a !important;
+  stroke: rgba(230, 230, 230, 0.18) !important;
+  stroke-width: 1px !important;
+}
+
+.prose .mermaid .edgePath .path,
+.prose .mermaid .flowchart-link,
+.prose .mermaid line,
+.prose .mermaid .relation {
+  stroke: var(--muted) !important;
+  stroke-width: 1.15px !important;
+  fill: none !important;
+}
+
+.prose .mermaid .arrowheadPath,
+.prose .mermaid marker path {
+  fill: var(--muted) !important;
+  stroke: none !important;
+}
+
+.prose .mermaid .edgeLabel rect,
+.prose .mermaid .label rect {
+  fill: #000 !important;
+  stroke: none !important;
+}
+
+.prose .mermaid .nodeLabel,
+.prose .mermaid .edgeLabel,
+.prose .mermaid .label,
+.prose .mermaid foreignObject,
+.prose .mermaid foreignObject div,
+.prose .mermaid foreignObject span,
+.prose .mermaid foreignObject p,
+.prose .mermaid .actor,
+.prose .mermaid .messageText,
+.prose .mermaid .loopText,
+.prose .mermaid .noteText,
+.prose .mermaid text {
+  font-family: var(--font) !important;
+  color: var(--text) !important;
+  fill: var(--text) !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  background: transparent !important;
+}
+
+.prose .mermaid .nodeLabel p,
+.prose .mermaid foreignObject p {
+  padding: 0.2em 0.55em;
+  margin: 0;
 }
 
 .desmos-graph,
