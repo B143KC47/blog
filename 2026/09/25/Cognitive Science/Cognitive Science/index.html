@@ -3,26 +3,26 @@
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Alphabench · BlackCat</title>
-  <meta name="description" content="论文笔记：AlphaBench —— 在公式化 Alpha 因子挖掘的完整工作流中，大语言模型适合扮演什么角色：因子公式生成器、不做回测的因子评审员、接收回测反馈不断提出新候选的搜索器。">
+  <title>Cognitive Science · BlackCat</title>
+  <meta name="description" content="Notes by KO Ho Tin (BlackCat) on LLM agents, formulaic alpha-factor mining, computer vision, and research tooling.">
   <meta name="author" content="KO Ho Tin">
   <meta name="theme-color" content="#000000">
   <meta name="color-scheme" content="dark">
-  <link rel="canonical" href="https://b143kc47.github.io/blog/2026/08/17/Generative%20AI%20in%20Finance/Alphabench/index.html">
+  <link rel="canonical" href="https://b143kc47.github.io/blog/2026/09/25/Cognitive%20Science/Cognitive%20Science/index.html">
   <link rel="preload" href="https://cdn.jsdelivr.net/fontsource/fonts/geist-mono:vf@5.3.0/latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/blog/css/style.css?v=tables2">
   
   <link rel="icon" href="/blog/avatar.jpg" type="image/jpeg">
-  <meta name="description" content="论文笔记：AlphaBench —— 在公式化 Alpha 因子挖掘的完整工作流中，大语言模型适合扮演什么角色：因子公式生成器、不做回测的因子评审员、接收回测反馈不断提出新候选的搜索器。">
+  <meta name="description" content="材料引用: https:&#x2F;&#x2F;plato.stanford.edu&#x2F;entries&#x2F;cognitive-science&#x2F;?utm_source&#x3D;chatgpt.com Cognitive Science 认知科学认知科学的范畴在于学习心灵和智能。  认知科学 融合了以下学科 人工智能 神经科学 语言学 人类学 哲学 心理学      timeline    section 古典源头        A">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Alphabench">
-<meta property="og:url" content="https://b143kc47.github.io/blog/2026/08/17/Generative%20AI%20in%20Finance/Alphabench/index.html">
+<meta property="og:title" content="Cognitive Science">
+<meta property="og:url" content="https://b143kc47.github.io/blog/2026/09/25/Cognitive%20Science/Cognitive%20Science/index.html">
 <meta property="og:site_name" content="BlackCat">
-<meta property="og:description" content="论文笔记：AlphaBench —— 在公式化 Alpha 因子挖掘的完整工作流中，大语言模型适合扮演什么角色：因子公式生成器、不做回测的因子评审员、接收回测反馈不断提出新候选的搜索器。">
+<meta property="og:description" content="材料引用: https:&#x2F;&#x2F;plato.stanford.edu&#x2F;entries&#x2F;cognitive-science&#x2F;?utm_source&#x3D;chatgpt.com Cognitive Science 认知科学认知科学的范畴在于学习心灵和智能。  认知科学 融合了以下学科 人工智能 神经科学 语言学 人类学 哲学 心理学      timeline    section 古典源头        A">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://b143kc47.github.io/blog/avatar.jpg">
-<meta property="article:published_time" content="2026-08-16T16:19:02.000Z">
-<meta property="article:modified_time" content="2026-09-24T13:00:02.840Z">
+<meta property="article:published_time" content="2026-09-25T13:00:03.668Z">
+<meta property="article:modified_time" content="2026-09-25T13:00:03.668Z">
 <meta property="article:author" content="KO Ho Tin">
 <meta property="article:tag" content="KO Ho Tin, BlackCat, B143KC47, blog, LLM agents, alpha mining, computer vision">
 <meta name="twitter:card" content="summary">
@@ -71,7 +71,7 @@ window.MathJax = {
         <div class="post-cover">
           <canvas
   class="pixel-banner pixel-banner--cover"
-  data-seed="cfc60df1"
+  data-seed="315fd6b1"
   data-cols="48"
   data-rows="10"
   aria-hidden="true"
@@ -82,14 +82,12 @@ window.MathJax = {
           <p class="meta">
             
             
-              <a href="/blog/categories/Paper-reading/">Paper reading</a>
+              <a href="/blog/categories/Cognitive-Science/">Cognitive science</a>
             
-            <time datetime="2026-08-16T16:19:02.000Z">2026-08-17</time>
-            <span>4 min read</span>
+            <time datetime="2026-09-25T13:00:03.668Z">2026-09-25</time>
+            <span>6 min read</span>
           </p>
-          <h1 class="post-title">ALPHABENCH: BENCHMARKING LARGE LANGUAGE MODELS IN FORMULAIC ALPHA FACTOR MINING</h1>
-          
-            <p class="lede">论文笔记：AlphaBench —— 在公式化 Alpha 因子挖掘的完整工作流中，大语言模型适合扮演什么角色：因子公式生成器、不做回测的因子评审员、接收回测反馈不断提出新候选的搜索器。</p>
+          <h1 class="post-title">Cognitive Science</h1>
           
         </div>
       </div>
@@ -97,88 +95,93 @@ window.MathJax = {
 
     <div class="post-well">
       <div class="prose">
-        <p>研究的问题：</p>
-<p>在“ Alpha 因子挖掘”的完整工作流中，大语言模型究竟适合扮演什么角色？&quot;</p>
-<p>三个角色：</p>
+        <p>材料引用: <a target="_blank" rel="noopener" href="https://plato.stanford.edu/entries/cognitive-science/?utm_source=chatgpt.com">https://plato.stanford.edu/entries/cognitive-science/?utm_source=chatgpt.com</a></p>
+<h1 id="Cognitive-Science-认知科学"><a href="#Cognitive-Science-认知科学" class="headerlink" title="Cognitive Science 认知科学"></a>Cognitive Science 认知科学</h1><p>认知科学的范畴在于学习心灵和智能。</p>
 <ul>
-<li>因子公式生成器</li>
-<li>不看数据、不做回测的因子评审员</li>
-<li>接收回测反馈、不断提出新候选的搜索器</li>
+<li>认知科学<ul>
+<li>融合了以下学科<ul>
+<li>人工智能</li>
+<li>神经科学</li>
+<li>语言学</li>
+<li>人类学</li>
+<li>哲学</li>
+<li>心理学</li>
 </ul>
-<p>理解Alpha Factor:</p>
-<p>Alpha Factor 是一个用量化指标（历史价格 成交量）等等有数据的量化指标 计算出来的一个数学表达</p>
-<p>例如 动量因子：<br>$$<br>f_{i,t} &#x3D; \frac{Close_{i,t}-Close_{i,t-20}}{Close_{i,t-20}}<br>$$</p>
-<p>Qlib DSL中：<br>Div(<br>    Sub($close, Ref($close, 20)),<br>    Add(Ref($close, 20), 1e-12)<br>)</p>
-<p>每天对所有股票计算因子的值，然后根据因子值从高到低排名。之后可以构造一个多空组合：</p>
-<p>买入因子值高的股票；<br>卖出或者低配因子值低的股票。</p>
-<p>这是因为因子可能与股价上涨有正相关 值高则上涨的相关性更高 负相关则相反<br>背后也可以有类似的金融逻辑解释<br>动量因子这里 使用 当前收盘价-20天前的收盘价&#x2F;(20天前的收盘价) 这里算的是 新的收盘价上涨的幅度相较于20天前的收盘是百分之多少<br>这里可以合理解释为<br>价格上涨多 -&gt; 市场认为其上涨动力强 -&gt; 更多人追高 -&gt; 价格可能继续上涨</p>
-<p>如何判断因子有没有预测力呢</p>
-<p>论文当中使用 IC (Information coefficient):<br>$$<br>IC_t &#x3D; Corr_i(f_{i,t},r_{i,t+1})<br>$$</p>
-<p>IC的数值理解为<br>IC &gt; 0 : 因子和股价是正相关，越高相关性越高<br>IC &#x3D; 0 : 完全的无相关<br>IC &lt; 0 : 因子和股价是负相关,越负负相关性越高</p>
-<p>ICIR (Information Coefficient Information Ratio) 是预测能力的稳定性</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>timeline<br>    section 古典源头<br>        Ancient Greeks : Plato : Aristotle<br>    section 19世纪<br>			Wilhelm Wunclt<br>	section 20世纪<br>		Behaviorism(行为主义) 主导<br>			-不对心灵进行理解和科学解释<br>			-排查内部原理理解（意识和心理表征）<br>	section 1956年左右 认知革命<br>		George Miller<br>			- 负责心理学与信息加工<br>			- 人的记忆容量有限<br>				- 如何解决？ 透过组块化 chunks<br>					- 利用心理表征（组块化）进行信息编码与译码<br>		John McCarthy·Marvin Minsky·Allen Newell·Herbert Simon<br>				创立人工智能领域<br>					- 用计算机模型来模拟符号推理与思考<br>			Noam Chomsky<br>				推动语言学<br>					-反对行为主义对语言的解释<br>					-提议语言是透过内部心理语法实现的</p>
+<p>心理表征:  字面理解 心理为心中 表征是一种状态和结构 代表某一种抽象的事物 概念 事件 关系<br>mental representation  是大脑内部用来代表外部事物或抽象概念的一种内部信息结构<br>例如猫这个Object<br>可能有 </p>
 <ul>
-<li>RankIC</li>
-<li>Win Rate</li>
-<li>Skewness</li>
+<li>animal </li>
+<li>furry</li>
+<li>meows</li>
 </ul>
-<p>论文中建立了什么benchmark</p>
-<div class="table-scroll"><table>
-<thead>
-<tr>
-<th>任务</th>
-<th>给 LLM 的输入</th>
-<th>LLM 要输出什么</th>
-<th>实际测量的能力</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Factor Generation</td>
-<td>自然语言因子描述或主题标签</td>
-<td>可执行的因子表达式</td>
-<td>是否能把金融意图翻译成 DSL</td>
-</tr>
-<tr>
-<td>Factor Evaluation</td>
-<td>一个或一组因子公式</td>
-<td>分数、标签或排序</td>
-<td>是否能不经回测判断因子质量</td>
-</tr>
-<tr>
-<td>Factor Searching</td>
-<td>种子因子、搜索历史、回测结果</td>
-<td>改进后的候选因子</td>
-<td>是否能利用反馈搜索更好的因子</td>
-</tr>
-</tbody></table></div>
-<p>Factor Searching 解释一下 也就是在无穷的组合空间里面搜索一个更好的因子<br>原始因子 -&gt; 反馈IC ICIR -&gt; 改不同的东西 -&gt; 新IC 新ICIR -&gt; 不同搜索看看能不能改进一个更好的因子</p>
-<p>prompt+Operator Library → LLM → Generated Factors→ Qlib Backtest→ Metrics→ Further Search</p>
-<p>Factor Generation:<br>分成两个子任务</p>
+<p>猫”这个字本身是一个 <strong>linguistic symbol</strong>，它用来指代“猫”这个概念或实体，但“猫”这个字并不是现实中的猫的一部分，也不是猫本身的 feature</p>
+<p>它是一种抽象化的代表。</p>
+<p>组块化为什么是心理表征<br>例如我们需要记一段数字 38902456<br>如果单独去记 就是8个不同的representation<br>3 8 9 0 2 4 5 6 它们之间是无关联的 是独立的representation<br>透过拆分 3890   和 2456<br>我们心理内部对于这一个信息的representation变了<br>也就是心理表征变了 </p>
+<p>（信息没变 我们理解 represent 信息的方法变了）</p>
+<p>认知科学有统一的理论思想<br>不同研究人员在探索心灵与智能时 会带来不同的多样化视角和方法。</p>
+<p>主要方法</p>
 <ul>
-<li>Text2Alpha</li>
-<li>Directional Mining</li>
+<li>基于人类参与着的实验研究<ul>
+<li>心理学家 研究u人类在演绎推理中常犯的错误</li>
 </ul>
-<p>Text2Alpha</p>
-<p>例如给一段文字描述：<br>Return the rolling max of close minus current close, divided by volume SMA, default window &#x3D; 25.</p>
-<p>Return Alpha Factor:<br>Div(<br>    Sub(Max($close, 25), $close),<br>    Add(Mean($volume, 25), 1e-12)<br>)</p>
-<p>这个任务主要测试：</p>
-<p>是否理解自然语言；<br>是否选对变量；<br>是否选对操作符；<br>是否使用正确窗口；<br>是否生成可解析、可执行的公式。</p>
-<p>论文将难度分为：</p>
-<p>Easy：单一操作或简单均值、比率；<br>Medium：组合价格与成交量，加入归一化；<br>Hard：多层组合、排名、条件逻辑、多个窗口</p>
-<p>论文中：<br>例如 GPT-5 在 Text2Alpha 的 reliability 几乎一直是 1.00，但 accuracy 从：</p>
-<p>Easy：0.99；<br>Medium：0.68；<br>Hard：0.10。</p>
-<p>也就是说，在困难任务上，它几乎总能输出合法公式，但只有约 10% 被判定为真正满足复杂指令。</p>
-<p>这揭示了两个完全不同的能力：</p>
-<p>Syntax correctness：会不会写合法 DSL；<br>Semantic correctness：写出来的公式是不是用户真正想要的。</p>
-<p>大模型在第一项已经很强，在第二项仍有明显问题</p>
-<p>Directional Mining</p>
-<p>这里不要求复现一个固定公式，而是给模型一个因子方向，例如：</p>
-<p>Momentum；<br>Mean Reversion；<br>Volume Spike；<br>Volatility Breakout；<br>Price–Volume Divergence；<br>Candlestick Pattern；<br>Crash Risk。</p>
-<p>模型需要自行设计属于该方向的公式。</p>
-<p>困难任务可能要求同时融合 3–5 种信号，例如：</p>
-<p>Momentum + Volume Confirmation + Volatility Normalization + Breakout</p>
-<p>这比 Text2Alpha 更开放，也更接近实际因子研究。</p>
-<p>论文构建了一套包含 90 个细分类别的方向 taxonomy，覆盖：</p>
-<p>Trend；<br>Momentum；<br>Mean Reversion；<br>Volume；<br>Volatility；<br>Pattern；<br>Relative Performance；<br>Seasonality；<br>Risk；<br>Microstructure Proxy。</p>
+</li>
+</ul>
+<p>对于大脑和心灵的运作：需要保持科学性，而不是直觉与常理！</p>
+<p>研究方法:<br>	- 实验法</p>
+<p>“没有实验的理论是空洞的，没有理论的实验是盲目的&quot;<br>理论可以尝试解释内部机制<br>实验可以尝试认证理论的正确性</p>
+<p>构建理论框架的最佳途径之一，是建立并测试旨在类比心理操作的计算模型。</p>
+<p>也就是研究者把自己认为的大脑内部过程写成一个可以运行的模型<br>INPUT -&gt; PROCESS -&gt; OUTPUT</p>
+<p>研究人员开发了能模拟人类表现各方面的计算模型。设计、构建计算模型并对其进行实验，是人工智能（AI）的核心方法。</p>
+<p>心理学和AI</p>
+<p>理想情况下，在认知科学中，计算模型与心理学实验应该紧密结合，但人工智能领域的许多重要工作，却是在相对脱离实验心理学的情况下，研究了不同知识表征方法的效能</p>
+<p>语言学</p>
+<p>语言学家（linguists）</p>
+<ul>
+<li>多数方法不同于心理学实验（psychological experiments）或开发计算模型（computational models）</li>
+</ul>
+<p><strong>Chomskian tradition（乔姆斯基学派&#x2F;传统）</strong> 的语言学家<br>	-  找出构成人类语言基本结构的 <strong>grammatical principles</strong><br>	    -  透过观察<strong>grammatical utterances（合乎语法的表达）</strong> 与 <strong>ungrammatical utterances（不合语法的表达）</strong> 的分别
+	</p>
+<p>神经学</p>
+<ul>
+<li>进行controlled experiments（受控实验）<ul>
+<li>并非心灵 直觉观察大脑的性质和运作</li>
+</ul>
+</li>
+</ul>
+<p>实验过程：对于 <strong>nonhuman subjects（非人类实验对象）</strong>，研究人员可以将电极插入大脑，并记录单个 <strong>neurons（神经元）</strong> 的放电活动。</p>
+<p>相反，对于人类此类技术过于侵入性（too invasive), 对于人类而言的常见方法是 magnetic scanning (磁成像扫描) 和 positron scanning devidce (正电子扫描设备) 去观察人们在进行不同mental tasks 时，大脑的活动。</p>
+<p>也可以透过观察大脑部分受过损伤的人所损失的能力，来察觉对应脑区的能力。</p>
+<p>神经科学跟认知科学也建立在理论和实验的基础上 并且时常借助computational models 来模拟一群神经元。</p>
+<p>Cognitive anthropology（认知人类学）</p>
+<p>观察人在不同 <strong>cultural settings（文化环境）</strong> 中是如何思考的</p>
+<p>对 <strong>mind（心智）</strong> 的研究显然不应该只局限于英语使用者是如何思考的，而应该进一步考虑：不同文化之间是否存在不同的 <strong>modes of thinking（思维方式）</strong> </p>
+<p>研究方法：</p>
+<ul>
+<li>ethnography（民族志 &#x2F; 田野调查）<ul>
+<li>在某种文化中生活，并与文化成员进行互动，来体会整个文化的社会系统和认知系统</li>
+</ul>
+</li>
+</ul>
+<p>philosophy 哲学</p>
+<p>传统哲学更多的是思想实验，而不会进行计算模型的构建和经验观察(虽然近年有增加)</p>
+<p>哲学可以用于探讨自己研究的WHY 或者叫自己到底在做什么 例如 理解 representation 的本质</p>
+<p>哲学也研究一般性问题 ： mind-body relation(心身关系) 以及 mmethodological questions (方法论维尼他)</p>
+<p>哲学不仅关心人们实际上是如何思考的，也关心人们 <strong>应该如何思考</strong>。</p>
+<p>也就是说，它既研究 <strong>descriptive questions（描述性问题）</strong>——人实际上怎么想；也研究 <strong>normative questions（规范性问题）</strong>——人应该怎么想。</p>
+<p>除了理解人类思维这一理论目标之外，<strong>cognitive science（认知科学）</strong> 还可以有一个实践目标：<strong>改善人类的思维方式</strong>。而如果我们想改善思维，就必须先进行规范性的反思，思考我们到底希望一种理想的“思维”应该是什么样的。</p>
+<h1 id="心理表征和计算-Representation-and-Computation"><a href="#心理表征和计算-Representation-and-Computation" class="headerlink" title="心理表征和计算 Representation and Computation"></a>心理表征和计算 Representation and Computation</h1><p><strong>Cognitive science（认知科学）</strong> 的核心假设是：</p>
+<p>为了理解思维从两个地方入手：</p>
+<ul>
+<li>心智中的 <strong>representational structures（表征结构）</strong></li>
+<li>表征结构之上的 <strong>computational procedures</strong></li>
+</ul>
+<p>研究者对于究竟什么样的 <strong>representations（表征）</strong> 和什么样的 <strong>computations（计算）</strong> 构成了思维，仍然存在很多分歧，但这个核心假设足够宽泛，因此能够涵盖目前认知科学</p>
+<p>connectionist theories（联结主义理论）： 使用 <strong>artificial neural networks（人工神经网络）</strong> 来模拟思维过程</p>
+<p>认知科学中的大多数研究都假设，<strong>mind（心智）</strong> 具有 <strong>mental representations（心理表征）</strong>，这些表征类似于计算机中的 <strong>data structures（数据结构）</strong>；同时，心智还具有类似于计算机 <strong>algorithms（算法）</strong> 的 <strong>computational procedures（计算过程）</strong> </p>
 
       </div>
 
@@ -198,11 +201,11 @@ window.MathJax = {
               
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/08/16/Generative%20AI%20in%20Finance/Evoalpha/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/09/25/Book%20Reading/The%20Effect/" aria-hidden="true" tabindex="-1">
     
       <canvas
   class="pixel-banner pixel-banner--card"
-  data-seed="1085f8a9"
+  data-seed="29381d9d"
   data-cols="24"
   data-rows="16"
   aria-hidden="true"
@@ -212,13 +215,13 @@ window.MathJax = {
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/08/16/Generative%20AI%20in%20Finance/Evoalpha/">Evoalpha</a>
+      <a href="/blog/2026/09/25/Book%20Reading/The%20Effect/">The Effect</a>
     </h3>
     <p class="meta">
       
-        <a href="/blog/categories/Paper-reading/">Paper reading</a>
+        <a href="/blog/categories/Book-Reading/">Book Reading</a>
       
-      <time datetime="2026-08-16T15:01:22.000Z">2026-08-16</time>
+      <time datetime="2026-09-25T12:54:58.000Z">2026-09-25</time>
     </p>
   </div>
 </article>
@@ -227,11 +230,11 @@ window.MathJax = {
               
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/08/16/Generative%20AI%20in%20Finance/Qfinzero/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/08/21/Continue%20Learning/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0/" aria-hidden="true" tabindex="-1">
     
       <canvas
   class="pixel-banner pixel-banner--card"
-  data-seed="86a685f"
+  data-seed="e88fabfd"
   data-cols="24"
   data-rows="16"
   aria-hidden="true"
@@ -241,13 +244,13 @@ window.MathJax = {
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/08/16/Generative%20AI%20in%20Finance/Qfinzero/">Qfinzero</a>
+      <a href="/blog/2026/08/21/Continue%20Learning/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0/">持续学习</a>
     </h3>
     <p class="meta">
       
-        <a href="/blog/categories/Paper-reading/">Paper reading</a>
+        <a href="/blog/categories/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0/">持续学习</a>
       
-      <time datetime="2026-08-16T15:01:06.000Z">2026-08-16</time>
+      <time datetime="2026-08-21T04:58:58.000Z">2026-08-21</time>
     </p>
   </div>
 </article>
@@ -256,11 +259,11 @@ window.MathJax = {
               
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/09/24/Cognitive%20Science/Cognitive%20Science/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/08/20/Neuro%20Sceince/Roadmap/" aria-hidden="true" tabindex="-1">
     
       <canvas
   class="pixel-banner pixel-banner--card"
-  data-seed="315fd6b1"
+  data-seed="c40194eb"
   data-cols="24"
   data-rows="16"
   aria-hidden="true"
@@ -270,13 +273,13 @@ window.MathJax = {
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/09/24/Cognitive%20Science/Cognitive%20Science/">Cognitive Science</a>
+      <a href="/blog/2026/08/20/Neuro%20Sceince/Roadmap/">Roadmap</a>
     </h3>
     <p class="meta">
       
-        <a href="/blog/categories/Cognitive-Science/">Cognitive science</a>
+        <a href="/blog/categories/%E7%A5%9E%E7%BB%8F%E7%A7%91%E5%AD%A6/">神经科学</a>
       
-      <time datetime="2026-09-24T13:00:02.835Z">2026-09-24</time>
+      <time datetime="2026-08-20T09:54:27.000Z">2026-08-20</time>
     </p>
   </div>
 </article>
