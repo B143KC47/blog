@@ -22,6 +22,7 @@
   }
 
   function paint(canvas) {
+    if (canvas.dataset.coverReady === "true" || canvas.dataset.coverManaged === "true") return;
     const cols = Number(canvas.dataset.cols) || 48;
     let rows = Number(canvas.dataset.rows) || 12;
     const rand = mulberry32(hashSeed(canvas.dataset.seed));
@@ -42,6 +43,7 @@
     canvas.style.width = "100%";
     canvas.style.height = fill ? "100%" : "auto";
     const ctx = canvas.getContext("2d");
+    if (!ctx) return;
     ctx.setTransform(scale * dpr, 0, 0, scale * dpr, 0, 0);
     ctx.fillStyle = "#000";
     ctx.fillRect(0, 0, w, h);

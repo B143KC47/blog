@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="dark">
+  <title>Cover studio · BlackCat</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/covers.css">
+  <link rel="stylesheet" href="studio.css">
+  <script src="../../js/covers.js" defer></script>
+  <script src="studio.js" defer></script>
+</head>
+<body data-cover-studio>
+  <a class="skip-link" href="#main">Skip to cover studio</a>
+  <header class="studio-bar"><a href="../../">BlackCat</a><span>Author tools / 01</span></header>
+  <main id="main" class="studio">
+    <p class="kicker">[ Cover studio ]</p>
+    <h1>Real photographs.<br>The same pixel language.</h1>
+    <p class="studio-intro">Keep the subject. Reduce the palette. Turn your photo into quiet, monochrome cover art without changing the blog’s design.</p>
+    <p class="privacy">Your selected photo stays in this browser. Nothing is uploaded automatically.</p>
+    <noscript><p>This local image editor requires JavaScript. The blog itself remains readable without it.</p></noscript>
+    <section class="studio-controls" aria-labelledby="controls-title">
+      <h2 id="controls-title">01 / Choose and compose</h2>
+      <div class="control-grid">
+        <label class="file-label">Photograph <input id="photo" type="file" accept="image/jpeg,image/png,image/webp"><small>JPEG, PNG or WebP. Up to 20 MB and 24 megapixels.</small></label>
+        <label>Use this cover for <select id="target"><option value="hero">Homepage banner</option></select></label>
+        <label>Preview crop <select id="ratio"><option value="6">Homepage · 6:1</option><option value="3">Article / featured · 3:1</option><option value="1.3333333333333333">Card · 4:3</option><option value="2">Mobile article · 2:1</option><option value="1.6">Mobile card · 16:10</option></select></label>
+        <label>File name <input id="filename" type="text" value="my-cover" pattern="[a-zA-Z0-9-]+" maxlength="64" autocomplete="off"><small>Use a unique name, for example micrograd-cover-v1.</small></label>
+        <label>Detail <output for="columns" id="columns-value">96 columns</output><input id="columns" type="range" min="32" max="160" step="16" value="96"></label>
+        <label>Grid gap <output for="gap" id="gap-value">12%</output><input id="gap" type="range" min="0" max="30" value="12"></label>
+        <label>Horizontal focal point <output for="focalX" id="focalX-value">50%</output><input id="focalX" type="range" min="0" max="100" value="50"></label>
+        <label>Vertical focal point <output for="focalY" id="focalY-value">50%</output><input id="focalY" type="range" min="0" max="100" value="50"></label>
+        <label>Contrast <output for="contrast" id="contrast-value">110%</output><input id="contrast" type="range" min="50" max="200" value="110"></label>
+        <label>Brightness <output for="brightness" id="brightness-value">100%</output><input id="brightness" type="range" min="50" max="150" value="100"></label>
+      </div>
+    </section>
+    <section aria-labelledby="preview-title">
+      <div class="section-heading"><h2 id="preview-title">02 / Check the subject</h2><button id="reset" type="button">Reset treatment</button></div>
+      <p class="hint">Choose a strong silhouette. Fine text and busy backgrounds will lose detail. Check both article and card crops before exporting.</p>
+      <div class="preview-grid">
+        <figure><div class="preview-frame"><canvas id="original" width="1200" height="200" role="img" aria-label="Original photograph crop preview"></canvas></div><figcaption>[ Original crop ]</figcaption></figure>
+        <figure><div class="preview-frame"><canvas id="processed" width="1200" height="200" role="img" aria-label="Monochrome pixel cover preview"></canvas></div><figcaption>[ BlackCat treatment ]</figcaption></figure>
+      </div>
+      <p id="status" class="studio-status" role="status" aria-live="polite">Choose a photograph to see the comparison.</p>
+    </section>
+    <section class="export-section" aria-labelledby="export-title">
+      <h2 id="export-title">03 / Export and publish</h2>
+      <p>The source download is resized to at most 1600 pixels on its longest edge. The site crops and processes it for each layout, so mobile cards retain the same subject.</p>
+      <div class="export-actions"><button id="download-source" type="button" disabled>Download optimized photo</button><button id="download-preview" type="button" disabled>Download pixel preview</button><button id="download-config" type="button" disabled>Download covers.json</button></div>
+      <p class="hint">Save the optimized photo in <code>source/images/covers/</code>, then replace the local project’s <code>source/covers.json</code> with the downloaded, merged configuration. The preview PNG is for review, not the source file.</p>
+      <label class="config-label" for="snippet">Configuration entry</label><textarea id="snippet" rows="11" readonly spellcheck="false" aria-label="Cover configuration entry"></textarea>
+      <p id="config-status" class="hint" role="status">Loading the existing cover configuration…</p>
+      <p class="hint">Downloading does not publish. Save both files in your local project; the next daily deployment includes them. See <a href="../../docs/COVERS.md">the cover guide</a> for local saving and daily deployment instructions.</p>
+    </section>
+  </main>
+</body>
+</html>

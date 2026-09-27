@@ -3,26 +3,27 @@
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>micrograd · BlackCat</title>
+  <title>micrograd：从神经元到反向传播 · BlackCat</title>
   <meta name="description" content="从零搭建 micrograd：神经元、权重、bias、激活函数（ReLU）与反向传播的直观解释，配可交互函数图像。">
   <meta name="author" content="KO Ho Tin">
   <meta name="theme-color" content="#000000">
   <meta name="color-scheme" content="dark">
   <link rel="canonical" href="https://b143kc47.github.io/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/index.html">
   <link rel="preload" href="https://cdn.jsdelivr.net/fontsource/fonts/geist-mono:vf@5.3.0/latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/blog/css/style.css?v=tables2">
+  <link rel="stylesheet" href="/blog/css/style.css?v=photo-covers-2">
+  <link rel="stylesheet" href="/blog/css/covers.css?v=2">
   
   <link rel="icon" href="/blog/avatar.jpg" type="image/jpeg">
   <meta name="description" content="从零搭建 micrograd：神经元、权重、bias、激活函数（ReLU）与反向传播的直观解释，配可交互函数图像。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="micrograd">
+<meta property="og:title" content="micrograd：从神经元到反向传播">
 <meta property="og:url" content="https://b143kc47.github.io/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/index.html">
 <meta property="og:site_name" content="BlackCat">
 <meta property="og:description" content="从零搭建 micrograd：神经元、权重、bias、激活函数（ReLU）与反向传播的直观解释，配可交互函数图像。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://b143kc47.github.io/blog/avatar.jpg">
 <meta property="article:published_time" content="2026-08-18T14:01:11.000Z">
-<meta property="article:modified_time" content="2026-09-25T13:00:03.678Z">
+<meta property="article:modified_time" content="2026-09-26T16:32:30.028Z">
 <meta property="article:author" content="KO Ho Tin">
 <meta property="article:tag" content="KO Ho Tin, BlackCat, B143KC47, blog, LLM agents, alpha mining, computer vision">
 <meta name="twitter:card" content="summary">
@@ -69,7 +70,8 @@ window.MathJax = {
     <header class="post-hero">
       <div class="post-well">
         <div class="post-cover">
-          <canvas
+          
+            <canvas
   class="pixel-banner pixel-banner--cover"
   data-seed="37194a89"
   data-cols="48"
@@ -77,6 +79,7 @@ window.MathJax = {
   aria-hidden="true"
 ></canvas>
 
+          
         </div>
         <div class="post-head">
           <p class="meta">
@@ -85,7 +88,7 @@ window.MathJax = {
               <a href="/blog/categories/Neural-Networks-Zero-to-Hero/">Neural nets</a>
             
             <time datetime="2026-08-18T14:01:11.000Z">2026-08-18</time>
-            <span>4 min read</span>
+            <span>9 min read</span>
           </p>
           <h1 class="post-title">building micrograd</h1>
           
@@ -97,16 +100,33 @@ window.MathJax = {
 
     <div class="post-well">
       <div class="prose">
-        <p>micrograd 是 andrej karpathy 所开源的一个Github学习项目,项目的初衷是让读者可以更好的学习back propagation.andrej karpathy 本人也录制过一段 Youtube 视频来进行讲解 (url:<a target="_blank" rel="noopener" href="https://youtu.be/VMj-3S1tku0?si=6qfc4FQkdIn_WmnL)%E3%80%82%E9%82%A3%E4%B9%88%E4%B8%BA%E4%BA%86%E7%90%86%E8%A7%A3">https://youtu.be/VMj-3S1tku0?si=6qfc4FQkdIn_WmnL)。那么为了理解</a> micrograd. 我们需要先从最基础的神经网络开始讲起.</p>
-<p>神经元就是一个 $f(x_1,x_2,x_3,...)$ 一个函数 输入了一堆数字<br>然后每个input 都会跟着一个weight 权重 就是 最主要是一个常数<br>高就代表这个输入很重要<br>低就代表没那么重要<br>当然也要看正负 可以看出是负影响 还是 正影响</p>
-<p>基本结构：<br>$f(x_1,x_2,x_3,...) &#x3D; Activation_function(w_1 \times x_1 + w_2\times x_2 + ... + bias)$</p>
-<p>这里可以看到在刚刚输入×权重后 还要加一个bias<br>而bias的作用是什么 为什么 + 一个bias呢</p>
-<p>bias 从几何意义上来理解<br>y &#x3D; mx + c<br>c 也就是代表着这条线可以在整个空间里面平移 </p>
-<p>机器学习 最主要是学习数据关系<br>也就是 输入 和 输出的对应关系<br>如果不允许平移 那么 如果真实数据里面是 y&#x3D; 2x + 100<br>在 输入永远 &#x3D; 0 的时候<br>如果没有bias 永远拟合不了线性的真实数据</p>
-<p>而我们最终的目的也就是 确保 x轴上  每一个x 只要调整 w 和 bias 可以触及 任意的y<br>因为我们要拟合 世界上 任意的对应关系 任何的数据形态 </p>
-<p>但是单单只有一条 直线 是不够的<br>所以我们要引入 非线性</p>
-<p>也就是 Activation function(激活函数)</p>
-<p>我们先介绍第一种 Activation function<br>ReLU:</p>
+        <h2 id="1-项目简介"><a href="#1-项目简介" class="headerlink" title="1. 项目简介"></a>1. 项目简介</h2><p>micrograd 是 andrej karpathy 所开源的一个Github学习项目，项目的初衷是让读者可以更好的学习back propagation。andrej karpathy 本人也录制过一段 Youtube 视频来进行讲解（url: <a target="_blank" rel="noopener" href="https://youtu.be/VMj-3S1tku0?si=6qfc4FQkdIn_WmnL">https://youtu.be/VMj-3S1tku0?si=6qfc4FQkdIn_WmnL</a>）。那么为了理解（<a target="_blank" rel="noopener" href="https://youtu.be/VMj-3S1tku0?si=6qfc4FQkdIn_WmnL">https://youtu.be/VMj-3S1tku0?si=6qfc4FQkdIn_WmnL</a>），那么为了理解 micrograd。我们需要先从最基础的神经网络开始讲起。</p>
+<h2 id="2-神经网络基础"><a href="#2-神经网络基础" class="headerlink" title="2. 神经网络基础"></a>2. 神经网络基础</h2><h3 id="2-1-神经元与权重"><a href="#2-1-神经元与权重" class="headerlink" title="2.1 神经元与权重"></a>2.1 神经元与权重</h3><p>神经元就是一个 $f(x_1,x_2,x_3,...)$，一个函数，输入了一堆数字。</p>
+<p>然后每个input 都会跟着一个weight 权重，就是，最主要是一个常数。</p>
+<p>高就代表这个输入很重要；低就代表没那么重要。</p>
+<p>当然也要看正负，可以看出是负影响，还是 正影响。</p>
+<h3 id="2-2-神经元的基本结构"><a href="#2-2-神经元的基本结构" class="headerlink" title="2.2 神经元的基本结构"></a>2.2 神经元的基本结构</h3><p>基本结构：</p>
+<p>$$<br>f(x_1,x_2,x_3,...) &#x3D; Activation_function(w_1 \times x_1 + w_2\times x_2 + ... + bias)<br>$$</p>
+<pre class="mermaid">flowchart LR
+    X1[&quot;x_1&quot;] --&gt;|w_1| S[&quot;加权求和&quot;]
+    X2[&quot;x_2&quot;] --&gt;|w_2| S
+    XN[&quot;...&quot;] --&gt; S
+    S --&gt; B[&quot;+ bias&quot;]
+    B --&gt; A[&quot;Activation function&quot;]
+    A --&gt; F[&quot;f(x_1,x_2,x_3,...)&quot;]</pre>
+
+<h3 id="2-3-bias-的作用"><a href="#2-3-bias-的作用" class="headerlink" title="2.3 bias 的作用"></a>2.3 bias 的作用</h3><p>这里可以看到，在刚刚输入×权重后，还要加一个bias。</p>
+<p>而bias的作用是什么？为什么 + 一个bias呢？</p>
+<p>bias 从几何意义上来理解：</p>
+<p>$$<br>y &#x3D; mx + c<br>$$</p>
+<p>c 也就是代表着这条线可以在整个空间里面平移。</p>
+<p>机器学习，最主要是学习数据关系，也就是 输入 和 输出的对应关系。</p>
+<p>如果不允许平移，那么，如果真实数据里面是 $y&#x3D; 2x + 100$，在 输入永远 &#x3D; 0 的时候，如果没有bias，永远拟合不了线性的真实数据。</p>
+<p>而我们最终的目的也就是，确保 x轴上 每一个x，只要调整 w 和 bias，可以触及 任意的y。</p>
+<p>因为我们要拟合 世界上 任意的对应关系，任何的数据形态。</p>
+<h3 id="2-4-Activation-function-与-ReLU"><a href="#2-4-Activation-function-与-ReLU" class="headerlink" title="2.4 Activation function 与 ReLU"></a>2.4 Activation function 与 ReLU</h3><p>但是单单只有一条 直线，是不够的，所以我们要引入 <strong>非线性</strong>。</p>
+<p>也就是 Activation function（激活函数）。</p>
+<p>我们先介绍第一种 Activation function，ReLU：</p>
 <div id="desmos-graph-1" class="desmos-graph" style="height:400px;"></div>
 <script>
 (function () {
@@ -147,11 +167,12 @@ window.MathJax = {
 })();
 </script>
 
-<p>其实也就是创造一个折点 在几何意义上</p>
-<p>那我们现在画一个最简单的神经网络 长这样(2个输入 3个隐藏神经元 1个输出):</p>
+<p>其实也就是创造一个折点，在几何意义上。</p>
+<h3 id="2-5-神经网络的连接结构"><a href="#2-5-神经网络的连接结构" class="headerlink" title="2.5 神经网络的连接结构"></a>2.5 神经网络的连接结构</h3><p>那我们现在画一个最简单的神经网络，长这样（2个输入、3个隐藏神经元、1个输出）：</p>
 <p><img src="/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/nn-diagram.svg" alt="最简单的神经网络：2输入 3隐藏 1输出"></p>
-<p>每条连线就是一个权重w 每个神经元做的是 加权求和 再过一个Activation function</p>
-<p>为什么一定要非线性?<br>如果每个神经元都只是线性加权求和 那不管叠多少层 组合起来还是一条直线:</p>
+<p>每条连线就是一个权重w，每个神经元做的是 加权求和，再过一个Activation function。</p>
+<h3 id="2-6-线性变换的局限"><a href="#2-6-线性变换的局限" class="headerlink" title="2.6 线性变换的局限"></a>2.6 线性变换的局限</h3><p>为什么一定要非线性？</p>
+<p>如果每个神经元都只是线性加权求和，那不管叠多少层，组合起来还是一条直线：</p>
 <div class="gpt-graph" id="gpt-graph-1" style="height:380px;--graph-h:380px;">
   <div class="gpt-graph-panel">
     <div class="gpt-graph-title" data-tex="y = mx + b"></div>
@@ -270,8 +291,8 @@ window.MathJax = {
 })();
 </script>
 
-<p>拖动左边m b的滑条 怎么调都只是一条直线 永远拟合不了sin(x)</p>
-<p>但是只要加上ReLU这种非线性 把几个ReLU加起来 曲线就开始拐弯了:</p>
+<p>拖动左边m b的滑条，怎么调都只是一条直线，永远拟合不了sin(x)。</p>
+<h3 id="2-7-多个-ReLU-的组合"><a href="#2-7-多个-ReLU-的组合" class="headerlink" title="2.7 多个 ReLU 的组合"></a>2.7 多个 ReLU 的组合</h3><p>但是只要加上ReLU这种非线性，把几个ReLU加起来，曲线就开始拐弯了：</p>
 <div class="gpt-graph" id="gpt-graph-2" style="height:380px;--graph-h:380px;">
   <div class="gpt-graph-panel">
     <div class="gpt-graph-title" data-tex="y = \sum_{i=1}^{4} c_i \max(0, x - p_i)"></div>
@@ -404,28 +425,136 @@ window.MathJax = {
 })();
 </script>
 
-<p>拖动c₁到c₄的滑条 可以看到分段线性的曲线可以一点点逼近sin(x)<br>神经元的数量越多 拐弯的点越多 就能逼近越复杂的函数<br>这就是为什么神经网络一定要加Activation function</p>
-<p>简单介绍完基本的神经网络结构就可以来说一下 micrograd 了</p>
-<p>micrograd 是一个 autograd engine 就是自动梯度的机器 </p>
+<p>拖动c₁到c₄的滑条，可以看到分段线性的曲线可以一点点逼近sin(x)。</p>
+<p>神经元的数量越多，拐弯的点越多，就能逼近越复杂的函数。</p>
+<p>这就是为什么神经网络一定要加Activation function。</p>
+<h2 id="3-micrograd-与-backpropagation"><a href="#3-micrograd-与-backpropagation" class="headerlink" title="3. micrograd 与 backpropagation"></a>3. micrograd 与 backpropagation</h2><p>简单介绍完基本的神经网络结构，就可以来说一下 micrograd 了。</p>
+<h3 id="3-1-autograd-engine"><a href="#3-1-autograd-engine" class="headerlink" title="3.1 autograd engine"></a>3.1 autograd engine</h3><p>micrograd 是一个 <strong>autograd engine</strong>，就是自动梯度的机器。</p>
 <ul>
-<li>也就是Implement backpropagation 向后传播</li>
+<li>也就是Implement backpropagation，向后传播。</li>
 </ul>
-<p>backpropagation 向后传播解释</p>
-<p>整个Neural Network的目的例如说 我们想要这个神经网络去拟合一种数据分布对吧<br>首先整个的流程就是<br>Feed input -&gt; Process -&gt; Output </p>
-<p>然后看看结果如何</p>
-<p>那如何衡量结果 我们就需要loss function </p>
-<p>有了 loss function 之后 知道做的好不好了 </p>
-<p>我们就需要去改良 (也就是去调整权重和bias)</p>
-<p>举出一个简单的例子</p>
-<p>Mean Squared Error - MSE</p>
+<h3 id="3-2-从输入、输出到-Loss-function"><a href="#3-2-从输入、输出到-Loss-function" class="headerlink" title="3.2 从输入、输出到 Loss function"></a>3.2 从输入、输出到 Loss function</h3><p><strong>backpropagation 向后传播解释</strong></p>
+<p>整个Neural Network的目的，例如说，我们想要这个神经网络去拟合一种数据分布，对吧？</p>
+<p>首先整个的流程就是：</p>
+<p><code>Feed input -&gt; Process -&gt; Output</code></p>
+<p>然后看看结果如何。</p>
+<p>那如何衡量结果？我们就需要loss function。</p>
+<p>有了 loss function 之后，知道做的好不好了。</p>
+<p>我们就需要去改良（也就是去调整权重和bias）。</p>
+<pre class="mermaid">flowchart LR
+    I[&quot;Feed input&quot;] --&gt; P[&quot;Process&quot;]
+    P --&gt; O[&quot;Output&quot;]
+    O --&gt; L[&quot;loss function&quot;]
+    L --&gt; U[&quot;调整权重和bias&quot;]
+    U --&gt; P</pre>
+
+<h3 id="3-3-Mean-Squared-Error（MSE）"><a href="#3-3-Mean-Squared-Error（MSE）" class="headerlink" title="3.3 Mean Squared Error（MSE）"></a>3.3 Mean Squared Error（MSE）</h3><p>举出一个简单的例子：</p>
+<p><strong>Mean Squared Error - MSE</strong></p>
 <p>$$<br>MSE &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n}(y_i-\hat{y}_i)^2<br>$$</p>
-<p>有了Loss function 之后 我们的步骤就到了如何改进<br>那么改进 需要 gradient （梯度）</p>
-<p>梯度的意思就是在 那一变量的对整个函数的影响 就是 如果增加一个无穷小量 dx 如何影响整个函数</p>
-<p>让L 作为 Loss function</p>
-<p>dL&#x2F;dL 是1 </p>
-<p>L &#x3D; tanh(wx + c)</p>
-<p>dL&#x2F;dw &#x3D; dL&#x2F;d(wx+c) d(wx +c)&#x2F;dw<br>只要用微积分的法则 例如多变量微积分是将其他的变量当成常熟，嵌套函数就是chain rule 就可以算出 某个具体变量的梯度</p>
-<p>知道梯度是 x 增加一个dx y的上涨<br>那么为了最小化L 可以学习率乘一个负导数<br>因为x 如果+dx是增加 L 那么 -dx 就是减少L 这样可以让Loss function 变小<br>而学习率就是变小多少 防止直接跳过了minimum</p>
+<h3 id="3-4-gradient-与-chain-rule"><a href="#3-4-gradient-与-chain-rule" class="headerlink" title="3.4 gradient 与 chain rule"></a>3.4 gradient 与 chain rule</h3><p>有了Loss function 之后，我们的步骤就到了如何改进。</p>
+<p>那么改进，需要 <strong>gradient（梯度）</strong>。</p>
+<p>梯度的意思就是在 那一变量的对整个函数的影响，就是，如果增加一个无穷小量 dx，如何影响整个函数。</p>
+<p>让L 作为 Loss function。</p>
+<p><code>dL/dL</code> 是1。</p>
+<p>$$<br>L &#x3D; tanh(wx + c)<br>$$</p>
+<p>$$<br>dL&#x2F;dw &#x3D; dL&#x2F;d(wx+c); d(wx +c)&#x2F;dw<br>$$</p>
+<p>只要用微积分的法则，例如多变量微积分是将其他的变量当成常熟，嵌套函数就是chain rule，就可以算出 某个具体变量的梯度。</p>
+<h3 id="3-5-学习率与最小化-Loss"><a href="#3-5-学习率与最小化-Loss" class="headerlink" title="3.5 学习率与最小化 Loss"></a>3.5 学习率与最小化 Loss</h3><p>知道梯度是 x 增加一个dx，y的上涨。</p>
+<p>那么为了最小化L，可以学习率乘一个负导数。</p>
+<p>因为x 如果+dx是增加 L，那么 -dx 就是减少L，这样可以让Loss function 变小。</p>
+<p>而学习率就是变小多少，防止直接跳过了minimum。</p>
+<h2 id="4-Python-与-Value-类的实现"><a href="#4-Python-与-Value-类的实现" class="headerlink" title="4. Python 与 Value 类的实现"></a>4. Python 与 Value 类的实现</h2><h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><p>在python 里面，我们最主要使用OOP（Object oriented programing）。</p>
+<p>我们要从最小的部分开始（分治法）。</p>
+<h3 id="4-1-初始化：-init"><a href="#4-1-初始化：-init" class="headerlink" title="4.1 初始化：__init__"></a>4.1 初始化：<code>__init__</code></h3><p>创造一个名为 value 的class。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Value</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self,x,_children=(<span class="hljs-params"></span>)</span>):<br>        <span class="hljs-variable language_">self</span>.data = x<br>        <span class="hljs-variable language_">self</span>.grad = <span class="hljs-number">0.0</span><br>        <span class="hljs-variable language_">self</span>._backward = <span class="hljs-keyword">lambda</span>: <span class="hljs-literal">None</span><br>        <span class="hljs-variable language_">self</span>._prev = <span class="hljs-built_in">set</span>(_children)<br></code></pre></td></tr></table></figure>
+
+<p>在初始化一个 value 的时候，它就是类似一种新的data type，是用来装数值的。</p>
+<h3 id="4-2-加法：-add"><a href="#4-2-加法：-add" class="headerlink" title="4.2 加法：__add__"></a>4.2 加法：<code>__add__</code></h3><p>并且我们要定义加法减法，等等，让python 可以识别我们对于这种自创的class 的操作。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">__add__</span>(<span class="hljs-params">self,other</span>):<br>    other = other <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(other,Value) <span class="hljs-keyword">else</span> Value(other)<br>    out = Value(<span class="hljs-variable language_">self</span>.data + other.data,(<span class="hljs-variable language_">self</span>,other))<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">_backward</span>():<br>        <span class="hljs-variable language_">self</span>.grad += <span class="hljs-number">1.0</span> * out.grad<br>        other.grad += <span class="hljs-number">1.0</span> * out.grad<br>    out._backward = _backward<br>    <span class="hljs-keyword">return</span> out<br></code></pre></td></tr></table></figure>
+
+<p>这里isinstance 就是判断Other 是不是 Value 这个类的，不是我们就转换成value，我们这个自定义的class。</p>
+<p>Value的第二个参数就是提供一个可以追溯的，因为我们最后要做Back propagation，所以就是我们会需要我之前做过每个操作的history。</p>
+<p>这里的backward 也很容易理解，就是基本的危机分。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">x = a + b <span class="hljs-comment"># x 是新的</span><br></code></pre></td></tr></table></figure>
+
+<p>那么如何算 <code>dx/da</code>？那就是treat other as constant。</p>
+<p>所以是：</p>
+<p>$$<br>dx&#x2F;da &#x3D; 1 + db&#x2F;da &#x3D; 1.0<br>$$</p>
+<p>那out.grad 是怎来？因为我们最终是要 <code>dL/da</code>，let&#39;s say。</p>
+<p>所以out.grad 就是 <code>dL/dx * dx/da = dL/da</code>，所以 <code>dL/da = 1* dL/dx</code>，这里的 <code>dL/dx</code> 就是 <code>out.grad</code>。</p>
+<pre class="mermaid">flowchart LR
+    A[&quot;a&quot;] --&gt; X[&quot;x = a + b&quot;]
+    B[&quot;b&quot;] --&gt; X</pre>
+
+<h3 id="4-3-对象表示：-repr"><a href="#4-3-对象表示：-repr" class="headerlink" title="4.3 对象表示：__repr__"></a>4.3 对象表示：<code>__repr__</code></h3><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">__repr__</span>(<span class="hljs-params">self</span>):<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">f&quot;data is: <span class="hljs-subst">&#123;self.data&#125;</span>&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>纯粹是，我们如果直接 call x 的时候，会出现什么。</p>
+<h3 id="4-4-乘法：-mul"><a href="#4-4-乘法：-mul" class="headerlink" title="4.4 乘法：__mul__"></a>4.4 乘法：<code>__mul__</code></h3><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">__mul__</span>(<span class="hljs-params">self,other</span>):<br>    other = other <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(other,Value) <span class="hljs-keyword">else</span> Value(other)<br>    out = Value(<span class="hljs-variable language_">self</span>.data * other.data,(<span class="hljs-variable language_">self</span>,other))<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">_backward</span>():<br>        <span class="hljs-variable language_">self</span>.grad += other.data * out.grad<br>        other.grad += <span class="hljs-variable language_">self</span>.data * out.grad<br>    out._backward = _backward<br>    <span class="hljs-keyword">return</span> out<br></code></pre></td></tr></table></figure>
+
+<p>mul 也是和add一样，不过转成了 乘法。</p>
+<p>还是推理一下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><code class="hljs text">x = a*b<br><br>dx/da = b<br><br>dL/dx * dx/da = dL/da<br>b * out.grad = dL/da<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-5-取负：-neg"><a href="#4-5-取负：-neg" class="headerlink" title="4.5 取负：__neg__"></a>4.5 取负：<code>__neg__</code></h3><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">__neg__</span>(<span class="hljs-params">self</span>): <span class="hljs-comment"># -self</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span> * -<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<p>这里是 negative，也就是 - self。</p>
+<h3 id="4-6-减法：-sub"><a href="#4-6-减法：-sub" class="headerlink" title="4.6 减法：__sub__"></a>4.6 减法：<code>__sub__</code></h3><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">__sub__</span>(<span class="hljs-params">self, other</span>): <span class="hljs-comment"># self - other</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span> + (-other)<br></code></pre></td></tr></table></figure>
+
+<p>这里subtract 的话就不用再写一遍了，直接套用 + 的那个方法就行。</p>
+<h3 id="4-7-反向减法：-rsub"><a href="#4-7-反向减法：-rsub" class="headerlink" title="4.7 反向减法：__rsub__"></a>4.7 反向减法：<code>__rsub__</code></h3><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">__rsub__</span>(<span class="hljs-params">self, other</span>): <span class="hljs-comment"># other - self</span><br>    <span class="hljs-keyword">return</span> other + (-<span class="hljs-variable language_">self</span>)<br></code></pre></td></tr></table></figure>
+
+<p>定义 other -self。</p>
+<h3 id="4-8-反向乘法：-rmul"><a href="#4-8-反向乘法：-rmul" class="headerlink" title="4.8 反向乘法：__rmul__"></a>4.8 反向乘法：<code>__rmul__</code></h3><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">__rmul__</span>(<span class="hljs-params">self, other</span>): <span class="hljs-comment"># other * self</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span> * other<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-9-反向加法：-radd"><a href="#4-9-反向加法：-radd" class="headerlink" title="4.9 反向加法：__radd__"></a>4.9 反向加法：<code>__radd__</code></h3><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">__radd__</span>(<span class="hljs-params">self, other</span>): <span class="hljs-comment"># other + self</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span> + other<br></code></pre></td></tr></table></figure>
+
+<hr>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">tanh</span>(<span class="hljs-params">self</span>):<br>    x = <span class="hljs-variable language_">self</span>.data<br>    t = (math.exp(<span class="hljs-number">2</span>*x) - <span class="hljs-number">1</span>)/(math.exp(<span class="hljs-number">2</span>*x) + <span class="hljs-number">1</span>)<br>    out = Value(t, (<span class="hljs-variable language_">self</span>, ))<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">_backward</span>():<br>        <span class="hljs-variable language_">self</span>.grad += (<span class="hljs-number">1</span> - t**<span class="hljs-number">2</span>) * out.grad<br>    out._backward = _backward<br>    <span class="hljs-keyword">return</span> out<br></code></pre></td></tr></table></figure>
+
+<p>然后是tanh 这个方法，就是加个 activation function，引入非线性，稍微推理一下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><code class="hljs text">x = tanh(a)<br><br>dX / da = d/da tanh(a)<br></code></pre></td></tr></table></figure>
+
+<p>wiki : <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Hyperbolic_functions">https://en.wikipedia.org/wiki/Hyperbolic_functions</a></p>
+<p>tanh(a)的导数wiki 有，所以是 <code>1- tanh(x)^2</code>。tanh又是由 e define 的，所以我们从math lib 引用一些函数用用来组成tanh，当然这里转ReLu那些都行。</p>
+<h3 id="然后就是最重要的方法"><a href="#然后就是最重要的方法" class="headerlink" title="然后就是最重要的方法"></a>然后就是最重要的方法</h3><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">backward</span>(<span class="hljs-params">self</span>):<br><br>    <span class="hljs-comment"># topological order all of the children in the graph</span><br>    topo = []<br>    visited = <span class="hljs-built_in">set</span>()<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">build_topo</span>(<span class="hljs-params">v</span>):<br>        <span class="hljs-keyword">if</span> v <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> visited:<br>            visited.add(v)<br>            <span class="hljs-keyword">for</span> child <span class="hljs-keyword">in</span> v._prev:<br>                build_topo(child)<br>            topo.append(v)<br>    build_topo(<span class="hljs-variable language_">self</span>)<br><br>    <span class="hljs-comment"># go one variable at a time and apply the chain rule to get its gradient</span><br>    <span class="hljs-variable language_">self</span>.grad = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> <span class="hljs-built_in">reversed</span>(topo):<br>        v._backward()<br></code></pre></td></tr></table></figure>
+
+<p>backward 首先我们创造了 <code>topo</code> 一个list 和 <code>visited</code> 一个 set。为什么要用set？首先我们需要获取所有的child，也就是需要做gradient 的child，set 是不重复的，收录所有的child，可以确保child 只看了一次。</p>
+<pre class="mermaid">flowchart TD
+    B[&quot;build_topo(v)&quot;] --&gt; Q&amp;#123;&quot;v not in visited&quot;&amp;#125;
+    Q --&gt;|是| V[&quot;visited.add(v)&quot;]
+    Q --&gt;|否| R[&quot;return&quot;]
+    V --&gt; F&amp;#123;&quot;for child in v._prev&quot;&amp;#125;
+    F --&gt;|还有 child| C[&quot;build_topo(child)&quot;]
+    C --&gt;|recursion 返回| F
+    F --&gt;|for loop 结束| A[&quot;topo.append(v)&quot;]
+    A --&gt; R</pre>
+
+<p>然后我们就开始进行 topological order，也就是 从 output 开始，最顶端 output的child，再到 output child 的 child（这里使用了recursion function calling itself）。</p>
+<p>例如我 <code>x = a + b</code>，那么 topo 里面会有 <code>a,b,x</code>。</p>
+<p><strong>topo里面是有order的，set 是无order，并且只记录一次的（确保所有node遍历过）。</strong></p>
+<p>因为它是处理完child 之后才会处理自己，<code>topo.append(v)</code> 在 for loop 后面，然后 for loop 里面有recursion，是处理for loop 里面的 recursion 先，然后就导致我们的list，x是在最后的。</p>
+<pre class="mermaid">sequenceDiagram
+    participant X as build_topo(x)
+    participant A as build_topo(a)
+    participant B as build_topo(b)
+    participant T as topo
+    X-&gt;&gt;A: build_topo(a)
+    A-&gt;&gt;T: topo.append(a)
+    A--&gt;&gt;X: return
+    X-&gt;&gt;B: build_topo(b)
+    B-&gt;&gt;T: topo.append(b)
+    B--&gt;&gt;X: return
+    X-&gt;&gt;T: topo.append(x)
+    Note over T: [a,b,x]</pre>
+
+<p>然后我们因为要从最顶端开始，所以是 <code>reversed</code>，从顶端的output，然后因为 node gradient已经有了，我们定义过 <code>dL/dL = 1</code>，然后利用local derivative + chain rule，计算child 的gradient，这样。</p>
+<pre class="mermaid">flowchart TD
+    T[&quot;topo = [a,b,x]&quot;] --&gt; R[&quot;reversed(topo)&quot;]
+    R --&gt; O[&quot;[x,b,a]&quot;]
+    O --&gt; V[&quot;v._backward()&quot;]
+    S[&quot;self.grad = 1&lt;br/&gt;dL/dL = 1&quot;] --&gt; V
+    V --&gt; C[&quot;local derivative + chain rule&quot;]
+    C --&gt; G[&quot;child 的gradient&quot;]</pre>
 
       </div>
 
@@ -441,35 +570,6 @@ window.MathJax = {
             <a class="keep-all" href="/blog/archives/">View all</a>
           </div>
           <div class="card-grid">
-            
-              
-
-<article class="card">
-  <a class="card-media" href="/blog/2026/09/25/Cognitive%20Science/Cognitive%20Science/" aria-hidden="true" tabindex="-1">
-    
-      <canvas
-  class="pixel-banner pixel-banner--card"
-  data-seed="315fd6b1"
-  data-cols="24"
-  data-rows="16"
-  aria-hidden="true"
-></canvas>
-
-    
-  </a>
-  <div class="card-body">
-    <h3 class="card-title">
-      <a href="/blog/2026/09/25/Cognitive%20Science/Cognitive%20Science/">Cognitive Science</a>
-    </h3>
-    <p class="meta">
-      
-        <a href="/blog/categories/Cognitive-Science/">Cognitive science</a>
-      
-      <time datetime="2026-09-25T13:00:03.668Z">2026-09-25</time>
-    </p>
-  </div>
-</article>
-
             
               
 
@@ -495,6 +595,35 @@ window.MathJax = {
         <a href="/blog/categories/Book-Reading/">Book Reading</a>
       
       <time datetime="2026-09-25T12:54:58.000Z">2026-09-25</time>
+    </p>
+  </div>
+</article>
+
+            
+              
+
+<article class="card">
+  <a class="card-media" href="/blog/2026/09/21/Cognitive%20Science/Cognitive%20Science/" aria-hidden="true" tabindex="-1">
+    
+      <canvas
+  class="pixel-banner pixel-banner--card"
+  data-seed="315fd6b1"
+  data-cols="24"
+  data-rows="16"
+  aria-hidden="true"
+></canvas>
+
+    
+  </a>
+  <div class="card-body">
+    <h3 class="card-title">
+      <a href="/blog/2026/09/21/Cognitive%20Science/Cognitive%20Science/">Cognitive Science</a>
+    </h3>
+    <p class="meta">
+      
+        <a href="/blog/categories/Cognitive-Science/">Cognitive science</a>
+      
+      <time datetime="2026-09-21T14:20:45.000Z">2026-09-21</time>
     </p>
   </div>
 </article>
@@ -650,8 +779,7 @@ window.MathJax = {
   </div>
 </footer>
 
-    
-<script src="/blog/js/main.js"></script>
-
+    <script src="/blog/js/main.js?v=2"></script>
+    <script src="/blog/js/covers.js?v=2"></script>
   </body>
 </html>
