@@ -1046,7 +1046,6 @@ summary:focus-visible {
 .prose .mermaid foreignObject div,
 .prose .mermaid foreignObject span,
 .prose .mermaid foreignObject p,
-.prose .mermaid .actor,
 .prose .mermaid .messageText,
 .prose .mermaid .loopText,
 .prose .mermaid .noteText,
@@ -1171,14 +1170,20 @@ summary:focus-visible {
 
 .desmos-graph .dcg-container,
 .gpt-graph-canvas .dcg-container {
-  background: #000 !important;
   max-width: 100% !important;
   min-width: 0 !important;
+  background: #000;
 }
 
-.desmos-graph .dcg-grapher,
-.gpt-graph-canvas .dcg-grapher {
-  filter: invert(1);
+.desmos-graph .dcg-container canvas,
+.desmos-graph .dcg-container svg,
+.desmos-graph .dcg-container img,
+.gpt-graph .dcg-container canvas,
+.gpt-graph .dcg-container svg,
+.gpt-graph .dcg-container img {
+  max-width: none;
+  height: unset;
+  display: unset;
 }
 
 .desmos-graph .dcg-graphpaper-branding,
@@ -1339,26 +1344,69 @@ mjx-container[display="true"] {
   padding: 0;
 }
 
+.hljs {
+  color: #e6e6e6;
+}
+
 .hljs-comment,
 .hljs-quote {
-  color: var(--muted);
+  color: #8b949e;
+  font-style: italic;
 }
 
 .hljs-keyword,
 .hljs-selector-tag,
-.hljs-addition {
-  color: var(--text);
+.hljs-addition,
+.hljs-type {
+  color: #ff7b72;
   font-weight: 600;
 }
 
 .hljs-string,
-.hljs-attribute {
-  color: #cfcfcf;
+.hljs-attribute,
+.hljs-attr,
+.hljs-regexp {
+  color: #7ee787;
 }
 
 .hljs-number,
 .hljs-literal {
-  color: #bdbdbd;
+  color: #ffa657;
+}
+
+.hljs-subst,
+.hljs-variable,
+.hljs-variable.language_ {
+  color: #ffa657;
+}
+
+.hljs-title.function_,
+.hljs-title.function {
+  color: #d2a8ff;
+  font-weight: 500;
+}
+
+.hljs-title,
+.hljs-title.class_,
+.hljs-title.class {
+  color: #79c0ff;
+  font-weight: 500;
+}
+
+.hljs-built_in,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #79c0ff;
+}
+
+.hljs-params {
+  color: #e6e6e6;
+}
+
+.hljs-meta,
+.hljs-doctag {
+  color: #d2a8ff;
 }
 
 .post-foot {

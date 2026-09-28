@@ -17,9 +17,27 @@
 .card:focus-within .card-media, .featured:focus-within .featured-media { outline: 1px solid var(--text); outline-offset: 4px; }
 :is(a, button, input, select, textarea, summary):focus-visible { outline: 2px solid var(--text, #e6e6e6); outline-offset: 4px; }
 .nav-link, .series-link { display: inline-flex; align-items: center; min-height: 2.25rem; }
-.series-link.is-on { color: var(--text); text-decoration: underline; text-underline-offset: 0.4em; }
+.series-nav {
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-width: 100%;
+}
+.series-link {
+  white-space: nowrap;
+  border: 1px solid var(--line);
+  padding: 0.4rem 0.75rem;
+  text-decoration: none;
+  line-height: 1.3;
+  min-height: 2.75rem;
+}
+.series-link.is-on {
+  background: var(--text);
+  color: #000;
+  text-decoration: none;
+}
+.series-link.is-on:hover { opacity: 1; }
 .prose h2, .prose h3, .prose h4 { scroll-margin-top: 1.5rem; }
-.article-outline { max-width: 760px; margin: 1.5rem auto 2rem; border-block: 1px solid var(--line, #333); font-size: 0.875rem; }
+.article-outline { max-width: 38rem; margin: 1.5rem auto 2rem; border-block: 1px solid var(--line, #333); font-size: 0.875rem; }
 .article-outline summary { padding: 0.85rem 0; cursor: pointer; }
 .article-outline nav { padding: 0 0.25rem 1rem; max-height: 24rem; overflow: auto; }
 .article-outline ul { list-style: none; margin: 0; padding: 0; }
@@ -28,12 +46,186 @@
 @media (max-width: 40rem) {
   .card-media { aspect-ratio: 16 / 10; }
   .pixel-banner--featured, .pixel-banner--cover, .featured-media img, .post-cover img { aspect-ratio: 2 / 1; }
+  .prose:not(.prose-ui) { font-size: 1.0625rem; }
   .post-hero { padding-top: 2rem; }
   .row { flex-wrap: wrap; gap: 0.35rem 1rem; }
   .row-meta { flex-wrap: wrap; }
 }
+/* Reading column: about 33–40 CJK characters, separate from wide figures. */
+.post-head,
+.lede,
+.featured-excerpt,
+.prose:not(.prose-ui) p,
+.prose:not(.prose-ui) h2,
+.prose:not(.prose-ui) h3,
+.prose:not(.prose-ui) h4,
+.prose:not(.prose-ui) ul,
+.prose:not(.prose-ui) ol,
+.prose:not(.prose-ui) blockquote {
+  max-width: 38rem;
+}
+.prose:not(.prose-ui) {
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+.prose:not(.prose-ui) p { margin-top: 1.15em; }
+.prose:not(.prose-ui) h4 { color: var(--text); }
+.lede { color: #cfcfcf; }
+.prose ::selection,
+.post-title ::selection,
+.lede ::selection {
+  background: #e6e6e6;
+  color: #000;
+}
+.article-outline summary {
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+}
+.article-outline a { padding-block: 0.45rem; }
+.read-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 30;
+  pointer-events: none;
+  background: transparent;
+}
+.read-progress span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--text);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
 @media (prefers-reduced-motion: reduce) { html:focus-within { scroll-behavior: auto; } }
 @media (forced-colors: active) { .article-outline { border-color: CanvasText; } }
-/* Inline MathJax otherwise remains an inline box, where overflow cannot scroll. */
-.prose mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; vertical-align: middle; overflow-x: auto; overflow-y: hidden; }
+/* Inline math stays in the sentence. A scrollbar there is the assistive MathML
+   box, not a formula that is wider than the line. */
+mjx-container { overflow: visible; }
+.prose mjx-container:not([display="true"]) {
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: middle;
+  overflow: visible;
+}
+mjx-container mjx-assistive-mml {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+}
+.prose p:has(mjx-container[display="true"]) { max-width: 100%; }
+mjx-container[display="true"] {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+/* Hexo wraps code in a table cell. The article table rule was capping that cell at 20rem. */
+.prose .highlight table {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  table-layout: fixed;
+}
+.prose .highlight td,
+.prose .highlight th {
+  position: static;
+  left: auto;
+  min-width: 0;
+  max-width: none;
+  width: auto;
+  box-shadow: none;
+  background: transparent;
+}
+.prose > .highlight,
+.prose > pre:not(.mermaid) {
+  margin-top: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+.prose .highlight {
+  overflow: hidden;
+}
+.prose .highlight pre {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 1.15rem 1.25rem 1.25rem;
+}
+.code-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.45rem 0.35rem 1.15rem;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+}
+.code-lang {
+  font-family: var(--font);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  color: #bdbdbd;
+}
+.code-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--line);
+  cursor: pointer;
+}
+.code-copy svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+.code-copy:hover {
+  background: var(--text);
+  color: #000;
+}
+.code-copy:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+/* Sequence actors were painted with the text color, so the label disappeared. */
+.prose .mermaid rect.actor {
+  fill: #141414 !important;
+  stroke: #d4d4d4 !important;
+  stroke-width: 1.25px !important;
+}
+.prose .mermaid text.actor,
+.prose .mermaid .messageText,
+.prose .mermaid .noteText,
+.prose .mermaid .loopText {
+  fill: #f2f2f2 !important;
+  color: #f2f2f2 !important;
+}
+.prose .mermaid .node rect,
+.prose .mermaid .node polygon,
+.prose .mermaid .label-container {
+  stroke: rgba(230, 230, 230, 0.72) !important;
+}
+.prose .mermaid .edgePath .path,
+.prose .mermaid .flowchart-link,
+.prose .mermaid line.messageLine0,
+.prose .mermaid line.messageLine1,
+.prose .mermaid .actor-line {
+  stroke: #bdbdbd !important;
+}
 :where(.table-scroll, .prose pre, .prose mjx-container)[tabindex="0"]:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }

@@ -97,6 +97,85 @@
       return /^https?:$/.test(url.protocol) && url.origin === origin ? url.href : null;
     } catch (_) { return null; }
   }
+  function layoutRatio(className, width, height) {
+    const cls = String(className || "");
+    if (cls.includes("pixel-banner--card")) {
+      return width > 0 && height > 0 ? width / height : 4 / 3;
+    }
+    if (cls.includes("pixel-banner--hero")) return 6;
+    if (cls.includes("pixel-banner--featured") || cls.includes("pixel-banner--cover")) return 3;
+    if (cls.includes("pixel-banner--rule")) return 8;
+    return 3;
+  }
+  function hashSeed(str) {
+    let h = 2166136261;
+    const s = String(str || "simplism");
+    for (let i = 0; i < s.length; i++) {
+      h ^= s.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return h >>> 0;
+  }
+  function mulberry32(seed) {
+    let t = seed >>> 0;
+    return function () {
+      t += 0x6d2b79f5;
+      let r = Math.imul(t ^ (t >>> 15), 1 | t);
+      r ^= r + Math.imul(r ^ (r >>> 7), 61 | r);
+      return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  // Same 8-level tiles, gap and dither as a Cover Studio photograph.
+  function paintSeed(canvas) {
+    if (!canvas || canvas.dataset.coverReady === "true" || canvas.dataset.coverManaged === "true") return;
+    const card = canvas.classList.contains("pixel-banner--card");
+    canvas.style.width = "100%";
+    canvas.style.height = card ? "100%" : "auto";
+    const parent = canvas.parentElement;
+    const boxW = canvas.clientWidth || (parent ? parent.clientWidth : 0);
+    const boxH = canvas.clientHeight || (card && parent ? parent.clientHeight : 0);
+    const ratio = boxW > 0 && boxH > 0
+      ? boxW / boxH
+      : layoutRatio(canvas.className, parent ? parent.clientWidth : 0, parent ? parent.clientHeight : 0);
+    const o = options({
+      columns: canvas.classList.contains("pixel-banner--card") ? 48 : 96,
+      gap: 0.12, contrast: 1.1, brightness: 1, dither: 0.2
+    });
+    const cols = o.columns;
+    const rows = Math.max(1, Math.round(cols / ratio));
+    const view = canvas.ownerDocument.defaultView || window;
+    const dpr = Math.min(view.devicePixelRatio || 1, 2);
+    const cssW = boxW || canvas.clientWidth || 960;
+    canvas.width = Math.round(Math.min(1600, Math.max(160, cssW * dpr)));
+    canvas.height = Math.max(1, Math.round(canvas.width / ratio));
+    canvas.style.width = "100%";
+    canvas.style.height = canvas.classList.contains("pixel-banner--card") ? "100%" : "auto";
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    const rand = mulberry32(hashSeed(canvas.dataset.seed));
+    const cx = cols * (0.28 + rand() * 0.44);
+    const cy = rows * (0.28 + rand() * 0.44);
+    const sx = 2.2 + rand() * 3.4;
+    const sy = 2.8 + rand() * 4.2;
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const dx = (x - cx) / cols;
+        const dy = (y - cy) / rows;
+        const radial = Math.exp(-(dx * dx * sx + dy * dy * sy));
+        const byte = Math.round(Math.max(0, Math.min(1, 0.08 + radial * 0.9)) * 255);
+        const gray = tone(byte, byte, byte, 255, x, y, o);
+        ctx.fillStyle = "rgb(" + gray + "," + gray + "," + gray + ")";
+        const left = Math.round(x * canvas.width / cols);
+        const top = Math.round(y * canvas.height / rows);
+        const right = Math.round((x + 1 - o.gap) * canvas.width / cols);
+        const bottom = Math.round((y + 1 - o.gap) * canvas.height / rows);
+        ctx.fillRect(left, top, Math.max(1, right - left), Math.max(1, bottom - top));
+      }
+    }
+    canvas.dataset.coverField = "studio";
+  }
   function boot(doc) {
     const win = doc.defaultView;
     const script = doc.currentScript;
@@ -104,6 +183,7 @@
     const nodes = Array.from(doc.querySelectorAll(
       ".pixel-banner--hero, .pixel-banner--featured, .pixel-banner--card, .pixel-banner--cover"
     ));
+    nodes.forEach(paintSeed);
     const jobs = new Map();
     const images = new Map();
     function load(src) {
@@ -210,8 +290,9 @@
       function focusScrollers() {
         win.cancelAnimationFrame(pending);
         pending = win.requestAnimationFrame(() => {
-          prose.querySelectorAll(".table-scroll, pre:not(.mermaid), mjx-container").forEach(node => {
-            const overflows = node.scrollWidth > node.clientWidth + 1;
+          prose.querySelectorAll(".table-scroll, .highlight pre, pre:not(.mermaid), mjx-container[display='true']").forEach(node => {
+            if (node.closest(".highlight") && node.tagName !== "PRE") return;
+            const overflows = node.scrollWidth > node.clientWidth + 8;
             if (overflows && !node.hasAttribute("tabindex")) {
               node.tabIndex = 0; node.dataset.coverScrollFocus = "true";
             } else if (!overflows && node.dataset.coverScrollFocus === "true") {
@@ -230,9 +311,11 @@
         const details = doc.createElement("details");
         details.className = "article-outline";
         const summary = doc.createElement("summary");
-        summary.textContent = "On this page";
+        const lang = (doc.documentElement.lang || "").toLowerCase();
+        summary.textContent = lang.startsWith("zh") ? "目录" : "Contents";
+        if (win.matchMedia && win.matchMedia("(min-width: 960px)").matches) details.open = true;
         const nav = doc.createElement("nav");
-        nav.setAttribute("aria-label", "Article sections");
+        nav.setAttribute("aria-label", lang.startsWith("zh") ? "目录" : "Article sections");
         const list = doc.createElement("ul");
         headings.forEach((heading, index) => {
           if (!heading.id) {
@@ -250,6 +333,41 @@
         nav.append(list); details.append(summary, nav); prose.before(details);
       }
     }
+    if (prose) {
+      const bar = doc.createElement("div");
+      bar.className = "read-progress";
+      bar.setAttribute("role", "progressbar");
+      bar.setAttribute("aria-label", langLabel(doc));
+      bar.setAttribute("aria-valuemin", "0");
+      bar.setAttribute("aria-valuemax", "100");
+      bar.setAttribute("aria-valuenow", "0");
+      const fill = doc.createElement("span");
+      bar.append(fill);
+      doc.body.append(bar);
+      const tick = () => {
+        const start = prose.getBoundingClientRect().top + win.scrollY;
+        const span = Math.max(1, prose.offsetHeight - win.innerHeight * 0.35);
+        const value = Math.max(0, Math.min(1, (win.scrollY - start) / span));
+        fill.style.transform = "scaleX(" + value + ")";
+        bar.setAttribute("aria-valuenow", String(Math.round(value * 100)));
+      };
+      tick();
+      win.addEventListener("scroll", tick, { passive: true });
+      win.addEventListener("resize", tick);
+    }
+    let seedTimer = 0;
+    win.addEventListener("resize", () => {
+      win.clearTimeout(seedTimer);
+      seedTimer = win.setTimeout(() => {
+        doc.querySelectorAll(".pixel-banner[data-cover-field='studio']").forEach(node => {
+          if (node.dataset.coverReady === "true") return;
+          paintSeed(node);
+        });
+      }, 120);
+    });
   }
-  return { options, cropRect, tone, draw, pathKey, localSource, boot };
+  function langLabel(doc) {
+    return (doc.documentElement.lang || "").toLowerCase().startsWith("zh") ? "阅读进度" : "Reading progress";
+  }
+  return { options, cropRect, tone, draw, pathKey, localSource, layoutRatio, paintSeed, boot };
 });

@@ -22,7 +22,7 @@
   }
 
   function paint(canvas) {
-    if (canvas.dataset.coverReady === "true" || canvas.dataset.coverManaged === "true") return;
+    if (canvas.dataset.coverReady === "true" || canvas.dataset.coverManaged === "true" || canvas.dataset.coverField === "studio") return;
     const cols = Number(canvas.dataset.cols) || 48;
     let rows = Number(canvas.dataset.rows) || 12;
     const rand = mulberry32(hashSeed(canvas.dataset.seed));
@@ -70,6 +70,72 @@
   function paintAll() {
     document.querySelectorAll(".pixel-banner").forEach(paint);
   }
+
+  function codeText(block) {
+    const code = block.querySelector("code");
+    return (code ? code.innerText : block.innerText).replace(/\n$/, "");
+  }
+  function writeClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+    return new Promise(function (resolve, reject) {
+      const area = document.createElement("textarea");
+      area.value = text;
+      area.setAttribute("readonly", "");
+      area.style.position = "fixed";
+      area.style.left = "-9999px";
+      document.body.appendChild(area);
+      area.select();
+      const ok = document.execCommand("copy");
+      area.remove();
+      if (ok) resolve();
+      else reject(new Error("copy failed"));
+    });
+  }
+  function mountCodeBlock(block) {
+    if (block.querySelector(":scope > .code-bar")) return;
+    const code = block.querySelector("code");
+    const names = Array.from((code || block).classList);
+    const language = names.find(function (name) { return name !== "hljs" && name !== "highlight" && name !== "code"; }) || "";
+    const zh = (document.documentElement.lang || "").toLowerCase().indexOf("zh") === 0;
+    const copyIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="8" y="8" width="12" height="12"/><path d="M4 16V4h12"/></svg>';
+    const doneIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12.5 10 17.5 19 7"/></svg>';
+    const idleLabel = zh ? "复制代码" : "Copy code";
+    const doneLabel = zh ? "已复制" : "Copied";
+    const bar = document.createElement("div");
+    bar.className = "code-bar";
+    if (language) {
+      const label = document.createElement("span");
+      label.className = "code-lang";
+      label.textContent = language;
+      bar.appendChild(label);
+    } else {
+      bar.appendChild(document.createElement("span"));
+    }
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "code-copy";
+    button.innerHTML = copyIcon;
+    button.setAttribute("aria-label", idleLabel);
+    button.addEventListener("click", function () {
+      writeClipboard(codeText(block)).then(function () {
+        button.innerHTML = doneIcon;
+        button.setAttribute("aria-label", doneLabel);
+        window.setTimeout(function () {
+          button.innerHTML = copyIcon;
+          button.setAttribute("aria-label", idleLabel);
+        }, 1600);
+      }).catch(function () {
+        button.setAttribute("aria-label", zh ? "复制失败" : "Copy failed");
+      });
+    });
+    bar.appendChild(button);
+    block.insertBefore(bar, block.firstChild);
+  }
+  document.querySelectorAll(".prose figure.highlight").forEach(mountCodeBlock);
+  document.querySelectorAll(".prose pre").forEach(function (node) {
+    if (node.classList.contains("mermaid") || node.closest("figure.highlight")) return;
+    mountCodeBlock(node);
+  });
 
   paintAll();
   let timer = 0;
