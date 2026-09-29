@@ -23,7 +23,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://b143kc47.github.io/blog/avatar.jpg">
 <meta property="article:published_time" content="2026-08-18T14:01:11.000Z">
-<meta property="article:modified_time" content="2026-09-28T13:00:01.746Z">
+<meta property="article:modified_time" content="2026-09-29T13:00:02.517Z">
 <meta property="article:author" content="KO Ho Tin">
 <meta property="article:tag" content="KO Ho Tin, BlackCat, B143KC47, blog, LLM agents, alpha mining, computer vision">
 <meta name="twitter:card" content="summary">
@@ -88,7 +88,7 @@ window.MathJax = {
               <a href="/blog/categories/Neural-Networks-Zero-to-Hero/">Neural-Networks-Zero-to-Hero</a>
             
             <time datetime="2026-08-18T14:01:11.000Z">2026-08-18</time>
-            <span>9 min read</span>
+            <span>12 min read</span>
           </p>
           <h1 class="post-title">building micrograd</h1>
           
@@ -599,6 +599,22 @@ window.MathJax = {
     V --&gt; C[&quot;local derivative + chain rule&quot;]
     C --&gt; G[&quot;child 的gradient&quot;]</pre>
 
+<p>以上就是整个engine的代码解析</p>
+<h2 id="那么我们如何制作一个最简单的神经网络来进行back-propagation呢？"><a href="#那么我们如何制作一个最简单的神经网络来进行back-propagation呢？" class="headerlink" title="那么我们如何制作一个最简单的神经网络来进行back propagation呢？"></a>那么我们如何制作一个最简单的神经网络来进行back propagation呢？</h2><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> Engine <span class="hljs-keyword">import</span> Value<br><span class="hljs-keyword">import</span> random<br></code></pre></td></tr></table></figure>
+
+<h3 id="制作最基础的神经元"><a href="#制作最基础的神经元" class="headerlink" title="制作最基础的神经元"></a>制作最基础的神经元</h3><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Neuron</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, nin</span>):<br>        <span class="hljs-variable language_">self</span>.w = [Value(random.uniform(-<span class="hljs-number">1</span>,<span class="hljs-number">1</span>)) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(nin)]<br>        <span class="hljs-variable language_">self</span>.b = Value(random.uniform(-<span class="hljs-number">1</span>,<span class="hljs-number">1</span>))<br>    <span class="hljs-comment"># 这里是首先初始化就是给予随机数值</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__call__</span>(<span class="hljs-params">self,x</span>):<br>        out = <span class="hljs-built_in">sum</span> ( (x1*w1 <span class="hljs-keyword">for</span> x1,w1 <span class="hljs-keyword">in</span> ( <span class="hljs-built_in">zip</span> (x,<span class="hljs-variable language_">self</span>.w))),<span class="hljs-variable language_">self</span>.b)<br>        <span class="hljs-keyword">return</span> out.tanh()<br>    <span class="hljs-comment"># tanh(wx + wx + b )</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">parameters</span>(<span class="hljs-params">self</span>):<br>        out = <span class="hljs-variable language_">self</span>.w + [<span class="hljs-variable language_">self</span>.b]<br>        <span class="hljs-keyword">return</span> out<br>    <span class="hljs-comment"># 可以调的参数 只有 b和 w 可以调 x是输入</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Layers</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self,nin,nneu</span>):<br>        <span class="hljs-variable language_">self</span>.n = [Neuron(nin) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(nneu)]<br>    <span class="hljs-comment"># nin 是多少个输入 就是一个神经元的多少个 x 然后 nneu 是多少个神经元</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__call__</span>(<span class="hljs-params">self, x</span>):<br>        out = [ni(x) <span class="hljs-keyword">for</span> ni <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.n]<br>        <span class="hljs-keyword">return</span> out<br>    <span class="hljs-comment">#输出是一个list 储存各个神经元的输出</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">parameters</span>(<span class="hljs-params">self</span>):<br>        out = [p <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.n <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> i.parameters()]<br>        <span class="hljs-keyword">return</span> out<br>    <span class="hljs-comment"># for i in self.n  这里的i 是每个神经元 i(x) = 神经元(x) 然后再来一个for p in i.parameters 就是从每个神经元中拿出其可以修改的参数</span><br></code></pre></td></tr></table></figure>
+
+<p>我们需要可以弄一个 每个layer 几层 几层 因为可能我们最后只需要输出一个值这样</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MLP</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span> (<span class="hljs-variable language_">self</span>,nin,nouts):<br>        sz = [nin] + nouts<br>        <span class="hljs-comment">#list 的拼接 那么 nin 是神经元的输入数量 nouts 是每个layers 有多少个 神经元 例如 [4,4,1] 就是第一层4个 第二层4个 最后一个</span><br>        <span class="hljs-comment"># 我们拼接出来例如说是 [3,4,4,1]</span><br>        <span class="hljs-variable language_">self</span>.layers = [Layers(sz[_],sz[_+<span class="hljs-number">1</span>]) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(sz)-<span class="hljs-number">1</span>)]<br>        <span class="hljs-comment"># 然后开始做初始化 那么我们要创造layers Layer的每一层的输入 是上一层的神经元（输出数量） 所以我们要做for loop 来就是对list 进行增加</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><code class="hljs text">3 -&gt; 4 -&gt; 4 -&gt; 1<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">__call__</span>(<span class="hljs-params">self,x</span>):<br>    <span class="hljs-keyword">for</span> layer <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.layers:<br>        x = layer(x)<br>    <span class="hljs-keyword">return</span> x<br><span class="hljs-comment"># __call__ 调用的时候 例如 MLP(x)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">parameters</span>(<span class="hljs-params">self</span>):<br>    out = [p <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.layers <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> i.parameters()]<br>    <span class="hljs-keyword">return</span> out<br><span class="hljs-comment"># 获取parameters 当成一个list</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 1. 建立我们的神经网络模型 (MLP)</span><br><span class="hljs-comment"># 输入特征是3个，然后经过两个各4个神经元的隐层，最后输出1个数</span><br>n = MLP(<span class="hljs-number">3</span>, [<span class="hljs-number">4</span>, <span class="hljs-number">4</span>, <span class="hljs-number">1</span>])<br><br><span class="hljs-comment"># 我们可以看看总共有多少个参数</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Total parameters: <span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(n.parameters())&#125;</span>&quot;</span>)<br><br><span class="hljs-comment"># 2. 准备数据集 (随便写的 :P)</span><br>Training_data = [<br>  [<span class="hljs-number">2.0</span>, <span class="hljs-number">3.0</span>, -<span class="hljs-number">1.0</span>],<br>  [<span class="hljs-number">3.0</span>, -<span class="hljs-number">1.0</span>, <span class="hljs-number">0.5</span>],<br>  [<span class="hljs-number">0.5</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">1.0</span>],<br>  [<span class="hljs-number">1.0</span>, <span class="hljs-number">1.0</span>, -<span class="hljs-number">1.0</span>],<br>]<br>y_expe = [<span class="hljs-number">1.0</span>, -<span class="hljs-number">1.0</span>, -<span class="hljs-number">1.0</span>, <span class="hljs-number">1.0</span>] <span class="hljs-comment"># 每个 x 对应的期望输出目标</span><br><br><span class="hljs-comment"># 我们先做一次前向传播，看看没经过训练的网络会输出什么乱七八糟的结果</span><br>y_pred = [n(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> Training_data]<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;初始未训练时的预测值:&quot;</span>)<br><span class="hljs-built_in">print</span>(y_pred)<br><br><span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">20</span>):<br>    y_pred = [n(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> Training_data]<br>    loss = <span class="hljs-built_in">sum</span>((yout[<span class="hljs-number">0</span>]-ygt)*(yout[<span class="hljs-number">0</span>]-ygt) <span class="hljs-keyword">for</span> ygt, yout <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(y_expe, y_pred))<br>    <span class="hljs-keyword">for</span> p_i <span class="hljs-keyword">in</span> n.parameters():<br>        p_i.grad = <span class="hljs-number">0.0</span><br>    <span class="hljs-comment">#设置每个parameters的gradient</span><br>    loss.backward()<br>    <span class="hljs-comment">#然后开始做backward 给每个parameter assign gradient</span><br><br>    <span class="hljs-keyword">for</span> p_i <span class="hljs-keyword">in</span> n.parameters():<br>        p_i.data += -<span class="hljs-number">0.01</span>* p_i.grad<br>    <span class="hljs-comment">#这里的0.01就是leanring rate了 然后 -就是我们说的走slope的反方向！</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;step<span class="hljs-subst">&#123;k&#125;</span> loss:<span class="hljs-subst">&#123;loss.data&#125;</span>&quot;</span>)<br><br>y_pred = [n(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> Training_data]<br>y_pred<br></code></pre></td></tr></table></figure>
+
       </div>
 
       <footer class="post-foot">
@@ -617,11 +633,11 @@ window.MathJax = {
               
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/09/25/Book%20Reading/The%20Effect/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/09/29/Neural-Networks-Zero-to-Hero/makemore/" aria-hidden="true" tabindex="-1">
     
       <canvas
   class="pixel-banner pixel-banner--card"
-  data-seed="29381d9d"
+  data-seed="6aa6f95a"
   data-cols="48"
   data-rows="36"
   aria-hidden="true"
@@ -631,13 +647,13 @@ window.MathJax = {
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/09/25/Book%20Reading/The%20Effect/">The Effect</a>
+      <a href="/blog/2026/09/29/Neural-Networks-Zero-to-Hero/makemore/">makemore</a>
     </h3>
     <p class="meta">
       
-        <a href="/blog/categories/Book-Reading/">Book Reading</a>
+        <a href="/blog/categories/Neural-Networks-Zero-to-Hero/">Neural-Networks-Zero-to-Hero</a>
       
-      <time datetime="2026-09-25T12:54:58.000Z">2026-09-25</time>
+      <time datetime="2026-09-29T03:55:38.000Z">2026-09-29</time>
     </p>
   </div>
 </article>
@@ -646,11 +662,11 @@ window.MathJax = {
               
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/09/21/Cognitive%20Science/Cognitive%20Science/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/09/29/Economics/Analysis/Analysis%20Principle/" aria-hidden="true" tabindex="-1">
     
       <canvas
   class="pixel-banner pixel-banner--card"
-  data-seed="315fd6b1"
+  data-seed="a592790b"
   data-cols="48"
   data-rows="36"
   aria-hidden="true"
@@ -660,13 +676,13 @@ window.MathJax = {
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/09/21/Cognitive%20Science/Cognitive%20Science/">Cognitive Science</a>
+      <a href="/blog/2026/09/29/Economics/Analysis/Analysis%20Principle/">Analysis Principle</a>
     </h3>
     <p class="meta">
       
-        <a href="/blog/categories/Cognitive-Science/">Cognitive Science</a>
+        <a href="/blog/categories/Economics/">Economics</a>
       
-      <time datetime="2026-09-21T14:20:45.000Z">2026-09-21</time>
+      <time datetime="2026-09-29T06:33:40.000Z">2026-09-29</time>
     </p>
   </div>
 </article>
@@ -675,11 +691,11 @@ window.MathJax = {
               
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/08/21/Continue%20Learning/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/09/29/Economics/Analysis/United%20State/" aria-hidden="true" tabindex="-1">
     
       <canvas
   class="pixel-banner pixel-banner--card"
-  data-seed="e88fabfd"
+  data-seed="7d1f3f57"
   data-cols="48"
   data-rows="36"
   aria-hidden="true"
@@ -689,13 +705,13 @@ window.MathJax = {
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/08/21/Continue%20Learning/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0/">持续学习</a>
+      <a href="/blog/2026/09/29/Economics/Analysis/United%20State/">United State</a>
     </h3>
     <p class="meta">
       
-        <a href="/blog/categories/Continue-Learning/">Continue Learning</a>
+        <a href="/blog/categories/Economics/">Economics</a>
       
-      <time datetime="2026-08-21T04:58:58.000Z">2026-08-21</time>
+      <time datetime="2026-09-29T06:33:26.000Z">2026-09-29</time>
     </p>
   </div>
 </article>

@@ -1,0 +1,65 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#F7F6F2"/>
+
+  <!-- Main typography -->
+  <text x="118" y="400"
+        font-family="Inter, Helvetica Neue, Arial, sans-serif"
+        font-size="154"
+        font-weight="700"
+        letter-spacing="-8"
+        fill="#111111">micrograd</text>
+
+  <!-- Accent + rule -->
+  <rect x="122" y="452" width="72" height="6" rx="3" fill="#FF5C2A"/>
+  <rect x="210" y="454.5" width="600" height="1.5" fill="#1B1B1B" opacity="0.34"/>
+
+  <!-- Subtitle -->
+  <text x="122" y="518"
+        font-family="Inter, Helvetica Neue, Arial, sans-serif"
+        font-size="28"
+        font-weight="400"
+        letter-spacing="7"
+        fill="#1A1A1A">BUILDING BACKPROPAGATION FROM SCRATCH</text>
+
+  <text x="122" y="565"
+        font-family="PingFang SC, Noto Sans CJK SC, Microsoft YaHei, Arial, sans-serif"
+        font-size="24"
+        font-weight="400"
+        letter-spacing="4"
+        fill="#77736E">从神经元到反向传播</text>
+
+  <!-- Mathematical mark -->
+  <rect x="1325" y="308" width="1.5" height="128" fill="#111111" opacity="0.25"/>
+  <text x="1390" y="380"
+        font-family="STIX Two Math, Times New Roman, serif"
+        font-size="55"
+        font-style="italic"
+        fill="#171717">∂L</text>
+  <line x1="1386" y1="394" x2="1454" y2="394" stroke="#171717" stroke-width="1.8"/>
+  <text x="1390" y="442"
+        font-family="STIX Two Math, Times New Roman, serif"
+        font-size="55"
+        font-style="italic"
+        fill="#171717">∂w</text>
+
+  <!-- Footer system -->
+  <text x="84" y="795"
+        font-family="Inter, Helvetica Neue, Arial, sans-serif"
+        font-size="14"
+        font-weight="500"
+        letter-spacing="5"
+        fill="#65615D">SMALL IDEAS</text>
+  <text x="84" y="822"
+        font-family="Inter, Helvetica Neue, Arial, sans-serif"
+        font-size="14"
+        font-weight="500"
+        letter-spacing="5"
+        fill="#65615D">DEEPER UNDERSTANDING</text>
+
+  <text x="1245" y="818"
+        font-family="Inter, Helvetica Neue, Arial, sans-serif"
+        font-size="14"
+        font-weight="500"
+        letter-spacing="5"
+        fill="#65615D">AI / ML / FROM SCRATCH</text>
+</svg>
