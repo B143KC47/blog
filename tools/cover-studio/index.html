@@ -24,16 +24,17 @@
     <section class="studio-controls" aria-labelledby="controls-title">
       <h2 id="controls-title">01 / Choose and compose</h2>
       <div class="control-grid">
-        <label class="file-label">Photograph <input id="photo" type="file" accept="image/jpeg,image/png,image/webp"><small>JPEG, PNG or WebP. Up to 20 MB and 24 megapixels.</small></label>
+        <label class="file-label">Cover image <input id="photo" type="file" accept="image/jpeg,image/png,image/webp,image/svg+xml"><small>JPEG, PNG, WebP or SVG. Up to 20 MB and 24 megapixels.</small></label>
         <label>Use this cover for <select id="target"><option value="hero">Homepage banner</option></select></label>
-        <label>Preview crop <select id="ratio"><option value="6">Homepage · 6:1</option><option value="3">Article / featured · 3:1</option><option value="1.3333333333333333">Card · 4:3</option><option value="2">Mobile article · 2:1</option><option value="1.6">Mobile card · 16:10</option></select></label>
+        <label>Preview crop <select id="ratio"><option value="6">Homepage · 6:1</option><option value="3">Article / featured · 3:1</option><option value="2">Mobile article · 2:1</option><option value="1.7777777777777777">Full artwork / cards · 16:9</option></select></label>
         <label>File name <input id="filename" type="text" value="my-cover" pattern="[a-zA-Z0-9-]+" maxlength="64" autocomplete="off"><small>Use a unique name, for example micrograd-cover-v1.</small></label>
         <label>Detail <output for="columns" id="columns-value">96 columns</output><input id="columns" type="range" min="32" max="160" step="16" value="96"></label>
-        <label>Grid gap <output for="gap" id="gap-value">12%</output><input id="gap" type="range" min="0" max="30" value="12"></label>
+        <label>Grid gap <output for="gap" id="gap-value">6%</output><input id="gap" type="range" min="0" max="30" value="6"></label>
         <label>Horizontal focal point <output for="focalX" id="focalX-value">50%</output><input id="focalX" type="range" min="0" max="100" value="50"></label>
         <label>Vertical focal point <output for="focalY" id="focalY-value">50%</output><input id="focalY" type="range" min="0" max="100" value="50"></label>
         <label>Contrast <output for="contrast" id="contrast-value">110%</output><input id="contrast" type="range" min="50" max="200" value="110"></label>
         <label>Brightness <output for="brightness" id="brightness-value">100%</output><input id="brightness" type="range" min="50" max="150" value="100"></label>
+        <label>Dark paper <input id="invert" type="checkbox"><small>Invert light artwork for a dark cover with brighter lettering.</small></label>
       </div>
     </section>
     <section aria-labelledby="preview-title">
@@ -49,7 +50,7 @@
       <h2 id="export-title">03 / Export and publish</h2>
       <p>The source download is resized to at most 1600 pixels on its longest edge. The site crops and processes it for each layout, so mobile cards retain the same subject.</p>
       <div class="export-actions"><button id="download-source" type="button" disabled>Download optimized photo</button><button id="download-preview" type="button" disabled>Download pixel preview</button><button id="download-config" type="button" disabled>Download covers.json</button></div>
-      <p class="hint">Save the optimized photo in <code>source/images/covers/</code>, then replace the local project’s <code>source/covers.json</code> with the downloaded, merged configuration. The preview PNG is for review, not the source file.</p>
+      <p class="hint">Save the optimized photo in <code>source/images/covers/</code> and its merged configuration in <code>source/covers.json</code>. For a finished pixel cover, export the Full artwork · 16:9 PNG and follow the processed notebook-cover workflow in <a href="../../docs/COVERS.md">the cover guide</a>.</p>
       <label class="config-label" for="snippet">Configuration entry</label><textarea id="snippet" rows="11" readonly spellcheck="false" aria-label="Cover configuration entry"></textarea>
       <p id="config-status" class="hint" role="status">Loading the existing cover configuration…</p>
       <p class="hint">Downloading does not publish. Save both files in your local project; the next daily deployment includes them. See <a href="../../docs/COVERS.md">the cover guide</a> for local saving and daily deployment instructions.</p>

@@ -8,7 +8,8 @@
   function settings() {
     return engine.options({ columns: $("columns").value, gap: $("gap").value / 100,
       focalX: $("focalX").value / 100, focalY: $("focalY").value / 100,
-      contrast: $("contrast").value / 100, brightness: $("brightness").value / 100 });
+      contrast: $("contrast").value / 100, brightness: $("brightness").value / 100,
+      invert: $("invert").checked });
   }
   function name() {
     return ($("filename").value.replace(/[^a-zA-Z0-9-]/g, "-").replace(/^-+|-+$/g, "").slice(0, 64) || "my-cover").toLowerCase();
@@ -35,7 +36,7 @@
       $("download-source").disabled = false;
       $("download-preview").disabled = false;
     } catch (_) {
-      $("status").textContent = "This image could not be processed. Try a smaller JPEG, PNG or WebP.";
+      $("status").textContent = "This image could not be processed. Try a smaller JPEG, PNG, WebP or SVG.";
       $("download-source").disabled = $("download-preview").disabled = $("download-config").disabled = true;
     }
   }
@@ -49,8 +50,8 @@
     if (objectURL) URL.revokeObjectURL(objectURL);
     objectURL = null;
     if (!file) { $("status").textContent = "Choose a photograph to see the comparison."; return; }
-    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type) || file.size > 20 * 1024 * 1024) {
-      $("status").textContent = "Choose a JPEG, PNG or WebP under 20 MB."; return;
+    if (!["image/jpeg", "image/png", "image/webp", "image/svg+xml"].includes(file.type) || file.size > 20 * 1024 * 1024) {
+      $("status").textContent = "Choose a JPEG, PNG, WebP or SVG under 20 MB."; return;
     }
     $("status").textContent = "Preparing the local preview…";
     objectURL = URL.createObjectURL(file);
@@ -66,12 +67,14 @@
     candidate.src = objectURL;
   });
   controls.forEach(id => $(id).addEventListener("input", schedule));
+  $("invert").addEventListener("change", schedule);
   $("ratio").addEventListener("change", schedule);
   $("filename").addEventListener("input", sync);
   $("target").addEventListener("change", () => { $("ratio").value = $("target").value === "hero" ? "6" : "3"; render(); });
   $("reset").addEventListener("click", () => {
-    const defaults = { columns: 96, gap: 12, focalX: 50, focalY: 50, contrast: 110, brightness: 100 };
-    controls.forEach(id => { $(id).value = defaults[id]; }); render();
+    const defaults = { columns: 96, gap: 6, focalX: 50, focalY: 50, contrast: 110, brightness: 100 };
+    controls.forEach(id => { $(id).value = defaults[id]; });
+    $("invert").checked = false; render();
   });
   function download(blob, filename) {
     const url = URL.createObjectURL(blob);

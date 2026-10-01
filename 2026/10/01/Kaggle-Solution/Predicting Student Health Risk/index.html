@@ -3,27 +3,27 @@
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Alphabench · BlackCat</title>
-  <meta name="description" content="论文笔记：AlphaBench —— 在公式化 Alpha 因子挖掘的完整工作流中，大语言模型适合扮演什么角色：因子公式生成器、不做回测的因子评审员、接收回测反馈不断提出新候选的搜索器。">
+  <title>Predicting Student Health Risk · BlackCat</title>
+  <meta name="description" content="Notes by KO Ho Tin (BlackCat) on LLM agents, formulaic alpha-factor mining, computer vision, and research tooling.">
   <meta name="author" content="KO Ho Tin">
   <meta name="theme-color" content="#000000">
   <meta name="color-scheme" content="dark">
-  <link rel="canonical" href="https://b143kc47.github.io/blog/2026/08/17/Paper-Learning/Alphabench/index.html">
+  <link rel="canonical" href="https://b143kc47.github.io/blog/2026/10/01/Kaggle-Solution/Predicting%20Student%20Health%20Risk/index.html">
   <link rel="preload" href="https://cdn.jsdelivr.net/fontsource/fonts/geist-mono:vf@5.3.0/latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/blog/css/style.css?v=reader-5">
   <link rel="stylesheet" href="/blog/css/covers.css?v=reader-8">
   
   <link rel="icon" href="/blog/avatar.jpg" type="image/jpeg">
-  <meta name="description" content="论文笔记：AlphaBench —— 在公式化 Alpha 因子挖掘的完整工作流中，大语言模型适合扮演什么角色：因子公式生成器、不做回测的因子评审员、接收回测反馈不断提出新候选的搜索器。">
+  <meta name="description" content="Kaggle Competition (URL) : https:&#x2F;&#x2F;www.kaggle.com&#x2F;competitions&#x2F;playground-series-s6e7  题目背景每一行是一个学生健康状况的记录，然后我们的target 是预测 health_condition (qualitative, ordinal )： health_condition要预测的状态：   at-risk">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Alphabench">
-<meta property="og:url" content="https://b143kc47.github.io/blog/2026/08/17/Paper-Learning/Alphabench/index.html">
+<meta property="og:title" content="Predicting Student Health Risk">
+<meta property="og:url" content="https://b143kc47.github.io/blog/2026/10/01/Kaggle-Solution/Predicting%20Student%20Health%20Risk/index.html">
 <meta property="og:site_name" content="BlackCat">
-<meta property="og:description" content="论文笔记：AlphaBench —— 在公式化 Alpha 因子挖掘的完整工作流中，大语言模型适合扮演什么角色：因子公式生成器、不做回测的因子评审员、接收回测反馈不断提出新候选的搜索器。">
+<meta property="og:description" content="Kaggle Competition (URL) : https:&#x2F;&#x2F;www.kaggle.com&#x2F;competitions&#x2F;playground-series-s6e7  题目背景每一行是一个学生健康状况的记录，然后我们的target 是预测 health_condition (qualitative, ordinal )： health_condition要预测的状态：   at-risk">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://b143kc47.github.io/blog/avatar.jpg">
-<meta property="article:published_time" content="2026-08-16T16:19:02.000Z">
-<meta property="article:modified_time" content="2026-09-08T06:30:18.968Z">
+<meta property="article:published_time" content="2026-09-30T17:47:01.000Z">
+<meta property="article:modified_time" content="2026-09-30T17:47:01.504Z">
 <meta property="article:author" content="KO Ho Tin">
 <meta property="article:tag" content="KO Ho Tin, BlackCat, B143KC47, blog, LLM agents, alpha mining, computer vision">
 <meta name="twitter:card" content="summary">
@@ -73,7 +73,7 @@ window.MathJax = {
           
             <canvas
   class="pixel-banner pixel-banner--cover"
-  data-seed="cfc60df1"
+  data-seed="4873a8d0"
   data-cols="96"
   data-rows="32"
   aria-hidden="true"
@@ -85,14 +85,12 @@ window.MathJax = {
           <p class="meta">
             
             
-              <a href="/blog/categories/Paper-Learning/">Paper-Learning</a>
+              <a href="/blog/categories/Kaggle-Solution/">Kaggle-Solution</a>
             
-            <time datetime="2026-08-16T16:19:02.000Z">2026-08-17</time>
-            <span>4 min read</span>
+            <time datetime="2026-09-30T17:47:01.000Z">2026-10-01</time>
+            <span>3 min read</span>
           </p>
-          <h1 class="post-title">ALPHABENCH: BENCHMARKING LARGE LANGUAGE MODELS IN FORMULAIC ALPHA FACTOR MINING</h1>
-          
-            <p class="lede">论文笔记：AlphaBench —— 在公式化 Alpha 因子挖掘的完整工作流中，大语言模型适合扮演什么角色：因子公式生成器、不做回测的因子评审员、接收回测反馈不断提出新候选的搜索器。</p>
+          <h1 class="post-title">Predicting Student Health Risk</h1>
           
         </div>
       </div>
@@ -100,89 +98,82 @@ window.MathJax = {
 
     <div class="post-well">
       <div class="prose">
-        <p>研究的问题：</p>
-<p>在“ Alpha 因子挖掘”的完整工作流中，大语言模型究竟适合扮演什么角色？&quot;</p>
-<p>三个角色：</p>
+        <p>Kaggle Competition (URL) : <a target="_blank" rel="noopener" href="https://www.kaggle.com/competitions/playground-series-s6e7">https://www.kaggle.com/competitions/playground-series-s6e7</a> </p>
+<h1 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h1><p>每一行是一个学生健康状况的记录，然后我们的target 是预测 <code>health_condition</code> (qualitative, ordinal )：</p>
+<p>health_condition要预测的状态： </p>
 <ul>
-<li>因子公式生成器</li>
-<li>不看数据、不做回测的因子评审员</li>
-<li>接收回测反馈、不断提出新候选的搜索器</li>
+<li>at-risk </li>
+<li>fit</li>
+<li>unhealthy</li>
 </ul>
-<p>理解Alpha Factor:</p>
-<p>Alpha Factor 是一个用量化指标（历史价格 成交量）等等有数据的量化指标 计算出来的一个数学表达</p>
-<p>例如 动量因子：<br>$$<br>f_{i,t} &#x3D; \frac{Close_{i,t}-Close_{i,t-20}}{Close_{i,t-20}}<br>$$</p>
-<p>Qlib DSL中：<br>Div(<br>    Sub($close, Ref($close, 20)),<br>    Add(Ref($close, 20), 1e-12)<br>)</p>
-<p>每天对所有股票计算因子的值，然后根据因子值从高到低排名。之后可以构造一个多空组合：</p>
-<p>买入因子值高的股票；<br>卖出或者低配因子值低的股票。</p>
-<p>这是因为因子可能与股价上涨有正相关 值高则上涨的相关性更高 负相关则相反<br>背后也可以有类似的金融逻辑解释<br>动量因子这里 使用 当前收盘价-20天前的收盘价&#x2F;(20天前的收盘价) 这里算的是 新的收盘价上涨的幅度相较于20天前的收盘是百分之多少<br>这里可以合理解释为<br>价格上涨多 -&gt; 市场认为其上涨动力强 -&gt; 更多人追高 -&gt; 价格可能继续上涨</p>
-<p>如何判断因子有没有预测力呢</p>
-<p>论文当中使用 IC (Information coefficient):<br>$$<br>IC_t &#x3D; Corr_i(f_{i,t},r_{i,t+1})<br>$$</p>
-<p>IC的数值理解为<br>IC &gt; 0 : 因子和股价是正相关，越高相关性越高<br>IC &#x3D; 0 : 完全的无相关<br>IC &lt; 0 : 因子和股价是负相关,越负负相关性越高</p>
-<p>ICIR (Information Coefficient Information Ratio) 是预测能力的稳定性</p>
-<ul>
-<li>RankIC</li>
-<li>Win Rate</li>
-<li>Skewness</li>
-</ul>
-<p>论文中建立了什么benchmark</p>
+<p>训练集有 690,088 行，测试集有 295,753 行。输入有 13 个feature：</p>
 <div class="table-scroll"><table>
 <thead>
 <tr>
-<th>任务</th>
-<th>给 LLM 的输入</th>
-<th>LLM 要输出什么</th>
-<th>实际测量的能力</th>
+<th>类型</th>
+<th>特征</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>Factor Generation</td>
-<td>自然语言因子描述或主题标签</td>
-<td>可执行的因子表达式</td>
-<td>是否能把金融意图翻译成 DSL</td>
+<td>数值</td>
+<td>睡眠时长、心率、BMI、卡路里消耗、步数、运动时长、饮水量</td>
 </tr>
 <tr>
-<td>Factor Evaluation</td>
-<td>一个或一组因子公式</td>
-<td>分数、标签或排序</td>
-<td>是否能不经回测判断因子质量</td>
-</tr>
-<tr>
-<td>Factor Searching</td>
-<td>种子因子、搜索历史、回测结果</td>
-<td>改进后的候选因子</td>
-<td>是否能利用反馈搜索更好的因子</td>
+<td>类别</td>
+<td>饮食类型、压力水平、睡眠质量、活动水平、烟酒情况、性别</td>
 </tr>
 </tbody></table></div>
-<p>Factor Searching 解释一下 也就是在无穷的组合空间里面搜索一个更好的因子<br>原始因子 -&gt; 反馈IC ICIR -&gt; 改不同的东西 -&gt; 新IC 新ICIR -&gt; 不同搜索看看能不能改进一个更好的因子</p>
-<p>prompt+Operator Library → LLM → Generated Factors→ Qlib Backtest→ Metrics→ Further Search</p>
-<p>Factor Generation:<br>分成两个子任务</p>
-<ul>
-<li>Text2Alpha</li>
-<li>Directional Mining</li>
-</ul>
-<p>Text2Alpha</p>
-<p>例如给一段文字描述：<br>Return the rolling max of close minus current close, divided by volume SMA, default window &#x3D; 25.</p>
-<p>Return Alpha Factor:<br>Div(<br>    Sub(Max($close, 25), $close),<br>    Add(Mean($volume, 25), 1e-12)<br>)</p>
-<p>这个任务主要测试：</p>
-<p>是否理解自然语言；<br>是否选对变量；<br>是否选对操作符；<br>是否使用正确窗口；<br>是否生成可解析、可执行的公式。</p>
-<p>论文将难度分为：</p>
-<p>Easy：单一操作或简单均值、比率；<br>Medium：组合价格与成交量，加入归一化；<br>Hard：多层组合、排名、条件逻辑、多个窗口</p>
-<p>论文中：<br>例如 GPT-5 在 Text2Alpha 的 reliability 几乎一直是 1.00，但 accuracy 从：</p>
-<p>Easy：0.99；<br>Medium：0.68；<br>Hard：0.10。</p>
-<p>也就是说，在困难任务上，它几乎总能输出合法公式，但只有约 10% 被判定为真正满足复杂指令。</p>
-<p>这揭示了两个完全不同的能力：</p>
-<p>Syntax correctness：会不会写合法 DSL；<br>Semantic correctness：写出来的公式是不是用户真正想要的。</p>
-<p>大模型在第一项已经很强，在第二项仍有明显问题</p>
-<p>Directional Mining</p>
-<p>这里不要求复现一个固定公式，而是给模型一个因子方向，例如：</p>
-<p>Momentum；<br>Mean Reversion；<br>Volume Spike；<br>Volatility Breakout；<br>Price–Volume Divergence；<br>Candlestick Pattern；<br>Crash Risk。</p>
-<p>模型需要自行设计属于该方向的公式。</p>
-<p>困难任务可能要求同时融合 3–5 种信号，例如：</p>
-<p>Momentum + Volume Confirmation + Volatility Normalization + Breakout</p>
-<p>这比 Text2Alpha 更开放，也更接近实际因子研究。</p>
-<p>论文构建了一套包含 90 个细分类别的方向 taxonomy，覆盖：</p>
-<p>Trend；<br>Momentum；<br>Mean Reversion；<br>Volume；<br>Volatility；<br>Pattern；<br>Relative Performance；<br>Seasonality；<br>Risk；<br>Microstructure Proxy。</p>
-
+<p>首先我们可以先看训练集的 target 分布（这个与titanic类似） </p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>类别</th>
+<th align="right">训练占比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>at-risk</code></td>
+<td align="right">85.87%</td>
+</tr>
+<tr>
+<td><code>fit</code></td>
+<td align="right">5.77%</td>
+</tr>
+<tr>
+<td><code>unhealthy</code></td>
+<td align="right">8.36%</td>
+</tr>
+</tbody></table></div>
+<p>对所有数据预测 <code>at-risk</code>，普通 accuracy 可以达到 85.87%</p>
+<p>但比赛使用：<br>BA(Balancing Accuracy [sklearn url: <a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.balanced_accuracy_score.html">https://scikit-learn.org/stable/modules/generated/sklearn.metrics.balanced_accuracy_score.html</a> ]):</p>
+<p>$$<br>BA &#x3D; \frac{\text{Recall}<em>{at-risk} + \text{Recall}</em>{fit} + \text{Recall}_{unhealthy}}{3}<br>$$</p>
+<p>这里的 $ \text{Recall}<em>{at-risk} ,  \text{Recall}</em>{fit}  ,\text{Recall}<em>{unhealthy} $ 也就是每个类别真正识别出了多少<br>例如 100个 at-risk 模型识别了 80 那就是 $ \text{Recall}</em>{at-risk} &#x3D; 80&#x2F;100 $ 然后对于这些类别的总数相加 然后取mean </p>
+<p>就按我们上面那个如果按普通accuracy 很高的baseline 来说 在 BA下  $ \text{Recall}_{at-risk} $ 是 100% 其他是 0 的话  (1+0+0)&#x2F;3 也只有 1&#x2F;3 而已 。</p>
+<p>然后我们首先要研究target 和 feature 的相关性， 看看target 是由哪个feature 决定的。使用决策树从 全部13个特征中寻找规则。</p>
+<p>决策树是一种 自动寻找  </p>
+<p>if 条件1:<br>    if 条件2:<br>        ...<br>else:<br>    ...</p>
+<p>的方法  其实也就是不同做condition的分类 举例：</p>
+<p>睡眠 &lt; 6 小时？<br>├── Yes<br>│   └── 压力 high？<br>│       ├── Yes → unhealthy<br>│       └── No  → at-risk<br>│<br>└── No<br>    └── 压力 low？<br>        ├── No  → at-risk<br>        └── Yes<br>            └── activity &#x3D; active？<br>                ├── Yes → fit<br>                └── No  → at-risk<br>那么这个条件是怎么出来的 就是蛮力试出来的</p>
+<p>例如测试<br>sleep &lt; 5.5?<br>sleep &lt; 6.0?<br>sleep &lt; 6.5?</p>
+<p>age &lt; 30?<br>age &lt; 40?</p>
+<p>stress &#x3D; high?<br>activity &#x3D; active?</p>
+<p>然后这个Decision tree (Sklearn Decision tree classifier) 的loss function: </p>
+<p>$$<br>Gini &#x3D; 1 - \sum^{K}_{k&#x3D;1} p_k^2<br>$$</p>
+<p>其中k为第几类</p>
+<p>例如 </p>
+<p>1&#x2F;3 fit<br>1&#x2F;3 at-risk<br>1&#x2F;3 unhealthy</p>
+<h1 id="Gini"><a href="#Gini" class="headerlink" title="$$Gini"></a>$$<br>Gini</h1><p>1-<br>\left[<br>\left(\frac{1}{3}\right)^2<br>+<br>\left(\frac{1}{3}\right)^2<br>+<br>\left(\frac{1}{3}\right)^2<br>\right]<br>$$</p>
+<h1 id=""><a href="#" class="headerlink" title="$$"></a>$$</h1><p>1-\frac{1}{3}<br>$$</p>
+<h1 id="-1"><a href="#-1" class="headerlink" title="$$"></a>$$</h1><p>\frac{2}{3}<br>\approx 0.667<br>$$</p>
+<p>decision tree 就会不停对 Gini 做优化 直到 maximum Gini 出现。</p>
+<p>原代码：<br>tree &#x3D; DecisionTreeClassifier(max_depth&#x3D;4, random_state&#x3D;0)</p>
+<h1 id="这里限制了tree的深度为4-判断简单机构-然后-random-state-0-就是一个固定的random-seed-确保结果可以复现"><a href="#这里限制了tree的深度为4-判断简单机构-然后-random-state-0-就是一个固定的random-seed-确保结果可以复现" class="headerlink" title="这里限制了tree的深度为4(判断简单机构) 然后 random state&#x3D;0 (就是一个固定的random seed 确保结果可以复现)"></a>这里限制了tree的深度为4(判断简单机构) 然后 random state&#x3D;0 (就是一个固定的random seed 确保结果可以复现)</h1><p>tree.fit(X_original, y_original)</p>
+<p>实际的结果就是： </p>
+<p>睡眠少于 6 小时？<br>├─ 是：压力高？<br>│      ├─ 是 → unhealthy<br>│      └─ 否 → at-risk<br>└─ 否：压力低？<br>       ├─ 否 → at-risk<br>       └─ 是：活动水平为 active？<br>              ├─ 否 → at-risk<br>              └─ 是：睡眠至少 7 小时？<br>                     ├─ 否 → at-risk<br>                     └─ 是 → fit</p>
+<p>为了防止 DecisionTree Overfit 做一下测试 我们做一下 5 fold cross validation<br>把5w个数据平均分五等份 然后就可以分出 training set 和 validation set 然后就做测试</p>
+<p>将获得的规则 看看对比一下比赛的数据</p>
+<p>规则字段完整的比赛训练行：511,675<br>规则预测正确：            507,574<br>规则预测错误：              4,101<br>Accuracy：                 99.1985% (并非BA)</p>
+<h1 id="自己的思路"><a href="#自己的思路" class="headerlink" title="自己的思路"></a>自己的思路</h1><h1 id="他人的思路"><a href="#他人的思路" class="headerlink" title="他人的思路"></a>他人的思路</h1><h1 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h1>
       </div>
 
       <footer class="post-foot">
@@ -201,11 +192,11 @@ window.MathJax = {
               
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/08/16/Paper-Learning/Evoalpha/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/09/29/Economics/Analysis/Analysis%20Principle/" aria-hidden="true" tabindex="-1">
     
       <canvas
   class="pixel-banner pixel-banner--card"
-  data-seed="1085f8a9"
+  data-seed="a592790b"
   data-cols="48"
   data-rows="36"
   aria-hidden="true"
@@ -215,13 +206,13 @@ window.MathJax = {
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/08/16/Paper-Learning/Evoalpha/">Evoalpha</a>
+      <a href="/blog/2026/09/29/Economics/Analysis/Analysis%20Principle/">Analysis Principle</a>
     </h3>
     <p class="meta">
       
-        <a href="/blog/categories/Paper-Learning/">Paper-Learning</a>
+        <a href="/blog/categories/Economics/">Economics</a>
       
-      <time datetime="2026-08-16T15:01:22.000Z">2026-08-16</time>
+      <time datetime="2026-09-29T06:33:40.000Z">2026-09-29</time>
     </p>
   </div>
 </article>
@@ -230,11 +221,11 @@ window.MathJax = {
               
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/08/16/Paper-Learning/Qfinzero/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/09/29/Economics/Analysis/United%20State/" aria-hidden="true" tabindex="-1">
     
       <canvas
   class="pixel-banner pixel-banner--card"
-  data-seed="86a685f"
+  data-seed="7d1f3f57"
   data-cols="48"
   data-rows="36"
   aria-hidden="true"
@@ -244,13 +235,13 @@ window.MathJax = {
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/08/16/Paper-Learning/Qfinzero/">Qfinzero</a>
+      <a href="/blog/2026/09/29/Economics/Analysis/United%20State/">United State</a>
     </h3>
     <p class="meta">
       
-        <a href="/blog/categories/Paper-Learning/">Paper-Learning</a>
+        <a href="/blog/categories/Economics/">Economics</a>
       
-      <time datetime="2026-08-16T15:01:06.000Z">2026-08-16</time>
+      <time datetime="2026-09-29T06:33:26.000Z">2026-09-29</time>
     </p>
   </div>
 </article>
@@ -259,11 +250,11 @@ window.MathJax = {
               
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/10/01/Kaggle-Solution/Predicting%20Student%20Health%20Risk/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/09/29/Economics/Analysis/China/" aria-hidden="true" tabindex="-1">
     
       <canvas
   class="pixel-banner pixel-banner--card"
-  data-seed="4873a8d0"
+  data-seed="94da8330"
   data-cols="48"
   data-rows="36"
   aria-hidden="true"
@@ -273,13 +264,13 @@ window.MathJax = {
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/10/01/Kaggle-Solution/Predicting%20Student%20Health%20Risk/">Predicting Student Health Risk</a>
+      <a href="/blog/2026/09/29/Economics/Analysis/China/">China</a>
     </h3>
     <p class="meta">
       
-        <a href="/blog/categories/Kaggle-Solution/">Kaggle-Solution</a>
+        <a href="/blog/categories/Economics/">Economics</a>
       
-      <time datetime="2026-09-30T17:47:01.000Z">2026-10-01</time>
+      <time datetime="2026-09-29T06:33:19.000Z">2026-09-29</time>
     </p>
   </div>
 </article>

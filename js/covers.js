@@ -18,12 +18,13 @@
     const o = value || {};
     return {
       columns: Math.round(bounded(o.columns, 96, 32, 160)),
-      gap: bounded(o.gap, 0.12, 0, 0.3),
+      gap: bounded(o.gap, 0.06, 0, 0.3),
       contrast: bounded(o.contrast, 1.1, 0.5, 2),
       brightness: bounded(o.brightness, 1, 0.5, 1.5),
       focalX: bounded(o.focalX, 0.5, 0, 1),
       focalY: bounded(o.focalY, 0.5, 0, 1),
-      dither: bounded(o.dither, 0.2, 0, 1)
+      dither: bounded(o.dither, 0.2, 0, 1),
+      invert: o.invert === true
     };
   }
   function cropRect(width, height, ratio, x, y) {
@@ -42,6 +43,7 @@
   function tone(r, g, b, alpha, x, y, o) {
     // Perceptual luma approximation; composite transparency onto the site's black paper.
     let v = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255 * alpha / 255;
+    if (o.invert) v = 1 - v;
     v = ((v - 0.5) * o.contrast + 0.5) * o.brightness;
     v += ((BAYER[(y % 4) * 4 + x % 4] + 0.5) / 16 - 0.5) * o.dither / 7;
     const level = Math.round(Math.max(0, Math.min(1, v)) * 7);
@@ -100,7 +102,7 @@
   function layoutRatio(className, width, height) {
     const cls = String(className || "");
     if (cls.includes("pixel-banner--card")) {
-      return width > 0 && height > 0 ? width / height : 4 / 3;
+      return width > 0 && height > 0 ? width / height : 16 / 9;
     }
     if (cls.includes("pixel-banner--hero")) return 6;
     if (cls.includes("pixel-banner--featured") || cls.includes("pixel-banner--cover")) return 3;
@@ -139,7 +141,7 @@
       : layoutRatio(canvas.className, parent ? parent.clientWidth : 0, parent ? parent.clientHeight : 0);
     const o = options({
       columns: canvas.classList.contains("pixel-banner--card") ? 48 : 96,
-      gap: 0.12, contrast: 1.1, brightness: 1, dither: 0.2
+      gap: 0.06, contrast: 1.1, brightness: 1, dither: 0.2
     });
     const cols = o.columns;
     const rows = Math.max(1, Math.round(cols / ratio));
@@ -181,7 +183,7 @@
     const script = doc.currentScript;
     const base = new URL("../", script ? script.src : doc.baseURI);
     const nodes = Array.from(doc.querySelectorAll(
-      ".pixel-banner--hero, .pixel-banner--featured, .pixel-banner--card, .pixel-banner--cover"
+      ".pixel-banner--hero, .pixel-banner--featured, .pixel-banner--card, .pixel-banner--cover, .pixel-banner--rule"
     ));
     nodes.forEach(paintSeed);
     const jobs = new Map();
@@ -251,7 +253,7 @@
     }
     // Existing Hexo cover <img> output also works; body figures are never selected.
     doc.querySelectorAll(".card-media img, .featured-media img, .post-cover img").forEach(image => {
-      if (image.dataset.coverStyle === "original" || !localSource(image.getAttribute("src"), doc.baseURI)) return;
+      if (image.dataset.coverStyle === "processed" || !localSource(image.getAttribute("src"), doc.baseURI)) return;
       const node = doc.createElement("canvas");
       const card = image.closest(".card-media");
       node.className = "pixel-banner " + (card ? "pixel-banner--card" : image.closest(".post-cover") ? "pixel-banner--cover" : "pixel-banner--featured");
@@ -313,7 +315,6 @@
         const summary = doc.createElement("summary");
         const lang = (doc.documentElement.lang || "").toLowerCase();
         summary.textContent = lang.startsWith("zh") ? "目录" : "Contents";
-        if (win.matchMedia && win.matchMedia("(min-width: 960px)").matches) details.open = true;
         const nav = doc.createElement("nav");
         nav.setAttribute("aria-label", lang.startsWith("zh") ? "目录" : "Article sections");
         const list = doc.createElement("ul");
