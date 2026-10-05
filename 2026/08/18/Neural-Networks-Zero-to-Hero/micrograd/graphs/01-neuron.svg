@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 248" width="1024" height="248" role="img" aria-labelledby="title" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Noto Sans SC', 'Microsoft YaHei', monospace">
+<title id="title">神经元的基本结构</title>
+<defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M1 1 L7 4 L1 7 Z" fill="#adadad"/></marker></defs>
+<g data-node="X1"><rect x="24" y="24" width="104" height="48" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="76.0" y="48.0" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#e6e6e6" data-label="x_1">x_1</text>
+</g>
+<g data-node="X2"><rect x="24" y="100" width="104" height="48" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="76.0" y="124.0" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#e6e6e6" data-label="x_2">x_2</text>
+</g>
+<g data-node="XN"><rect x="24" y="176" width="104" height="48" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="76.0" y="200.0" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#e6e6e6" data-label="...">...</text>
+</g>
+<g data-node="S"><rect x="238" y="100" width="144" height="48" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="310.0" y="124.0" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#e6e6e6" data-label="加权求和">加权求和</text>
+</g>
+<g data-node="B"><rect x="432" y="100" width="108" height="48" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="486.0" y="124.0" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#e6e6e6" data-label="+ bias">+ bias</text>
+</g>
+<g data-node="A"><rect x="590" y="100" width="166" height="48" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="673.0" y="124.0" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#e6e6e6" data-label="Activation function">Activation function</text>
+</g>
+<g data-node="F"><rect x="806" y="100" width="194" height="48" fill="#202020" stroke="#e6e6e6" stroke-width="1.4"/>
+<text x="903.0" y="124.0" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#e6e6e6" data-label="f(x_1,x_2,x_3,...)">f(x_1,x_2,x_3,...)</text>
+</g>
+<path data-edge="X1-&gt;S" d="M128 48 H170 L220 110 H238" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="176" y="65" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#c8c8c8" data-label="w_1">w_1</text>
+<path data-edge="X2-&gt;S" d="M128 124 H238" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="179" y="110" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#c8c8c8" data-label="w_2">w_2</text>
+<path data-edge="XN-&gt;S" d="M128 200 H170 L220 138 H238" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path data-edge="S-&gt;B" d="M382 124 H432" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path data-edge="B-&gt;A" d="M540 124 H590" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path data-edge="A-&gt;F" d="M756 124 H806" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+</svg>

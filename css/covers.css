@@ -297,3 +297,143 @@ mjx-container[display="true"] {
   .row { padding-block: 1.25rem; }
   .prose .mermaid { padding: 1.25rem 1rem; }
 }
+
+/* Verbatim structures and TeX keep their source layout at readable type sizes. */
+.prose pre.literal-block {
+  margin: 1.25rem 0;
+  padding: 1rem 1.25rem;
+}
+.prose pre.literal-block--code {
+  width: fit-content;
+  min-width: min(100%, 20rem);
+  max-width: 100%;
+}
+.prose .literal-block > code {
+  white-space: pre;
+  overflow-wrap: normal;
+  word-break: normal;
+  line-height: 1.65;
+}
+.math-source--display { display: block; max-width: 100%; }
+.prose mjx-container[display="true"] { padding-block: 0.2em; }
+.prose mjx-container:not([display="true"])[data-reader-overflow="true"] {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.2em;
+}
+.reader-scroll-hint {
+  margin-top: -0.75rem;
+  margin-bottom: 1.5rem;
+  color: var(--muted);
+  font-family: var(--font);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+.reader-scroll-hint[hidden] { display: none; }
+[data-reader-overflow="true"] { scrollbar-width: thin; }
+[data-reader-focus="true"]:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+
+/* Short tables fit the phone; larger tables retain useful column widths. */
+.prose .table-scroll table {
+  width: 100%;
+  min-width: max(100%, calc(var(--table-columns, 2) * 8.5rem));
+}
+.prose .table-scroll :is(th, td) {
+  min-width: 0;
+  padding: 0.75em 0.8em;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+.prose .table-scroll code,
+.prose table code {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+}
+.prose .table-scroll :is(th, td):first-child { position: static; box-shadow: none; }
+.prose .table-scroll[data-compact-first="true"] :is(th, td):first-child,
+.prose .table-scroll[data-compact-first="true"] :is(th, td):first-child * {
+  width: 1%;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+}
+.prose :is(th, td)[align="right"] { text-align: right; }
+.prose :is(th, td)[align="center"] { text-align: center; }
+.prose :is(th, td)[align="left"] { text-align: left; }
+@media (max-width: 40rem) {
+  .prose .table-scroll[data-reader-overflow="true"] :is(th, td):first-child {
+    position: sticky;
+    left: 0;
+    width: 8rem;
+    max-width: 10rem;
+    background: var(--bg);
+    box-shadow: 8px 0 12px -8px #000;
+  }
+}
+
+/* Center complete previews, with original-size scrolling and a larger view. */
+.prose .mermaid { padding: 0; overflow: hidden; }
+.mermaid-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 1.5rem 1rem;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.prose .mermaid svg {
+  display: block;
+  margin-inline: auto;
+  max-width: none;
+  height: auto;
+}
+.prose .mermaid .reader-scroll-hint { margin: 0; padding: 0 1rem 1rem; text-align: left; }
+.diagram-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--fill);
+}
+.diagram-toolbar button {
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+.diagram-toolbar button:hover,
+.diagram-toolbar button[aria-pressed="true"] { color: var(--text); border-color: var(--line); }
+.diagram-dialog {
+  width: calc(100vw - 2rem);
+  max-width: 80rem;
+  max-height: calc(100dvh - 2rem);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--muted);
+  background: var(--bg);
+  color: var(--text);
+  overflow: auto;
+}
+.diagram-dialog::backdrop { background: rgb(0 0 0 / 85%); }
+.diagram-dialog .mermaid { margin: 0; border: 0; }
+.diagram-dialog .mermaid-scroll { max-height: calc(100dvh - 6rem); overflow: auto; }
+.diagram-source { padding: 1rem; text-align: left; }
+
+/* Sliders have full touch targets while the rail keeps its existing thin style. */
+.gpt-slider input[type="range"] {
+  height: 2.75rem;
+  margin: 0;
+  background: linear-gradient(var(--line), var(--line)) center / 100% 2px no-repeat;
+  touch-action: pan-y;
+}
+.gpt-slider input[type="range"]::-webkit-slider-thumb { width: 18px; height: 18px; }
+.gpt-slider input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; }
+@media (max-width: 40rem) {
+  .gpt-graph-canvas { flex: none; height: clamp(260px, var(--graph-h, 320px), 420px); }
+}

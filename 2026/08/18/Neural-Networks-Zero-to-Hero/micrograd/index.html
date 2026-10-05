@@ -11,7 +11,7 @@
   <link rel="canonical" href="https://b143kc47.github.io/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/index.html">
   <link rel="preload" href="https://cdn.jsdelivr.net/fontsource/fonts/geist-mono:vf@5.3.0/latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/blog/css/style.css?v=reader-5">
-  <link rel="stylesheet" href="/blog/css/covers.css?v=reader-8">
+  <link rel="stylesheet" href="/blog/css/covers.css?v=reader-9">
   
   <link rel="icon" href="/blog/avatar.jpg" type="image/jpeg">
   <meta name="description" content="从零搭建 micrograd：神经元、权重、bias、激活函数（ReLU）与反向传播的直观解释，配可交互函数图像。">
@@ -41,7 +41,7 @@ window.MathJax = {
   }
 };
 </script>
-<script async id="mathjax-cdn-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+<script async id="mathjax-cdn-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/blog/css/micrograd-graphs.css?v=1"></head>
 
   <body>
     <a class="skip-link" href="#main">Skip to writing</a>
@@ -89,7 +89,7 @@ window.MathJax = {
               <a href="/blog/categories/Neural-Networks-Zero-to-Hero/">Neural-Networks-Zero-to-Hero</a>
             
             <time datetime="2026-08-18T14:01:11.000Z">2026-08-18</time>
-            <span>12 min read</span>
+            <span>11 min read</span>
           </p>
           <h1 class="post-title">building micrograd</h1>
           
@@ -102,35 +102,56 @@ window.MathJax = {
     <div class="post-well">
       <div class="prose">
         <h2 id="1-项目简介"><a href="#1-项目简介" class="headerlink" title="1. 项目简介"></a>1. 项目简介</h2><p>micrograd 是 andrej karpathy 所开源的一个Github学习项目，项目的初衷是让读者可以更好的学习back propagation。andrej karpathy 本人也录制过一段 Youtube 视频来进行讲解（url: <a target="_blank" rel="noopener" href="https://youtu.be/VMj-3S1tku0?si=6qfc4FQkdIn_WmnL">https://youtu.be/VMj-3S1tku0?si=6qfc4FQkdIn_WmnL</a>），那么为了理解 micrograd。我们需要先从最基础的神经网络开始讲起。</p>
-<h2 id="2-神经网络基础"><a href="#2-神经网络基础" class="headerlink" title="2. 神经网络基础"></a>2. 神经网络基础</h2><h3 id="2-1-神经元与权重"><a href="#2-1-神经元与权重" class="headerlink" title="2.1 神经元与权重"></a>2.1 神经元与权重</h3><p>神经元就是一个 $f(x_1,x_2,x_3,...)$，一个函数，输入了一堆数字。</p>
+<h2 id="2-神经网络基础"><a href="#2-神经网络基础" class="headerlink" title="2. 神经网络基础"></a>2. 神经网络基础</h2><h3 id="2-1-神经元与权重"><a href="#2-1-神经元与权重" class="headerlink" title="2.1 神经元与权重"></a>2.1 神经元与权重</h3><p>神经元就是一个 <span class="math-source">$f(x_1,x_2,x_3,...)$</span>，一个函数，输入了一堆数字。</p>
 <p>然后每个input 都会跟着一个weight 权重，就是，最主要是一个常数。</p>
 <p>高就代表这个输入很重要；低就代表没那么重要。</p>
 <p>当然也要看正负，可以看出是负影响，还是 正影响。</p>
 <h3 id="2-2-神经元的基本结构"><a href="#2-2-神经元的基本结构" class="headerlink" title="2.2 神经元的基本结构"></a>2.2 神经元的基本结构</h3><p>基本结构：</p>
-<p>$$<br>f(x_1,x_2,x_3,...) &#x3D; Activation_function(w_1 \times x_1 + w_2\times x_2 + ... + bias)<br>$$</p>
-<pre class="mermaid">flowchart LR
-    X1[&quot;x_1&quot;] --&gt;|w_1| S[&quot;加权求和&quot;]
-    X2[&quot;x_2&quot;] --&gt;|w_2| S
-    XN[&quot;...&quot;] --&gt; S
-    S --&gt; B[&quot;+ bias&quot;]
-    B --&gt; A[&quot;Activation function&quot;]
-    A --&gt; F[&quot;f(x_1,x_2,x_3,...)&quot;]</pre>
+<div class="math-source math-source--display">$$
+f(x_1,x_2,x_3,...) &#x3D; Activation\_function(w_1 \times x_1 + w_2\times x_2 + ... + bias)
+$$</div>
+<figure class="micrograd-diagram"><div class="learning-graph-tools"><button type="button" class="learning-graph-expand" aria-label="放大图形" title="放大图形"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></button></div><div class="learning-graph-viewport" tabindex="0" role="region" aria-label="神经元的基本结构"><picture><source media="(max-width: 40rem)" srcset="/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/graphs/01-neuron-mobile.svg"><img src="/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/graphs/01-neuron.svg" alt="神经元的基本结构" decoding="async"></picture></div></figure>
 
 <h3 id="2-3-bias-的作用"><a href="#2-3-bias-的作用" class="headerlink" title="2.3 bias 的作用"></a>2.3 bias 的作用</h3><p>这里可以看到，在刚刚输入×权重后，还要加一个bias。</p>
 <p>而bias的作用是什么？为什么 + 一个bias呢？</p>
 <p>bias 从几何意义上来理解：</p>
-<p>$$<br>y &#x3D; mx + c<br>$$</p>
+<div class="math-source math-source--display">$$
+y &#x3D; mx + c
+$$</div>
 <p>c 也就是代表着这条线可以在整个空间里面平移。</p>
 <p>机器学习，最主要是学习数据关系，也就是 输入 和 输出的对应关系。</p>
-<p>如果不允许平移，那么，如果真实数据里面是 $y&#x3D; 2x + 100$，在 输入永远 &#x3D; 0 的时候，如果没有bias，永远拟合不了线性的真实数据。</p>
+<p>如果不允许平移，那么，如果真实数据里面是 <span class="math-source">$y&#x3D; 2x + 100$</span>，在 输入永远 &#x3D; 0 的时候，如果没有bias，永远拟合不了线性的真实数据。</p>
 <p>而我们最终的目的也就是，确保 x轴上 每一个x，只要调整 w 和 bias，可以触及 任意的y。</p>
 <p>因为我们要拟合 世界上 任意的对应关系，任何的数据形态。</p>
 <h3 id="2-4-Activation-function-与-ReLU"><a href="#2-4-Activation-function-与-ReLU" class="headerlink" title="2.4 Activation function 与 ReLU"></a>2.4 Activation function 与 ReLU</h3><p>但是单单只有一条 直线，是不够的，所以我们要引入 <strong>非线性</strong>。</p>
 <p>也就是 Activation function（激活函数）。</p>
 <p>我们先介绍第一种 Activation function，ReLU：</p>
-<div id="desmos-graph-1" class="desmos-graph" style="height:400px;"></div>
+<div id="desmos-graph-1" class="desmos-graph micrograd-plot" style="height:400px;"></div>
 <script>
 (function () {
+  function mountWhenVisible(elt, create) {
+    if (!elt || elt.__desmosInit || elt.__desmosPending) return;
+    elt.__desmosPending = true;
+    var observer;
+    function mount() {
+      if (elt.closest('details:not([open])') || !elt.clientWidth || !elt.clientHeight || elt.__desmosInit) return;
+      if (observer) observer.disconnect();
+      document.removeEventListener('toggle', mount, true);
+      window.removeEventListener('resize', mount);
+      var calc = create();
+      elt.__desmosCalc = calc;
+      elt.__desmosInit = true;
+      elt.__desmosPending = false;
+      watchGraph(calc, elt);
+    }
+    if (window.ResizeObserver) {
+      observer = new ResizeObserver(mount);
+      observer.observe(elt);
+    }
+    document.addEventListener('toggle', mount, true);
+    window.addEventListener('resize', mount);
+    mount();
+  }
   function watchGraph(calc, elt) {
     if (!window.ResizeObserver || !elt) return;
     var frame = 0;
@@ -150,21 +171,22 @@ window.MathJax = {
     window.__desmosQueue.forEach(function (item) {
       if (item.sliders) return;
       var elt = document.getElementById(item.id);
-      if (!elt || elt.__desmosInit) return;
-      if (!elt.clientWidth || !elt.clientHeight) return;
-      elt.__desmosInit = true;
-      var calc = Desmos.GraphingCalculator(elt, {
+      mountWhenVisible(elt, function () {
+        var calc = Desmos.GraphingCalculator(elt, {
         invertedColors: true,
         expressions: false,
         expressionsTopbar: false,
         keypad: false,
         settingsMenu: false,
-        zoomButtons: false,
+        zoomButtons: true,
+        showResetButtonOnGraphpaper: true,
         border: false,
         fontSize: 16
       });
-      calc.setExpressions(item.expressions);
-      watchGraph(calc, elt);
+        calc.setExpressions(item.expressions);
+        calc.setDefaultState(calc.getState());
+        return calc;
+      });
     });
   }
   
@@ -179,17 +201,28 @@ window.MathJax = {
   s.id = 'desmos-api-script';
   s.src = 'https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6';
   s.onload = initDesmos;
+  s.onerror = function () {
+    (window.__desmosQueue || []).forEach(function (item) {
+      var elt = document.getElementById(item.id + (item.sliders ? '-canvas' : ''));
+      if (!elt) return;
+      elt.textContent = '图形暂未加载，请刷新页面重试。';
+      var source = document.createElement('pre');
+      source.textContent = item.expressions.map(function (expression) { return expression.latex; }).join('\n');
+      elt.appendChild(source);
+      elt.setAttribute('role', 'status');
+    });
+  };
   document.head.appendChild(s);
 })();
 </script>
 
 <p>其实也就是创造一个折点，在几何意义上。</p>
 <h3 id="2-5-神经网络的连接结构"><a href="#2-5-神经网络的连接结构" class="headerlink" title="2.5 神经网络的连接结构"></a>2.5 神经网络的连接结构</h3><p>那我们现在画一个最简单的神经网络，长这样（2个输入、3个隐藏神经元、1个输出）：</p>
-<p><img src="/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/nn-diagram.svg" alt="最简单的神经网络：2输入 3隐藏 1输出"></p>
+<p><figure class="micrograd-diagram"><div class="learning-graph-tools"><button type="button" class="learning-graph-expand" aria-label="放大图形" title="放大图形"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></button></div><div class="learning-graph-viewport" tabindex="0" role="region" aria-label="最简单的神经网络：2输入 3隐藏 1输出"><picture><source media="(max-width: 40rem)" srcset="/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/graphs/network-mobile.svg"><img src="/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/graphs/network.svg" alt="最简单的神经网络：2输入 3隐藏 1输出" decoding="async"></picture></div></figure></p>
 <p>每条连线就是一个权重w，每个神经元做的是 加权求和，再过一个Activation function。</p>
 <h3 id="2-6-线性变换的局限"><a href="#2-6-线性变换的局限" class="headerlink" title="2.6 线性变换的局限"></a>2.6 线性变换的局限</h3><p>为什么一定要非线性？</p>
 <p>如果每个神经元都只是线性加权求和，那不管叠多少层，组合起来还是一条直线：</p>
-<div class="gpt-graph" id="gpt-graph-1" style="height:380px;--graph-h:380px;">
+<div class="gpt-graph micrograd-plot" id="gpt-graph-1" style="height:380px;--graph-h:380px;">
   <div class="gpt-graph-panel">
     <div class="gpt-graph-title" data-tex="y = mx + b"></div>
     
@@ -198,20 +231,43 @@ window.MathJax = {
         <span>m（斜率）</span>
         <span class="gpt-slider-value" data-slider-value="0">1</span>
       </div>
-      <input type="range" data-slider="0" min="-10" max="10" step="0.1" value="1">
+      <input type="range" aria-label="m（斜率）" data-slider="0" min="-10" max="10" step="0.1" value="1">
     </div>
     <div class="gpt-slider">
       <div class="gpt-slider-row">
         <span>b（y截距）</span>
         <span class="gpt-slider-value" data-slider-value="1">0.5</span>
       </div>
-      <input type="range" data-slider="1" min="-10" max="10" step="0.1" value="0.5">
+      <input type="range" aria-label="b（y截距）" data-slider="1" min="-10" max="10" step="0.1" value="0.5">
     </div>
   </div>
   <div class="gpt-graph-canvas" id="gpt-graph-1-canvas"></div>
 </div>
 <script>
 (function () {
+  function mountWhenVisible(elt, create) {
+    if (!elt || elt.__desmosInit || elt.__desmosPending) return;
+    elt.__desmosPending = true;
+    var observer;
+    function mount() {
+      if (elt.closest('details:not([open])') || !elt.clientWidth || !elt.clientHeight || elt.__desmosInit) return;
+      if (observer) observer.disconnect();
+      document.removeEventListener('toggle', mount, true);
+      window.removeEventListener('resize', mount);
+      var calc = create();
+      elt.__desmosCalc = calc;
+      elt.__desmosInit = true;
+      elt.__desmosPending = false;
+      watchGraph(calc, elt);
+    }
+    if (window.ResizeObserver) {
+      observer = new ResizeObserver(mount);
+      observer.observe(elt);
+    }
+    document.addEventListener('toggle', mount, true);
+    window.addEventListener('resize', mount);
+    mount();
+  }
   function watchGraph(calc, elt) {
     if (!window.ResizeObserver || !elt) return;
     var frame = 0;
@@ -234,24 +290,23 @@ window.MathJax = {
 
   function initOne(item) {
     var canvas = document.getElementById(item.id + '-canvas');
-    if (!canvas || canvas.__desmosInit) return;
-    if (!canvas.clientWidth || !canvas.clientHeight) return;
-    canvas.__desmosInit = true;
+    mountWhenVisible(canvas, function () {
     var calc = Desmos.GraphingCalculator(canvas, {
         invertedColors: true,
         expressions: false,
         expressionsTopbar: false,
         keypad: false,
         settingsMenu: false,
-        zoomButtons: false,
+        zoomButtons: true,
+        showResetButtonOnGraphpaper: true,
         border: false,
         fontSize: 16
       });
     calc.setExpressions(item.expressions);
-    watchGraph(calc, canvas);
     item.sliders.forEach(function (s, i) {
       calc.setExpression({ id: 'slider-' + i, latex: s.varName + '=' + s.init });
     });
+    calc.setDefaultState(calc.getState());
 
     var root = document.getElementById(item.id);
     root.querySelectorAll('input[data-slider]').forEach(function (input) {
@@ -263,8 +318,23 @@ window.MathJax = {
         if (badge) badge.textContent = value;
       });
     });
+    calc.observeEvent('change', function () {
+      var expressions = calc.getExpressions();
+      item.sliders.forEach(function (slider, i) {
+        var expression = expressions.find(function (entry) { return entry.id === 'slider-' + i; });
+        if (!expression) return;
+        var value = Number(expression.latex.slice(expression.latex.lastIndexOf('=') + 1));
+        if (!Number.isFinite(value)) return;
+        var input = root.querySelector('[data-slider="' + i + '"]');
+        var badge = root.querySelector('[data-slider-value="' + i + '"]');
+        if (input) input.value = value;
+        if (badge) badge.textContent = value;
+      });
+    });
 
     renderTitle(root);
+    return calc;
+    });
   }
 
   function renderTitle(root) {
@@ -274,7 +344,7 @@ window.MathJax = {
     if (!raw) return;
     ensureMathJax(function () {
       titleEl.textContent = '';
-      titleEl.innerHTML = '\\(' + raw + '\\)';
+      titleEl.textContent = '\\(' + raw + '\\)';
       if (window.MathJax && MathJax.typesetPromise) {
         MathJax.typesetPromise([titleEl]).catch(function () { titleEl.textContent = raw; });
       } else {
@@ -317,13 +387,24 @@ window.MathJax = {
   s.id = 'desmos-api-script';
   s.src = 'https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6';
   s.onload = initDesmos;
+  s.onerror = function () {
+    (window.__desmosQueue || []).forEach(function (item) {
+      var elt = document.getElementById(item.id + (item.sliders ? '-canvas' : ''));
+      if (!elt) return;
+      elt.textContent = '图形暂未加载，请刷新页面重试。';
+      var source = document.createElement('pre');
+      source.textContent = item.expressions.map(function (expression) { return expression.latex; }).join('\n');
+      elt.appendChild(source);
+      elt.setAttribute('role', 'status');
+    });
+  };
   document.head.appendChild(s);
 })();
 </script>
 
 <p>拖动左边m b的滑条，怎么调都只是一条直线，永远拟合不了sin(x)。</p>
 <h3 id="2-7-多个-ReLU-的组合"><a href="#2-7-多个-ReLU-的组合" class="headerlink" title="2.7 多个 ReLU 的组合"></a>2.7 多个 ReLU 的组合</h3><p>但是只要加上ReLU这种非线性，把几个ReLU加起来，曲线就开始拐弯了：</p>
-<div class="gpt-graph" id="gpt-graph-2" style="height:380px;--graph-h:380px;">
+<div class="gpt-graph micrograd-plot" id="gpt-graph-2" style="height:380px;--graph-h:380px;">
   <div class="gpt-graph-panel">
     <div class="gpt-graph-title" data-tex="y = \sum_{i=1}^{4} c_i \max(0, x - p_i)"></div>
     
@@ -332,34 +413,57 @@ window.MathJax = {
         <span>c₁</span>
         <span class="gpt-slider-value" data-slider-value="0">1</span>
       </div>
-      <input type="range" data-slider="0" min="-3" max="3" step="0.1" value="1">
+      <input type="range" aria-label="c₁" data-slider="0" min="-3" max="3" step="0.1" value="1">
     </div>
     <div class="gpt-slider">
       <div class="gpt-slider-row">
         <span>c₂</span>
         <span class="gpt-slider-value" data-slider-value="1">-0.8</span>
       </div>
-      <input type="range" data-slider="1" min="-3" max="3" step="0.1" value="-0.8">
+      <input type="range" aria-label="c₂" data-slider="1" min="-3" max="3" step="0.1" value="-0.8">
     </div>
     <div class="gpt-slider">
       <div class="gpt-slider-row">
         <span>c₃</span>
         <span class="gpt-slider-value" data-slider-value="2">0.5</span>
       </div>
-      <input type="range" data-slider="2" min="-3" max="3" step="0.1" value="0.5">
+      <input type="range" aria-label="c₃" data-slider="2" min="-3" max="3" step="0.1" value="0.5">
     </div>
     <div class="gpt-slider">
       <div class="gpt-slider-row">
         <span>c₄</span>
         <span class="gpt-slider-value" data-slider-value="3">-0.3</span>
       </div>
-      <input type="range" data-slider="3" min="-3" max="3" step="0.1" value="-0.3">
+      <input type="range" aria-label="c₄" data-slider="3" min="-3" max="3" step="0.1" value="-0.3">
     </div>
   </div>
   <div class="gpt-graph-canvas" id="gpt-graph-2-canvas"></div>
 </div>
 <script>
 (function () {
+  function mountWhenVisible(elt, create) {
+    if (!elt || elt.__desmosInit || elt.__desmosPending) return;
+    elt.__desmosPending = true;
+    var observer;
+    function mount() {
+      if (elt.closest('details:not([open])') || !elt.clientWidth || !elt.clientHeight || elt.__desmosInit) return;
+      if (observer) observer.disconnect();
+      document.removeEventListener('toggle', mount, true);
+      window.removeEventListener('resize', mount);
+      var calc = create();
+      elt.__desmosCalc = calc;
+      elt.__desmosInit = true;
+      elt.__desmosPending = false;
+      watchGraph(calc, elt);
+    }
+    if (window.ResizeObserver) {
+      observer = new ResizeObserver(mount);
+      observer.observe(elt);
+    }
+    document.addEventListener('toggle', mount, true);
+    window.addEventListener('resize', mount);
+    mount();
+  }
   function watchGraph(calc, elt) {
     if (!window.ResizeObserver || !elt) return;
     var frame = 0;
@@ -382,24 +486,23 @@ window.MathJax = {
 
   function initOne(item) {
     var canvas = document.getElementById(item.id + '-canvas');
-    if (!canvas || canvas.__desmosInit) return;
-    if (!canvas.clientWidth || !canvas.clientHeight) return;
-    canvas.__desmosInit = true;
+    mountWhenVisible(canvas, function () {
     var calc = Desmos.GraphingCalculator(canvas, {
         invertedColors: true,
         expressions: false,
         expressionsTopbar: false,
         keypad: false,
         settingsMenu: false,
-        zoomButtons: false,
+        zoomButtons: true,
+        showResetButtonOnGraphpaper: true,
         border: false,
         fontSize: 16
       });
     calc.setExpressions(item.expressions);
-    watchGraph(calc, canvas);
     item.sliders.forEach(function (s, i) {
       calc.setExpression({ id: 'slider-' + i, latex: s.varName + '=' + s.init });
     });
+    calc.setDefaultState(calc.getState());
 
     var root = document.getElementById(item.id);
     root.querySelectorAll('input[data-slider]').forEach(function (input) {
@@ -411,8 +514,23 @@ window.MathJax = {
         if (badge) badge.textContent = value;
       });
     });
+    calc.observeEvent('change', function () {
+      var expressions = calc.getExpressions();
+      item.sliders.forEach(function (slider, i) {
+        var expression = expressions.find(function (entry) { return entry.id === 'slider-' + i; });
+        if (!expression) return;
+        var value = Number(expression.latex.slice(expression.latex.lastIndexOf('=') + 1));
+        if (!Number.isFinite(value)) return;
+        var input = root.querySelector('[data-slider="' + i + '"]');
+        var badge = root.querySelector('[data-slider-value="' + i + '"]');
+        if (input) input.value = value;
+        if (badge) badge.textContent = value;
+      });
+    });
 
     renderTitle(root);
+    return calc;
+    });
   }
 
   function renderTitle(root) {
@@ -422,7 +540,7 @@ window.MathJax = {
     if (!raw) return;
     ensureMathJax(function () {
       titleEl.textContent = '';
-      titleEl.innerHTML = '\\(' + raw + '\\)';
+      titleEl.textContent = '\\(' + raw + '\\)';
       if (window.MathJax && MathJax.typesetPromise) {
         MathJax.typesetPromise([titleEl]).catch(function () { titleEl.textContent = raw; });
       } else {
@@ -465,6 +583,17 @@ window.MathJax = {
   s.id = 'desmos-api-script';
   s.src = 'https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6';
   s.onload = initDesmos;
+  s.onerror = function () {
+    (window.__desmosQueue || []).forEach(function (item) {
+      var elt = document.getElementById(item.id + (item.sliders ? '-canvas' : ''));
+      if (!elt) return;
+      elt.textContent = '图形暂未加载，请刷新页面重试。';
+      var source = document.createElement('pre');
+      source.textContent = item.expressions.map(function (expression) { return expression.latex; }).join('\n');
+      elt.appendChild(source);
+      elt.setAttribute('role', 'status');
+    });
+  };
   document.head.appendChild(s);
 })();
 </script>
@@ -485,23 +614,24 @@ window.MathJax = {
 <p>那如何衡量结果？我们就需要loss function。</p>
 <p>有了 loss function 之后，知道做的好不好了。</p>
 <p>我们就需要去改良（也就是去调整权重和bias）。</p>
-<pre class="mermaid">flowchart LR
-    I[&quot;Feed input&quot;] --&gt; P[&quot;Process&quot;]
-    P --&gt; O[&quot;Output&quot;]
-    O --&gt; L[&quot;loss function&quot;]
-    L --&gt; U[&quot;调整权重和bias&quot;]
-    U --&gt; P</pre>
+<figure class="micrograd-diagram"><div class="learning-graph-tools"><button type="button" class="learning-graph-expand" aria-label="放大图形" title="放大图形"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></button></div><div class="learning-graph-viewport" tabindex="0" role="region" aria-label="从输入、输出到 Loss function"><picture><source media="(max-width: 40rem)" srcset="/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/graphs/02-training-mobile.svg"><img src="/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/graphs/02-training.svg" alt="从输入、输出到 Loss function" decoding="async"></picture></div></figure>
 
 <h3 id="3-3-Mean-Squared-Error（MSE）"><a href="#3-3-Mean-Squared-Error（MSE）" class="headerlink" title="3.3 Mean Squared Error（MSE）"></a>3.3 Mean Squared Error（MSE）</h3><p>举出一个简单的例子：</p>
 <p><strong>Mean Squared Error - MSE</strong></p>
-<p>$$<br>MSE &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n}(y_i-\hat{y}_i)^2<br>$$</p>
+<div class="math-source math-source--display">$$
+MSE &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n}(y_i-\hat{y}_i)^2
+$$</div>
 <h3 id="3-4-gradient-与-chain-rule"><a href="#3-4-gradient-与-chain-rule" class="headerlink" title="3.4 gradient 与 chain rule"></a>3.4 gradient 与 chain rule</h3><p>有了Loss function 之后，我们的步骤就到了如何改进。</p>
 <p>那么改进，需要 <strong>gradient（梯度）</strong>。</p>
 <p>梯度的意思就是在 那一变量的对整个函数的影响，就是，如果增加一个无穷小量 dx，如何影响整个函数。</p>
 <p>让L 作为 Loss function。</p>
 <p><code>dL/dL</code> 是1。</p>
-<p>$$<br>L &#x3D; tanh(wx + c)<br>$$</p>
-<p>$$<br>dL&#x2F;dw &#x3D; dL&#x2F;d(wx+c); d(wx +c)&#x2F;dw<br>$$</p>
+<div class="math-source math-source--display">$$
+L &#x3D; tanh(wx + c)
+$$</div>
+<div class="math-source math-source--display">$$
+dL&#x2F;dw &#x3D; dL&#x2F;d(wx+c)\; d(wx +c)&#x2F;dw
+$$</div>
 <p>只要用微积分的法则，例如多变量微积分是将其他的变量当成常熟，嵌套函数就是chain rule，就可以算出 某个具体变量的梯度。</p>
 <h3 id="3-5-学习率与最小化-Loss"><a href="#3-5-学习率与最小化-Loss" class="headerlink" title="3.5 学习率与最小化 Loss"></a>3.5 学习率与最小化 Loss</h3><p>知道梯度是 x 增加一个dx，y的上涨。</p>
 <p>那么为了最小化L，可以学习率乘一个负导数。</p>
@@ -523,12 +653,12 @@ window.MathJax = {
 
 <p>那么如何算 <code>dx/da</code>？那就是treat other as constant。</p>
 <p>所以是：</p>
-<p>$$<br>dx&#x2F;da &#x3D; 1 + db&#x2F;da &#x3D; 1.0<br>$$</p>
+<div class="math-source math-source--display">$$
+dx&#x2F;da &#x3D; 1 + db&#x2F;da &#x3D; 1.0
+$$</div>
 <p>那out.grad 是怎来？因为我们最终是要 <code>dL/da</code>，let&#39;s say。</p>
 <p>所以out.grad 就是 <code>dL/dx * dx/da = dL/da</code>，所以 <code>dL/da = 1* dL/dx</code>，这里的 <code>dL/dx</code> 就是 <code>out.grad</code>。</p>
-<pre class="mermaid">flowchart LR
-    A[&quot;a&quot;] --&gt; X[&quot;x = a + b&quot;]
-    B[&quot;b&quot;] --&gt; X</pre>
+<figure class="micrograd-diagram"><div class="learning-graph-tools"><button type="button" class="learning-graph-expand" aria-label="放大图形" title="放大图形"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></button></div><div class="learning-graph-viewport" tabindex="0" role="region" aria-label="加法：__add__"><picture><img src="/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/graphs/03-addition.svg" alt="加法：__add__" decoding="async"></picture></div></figure>
 
 <h3 id="4-3-对象表示：-repr"><a href="#4-3-对象表示：-repr" class="headerlink" title="4.3 对象表示：__repr__"></a>4.3 对象表示：<code>__repr__</code></h3><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">__repr__</span>(<span class="hljs-params">self</span>):<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">f&quot;data is: <span class="hljs-subst">&#123;self.data&#125;</span>&quot;</span><br></code></pre></td></tr></table></figure>
 
@@ -563,42 +693,16 @@ window.MathJax = {
 <h3 id="然后就是最重要的方法"><a href="#然后就是最重要的方法" class="headerlink" title="然后就是最重要的方法"></a>然后就是最重要的方法</h3><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">backward</span>(<span class="hljs-params">self</span>):<br><br>    <span class="hljs-comment"># topological order all of the children in the graph</span><br>    topo = []<br>    visited = <span class="hljs-built_in">set</span>()<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">build_topo</span>(<span class="hljs-params">v</span>):<br>        <span class="hljs-keyword">if</span> v <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> visited:<br>            visited.add(v)<br>            <span class="hljs-keyword">for</span> child <span class="hljs-keyword">in</span> v._prev:<br>                build_topo(child)<br>            topo.append(v)<br>    build_topo(<span class="hljs-variable language_">self</span>)<br><br>    <span class="hljs-comment"># go one variable at a time and apply the chain rule to get its gradient</span><br>    <span class="hljs-variable language_">self</span>.grad = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> <span class="hljs-built_in">reversed</span>(topo):<br>        v._backward()<br></code></pre></td></tr></table></figure>
 
 <p>backward 首先我们创造了 <code>topo</code> 一个list 和 <code>visited</code> 一个 set。为什么要用set？首先我们需要获取所有的child，也就是需要做gradient 的child，set 是不重复的，收录所有的child，可以确保child 只看了一次。</p>
-<pre class="mermaid">flowchart TD
-    B[&quot;build_topo(v)&quot;] --&gt; Q&amp;#123;&quot;v not in visited&quot;&amp;#125;
-    Q --&gt;|是| V[&quot;visited.add(v)&quot;]
-    Q --&gt;|否| R[&quot;return&quot;]
-    V --&gt; F&amp;#123;&quot;for child in v._prev&quot;&amp;#125;
-    F --&gt;|还有 child| C[&quot;build_topo(child)&quot;]
-    C --&gt;|recursion 返回| F
-    F --&gt;|for loop 结束| A[&quot;topo.append(v)&quot;]
-    A --&gt; R</pre>
+<figure class="micrograd-diagram"><div class="learning-graph-tools"><button type="button" class="learning-graph-expand" aria-label="放大图形" title="放大图形"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></button></div><div class="learning-graph-viewport" tabindex="0" role="region" aria-label="build_topo(v)"><picture><img src="/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/graphs/04-topological.svg" alt="build_topo(v)" decoding="async"></picture></div></figure>
 
 <p>然后我们就开始进行 topological order，也就是 从 output 开始，最顶端 output的child，再到 output child 的 child（这里使用了recursion function calling itself）。</p>
 <p>例如我 <code>x = a + b</code>，那么 topo 里面会有 <code>a,b,x</code>。</p>
 <p><strong>topo里面是有order的，set 是无order，并且只记录一次的（确保所有node遍历过）。</strong></p>
 <p>因为它是处理完child 之后才会处理自己，<code>topo.append(v)</code> 在 for loop 后面，然后 for loop 里面有recursion，是处理for loop 里面的 recursion 先，然后就导致我们的list，x是在最后的。</p>
-<pre class="mermaid">sequenceDiagram
-    participant X as build_topo(x)
-    participant A as build_topo(a)
-    participant B as build_topo(b)
-    participant T as topo
-    X-&gt;&gt;A: build_topo(a)
-    A-&gt;&gt;T: topo.append(a)
-    A--&gt;&gt;X: return
-    X-&gt;&gt;B: build_topo(b)
-    B-&gt;&gt;T: topo.append(b)
-    B--&gt;&gt;X: return
-    X-&gt;&gt;T: topo.append(x)
-    Note over T: [a,b,x]</pre>
+<figure class="micrograd-diagram micrograd-diagram--scroll"><div class="learning-graph-tools"><button type="button" class="learning-graph-pan" data-pan="-1" aria-label="向左查看" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><button type="button" class="learning-graph-pan" data-pan="1" aria-label="向右查看"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button><button type="button" class="learning-graph-expand" aria-label="放大图形" title="放大图形"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></button></div><div class="learning-graph-viewport" tabindex="0" role="region" aria-label="topo = [a,b,x]"><picture><img src="/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/graphs/05-sequence.svg" alt="topo = [a,b,x]" decoding="async"></picture></div></figure>
 
 <p>然后我们因为要从最顶端开始，所以是 <code>reversed</code>，从顶端的output，然后因为 node gradient已经有了，我们定义过 <code>dL/dL = 1</code>，然后利用local derivative + chain rule，计算child 的gradient，这样。</p>
-<pre class="mermaid">flowchart TD
-    T[&quot;topo = [a,b,x]&quot;] --&gt; R[&quot;reversed(topo)&quot;]
-    R --&gt; O[&quot;[x,b,a]&quot;]
-    O --&gt; V[&quot;v._backward()&quot;]
-    S[&quot;self.grad = 1&lt;br/&gt;dL/dL = 1&quot;] --&gt; V
-    V --&gt; C[&quot;local derivative + chain rule&quot;]
-    C --&gt; G[&quot;child 的gradient&quot;]</pre>
+<figure class="micrograd-diagram"><div class="learning-graph-tools"><button type="button" class="learning-graph-expand" aria-label="放大图形" title="放大图形"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></button></div><div class="learning-graph-viewport" tabindex="0" role="region" aria-label="local derivative + chain rule"><picture><img src="/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/graphs/06-backward.svg" alt="local derivative + chain rule" decoding="async"></picture></div></figure>
 
 <p>以上就是整个engine的代码解析</p>
 <h2 id="那么我们如何制作一个最简单的神经网络来进行back-propagation呢？"><a href="#那么我们如何制作一个最简单的神经网络来进行back-propagation呢？" class="headerlink" title="那么我们如何制作一个最简单的神经网络来进行back propagation呢？"></a>那么我们如何制作一个最简单的神经网络来进行back propagation呢？</h2><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> Engine <span class="hljs-keyword">import</span> Value<br><span class="hljs-keyword">import</span> random<br></code></pre></td></tr></table></figure>
@@ -840,6 +944,7 @@ window.MathJax = {
 </footer>
 
     <script src="/blog/js/covers.js?v=reader-8"></script>
-    <script src="/blog/js/main.js?v=reader-4"></script>
-  </body>
+    <script src="/blog/js/reading.js?v=reader-1"></script>
+    <script src="/blog/js/main.js?v=reader-5"></script>
+  <script src="/blog/js/micrograd-graphs.js?v=1"></script></body>
 </html>

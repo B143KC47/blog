@@ -11,7 +11,7 @@
   <link rel="canonical" href="https://b143kc47.github.io/blog/2026/10/01/Kaggle-Solution/Predicting%20Student%20Health%20Risk/index.html">
   <link rel="preload" href="https://cdn.jsdelivr.net/fontsource/fonts/geist-mono:vf@5.3.0/latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/blog/css/style.css?v=reader-5">
-  <link rel="stylesheet" href="/blog/css/covers.css?v=reader-8">
+  <link rel="stylesheet" href="/blog/css/covers.css?v=reader-9">
   
   <link rel="icon" href="/blog/avatar.jpg" type="image/jpeg">
   <meta name="description" content="Kaggle Competition (URL) : https:&#x2F;&#x2F;www.kaggle.com&#x2F;competitions&#x2F;playground-series-s6e7  题目背景每一行是一个学生健康状况的记录，然后我们的target 是预测 health_condition (qualitative, ordinal )： health_condition要预测的状态：   at-risk">
@@ -23,7 +23,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://b143kc47.github.io/blog/avatar.jpg">
 <meta property="article:published_time" content="2026-09-30T17:47:01.000Z">
-<meta property="article:modified_time" content="2026-09-30T17:47:01.504Z">
+<meta property="article:modified_time" content="2026-10-05T17:41:22.149Z">
 <meta property="article:author" content="KO Ho Tin">
 <meta property="article:tag" content="KO Ho Tin, BlackCat, B143KC47, blog, LLM agents, alpha mining, computer vision">
 <meta name="twitter:card" content="summary">
@@ -107,7 +107,7 @@ window.MathJax = {
 <li>unhealthy</li>
 </ul>
 <p>训练集有 690,088 行，测试集有 295,753 行。输入有 13 个feature：</p>
-<div class="table-scroll"><table>
+<div class="table-scroll" data-columns="2" data-compact-first="true" style="--table-columns:2"><table>
 <thead>
 <tr>
 <th>类型</th>
@@ -124,7 +124,7 @@ window.MathJax = {
 </tr>
 </tbody></table></div>
 <p>首先我们可以先看训练集的 target 分布（这个与titanic类似） </p>
-<div class="table-scroll"><table>
+<div class="table-scroll" data-columns="2" data-compact-first="true" style="--table-columns:2"><table>
 <thead>
 <tr>
 <th>类别</th>
@@ -146,33 +146,83 @@ window.MathJax = {
 </tbody></table></div>
 <p>对所有数据预测 <code>at-risk</code>，普通 accuracy 可以达到 85.87%</p>
 <p>但比赛使用：<br>BA(Balancing Accuracy [sklearn url: <a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.balanced_accuracy_score.html">https://scikit-learn.org/stable/modules/generated/sklearn.metrics.balanced_accuracy_score.html</a> ]):</p>
-<p>$$<br>BA &#x3D; \frac{\text{Recall}<em>{at-risk} + \text{Recall}</em>{fit} + \text{Recall}_{unhealthy}}{3}<br>$$</p>
-<p>这里的 $ \text{Recall}<em>{at-risk} ,  \text{Recall}</em>{fit}  ,\text{Recall}<em>{unhealthy} $ 也就是每个类别真正识别出了多少<br>例如 100个 at-risk 模型识别了 80 那就是 $ \text{Recall}</em>{at-risk} &#x3D; 80&#x2F;100 $ 然后对于这些类别的总数相加 然后取mean </p>
-<p>就按我们上面那个如果按普通accuracy 很高的baseline 来说 在 BA下  $ \text{Recall}_{at-risk} $ 是 100% 其他是 0 的话  (1+0+0)&#x2F;3 也只有 1&#x2F;3 而已 。</p>
+<div class="math-source math-source--display">$$
+BA &#x3D; \frac{\text{Recall}_{at-risk} + \text{Recall}_{fit} + \text{Recall}_{unhealthy}}{3}
+$$</div>
+<p>这里的 <span class="math-source">$ \text{Recall}_{at-risk} ,  \text{Recall}_{fit}  ,\text{Recall}_{unhealthy} $</span> 也就是每个类别真正识别出了多少<br>例如 100个 at-risk 模型识别了 80 那就是 <span class="math-source">$ \text{Recall}_{at-risk} &#x3D; 80&#x2F;100 $</span> 然后对于这些类别的总数相加 然后取mean </p>
+<p>就按我们上面那个如果按普通accuracy 很高的baseline 来说 在 BA下  <span class="math-source">$ \text{Recall}_{at-risk} $</span> 是 100% 其他是 0 的话  (1+0+0)&#x2F;3 也只有 1&#x2F;3 而已 。</p>
 <p>然后我们首先要研究target 和 feature 的相关性， 看看target 是由哪个feature 决定的。使用决策树从 全部13个特征中寻找规则。</p>
-<p>决策树是一种 自动寻找  </p>
-<p>if 条件1:<br>    if 条件2:<br>        ...<br>else:<br>    ...</p>
-<p>的方法  其实也就是不同做condition的分类 举例：</p>
-<p>睡眠 &lt; 6 小时？<br>├── Yes<br>│   └── 压力 high？<br>│       ├── Yes → unhealthy<br>│       └── No  → at-risk<br>│<br>└── No<br>    └── 压力 low？<br>        ├── No  → at-risk<br>        └── Yes<br>            └── activity &#x3D; active？<br>                ├── Yes → fit<br>                └── No  → at-risk<br>那么这个条件是怎么出来的 就是蛮力试出来的</p>
+<p>决策树本质上是一种自动寻找条件分支规则的方法，寻找类似如下的条件嵌套逻辑：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> 条件<span class="hljs-number">1</span>:<br>    <span class="hljs-keyword">if</span> 条件<span class="hljs-number">2</span>:<br>        ...<br><span class="hljs-keyword">else</span>:<br>    ...<br></code></pre></td></tr></table></figure>
+
+<p>其实也就是不断通过特征条件（condition）做分类。举例：</p>
+<pre class="literal-block literal-block--tree"><code>睡眠 &lt; 6 小时？
+├── Yes
+│   └── 压力 high？
+│       ├── Yes → unhealthy
+│       └── No  → at-risk
+│
+└── No
+    └── 压力 low？
+        ├── No  → at-risk
+        └── Yes
+            └── activity &#x3D; active？
+                ├── Yes → fit
+                └── No  → at-risk</code></pre>
+<p>那么这个条件是怎么出来的 就是蛮力试出来的</p>
 <p>例如测试<br>sleep &lt; 5.5?<br>sleep &lt; 6.0?<br>sleep &lt; 6.5?</p>
 <p>age &lt; 30?<br>age &lt; 40?</p>
 <p>stress &#x3D; high?<br>activity &#x3D; active?</p>
 <p>然后这个Decision tree (Sklearn Decision tree classifier) 的loss function: </p>
-<p>$$<br>Gini &#x3D; 1 - \sum^{K}_{k&#x3D;1} p_k^2<br>$$</p>
+<div class="math-source math-source--display">$$
+Gini &#x3D; 1 - \sum^{K}_{k&#x3D;1} p_k^2
+$$</div>
 <p>其中k为第几类</p>
 <p>例如 </p>
 <p>1&#x2F;3 fit<br>1&#x2F;3 at-risk<br>1&#x2F;3 unhealthy</p>
-<h1 id="Gini"><a href="#Gini" class="headerlink" title="$$Gini"></a>$$<br>Gini</h1><p>1-<br>\left[<br>\left(\frac{1}{3}\right)^2<br>+<br>\left(\frac{1}{3}\right)^2<br>+<br>\left(\frac{1}{3}\right)^2<br>\right]<br>$$</p>
-<h1 id=""><a href="#" class="headerlink" title="$$"></a>$$</h1><p>1-\frac{1}{3}<br>$$</p>
-<h1 id="-1"><a href="#-1" class="headerlink" title="$$"></a>$$</h1><p>\frac{2}{3}<br>\approx 0.667<br>$$</p>
+<div class="math-source math-source--display">$$
+Gini
+&#x3D;
+1-
+\left[
+\left(\frac{1}{3}\right)^2
++
+\left(\frac{1}{3}\right)^2
++
+\left(\frac{1}{3}\right)^2
+\right]
+$$</div>
+<div class="math-source math-source--display">$$
+&#x3D;
+1-\frac{1}{3}
+$$</div>
+<div class="math-source math-source--display">$$
+&#x3D;
+\frac{2}{3}
+\approx 0.667
+$$</div>
 <p>decision tree 就会不停对 Gini 做优化 直到 maximum Gini 出现。</p>
-<p>原代码：<br>tree &#x3D; DecisionTreeClassifier(max_depth&#x3D;4, random_state&#x3D;0)</p>
-<h1 id="这里限制了tree的深度为4-判断简单机构-然后-random-state-0-就是一个固定的random-seed-确保结果可以复现"><a href="#这里限制了tree的深度为4-判断简单机构-然后-random-state-0-就是一个固定的random-seed-确保结果可以复现" class="headerlink" title="这里限制了tree的深度为4(判断简单机构) 然后 random state&#x3D;0 (就是一个固定的random seed 确保结果可以复现)"></a>这里限制了tree的深度为4(判断简单机构) 然后 random state&#x3D;0 (就是一个固定的random seed 确保结果可以复现)</h1><p>tree.fit(X_original, y_original)</p>
+<p>原代码：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">tree = DecisionTreeClassifier(max_depth=<span class="hljs-number">4</span>, random_state=<span class="hljs-number">0</span>)<br><span class="hljs-comment"># 这里限制了tree的深度为4(判断简单结构)，random_state=0 确保结果可复现</span><br>tree.fit(X_original, y_original)<br></code></pre></td></tr></table></figure>
+
 <p>实际的结果就是： </p>
-<p>睡眠少于 6 小时？<br>├─ 是：压力高？<br>│      ├─ 是 → unhealthy<br>│      └─ 否 → at-risk<br>└─ 否：压力低？<br>       ├─ 否 → at-risk<br>       └─ 是：活动水平为 active？<br>              ├─ 否 → at-risk<br>              └─ 是：睡眠至少 7 小时？<br>                     ├─ 否 → at-risk<br>                     └─ 是 → fit</p>
+<pre class="literal-block literal-block--tree"><code>睡眠少于 6 小时？
+├─ 是：压力高？
+│      ├─ 是 → unhealthy
+│      └─ 否 → at-risk
+└─ 否：压力低？
+       ├─ 否 → at-risk
+       └─ 是：活动水平为 active？
+              ├─ 否 → at-risk
+              └─ 是：睡眠至少 7 小时？
+                     ├─ 否 → at-risk
+                     └─ 是 → fit</code></pre>
 <p>为了防止 DecisionTree Overfit 做一下测试 我们做一下 5 fold cross validation<br>把5w个数据平均分五等份 然后就可以分出 training set 和 validation set 然后就做测试</p>
 <p>将获得的规则 看看对比一下比赛的数据</p>
-<p>规则字段完整的比赛训练行：511,675<br>规则预测正确：            507,574<br>规则预测错误：              4,101<br>Accuracy：                 99.1985% (并非BA)</p>
+<pre class="literal-block literal-block--aligned"><code>规则字段完整的比赛训练行：511,675
+规则预测正确：            507,574
+规则预测错误：              4,101
+Accuracy：                 99.1985% (并非BA)</code></pre>
 <h1 id="自己的思路"><a href="#自己的思路" class="headerlink" title="自己的思路"></a>自己的思路</h1><h1 id="他人的思路"><a href="#他人的思路" class="headerlink" title="他人的思路"></a>他人的思路</h1><h1 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h1>
       </div>
 
@@ -398,6 +448,7 @@ window.MathJax = {
 </footer>
 
     <script src="/blog/js/covers.js?v=reader-8"></script>
-    <script src="/blog/js/main.js?v=reader-4"></script>
+    <script src="/blog/js/reading.js?v=reader-1"></script>
+    <script src="/blog/js/main.js?v=reader-5"></script>
   </body>
 </html>

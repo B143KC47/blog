@@ -11,7 +11,7 @@
   <link rel="canonical" href="https://b143kc47.github.io/blog/2026/08/21/Continue%20Learning/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0/index.html">
   <link rel="preload" href="https://cdn.jsdelivr.net/fontsource/fonts/geist-mono:vf@5.3.0/latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/blog/css/style.css?v=reader-5">
-  <link rel="stylesheet" href="/blog/css/covers.css?v=reader-8">
+  <link rel="stylesheet" href="/blog/css/covers.css?v=reader-9">
   
   <link rel="icon" href="/blog/avatar.jpg" type="image/jpeg">
   <meta name="description" content="持续学习（Continual Learning）截至 2026 年的技术总体认知：为什么零遗忘不等于好的持续学习系统，评估需同时考虑新知识吸收、旧能力保持、前后向迁移与训练存储成本。">
@@ -123,8 +123,10 @@ window.MathJax = {
 </ol>
 <hr>
 <h1 id="第一部分：问题到底是什么"><a href="#第一部分：问题到底是什么" class="headerlink" title="第一部分：问题到底是什么"></a>第一部分：问题到底是什么</h1><h2 id="1-持续学习的技术定义"><a href="#1-持续学习的技术定义" class="headerlink" title="1. 持续学习的技术定义"></a>1. 持续学习的技术定义</h2><p>设数据按顺序到达：</p>
-<p>[<br>D_1, D_2, \ldots, D_T, \qquad D_t \sim P_t(X,Y)<br>]</p>
-<p>其中分布 (P_t) 可以发生变化。变化可能表现为：</p>
+<div class="math-source math-source--display">\[
+D_1, D_2, \ldots, D_T, \qquad D_t \sim P_t(X,Y)
+\]</div>
+<p>其中分布 <span class="math-source">\(P_t\)</span> 可以发生变化。变化可能表现为：</p>
 <ul>
 <li>新类别出现；</li>
 <li>输入风格或传感器变化；</li>
@@ -132,20 +134,26 @@ window.MathJax = {
 <li>标签含义、奖励函数或用户偏好变化；</li>
 <li>任务边界明确、模糊，甚至根本不存在。</li>
 </ul>
-<p>模型在第 (t) 个阶段不只有参数 (\theta_t)，更完整的状态应该写成：</p>
-<p>[<br>S_t &#x3D; \big(\theta_t,; o_t,; M_t,; A_t,; E_t\big)<br>]</p>
+<p>模型在第 <span class="math-source">\(t\)</span> 个阶段不只有参数 <span class="math-source">\(\theta_t\)</span>，更完整的状态应该写成：</p>
+<div class="math-source math-source--display">\[
+S_t &#x3D; \big(\theta_t,\; o_t,\; M_t,\; A_t,\; E_t\big)
+\]</div>
 <p>其中：</p>
 <ul>
-<li>(\theta_t)：主模型参数；</li>
-<li>(o_t)：优化器状态，例如 Adam 的一阶、二阶动量；</li>
-<li>(M_t)：回放缓冲或样本统计；</li>
-<li>(A_t)：Prompt、Adapter、LoRA、mask、专家模块等可插拔参数；</li>
-<li>(E_t)：RAG 数据库、Agent episodic memory 等外部记忆。</li>
+<li><span class="math-source">\(\theta_t\)</span>：主模型参数；</li>
+<li><span class="math-source">\(o_t\)</span>：优化器状态，例如 Adam 的一阶、二阶动量；</li>
+<li><span class="math-source">\(M_t\)</span>：回放缓冲或样本统计；</li>
+<li><span class="math-source">\(A_t\)</span>：Prompt、Adapter、LoRA、mask、专家模块等可插拔参数；</li>
+<li><span class="math-source">\(E_t\)</span>：RAG 数据库、Agent episodic memory 等外部记忆。</li>
 </ul>
 <p>持续学习算法执行更新：</p>
-<p>[<br>S_t &#x3D; \mathcal{A}(S_{t-1},D_t;B)<br>]</p>
-<p>这里的 (B) 是资源约束，例如：</p>
-<p>[<br>B&#x3D;(\text{memory bytes},\text{train FLOPs},\text{latency},\text{privacy},\text{model growth})<br>]</p>
+<div class="math-source math-source--display">\[
+S_t &#x3D; \mathcal{A}(S_{t-1},D_t;B)
+\]</div>
+<p>这里的 <span class="math-source">\(B\)</span> 是资源约束，例如：</p>
+<div class="math-source math-source--display">\[
+B&#x3D;(\text{memory bytes},\text{train FLOPs},\text{latency},\text{privacy},\text{model growth})
+\]</div>
 <p>因此，一个更完整的定义是：</p>
 <blockquote>
 <p><strong>持续学习是模型在非平稳、按序到达的数据或经验上持续更新，在无法反复依赖全部历史数据与无限计算的条件下，兼顾新知识吸收、旧能力保持、知识迁移和资源有界增长。</strong></p>
@@ -158,7 +166,13 @@ window.MathJax = {
 <li>旧知识不一定都应永久保存；过期、错误或不安全的知识有时应被主动修改或遗忘。</li>
 </ol>
 <h3 id="1-1-一个多目标优化视角"><a href="#1-1-一个多目标优化视角" class="headerlink" title="1.1 一个多目标优化视角"></a>1.1 一个多目标优化视角</h3><p>可以把 CL 写成多目标问题：</p>
-<p>[<br>\min_{S_t};<br>\underbrace{R_t(S_t)}<em>{\text{当前适应}}<br>+\lambda</em>{\text{old}}\underbrace{R_{1:t-1}(S_t)}<em>{\text{历史保持}}<br>-\lambda</em>{\text{transfer}}\underbrace{T(S_t)}<em>{\text{迁移收益}}<br>+\lambda</em>{\text{resource}}\underbrace{C(S_t)}_{\text{资源代价}}<br>]</p>
+<div class="math-source math-source--display">\[
+\min_{S_t}\;
+\underbrace{R_t(S_t)}_{\text{当前适应}}
++\lambda_{\text{old}}\underbrace{R_{1:t-1}(S_t)}_{\text{历史保持}}
+-\lambda_{\text{transfer}}\underbrace{T(S_t)}_{\text{迁移收益}}
++\lambda_{\text{resource}}\underbrace{C(S_t)}_{\text{资源代价}}
+\]</div>
 <p>这不是某一篇论文的统一训练式，而是理解领域的工程抽象：</p>
 <ul>
 <li>只压低当前风险，得到 naïve sequential fine-tuning，容易遗忘；</li>
@@ -166,7 +180,7 @@ window.MathJax = {
 <li>不惩罚资源，最简单的办法是每个任务复制一整套模型；</li>
 <li>不考虑迁移，系统只是保存一堆孤立任务，并没有形成可复用知识。</li>
 </ul>
-<h2 id="2-CL-与相邻概念的边界"><a href="#2-CL-与相邻概念的边界" class="headerlink" title="2. CL 与相邻概念的边界"></a>2. CL 与相邻概念的边界</h2><div class="table-scroll"><table>
+<h2 id="2-CL-与相邻概念的边界"><a href="#2-CL-与相邻概念的边界" class="headerlink" title="2. CL 与相邻概念的边界"></a>2. CL 与相邻概念的边界</h2><div class="table-scroll" data-columns="5" style="--table-columns:5"><table>
 <thead>
 <tr>
 <th>概念</th>
@@ -241,19 +255,34 @@ window.MathJax = {
 </tr>
 </tbody></table></div>
 <h3 id="2-1-为什么“零遗忘”不是充分条件"><a href="#2-1-为什么“零遗忘”不是充分条件" class="headerlink" title="2.1 为什么“零遗忘”不是充分条件"></a>2.1 为什么“零遗忘”不是充分条件</h3><p>假设模型参数完全冻结：</p>
-<p>[<br>\theta_t&#x3D;\theta_0,\quad \forall t<br>]</p>
+<div class="math-source math-source--display">\[
+\theta_t&#x3D;\theta_0,\quad \forall t
+\]</div>
 <p>它不会因为新训练而忘记旧任务，但也无法吸收参数知识。于是：</p>
-<p>[<br>\text{Forgetting}&#x3D;0 \not\Rightarrow \text{Continual Learning is good}<br>]</p>
+<div class="math-source math-source--display">\[
+\text{Forgetting}&#x3D;0 \not\Rightarrow \text{Continual Learning is good}
+\]</div>
 <p>同样，如果允许每个任务复制一个无限大的模型，并在测试时提供完美 task ID，也可以接近零遗忘；但其参数量随任务线性增长：</p>
-<p>[<br>|\theta_{1:T}|&#x3D;O(TP)<br>]</p>
+<div class="math-source math-source--display">\[
+|\theta_{1:T}|&#x3D;O(TP)
+\]</div>
 <p>这说明 CL 的真正难点来自<strong>共同参数、未知路由和有界资源同时存在</strong>。</p>
 <hr>
-<h1 id="第二部分：为什么神经网络会忘"><a href="#第二部分：为什么神经网络会忘" class="headerlink" title="第二部分：为什么神经网络会忘"></a>第二部分：为什么神经网络会忘</h1><h2 id="3-最小解释：共享参数上的梯度干扰"><a href="#3-最小解释：共享参数上的梯度干扰" class="headerlink" title="3. 最小解释：共享参数上的梯度干扰"></a>3. 最小解释：共享参数上的梯度干扰</h2><p>模型学完旧任务后位于 (\theta)。新任务的一步更新为：</p>
-<p>[<br>\theta&#39; &#x3D; \theta - \eta g_{\text{new}}<br>]</p>
+<h1 id="第二部分：为什么神经网络会忘"><a href="#第二部分：为什么神经网络会忘" class="headerlink" title="第二部分：为什么神经网络会忘"></a>第二部分：为什么神经网络会忘</h1><h2 id="3-最小解释：共享参数上的梯度干扰"><a href="#3-最小解释：共享参数上的梯度干扰" class="headerlink" title="3. 最小解释：共享参数上的梯度干扰"></a>3. 最小解释：共享参数上的梯度干扰</h2><p>模型学完旧任务后位于 <span class="math-source">\(\theta\)</span>。新任务的一步更新为：</p>
+<div class="math-source math-source--display">\[
+\theta&#39; &#x3D; \theta - \eta g_{\text{new}}
+\]</div>
 <p>对旧任务损失做一阶展开：</p>
-<p>[<br>L_{\text{old}}(\theta&#39;)<br>\approx<br>L_{\text{old}}(\theta)<br>-\eta g_{\text{old}}^\top g_{\text{new}}<br>]</p>
+<div class="math-source math-source--display">\[
+L_{\text{old}}(\theta&#39;)
+\approx
+L_{\text{old}}(\theta)
+-\eta g_{\text{old}}^\top g_{\text{new}}
+\]</div>
 <p>若：</p>
-<p>[<br>g_{\text{old}}^\top g_{\text{new}}&lt;0<br>]</p>
+<div class="math-source math-source--display">\[
+g_{\text{old}}^\top g_{\text{new}}&lt;0
+\]</div>
 <p>那么沿新任务梯度更新会使旧任务损失上升。这就是 GEM&#x2F;A-GEM 等梯度约束方法的直接出发点。</p>
 <p>但不能把灾难性遗忘简单等同于“梯度点积为负”。一阶局部近似没有覆盖：</p>
 <ul>
@@ -268,10 +297,10 @@ window.MathJax = {
     A[新数据或新任务到达] --&gt; B[参数更新]
     B --&gt; C1[参数干扰]
     B --&gt; C2[表征漂移]
-    B --&gt; C3[分类器/校准偏置]
+    B --&gt; C3[分类器&#x2F;校准偏置]
     B --&gt; C4[优化器与统计状态漂移]
     B --&gt; C5[路由或任务识别错误]
-    B --&gt; C6[LLM 输出策略/对齐改变]
+    B --&gt; C6[LLM 输出策略&#x2F;对齐改变]
     C1 --&gt; D[旧任务指标下降]
     C2 --&gt; D
     C3 --&gt; D
@@ -281,18 +310,28 @@ window.MathJax = {
 
 <h3 id="4-1-参数干扰"><a href="#4-1-参数干扰" class="headerlink" title="4.1 参数干扰"></a>4.1 参数干扰</h3><p>同一组权重同时承担多个任务。新任务优化修改了旧任务依赖的方向。</p>
 <h3 id="4-2-表征漂移（representation-drift）"><a href="#4-2-表征漂移（representation-drift）" class="headerlink" title="4.2 表征漂移（representation drift）"></a>4.2 表征漂移（representation drift）</h3><p>旧样本的特征由：</p>
-<p>[<br>z_{\text{old}}&#x3D;\phi_{\theta_{t-1}}(x)<br>]</p>
+<div class="math-source math-source--display">\[
+z_{\text{old}}&#x3D;\phi_{\theta_{t-1}}(x)
+\]</div>
 <p>变成：</p>
-<p>[<br>z_{\text{new}}&#x3D;\phi_{\theta_t}(x)<br>]</p>
+<div class="math-source math-source--display">\[
+z_{\text{new}}&#x3D;\phi_{\theta_t}(x)
+\]</div>
 <p>即使分类器没有变，旧类别在特征空间的位置也可能移动。反过来，即便 backbone 基本保留，分类头偏置也可能造成性能下降。</p>
 <h3 id="4-3-类别不平衡与-logit-偏置"><a href="#4-3-类别不平衡与-logit-偏置" class="headerlink" title="4.3 类别不平衡与 logit 偏置"></a>4.3 类别不平衡与 logit 偏置</h3><p>Class-IL 中，当前阶段包含大量新类样本，却只有少量甚至没有旧类样本。交叉熵会把决策边界推向旧类，产生“新类偏置”。因此很多 CIL 方法中的 classifier alignment、balanced fine-tuning、prototype classifier，并不是直接保护参数，而是在修正输出空间。</p>
 <h3 id="4-4-优化器与归一化统计漂移"><a href="#4-4-优化器与归一化统计漂移" class="headerlink" title="4.4 优化器与归一化统计漂移"></a>4.4 优化器与归一化统计漂移</h3><p>Adam 的动量、学习率调度、BatchNorm running mean&#x2F;variance 都是模型状态。只保存权重、不保存这些状态，或者在新域上重新估计统计量，都可能改变旧任务表现。</p>
 <h3 id="4-5-路由失败"><a href="#4-5-路由失败" class="headerlink" title="4.5 路由失败"></a>4.5 路由失败</h3><p>参数隔离、Prompt Pool、MoE 或 Adapter Pool 依赖“给当前输入选择正确模块”。此时旧知识可能完整保存在某个模块里，但输入被路由到了错误模块。表面指标仍会下降，但问题不是参数被擦除，而是<strong>知识不可达</strong>。</p>
 <h3 id="4-6-LLM-的访问与对齐失败"><a href="#4-6-LLM-的访问与对齐失败" class="headerlink" title="4.6 LLM 的访问与对齐失败"></a>4.6 LLM 的访问与对齐失败</h3><p>LLM 可能仍然能在线性 probe、特定 prompt 或少量校准后输出旧知识，但在原任务格式下失败。ICLR 2025 的 <em>Spurious Forgetting in Continual Learning of Language Models</em> 将一类现象解释为 task alignment 下降，而非知识本体完全消失。因此 LLM-CL 评测必须区分：</p>
-<p>[<br>\text{knowledge storage}<br>\neq<br>\text{knowledge accessibility}<br>\neq<br>\text{generation policy}<br>]</p>
+<div class="math-source math-source--display">\[
+\text{knowledge storage}
+\neq
+\text{knowledge accessibility}
+\neq
+\text{generation policy}
+\]</div>
 <hr>
 <h1 id="第三部分：先把实验场景说清楚"><a href="#第三部分：先把实验场景说清楚" class="headerlink" title="第三部分：先把实验场景说清楚"></a>第三部分：先把实验场景说清楚</h1><h2 id="5-三种经典增量场景"><a href="#5-三种经典增量场景" class="headerlink" title="5. 三种经典增量场景"></a>5. 三种经典增量场景</h2><p>van de Ven 等人的标准化工作把经典监督 CL 分为三类。</p>
-<div class="table-scroll"><table>
+<div class="table-scroll" data-columns="5" style="--table-columns:5"><table>
 <thead>
 <tr>
 <th>场景</th>
@@ -325,11 +364,17 @@ window.MathJax = {
 </tr>
 </tbody></table></div>
 <p>形式化地：</p>
-<h3 id="Task-IL"><a href="#Task-IL" class="headerlink" title="Task-IL"></a>Task-IL</h3><p>[<br>f(x,t)\rightarrow y<br>]</p>
-<p>测试时提供任务上下文 (t)。</p>
-<h3 id="Domain-IL"><a href="#Domain-IL" class="headerlink" title="Domain-IL"></a>Domain-IL</h3><p>[<br>f(x)\rightarrow y, \qquad \mathcal{Y}_t&#x3D;\mathcal{Y}<br>]</p>
-<p>标签空间保持一致，但 (P_t(X)) 或 (P_t(X,Y)) 变化。</p>
-<h3 id="Class-IL"><a href="#Class-IL" class="headerlink" title="Class-IL"></a>Class-IL</h3><p>[<br>\mathcal{Y}<em>1\subset \mathcal{Y}</em>{1:2}\subset\cdots\subset\mathcal{Y}_{1:T}<br>]</p>
+<h3 id="Task-IL"><a href="#Task-IL" class="headerlink" title="Task-IL"></a>Task-IL</h3><div class="math-source math-source--display">\[
+f(x,t)\rightarrow y
+\]</div>
+<p>测试时提供任务上下文 <span class="math-source">\(t\)</span>。</p>
+<h3 id="Domain-IL"><a href="#Domain-IL" class="headerlink" title="Domain-IL"></a>Domain-IL</h3><div class="math-source math-source--display">\[
+f(x)\rightarrow y, \qquad \mathcal{Y}_t&#x3D;\mathcal{Y}
+\]</div>
+<p>标签空间保持一致，但 <span class="math-source">\(P_t(X)\)</span> 或 <span class="math-source">\(P_t(X,Y)\)</span> 变化。</p>
+<h3 id="Class-IL"><a href="#Class-IL" class="headerlink" title="Class-IL"></a>Class-IL</h3><div class="math-source math-source--display">\[
+\mathcal{Y}_1\subset \mathcal{Y}_{1:2}\subset\cdots\subset\mathcal{Y}_{1:T}
+\]</div>
 <p>模型必须在所有已见类别上做一次统一预测。</p>
 <h2 id="6-现实设定还需要另外四个轴"><a href="#6-现实设定还需要另外四个轴" class="headerlink" title="6. 现实设定还需要另外四个轴"></a>6. 现实设定还需要另外四个轴</h2><p>只写“Class-IL”仍然不够。实验至少还要声明：</p>
 <h3 id="6-1-数据访问"><a href="#6-1-数据访问" class="headerlink" title="6.1 数据访问"></a>6.1 数据访问</h3><ul>
@@ -353,30 +398,55 @@ window.MathJax = {
 <li>无边界 task-free &#x2F; general CL。</li>
 </ul>
 <h3 id="6-4-资源增长"><a href="#6-4-资源增长" class="headerlink" title="6.4 资源增长"></a>6.4 资源增长</h3><p>必须分别报告：</p>
-<p>[<br>\text{raw memory},\quad<br>\text{feature&#x2F;logit memory},\quad<br>\text{trainable params},\quad<br>\text{total params},\quad<br>\text{FLOPs},\quad<br>\text{latency}<br>]</p>
+<div class="math-source math-source--display">\[
+\text{raw memory},\quad
+\text{feature&#x2F;logit memory},\quad
+\text{trainable params},\quad
+\text{total params},\quad
+\text{FLOPs},\quad
+\text{latency}
+\]</div>
 <p>“每类保存 20 个样本”与“总共保存 2,000 个样本”不是同一个约束；“每任务增加一个 LoRA”也不能称为严格常数内存。</p>
 <hr>
-<h1 id="第四部分：怎样正确评测-CL"><a href="#第四部分：怎样正确评测-CL" class="headerlink" title="第四部分：怎样正确评测 CL"></a>第四部分：怎样正确评测 CL</h1><h2 id="7-性能矩阵"><a href="#7-性能矩阵" class="headerlink" title="7. 性能矩阵"></a>7. 性能矩阵</h2><p>设 (R_{i,j}) 表示模型学完第 (i) 个任务后，在第 (j) 个任务测试集上的性能。</p>
-<p>[<br>R&#x3D;<br>\begin{bmatrix}<br>R_{1,1} &amp; R_{1,2} &amp; \cdots &amp; R_{1,T}\<br>R_{2,1} &amp; R_{2,2} &amp; \cdots &amp; R_{2,T}\<br>\vdots &amp; \vdots &amp; \ddots &amp; \vdots\<br>R_{T,1} &amp; R_{T,2} &amp; \cdots &amp; R_{T,T}<br>\end{bmatrix}<br>]</p>
+<h1 id="第四部分：怎样正确评测-CL"><a href="#第四部分：怎样正确评测-CL" class="headerlink" title="第四部分：怎样正确评测 CL"></a>第四部分：怎样正确评测 CL</h1><h2 id="7-性能矩阵"><a href="#7-性能矩阵" class="headerlink" title="7. 性能矩阵"></a>7. 性能矩阵</h2><p>设 <span class="math-source">\(R_{i,j}\)</span> 表示模型学完第 <span class="math-source">\(i\)</span> 个任务后，在第 <span class="math-source">\(j\)</span> 个任务测试集上的性能。</p>
+<div class="math-source math-source--display">\[
+R&#x3D;
+\begin{bmatrix}
+R_{1,1} &amp; R_{1,2} &amp; \cdots &amp; R_{1,T}\\
+R_{2,1} &amp; R_{2,2} &amp; \cdots &amp; R_{2,T}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+R_{T,1} &amp; R_{T,2} &amp; \cdots &amp; R_{T,T}
+\end{bmatrix}
+\]</div>
 <p>矩阵的对角线衡量每个任务刚学完时的能力；最后一行衡量整个序列结束后的保留情况；下三角反映学习后续任务对前面任务的影响。</p>
-<h2 id="8-核心指标"><a href="#8-核心指标" class="headerlink" title="8. 核心指标"></a>8. 核心指标</h2><h3 id="8-1-最终平均精度（ACC）"><a href="#8-1-最终平均精度（ACC）" class="headerlink" title="8.1 最终平均精度（ACC）"></a>8.1 最终平均精度（ACC）</h3><p>[<br>\mathrm{ACC}&#x3D;\frac{1}{T}\sum_{j&#x3D;1}^{T}R_{T,j}<br>]</p>
+<h2 id="8-核心指标"><a href="#8-核心指标" class="headerlink" title="8. 核心指标"></a>8. 核心指标</h2><h3 id="8-1-最终平均精度（ACC）"><a href="#8-1-最终平均精度（ACC）" class="headerlink" title="8.1 最终平均精度（ACC）"></a>8.1 最终平均精度（ACC）</h3><div class="math-source math-source--display">\[
+\mathrm{ACC}&#x3D;\frac{1}{T}\sum_{j&#x3D;1}^{T}R_{T,j}
+\]</div>
 <p>它是最直观的最终综合表现，但不能告诉你模型是“学不会新任务”还是“学会后又忘了”。</p>
 <h3 id="8-2-反向迁移（BWT）"><a href="#8-2-反向迁移（BWT）" class="headerlink" title="8.2 反向迁移（BWT）"></a>8.2 反向迁移（BWT）</h3><p>常用定义为：</p>
-<p>[<br>\mathrm{BWT}&#x3D;\frac{1}{T-1}\sum_{j&#x3D;1}^{T-1}\left(R_{T,j}-R_{j,j}\right)<br>]</p>
+<div class="math-source math-source--display">\[
+\mathrm{BWT}&#x3D;\frac{1}{T-1}\sum_{j&#x3D;1}^{T-1}\left(R_{T,j}-R_{j,j}\right)
+\]</div>
 <ul>
 <li>BWT &lt; 0：后续学习伤害旧任务；</li>
 <li>BWT &#x3D; 0：旧任务最终表现与刚学完时相同；</li>
 <li>BWT &gt; 0：后续学习反而提升旧任务。</li>
 </ul>
 <h3 id="8-3-正向迁移（FWT）"><a href="#8-3-正向迁移（FWT）" class="headerlink" title="8.3 正向迁移（FWT）"></a>8.3 正向迁移（FWT）</h3><p>一种常见定义是：</p>
-<p>[<br>\mathrm{FWT}&#x3D;\frac{1}{T-1}\sum_{j&#x3D;2}^{T}\left(R_{j-1,j}-b_j\right)<br>]</p>
-<p>其中 (b_j) 是未学习该任务时的基线。FWT 高意味着过去经验让模型在正式训练新任务前已经更有准备。</p>
+<div class="math-source math-source--display">\[
+\mathrm{FWT}&#x3D;\frac{1}{T-1}\sum_{j&#x3D;2}^{T}\left(R_{j-1,j}-b_j\right)
+\]</div>
+<p>其中 <span class="math-source">\(b_j\)</span> 是未学习该任务时的基线。FWT 高意味着过去经验让模型在正式训练新任务前已经更有准备。</p>
 <p><strong>注意</strong>：不同论文对 BWT&#x2F;FWT 的下标和基线约定可能不同，比较数字前必须核对公式。</p>
-<h3 id="8-4-平均遗忘（Average-Forgetting）"><a href="#8-4-平均遗忘（Average-Forgetting）" class="headerlink" title="8.4 平均遗忘（Average Forgetting）"></a>8.4 平均遗忘（Average Forgetting）</h3><p>任务 (j) 的遗忘可写为：</p>
-<p>[<br>F_j&#x3D;\max_{l\in{j,\ldots,T-1}}R_{l,j}-R_{T,j}<br>]</p>
+<h3 id="8-4-平均遗忘（Average-Forgetting）"><a href="#8-4-平均遗忘（Average-Forgetting）" class="headerlink" title="8.4 平均遗忘（Average Forgetting）"></a>8.4 平均遗忘（Average Forgetting）</h3><p>任务 <span class="math-source">\(j\)</span> 的遗忘可写为：</p>
+<div class="math-source math-source--display">\[
+F_j&#x3D;\max_{l\in\{j,\ldots,T-1\}}R_{l,j}-R_{T,j}
+\]</div>
 <p>然后：</p>
-<p>[<br>\overline F&#x3D;\frac{1}{T-1}\sum_{j&#x3D;1}^{T-1}F_j<br>]</p>
-<p>它比较旧任务历史最佳值与最终值。若模型后续获得正向修正，(F_j) 也可能为负或接近零。</p>
+<div class="math-source math-source--display">\[
+\overline F&#x3D;\frac{1}{T-1}\sum_{j&#x3D;1}^{T-1}F_j
+\]</div>
+<p>它比较旧任务历史最佳值与最终值。若模型后续获得正向修正，<span class="math-source">\(F_j\)</span> 也可能为负或接近零。</p>
 <h2 id="9-只报告-ACC-Forgetting-仍然不够"><a href="#9-只报告-ACC-Forgetting-仍然不够" class="headerlink" title="9. 只报告 ACC&#x2F;Forgetting 仍然不够"></a>9. 只报告 ACC&#x2F;Forgetting 仍然不够</h2><p>现实系统还应报告：</p>
 <ul>
 <li><strong>Anytime performance</strong>：训练过程中任意时间点的平均能力，而不仅是最终一步；</li>
@@ -385,7 +455,7 @@ window.MathJax = {
 <li><strong>Memory in bytes</strong>：不要只报“样本数”；图像、token、feature、logit 的体积不同；</li>
 <li><strong>训练 FLOPs 和 wall-clock</strong>：回放会让每步训练量上升；</li>
 <li><strong>推理延迟与路由代价</strong>：模块池、ensemble、KNN、RAG 都可能增加推理成本；</li>
-<li><strong>参数增长率</strong>：每任务新增参数是否是 (O(1))、(O(T)) 或更高；</li>
+<li><strong>参数增长率</strong>：每任务新增参数是否是 <span class="math-source">\(O(1)\)</span>、<span class="math-source">\(O(T)\)</span> 或更高；</li>
 <li><strong>隐私风险</strong>：原始样本回放可能记住个人数据；生成式回放也不天然隐私安全；</li>
 <li><strong>安全与通用能力回归</strong>：对 LLM 尤其重要。</li>
 </ul>
@@ -411,24 +481,29 @@ window.MathJax = {
 </ul>
 <hr>
 <h1 id="第五部分：经典技术路线"><a href="#第五部分：经典技术路线" class="headerlink" title="第五部分：经典技术路线"></a>第五部分：经典技术路线</h1><h2 id="11-正则化：限制哪些参数或函数可以改变"><a href="#11-正则化：限制哪些参数或函数可以改变" class="headerlink" title="11. 正则化：限制哪些参数或函数可以改变"></a>11. 正则化：限制哪些参数或函数可以改变</h2><p>正则化方法的统一思想是：</p>
-<p>[<br>L_t(\theta)&#x3D;L_{\text{new}}(\theta)+\lambda,\Omega(\theta,\theta^*_{\text{old}})<br>]</p>
+<div class="math-source math-source--display">\[
+L_t(\theta)&#x3D;L_{\text{new}}(\theta)+\lambda\,\Omega(\theta,\theta^*_{\text{old}})
+\]</div>
 <p>根据保护对象，可分为：</p>
 <ul>
 <li><strong>参数正则化</strong>：EWC、SI、MAS 等，保护“重要参数”；</li>
 <li><strong>函数正则化</strong>：LwF、logit distillation 等，保护旧模型的输入—输出行为。</li>
 </ul>
 <h3 id="11-1-EWC：用局部后验曲率保护重要参数"><a href="#11-1-EWC：用局部后验曲率保护重要参数" class="headerlink" title="11.1 EWC：用局部后验曲率保护重要参数"></a>11.1 EWC：用局部后验曲率保护重要参数</h3><p>EWC 的经典目标为：</p>
-<p>[<br>L(\theta)&#x3D;L_{\text{new}}(\theta)<br>+\frac{\lambda}{2}\sum_i F_i(\theta_i-\theta_i^*)^2<br>]</p>
+<div class="math-source math-source--display">\[
+L(\theta)&#x3D;L_{\text{new}}(\theta)
++\frac{\lambda}{2}\sum_i F_i(\theta_i-\theta_i^*)^2
+\]</div>
 <p>其中：</p>
 <ul>
-<li>(\theta_i^*)：旧任务训练结束时的参数；</li>
-<li>(F_i)：Fisher 信息矩阵的对角近似，作为参数重要性；</li>
-<li>(\lambda)：稳定性与可塑性的权衡。</li>
+<li><span class="math-source">\(\theta_i^*\)</span>：旧任务训练结束时的参数；</li>
+<li><span class="math-source">\(F_i\)</span>：Fisher 信息矩阵的对角近似，作为参数重要性；</li>
+<li><span class="math-source">\(\lambda\)</span>：稳定性与可塑性的权衡。</li>
 </ul>
 <p>直观解释：</p>
 <ul>
-<li>若 (F_i) 大，移动参数 (\theta_i) 的代价高；</li>
-<li>若 (F_i) 小，该参数可更多用于新任务；</li>
+<li>若 <span class="math-source">\(F_i\)</span> 大，移动参数 <span class="math-source">\(\theta_i\)</span> 的代价高；</li>
+<li>若 <span class="math-source">\(F_i\)</span> 小，该参数可更多用于新任务；</li>
 <li>这不是把重要参数绝对冻结，而是施加“弹性锚定”。</li>
 </ul>
 <h4 id="开源代码摘录：Online-EWC-的惩罚项"><a href="#开源代码摘录：Online-EWC-的惩罚项" class="headerlink" title="开源代码摘录：Online EWC 的惩罚项"></a>开源代码摘录：Online EWC 的惩罚项</h4><p><strong>出处</strong>：Mammoth，<code>models/ewc_on.py</code>，MIT License。<br><strong>实现身份</strong>：权威 CL 框架复现；不是 EWC 原作者仓库。<br><strong>原始行</strong>：<a target="_blank" rel="noopener" href="https://github.com/aimagelab/mammoth/blob/master/models/ewc_on.py#L30-L35">源码 L30–L35</a></p>
@@ -436,14 +511,16 @@ window.MathJax = {
 
 <p>逐项对应：</p>
 <ul>
-<li><code>self.net.get_params() - self.checkpoint</code> 对应 (\theta-\theta^*)；</li>
+<li><code>self.net.get_params() - self.checkpoint</code> 对应 <span class="math-source">\(\theta-\theta^*\)</span>；</li>
 <li><code>** 2</code> 是二次距离；</li>
 <li><code>self.fish * ...</code> 让 Fisher 大的参数受到更强约束；</li>
 <li><code>.sum()</code> 对全部参数累加；</li>
 <li><code>e_lambda</code> 控制保护强度。</li>
 </ul>
 <p>Online EWC 还会递归衰减和累积 Fisher：</p>
-<p>[<br>F_t \leftarrow \gamma F_{t-1}+\widehat F_t<br>]</p>
+<div class="math-source math-source--display">\[
+F_t \leftarrow \gamma F_{t-1}+\widehat F_t
+\]</div>
 <p>这样不必为每个历史任务保存一整套 Fisher 和锚点，但压缩历史曲率也会丢失任务细节。</p>
 <h4 id="EWC-的假设与局限"><a href="#EWC-的假设与局限" class="headerlink" title="EWC 的假设与局限"></a>EWC 的假设与局限</h4><ol>
 <li>使用对角 Fisher，忽略参数间相关性；</li>
@@ -452,8 +529,14 @@ window.MathJax = {
 <li>它保护参数位置，不保证旧函数在所有输入区域都保持；</li>
 <li>Class-IL 中的分类器偏置并不会因为 Fisher 惩罚自动解决。</li>
 </ol>
-<h3 id="11-2-LwF：保护函数输出，而不是参数位置"><a href="#11-2-LwF：保护函数输出，而不是参数位置" class="headerlink" title="11.2 LwF：保护函数输出，而不是参数位置"></a>11.2 LwF：保护函数输出，而不是参数位置</h3><p>LwF 保存旧模型 (f_{\theta^-})，在新数据 (x\sim D_t) 上要求新模型输出接近旧模型：</p>
-<p>[<br>L&#x3D;L_{\text{new-label}}<br>+\lambda T^2,<br>\mathrm{KL}\left(<br>\sigma(z^- &#x2F;T);|;\sigma(z&#x2F;T)<br>\right)<br>]</p>
+<h3 id="11-2-LwF：保护函数输出，而不是参数位置"><a href="#11-2-LwF：保护函数输出，而不是参数位置" class="headerlink" title="11.2 LwF：保护函数输出，而不是参数位置"></a>11.2 LwF：保护函数输出，而不是参数位置</h3><p>LwF 保存旧模型 <span class="math-source">\(f_{\theta^-}\)</span>，在新数据 <span class="math-source">\(x\sim D_t\)</span> 上要求新模型输出接近旧模型：</p>
+<div class="math-source math-source--display">\[
+L&#x3D;L_{\text{new-label}}
++\lambda T^2\,
+\mathrm{KL}\left(
+\sigma(z^- &#x2F;T)\;\|\;\sigma(z&#x2F;T)
+\right)
+\]</div>
 <p>优点是无需原始旧数据；局限是蒸馏只发生在<strong>新数据覆盖的输入区域</strong>。若新旧任务输入支持集几乎不重叠，旧模型在新数据上的输出不足以约束旧域函数。</p>
 <h3 id="11-3-SI-与-MAS-的位置"><a href="#11-3-SI-与-MAS-的位置" class="headerlink" title="11.3 SI 与 MAS 的位置"></a>11.3 SI 与 MAS 的位置</h3><ul>
 <li><strong>SI</strong> 沿优化轨迹累计每个参数对损失下降的贡献；</li>
@@ -477,10 +560,17 @@ window.MathJax = {
 </ul>
 <hr>
 <h2 id="12-回放：把旧训练信号重新放回优化过程"><a href="#12-回放：把旧训练信号重新放回优化过程" class="headerlink" title="12. 回放：把旧训练信号重新放回优化过程"></a>12. 回放：把旧训练信号重新放回优化过程</h2><p>经验回放的基本目标是：</p>
-<p>[<br>L &#x3D;<br>\mathbb E_{(x,y)\sim D_t}\ell(f_\theta(x),y)<br>+\lambda<br>\mathbb E_{(x,y)\sim M_t}\ell(f_\theta(x),y)<br>]</p>
+<div class="math-source math-source--display">\[
+L &#x3D;
+\mathbb E_{(x,y)\sim D_t}\ell(f_\theta(x),y)
++\lambda
+\mathbb E_{(x,y)\sim M_t}\ell(f_\theta(x),y)
+\]</div>
 <p>它直接修复顺序训练的核心缺陷：优化器不再只看到最新分布。</p>
-<h3 id="12-1-Reservoir-Sampling：固定缓冲如何代表整个历史流"><a href="#12-1-Reservoir-Sampling：固定缓冲如何代表整个历史流" class="headerlink" title="12.1 Reservoir Sampling：固定缓冲如何代表整个历史流"></a>12.1 Reservoir Sampling：固定缓冲如何代表整个历史流</h3><p>当已见样本数为 (n)，缓冲容量为 (m) 时，reservoir sampling 使每个历史样本最终进入缓冲的概率为：</p>
-<p>[<br>P(x_i\in M_n)&#x3D;\frac{m}{n}<br>]</p>
+<h3 id="12-1-Reservoir-Sampling：固定缓冲如何代表整个历史流"><a href="#12-1-Reservoir-Sampling：固定缓冲如何代表整个历史流" class="headerlink" title="12.1 Reservoir Sampling：固定缓冲如何代表整个历史流"></a>12.1 Reservoir Sampling：固定缓冲如何代表整个历史流</h3><p>当已见样本数为 <span class="math-source">\(n\)</span>，缓冲容量为 <span class="math-source">\(m\)</span> 时，reservoir sampling 使每个历史样本最终进入缓冲的概率为：</p>
+<div class="math-source math-source--display">\[
+P(x_i\in M_n)&#x3D;\frac{m}{n}
+\]</div>
 <p>它不需要预先知道数据流总长度。</p>
 <h4 id="开源代码摘录：Mammoth-Buffer"><a href="#开源代码摘录：Mammoth-Buffer" class="headerlink" title="开源代码摘录：Mammoth Buffer"></a>开源代码摘录：Mammoth Buffer</h4><p><strong>出处</strong>：Mammoth，<code>utils/buffer.py</code>，MIT License。<br><strong>实现身份</strong>：框架公共 Buffer 实现。<br><strong>原始行</strong>：<a target="_blank" rel="noopener" href="https://github.com/aimagelab/mammoth/blob/master/utils/buffer.py#L104-L122">源码 L104–L122</a></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> num_seen_examples &lt; <span class="hljs-variable language_">self</span>.buffer_size:<br>    <span class="hljs-keyword">return</span> num_seen_examples<br><br>rand = np.random.randint(<span class="hljs-number">0</span>, num_seen_examples + <span class="hljs-number">1</span>)<br><span class="hljs-keyword">if</span> rand &lt; <span class="hljs-variable language_">self</span>.buffer_size:<br>    <span class="hljs-keyword">return</span> rand<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
@@ -488,12 +578,12 @@ window.MathJax = {
 <p>逐步解释：</p>
 <ol>
 <li>缓冲未满时，当前样本直接进入下一个空位；</li>
-<li>缓冲满后，在 ([0,n]) 中均匀抽一个整数；</li>
-<li>只有抽到前 (m) 个位置时才替换缓冲中的某项；</li>
+<li>缓冲满后，在 <span class="math-source">\([0,n]\)</span> 中均匀抽一个整数；</li>
+<li>只有抽到前 <span class="math-source">\(m\)</span> 个位置时才替换缓冲中的某项；</li>
 <li>否则返回 <code>-1</code>，丢弃当前样本。</li>
 </ol>
 <p>Reservoir 的优势是简单、无偏和 task-free；不足是它不关心类别平衡、困难度、梯度多样性或隐私价值。数据流严重不平衡时，“全历史均匀”不一定等于“对最终任务最有用”。</p>
-<h3 id="12-2-缓冲里究竟存什么"><a href="#12-2-缓冲里究竟存什么" class="headerlink" title="12.2 缓冲里究竟存什么"></a>12.2 缓冲里究竟存什么</h3><div class="table-scroll"><table>
+<h3 id="12-2-缓冲里究竟存什么"><a href="#12-2-缓冲里究竟存什么" class="headerlink" title="12.2 缓冲里究竟存什么"></a>12.2 缓冲里究竟存什么</h3><div class="table-scroll" data-columns="3" style="--table-columns:3"><table>
 <thead>
 <tr>
 <th>存储对象</th>
@@ -533,8 +623,13 @@ window.MathJax = {
 </tr>
 </tbody></table></div>
 <h3 id="12-3-DER-：样本标签与历史-logit-同时回放"><a href="#12-3-DER-：样本标签与历史-logit-同时回放" class="headerlink" title="12.3 DER++：样本标签与历史 logit 同时回放"></a>12.3 DER++：样本标签与历史 logit 同时回放</h3><p>DER++ 的典型目标可写成：</p>
-<p>[<br>L_{	ext{DER++}}<br>&#x3D;L_{\text{CE,new}}<br>+\alpha|f_\theta(x_m)-z_m|<em>2^2<br>+\beta,L</em>{\text{CE}}(f_\theta(x_m),y_m)<br>]</p>
-<p>其中缓冲保存 ((x_m,y_m,z_m))，(z_m) 是样本进入缓冲时的历史 logits。</p>
+<div class="math-source math-source--display">\[
+L_{	ext{DER++}}
+&#x3D;L_{\text{CE,new}}
++\alpha\|f_\theta(x_m)-z_m\|_2^2
++\beta\,L_{\text{CE}}(f_\theta(x_m),y_m)
+\]</div>
+<p>其中缓冲保存 <span class="math-source">\((x_m,y_m,z_m)\)</span>，<span class="math-source">\(z_m\)</span> 是样本进入缓冲时的历史 logits。</p>
 <h4 id="开源代码摘录：DER"><a href="#开源代码摘录：DER" class="headerlink" title="开源代码摘录：DER++"></a>开源代码摘录：DER++</h4><p><strong>出处</strong>：Mammoth，<code>models/derpp.py</code>，MIT License。<br><strong>实现身份</strong>：Mammoth 是 DER&#x2F;DER++ 论文团队的官方代码库。<br><strong>原始行</strong>：<a target="_blank" rel="noopener" href="https://github.com/aimagelab/mammoth/blob/master/models/derpp.py#L36-L52">源码 L36–L52</a></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">loss_mse = <span class="hljs-variable language_">self</span>.args.alpha * F.mse_loss(buf_outputs, buf_logits)<br>loss += loss_mse<br></code></pre></td></tr></table></figure>
 
@@ -549,9 +644,17 @@ window.MathJax = {
 </ul>
 <p>但 DER++ 仍受缓冲代表性、logit 校准漂移和输出空间扩展影响。</p>
 <h3 id="12-4-GEM-A-GEM：不是直接混合损失，而是约束梯度"><a href="#12-4-GEM-A-GEM：不是直接混合损失，而是约束梯度" class="headerlink" title="12.4 GEM &#x2F; A-GEM：不是直接混合损失，而是约束梯度"></a>12.4 GEM &#x2F; A-GEM：不是直接混合损失，而是约束梯度</h3><p>GEM 希望新任务更新不能增加每个旧任务记忆集的损失：</p>
-<p>[<br>\langle g,g_k\rangle \ge 0,\qquad \forall k&lt;t<br>]</p>
-<p>若违反约束，就把新梯度投影到可行区域。A-GEM 用一个参考记忆梯度 (g_{\text{ref}}) 代替多个旧任务约束：</p>
-<p>[<br>\tilde g&#x3D;<br>\begin{cases}<br>g,&amp;g^\top g_{\text{ref}}\ge 0\<br>g-\frac{g^\top g_{\text{ref}}}{g_{\text{ref}}^\top g_{\text{ref}}}g_{\text{ref}},&amp;g^\top g_{\text{ref}}&lt;0<br>\end{cases}<br>]</p>
+<div class="math-source math-source--display">\[
+\langle g,g_k\rangle \ge 0,\qquad \forall k&lt;t
+\]</div>
+<p>若违反约束，就把新梯度投影到可行区域。A-GEM 用一个参考记忆梯度 <span class="math-source">\(g_{\text{ref}}\)</span> 代替多个旧任务约束：</p>
+<div class="math-source math-source--display">\[
+\tilde g&#x3D;
+\begin{cases}
+g,&amp;g^\top g_{\text{ref}}\ge 0\\
+g-\frac{g^\top g_{\text{ref}}}{g_{\text{ref}}^\top g_{\text{ref}}}g_{\text{ref}},&amp;g^\top g_{\text{ref}}&lt;0
+\end{cases}
+\]</div>
 <h4 id="开源代码摘录：A-GEM-投影"><a href="#开源代码摘录：A-GEM-投影" class="headerlink" title="开源代码摘录：A-GEM 投影"></a>开源代码摘录：A-GEM 投影</h4><p><strong>出处</strong>：Mammoth，<code>models/agem.py</code>，MIT License。<br><strong>实现身份</strong>：框架复现。<br><strong>原始行</strong>：<a target="_blank" rel="noopener" href="https://github.com/aimagelab/mammoth/blob/master/models/agem.py#L13-L15">源码 L13–L15</a></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">corr = torch.dot(gxy, ger) / torch.dot(ger, ger)<br><span class="hljs-keyword">return</span> gxy - corr * ger<br></code></pre></td></tr></table></figure>
 
@@ -576,9 +679,11 @@ window.MathJax = {
 <p>这比“回放 &#x3D; 把几张旧图混进来”更完整。</p>
 <hr>
 <h2 id="13-参数隔离与架构扩展：让任务少共享或不共享参数"><a href="#13-参数隔离与架构扩展：让任务少共享或不共享参数" class="headerlink" title="13. 参数隔离与架构扩展：让任务少共享或不共享参数"></a>13. 参数隔离与架构扩展：让任务少共享或不共享参数</h2><p>核心形式可以抽象为：</p>
-<p>[<br>f(x)&#x3D;f_{\theta_{\text{shared}},A_{r(x)}}(x)<br>]</p>
-<p>其中 (A_k) 是任务模块、mask、Prompt、Adapter、LoRA 或专家，(r(x)) 是路由器。</p>
-<h3 id="13-1-主要形态"><a href="#13-1-主要形态" class="headerlink" title="13.1 主要形态"></a>13.1 主要形态</h3><div class="table-scroll"><table>
+<div class="math-source math-source--display">\[
+f(x)&#x3D;f_{\theta_{\text{shared}},A_{r(x)}}(x)
+\]</div>
+<p>其中 <span class="math-source">\(A_k\)</span> 是任务模块、mask、Prompt、Adapter、LoRA 或专家，<span class="math-source">\(r(x)\)</span> 是路由器。</p>
+<h3 id="13-1-主要形态"><a href="#13-1-主要形态" class="headerlink" title="13.1 主要形态"></a>13.1 主要形态</h3><div class="table-scroll" data-columns="4" style="--table-columns:4"><table>
 <thead>
 <tr>
 <th>形态</th>
@@ -630,7 +735,13 @@ window.MathJax = {
 <p>若测试时直接提供 task ID，许多参数隔离方法的难度会显著下降。因此 Task-IL 的高分不能自动推导出真实 task-agnostic 场景的可靠性。</p>
 <hr>
 <h2 id="14-三大方法家族不是互斥的"><a href="#14-三大方法家族不是互斥的" class="headerlink" title="14. 三大方法家族不是互斥的"></a>14. 三大方法家族不是互斥的</h2><p>现代方法往往同时使用：</p>
-<p>[<br>\boxed{\text{frozen backbone}}<br>+\boxed{\text{PEFT module}}<br>+\boxed{\text{small replay}}<br>+\boxed{\text{distillation}}<br>+\boxed{\text{classifier calibration}}<br>]</p>
+<div class="math-source math-source--display">\[
+\boxed{\text{frozen backbone}}
++\boxed{\text{PEFT module}}
++\boxed{\text{small replay}}
++\boxed{\text{distillation}}
++\boxed{\text{classifier calibration}}
+\]</div>
 <p>例如：</p>
 <ul>
 <li>replay 提供旧输入覆盖；</li>
@@ -642,11 +753,15 @@ window.MathJax = {
 <p>所以把一个方法只归为“正则化”或“架构法”，更多是历史上的主机制分类，而不是当代系统的完整描述。</p>
 <hr>
 <h1 id="第六部分：预训练模型如何重构-CL"><a href="#第六部分：预训练模型如何重构-CL" class="headerlink" title="第六部分：预训练模型如何重构 CL"></a>第六部分：预训练模型如何重构 CL</h1><h2 id="15-从“保护表征”转向“利用表征”"><a href="#15-从“保护表征”转向“利用表征”" class="headerlink" title="15. 从“保护表征”转向“利用表征”"></a>15. 从“保护表征”转向“利用表征”</h2><p>传统 CL 默认从随机初始化开始：</p>
-<p>[<br>\phi_{\theta_0}\text{ 很弱}<br>]</p>
+<div class="math-source math-source--display">\[
+\phi_{\theta_0}\text{ 很弱}
+\]</div>
 <p>因此每个任务都必须修改 backbone，而遗忘主要发生在表征层。</p>
 <p>Foundation Model 时代，预训练表示可能已经具有很强的可迁移性：</p>
-<p>[<br>\phi_{\text{PTM}}(x)\text{ 已经线性可分或近似可分}<br>]</p>
-<p>如果冻结 (\phi)，只更新类别统计或轻量分类器，就不存在 backbone 参数遗忘。此时问题转化为：</p>
+<div class="math-source math-source--display">\[
+\phi_{\text{PTM}}(x)\text{ 已经线性可分或近似可分}
+\]</div>
+<p>如果冻结 <span class="math-source">\(\phi\)</span>，只更新类别统计或轻量分类器，就不存在 backbone 参数遗忘。此时问题转化为：</p>
 <ul>
 <li>预训练表征是否覆盖下游分布；</li>
 <li>类原型是否稳定；</li>
@@ -654,10 +769,17 @@ window.MathJax = {
 <li>分类器如何处理类数量扩张；</li>
 <li>需不需要轻量适配来缩小分布差距。</li>
 </ul>
-<h2 id="16-Prototype-NCM：为什么简单方法会很强"><a href="#16-Prototype-NCM：为什么简单方法会很强" class="headerlink" title="16. Prototype &#x2F; NCM：为什么简单方法会很强"></a>16. Prototype &#x2F; NCM：为什么简单方法会很强</h2><p>对类别 (c)，累积归一化特征均值：</p>
-<p>[<br>\mu_c&#x3D;rac{1}{N_c}\sum_{i:y_i&#x3D;c}<br>\frac{\phi(x_i)}{|\phi(x_i)|_2}<br>]</p>
+<h2 id="16-Prototype-NCM：为什么简单方法会很强"><a href="#16-Prototype-NCM：为什么简单方法会很强" class="headerlink" title="16. Prototype &#x2F; NCM：为什么简单方法会很强"></a>16. Prototype &#x2F; NCM：为什么简单方法会很强</h2><p>对类别 <span class="math-source">\(c\)</span>，累积归一化特征均值：</p>
+<div class="math-source math-source--display">\[
+\mu_c&#x3D;\frac{1}{N_c}\sum_{i:y_i&#x3D;c}
+\frac{\phi(x_i)}{\|\phi(x_i)\|_2}
+\]</div>
 <p>预测：</p>
-<p>[<br>\hat y&#x3D;\arg\max_c<br>\frac{\phi(x)^\top\mu_c}<br>{|\phi(x)|_2|\mu_c|_2}<br>]</p>
+<div class="math-source math-source--display">\[
+\hat y&#x3D;\arg\max_c
+\frac{\phi(x)^\top\mu_c}
+{\|\phi(x)\|_2\|\mu_c\|_2}
+\]</div>
 <p>如果 backbone 冻结，旧样本的特征坐标系不会漂移，类原型可在线累计。因此 SimpleCIL 一类方法可以在不训练下游 backbone 的条件下形成很强的 CIL 基线。RanPAC 进一步加入固定随机投影和非线性扩维，以提高线性可分性，再累计原型&#x2F;统计。</p>
 <h3 id="16-1-这不等于-CL-已经解决"><a href="#16-1-这不等于-CL-已经解决" class="headerlink" title="16.1 这不等于 CL 已经解决"></a>16.1 这不等于 CL 已经解决</h3><p>冻结表征绕开了参数干扰，却仍可能失败于：</p>
 <ul>
@@ -709,17 +831,21 @@ window.MathJax = {
 </ul>
 <p>图右侧展示 Prompt 如何注入多头自注意力（MSA）：Prompt 可以被拆分并附着到 key&#x2F;value 路径，而不是只在最外层拼接 token。</p>
 <h3 id="18-2-它在解决什么"><a href="#18-2-它在解决什么" class="headerlink" title="18.2 它在解决什么"></a>18.2 它在解决什么</h3><p>L2P 把所有知识放进一个池，容易出现共享不足或 prompt collision。DualPrompt 显式分解：</p>
-<p>[<br>P(x)&#x3D;P_G+P_{E,r(x)}<br>]</p>
+<div class="math-source math-source--display">\[
+P(x)&#x3D;P_G+P_{E,r(x)}
+\]</div>
 <ul>
-<li>(P_G) 负责跨任务共享；</li>
-<li>(P_E) 负责隔离任务特异变化；</li>
-<li>路由器 (r(x)) 负责选择专家 Prompt。</li>
+<li><span class="math-source">\(P_G\)</span> 负责跨任务共享；</li>
+<li><span class="math-source">\(P_E\)</span> 负责隔离任务特异变化；</li>
+<li>路由器 <span class="math-source">\(r(x)\)</span> 负责选择专家 Prompt。</li>
 </ul>
 <p>这是一种参数级的“稳定—可塑”分工，但它仍依赖路由可靠性、Prompt 容量和预训练 backbone 的可迁移性。</p>
 <hr>
 <h2 id="19-Adapter-LoRA-子空间隔离"><a href="#19-Adapter-LoRA-子空间隔离" class="headerlink" title="19. Adapter &#x2F; LoRA &#x2F; 子空间隔离"></a>19. Adapter &#x2F; LoRA &#x2F; 子空间隔离</h2><p>LoRA 将权重更新写为低秩增量：</p>
-<p>[<br>W&#39;&#x3D;W+\Delta W,\qquad \Delta W&#x3D;BA,<br>]</p>
-<p>其中秩 (r\ll d)。冻结 (W) 后，只训练 (A,B)，可以显著减少可训练参数。</p>
+<div class="math-source math-source--display">\[
+W&#39;&#x3D;W+\Delta W,\qquad \Delta W&#x3D;BA,
+\]</div>
+<p>其中秩 <span class="math-source">\(r\ll d\)</span>。冻结 <span class="math-source">\(W\)</span> 后，只训练 <span class="math-source">\(A,B\)</span>，可以显著减少可训练参数。</p>
 <p>持续学习中的关键不是“用了 LoRA 就不会忘”，而是：</p>
 <ul>
 <li>多任务是否共用同一 LoRA；</li>
@@ -729,7 +855,9 @@ window.MathJax = {
 <li>模块数量是否有界。</li>
 </ul>
 <p>InfLoRA、O-LoRA 等方法试图让新任务增量位于与旧任务重要梯度&#x2F;子空间正交的方向：</p>
-<p>[<br>\Delta W_t\perp \mathcal{G}_{1:t-1}<br>]</p>
+<div class="math-source math-source--display">\[
+\Delta W_t\perp \mathcal{G}_{1:t-1}
+\]</div>
 <p>但严格正交会随任务增多消耗可用子空间；近似梯度空间的质量也决定了真实保护程度。</p>
 <hr>
 <h1 id="第七部分：LLM-的持续学习"><a href="#第七部分：LLM-的持续学习" class="headerlink" title="第七部分：LLM 的持续学习"></a>第七部分：LLM 的持续学习</h1><h2 id="20-为什么-LLM-CL-不能直接照搬-Split-CIFAR"><a href="#20-为什么-LLM-CL-不能直接照搬-Split-CIFAR" class="headerlink" title="20. 为什么 LLM-CL 不能直接照搬 Split CIFAR"></a>20. 为什么 LLM-CL 不能直接照搬 Split CIFAR</h2><p>LLM 的“任务”通常不是清晰的十分类：</p>
@@ -741,7 +869,7 @@ window.MathJax = {
 <li>同一个 prompt 同时依赖知识、推理、指令遵循与输出策略。</li>
 </ul>
 <p>因此当前 LLM-CL 通常按模型生命周期分成三个阶段：</p>
-<div class="table-scroll"><table>
+<div class="table-scroll" data-columns="5" style="--table-columns:5"><table>
 <thead>
 <tr>
 <th>阶段</th>
@@ -775,8 +903,12 @@ window.MathJax = {
 </tbody></table></div>
 <p>2026 年的 LLM-CL 综述也普遍采用“持续预训练—持续微调—持续对齐”的阶段化结构。</p>
 <h2 id="21-持续预训练：真正的变量不只有数据"><a href="#21-持续预训练：真正的变量不只有数据" class="headerlink" title="21. 持续预训练：真正的变量不只有数据"></a>21. 持续预训练：真正的变量不只有数据</h2><p>CPT 的更新可写为：</p>
-<p>[<br>L_{\text{CPT}}&#x3D;<br>\mathbb E_{x\sim \alpha P_{\text{new}}+(1-\alpha)P_{\text{replay}}}<br>[-\log p_\theta(x)]<br>]</p>
-<p>其中 (\alpha) 是新旧数据混合比例。工程上至少要同时设计：</p>
+<div class="math-source math-source--display">\[
+L_{\text{CPT}}&#x3D;
+\mathbb E_{x\sim \alpha P_{\text{new}}+(1-\alpha)P_{\text{replay}}}
+[-\log p_\theta(x)]
+\]</div>
+<p>其中 <span class="math-source">\(\alpha\)</span> 是新旧数据混合比例。工程上至少要同时设计：</p>
 <ol>
 <li><strong>数据混合比例</strong>：新领域太高会覆盖旧能力，太低则适应慢；</li>
 <li><strong>学习率重预热</strong>：旧模型已经处于衰减学习率末端，直接继续训练可能缺乏可塑性；</li>
@@ -787,7 +919,9 @@ window.MathJax = {
 </ol>
 <p>实践中，“重预热 + 少量旧数据混合”是必须认真比较的简单基线。复杂 CL 方法若没有超过这一基线，往往没有足够工程价值。</p>
 <h2 id="22-持续指令微调：技能与任务对齐同时变化"><a href="#22-持续指令微调：技能与任务对齐同时变化" class="headerlink" title="22. 持续指令微调：技能与任务对齐同时变化"></a>22. 持续指令微调：技能与任务对齐同时变化</h2><p>CIT 训练的是：</p>
-<p>[<br>p_\theta(y\mid x,\text{instruction})<br>]</p>
+<div class="math-source math-source--display">\[
+p_\theta(y\mid x,\text{instruction})
+\]</div>
 <p>性能下降可能来自：</p>
 <ul>
 <li>旧技能参数被覆盖；</li>
@@ -814,17 +948,23 @@ window.MathJax = {
 <li>安全&#x2F;策略漂移 → alignment 数据与目标重新平衡。</li>
 </ul>
 <h2 id="24-LLaMA-Pro：用-Block-Expansion-增加新容量"><a href="#24-LLaMA-Pro：用-Block-Expansion-增加新容量" class="headerlink" title="24. LLaMA Pro：用 Block Expansion 增加新容量"></a>24. LLaMA Pro：用 Block Expansion 增加新容量</h2><p>LLaMA Pro 的思路是把原 Transformer 层保留并冻结，在层间插入新块。残差块可写为：</p>
-<p>[<br>h_{l+1}&#x3D;h_l+F_l(h_l)<br>]</p>
+<div class="math-source math-source--display">\[
+h_{l+1}&#x3D;h_l+F_l(h_l)
+\]</div>
 <p>如果新增块初始化为：</p>
-<p>[<br>F_{\text{new}}(h)\approx 0,<br>]</p>
+<div class="math-source math-source--display">\[
+F_{\text{new}}(h)\approx 0,
+\]</div>
 <p>那么插入时近似恒等映射：</p>
-<p>[<br>h_{l+1}\approx h_l<br>]</p>
+<div class="math-source math-source--display">\[
+h_{l+1}\approx h_l
+\]</div>
 <p>之后只训练新增块，使新领域知识主要进入新容量，继承参数尽量不动。</p>
 <pre class="mermaid">flowchart LR
     I[输入] --&gt; O1[冻结旧 Block 1]
-    O1 --&gt; N1[新增可训练 Block A&lt;br/&gt;初始近似恒等]
+    O1 --&gt; N1[新增可训练 Block A&lt;br&#x2F;&gt;初始近似恒等]
     N1 --&gt; O2[冻结旧 Block 2]
-    O2 --&gt; N2[新增可训练 Block B&lt;br/&gt;初始近似恒等]
+    O2 --&gt; N2[新增可训练 Block B&lt;br&#x2F;&gt;初始近似恒等]
     N2 --&gt; O3[冻结旧 Block 3]
     O3 --&gt; Y[输出]</pre>
 
@@ -837,8 +977,10 @@ window.MathJax = {
 <li>“旧参数不动”不等于输出行为绝对不变，因为新增块会改变后续激活。</li>
 </ul>
 <h2 id="25-RAG、模型编辑、模型融合与-LLM-CL-的关系"><a href="#25-RAG、模型编辑、模型融合与-LLM-CL-的关系" class="headerlink" title="25. RAG、模型编辑、模型融合与 LLM-CL 的关系"></a>25. RAG、模型编辑、模型融合与 LLM-CL 的关系</h2><h3 id="25-1-RAG"><a href="#25-1-RAG" class="headerlink" title="25.1 RAG"></a>25.1 RAG</h3><p>RAG 更新：</p>
-<p>[<br>E_t \leftarrow E_{t-1}\cup \Delta E_t<br>]</p>
-<p>而主参数 (\theta) 可以不变。它特别适合：</p>
+<div class="math-source math-source--display">\[
+E_t \leftarrow E_{t-1}\cup \Delta E_t
+\]</div>
+<p>而主参数 <span class="math-source">\(\theta\)</span> 可以不变。它特别适合：</p>
 <ul>
 <li>频繁变化的事实；</li>
 <li>需要来源和可删除性的知识；</li>
@@ -855,15 +997,21 @@ window.MathJax = {
 </ul>
 <p>因此 lifelong model editing 是 CL 的邻近子问题，而不是已经替代 CL 的万能方案。</p>
 <h3 id="25-3-模型融合"><a href="#25-3-模型融合" class="headerlink" title="25.3 模型融合"></a>25.3 模型融合</h3><p>任务向量可写为：</p>
-<p>[<br>\tau_t&#x3D;\theta_t-\theta_0<br>]</p>
+<div class="math-source math-source--display">\[
+\tau_t&#x3D;\theta_t-\theta_0
+\]</div>
 <p>融合尝试：</p>
-<p>[<br>\theta_{\text{merge}}&#x3D;\theta_0+\sum_t\alpha_t\tau_t<br>]</p>
+<div class="math-source math-source--display">\[
+\theta_{\text{merge}}&#x3D;\theta_0+\sum_t\alpha_t\tau_t
+\]</div>
 <p>它可以免原始数据合并多个专长模型，但参数方向冲突、尺度差异和路由问题仍然存在。它更像离线知识整合，与在线顺序学习互补。</p>
 <hr>
 <h1 id="第八部分：Agent-与实际系统中的记忆层级"><a href="#第八部分：Agent-与实际系统中的记忆层级" class="headerlink" title="第八部分：Agent 与实际系统中的记忆层级"></a>第八部分：Agent 与实际系统中的记忆层级</h1><h2 id="26-“保存经历”与“改变能力”必须分开"><a href="#26-“保存经历”与“改变能力”必须分开" class="headerlink" title="26. “保存经历”与“改变能力”必须分开"></a>26. “保存经历”与“改变能力”必须分开</h2><p>一个 Agent 可以把每次轨迹存进数据库，但这只说明它有外部记忆：</p>
-<p>[<br>\text{remembered episode}\not\Rightarrow\text{internalized skill}<br>]</p>
+<div class="math-source math-source--display">\[
+\text{remembered episode}\not\Rightarrow\text{internalized skill}
+\]</div>
 <p>更完整的记忆层级是：</p>
-<div class="table-scroll"><table>
+<div class="table-scroll" data-columns="5" style="--table-columns:5"><table>
 <thead>
 <tr>
 <th>层级</th>
@@ -910,14 +1058,14 @@ window.MathJax = {
 </tr>
 </tbody></table></div>
 <h2 id="27-一个较现实的持续学习系统架构"><a href="#27-一个较现实的持续学习系统架构" class="headerlink" title="27. 一个较现实的持续学习系统架构"></a>27. 一个较现实的持续学习系统架构</h2><pre class="mermaid">flowchart TD
-    A[持续到达的数据/轨迹] --&gt; B[质量、隐私与安全过滤]
+    A[持续到达的数据&#x2F;轨迹] --&gt; B[质量、隐私与安全过滤]
     B --&gt; C[短期 episodic buffer]
     B --&gt; D[可检索语义记忆 RAG]
     C --&gt; E[样本选择与回放调度]
-    D --&gt; F[训练数据构造/自蒸馏]
-    E --&gt; G[冻结主干 + PEFT/可扩展模块]
+    D --&gt; F[训练数据构造&#x2F;自蒸馏]
+    E --&gt; G[冻结主干 + PEFT&#x2F;可扩展模块]
     F --&gt; G
-    G --&gt; H[旧能力/新能力/安全回归测试]
+    G --&gt; H[旧能力&#x2F;新能力&#x2F;安全回归测试]
     H --&gt;|通过| I[版本化部署]
     H --&gt;|失败| J[回滚、调混合比、扩大回放]
     I --&gt; K[线上反馈与漂移监测]
@@ -947,10 +1095,17 @@ window.MathJax = {
 <li>决定何时外部记忆、何时参数巩固、何时删除。</li>
 </ul>
 <p>因此更完整的闭环是：</p>
-<p>[<br>\text{experience}<br>\rightarrow\text{evaluation}<br>\rightarrow\text{selection}<br>\rightarrow\text{update}<br>\rightarrow\text{regression testing}<br>\rightarrow\text{deployment}<br>]</p>
+<div class="math-source math-source--display">\[
+\text{experience}
+\rightarrow\text{evaluation}
+\rightarrow\text{selection}
+\rightarrow\text{update}
+\rightarrow\text{regression testing}
+\rightarrow\text{deployment}
+\]</div>
 <p>而不仅是“继续梯度下降”。</p>
 <hr>
-<h1 id="第九部分：开源代码与复现实验"><a href="#第九部分：开源代码与复现实验" class="headerlink" title="第九部分：开源代码与复现实验"></a>第九部分：开源代码与复现实验</h1><h2 id="29-本文代码来源清单"><a href="#29-本文代码来源清单" class="headerlink" title="29. 本文代码来源清单"></a>29. 本文代码来源清单</h2><div class="table-scroll"><table>
+<h1 id="第九部分：开源代码与复现实验"><a href="#第九部分：开源代码与复现实验" class="headerlink" title="第九部分：开源代码与复现实验"></a>第九部分：开源代码与复现实验</h1><h2 id="29-本文代码来源清单"><a href="#29-本文代码来源清单" class="headerlink" title="29. 本文代码来源清单"></a>29. 本文代码来源清单</h2><div class="table-scroll" data-columns="6" style="--table-columns:6"><table>
 <thead>
 <tr>
 <th>机制</th>
@@ -1032,7 +1187,7 @@ window.MathJax = {
 <li>Buffer 的样本数与实际字节；</li>
 <li>所有超参数；</li>
 <li>随机种子；</li>
-<li>每阶段性能矩阵 (R)；</li>
+<li>每阶段性能矩阵 <span class="math-source">\(R\)</span>；</li>
 <li>FLOPs、显存、训练时间；</li>
 <li>最终模型与优化器状态；</li>
 <li>是否使用 task ID；</li>
@@ -1056,7 +1211,7 @@ window.MathJax = {
 <li>训练与推理预算是多少？</li>
 </ol>
 <p>没有这些条件，“解决 catastrophic forgetting”是不可证伪的宽泛表述。</p>
-<h2 id="33-第二步：建立最小但强的基线矩阵"><a href="#33-第二步：建立最小但强的基线矩阵" class="headerlink" title="33. 第二步：建立最小但强的基线矩阵"></a>33. 第二步：建立最小但强的基线矩阵</h2><div class="table-scroll"><table>
+<h2 id="33-第二步：建立最小但强的基线矩阵"><a href="#33-第二步：建立最小但强的基线矩阵" class="headerlink" title="33. 第二步：建立最小但强的基线矩阵"></a>33. 第二步：建立最小但强的基线矩阵</h2><div class="table-scroll" data-columns="3" style="--table-columns:3"><table>
 <thead>
 <tr>
 <th>类别</th>
@@ -1134,7 +1289,9 @@ window.MathJax = {
 </ul>
 <p>此时 ER、DER++、prototype、PEFT 和简单校准往往能构成强系统。</p>
 <h2 id="37-仍然开放的核心问题"><a href="#37-仍然开放的核心问题" class="headerlink" title="37. 仍然开放的核心问题"></a>37. 仍然开放的核心问题</h2><h3 id="37-1-长时间尺度与有界资源"><a href="#37-1-长时间尺度与有界资源" class="headerlink" title="37.1 长时间尺度与有界资源"></a>37.1 长时间尺度与有界资源</h3><p>很多方法的隐藏状态随任务增长：</p>
-<p>[<br>|M_T|,|A_T|,|\text{statistics}_T|&#x3D;O(T)<br>]</p>
+<div class="math-source math-source--display">\[
+|M_T|,|A_T|,|\text{statistics}_T|&#x3D;O(T)
+\]</div>
 <p>真正终身学习需要长期压缩、合并、淘汰和重构，而不是无限增加 Prompt、LoRA 或样本。</p>
 <h3 id="37-2-未知任务边界"><a href="#37-2-未知任务边界" class="headerlink" title="37.2 未知任务边界"></a>37.2 未知任务边界</h3><p>现实分布可能缓慢漂移，也可能突然改变。系统必须决定：</p>
 <ul>
@@ -1164,7 +1321,7 @@ window.MathJax = {
 </ul>
 <p>因此实际系统不能让线上反馈直接无门控地更新主模型。</p>
 <hr>
-<h1 id="第十二部分：方法选择的工程决策表"><a href="#第十二部分：方法选择的工程决策表" class="headerlink" title="第十二部分：方法选择的工程决策表"></a>第十二部分：方法选择的工程决策表</h1><div class="table-scroll"><table>
+<h1 id="第十二部分：方法选择的工程决策表"><a href="#第十二部分：方法选择的工程决策表" class="headerlink" title="第十二部分：方法选择的工程决策表"></a>第十二部分：方法选择的工程决策表</h1><div class="table-scroll" data-columns="4" style="--table-columns:4"><table>
 <thead>
 <tr>
 <th>现实需求</th>
@@ -1224,7 +1381,11 @@ window.MathJax = {
 </tbody></table></div>
 <hr>
 <h1 id="结论：当前-CL-的最准确技术图景"><a href="#结论：当前-CL-的最准确技术图景" class="headerlink" title="结论：当前 CL 的最准确技术图景"></a>结论：当前 CL 的最准确技术图景</h1><p>持续学习的核心不应被概括为一句“让模型不断学习且不遗忘”。更准确的图景是：</p>
-<p>[<br>\boxed{<br>\text{在非平稳数据流上，管理参数、模块、样本与外部记忆的长期状态更新}<br>}<br>]</p>
+<div class="math-source math-source--display">\[
+\boxed{
+\text{在非平稳数据流上，管理参数、模块、样本与外部记忆的长期状态更新}
+}
+\]</div>
 <p>经典正则化、回放和参数隔离分别回答：</p>
 <ul>
 <li>哪些方向不能随便改；</li>
@@ -1237,7 +1398,13 @@ window.MathJax = {
 <li>如何在 Prompt&#x2F;LoRA&#x2F;Adapter&#x2F;原型之间组织和路由知识。</li>
 </ul>
 <p>LLM 与 Agent 时代进一步要求系统区分：</p>
-<p>[<br>\text{参数知识}<br>+\text{外部语义记忆}<br>+\text{情景经历}<br>+\text{程序性技能}<br>+\text{生成与安全策略}<br>]</p>
+<div class="math-source math-source--display">\[
+\text{参数知识}
++\text{外部语义记忆}
++\text{情景经历}
++\text{程序性技能}
++\text{生成与安全策略}
+\]</div>
 <p>因此，目前最有前景的方向不是寻找一个单一“永不遗忘损失函数”，而是设计一个<strong>有界、可诊断、可回滚、分层记忆、能够周期巩固的学习系统</strong>。</p>
 <p>真正的终身学习是否实现，应由以下问题决定：</p>
 <ol>
@@ -1516,6 +1683,7 @@ window.MathJax = {
 </footer>
 
     <script src="/blog/js/covers.js?v=reader-8"></script>
-    <script src="/blog/js/main.js?v=reader-4"></script>
+    <script src="/blog/js/reading.js?v=reader-1"></script>
+    <script src="/blog/js/main.js?v=reader-5"></script>
   </body>
 </html>

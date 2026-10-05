@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 816" width="360" height="816" role="img" aria-labelledby="title" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Noto Sans SC', 'Microsoft YaHei', monospace">
+<title id="title">build_topo(v)</title>
+<defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M1 1 L7 4 L1 7 Z" fill="#adadad"/></marker></defs>
+<g data-node="B"><rect x="75" y="24" width="210" height="52" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="180.0" y="50.0" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#e6e6e6" data-label="build_topo(v)">build_topo(v)</text>
+</g>
+<g data-node="Q"><polygon points="180.0,108 312,152.0 180.0,196 48,152.0" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="180.0" y="152.0" text-anchor="middle" dominant-baseline="middle" font-size="15" fill="#e6e6e6" data-label="v not in visited">v not in visited</text>
+</g>
+<g data-node="V"><rect x="74" y="236" width="212" height="52" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="180.0" y="262.0" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#e6e6e6" data-label="visited.add(v)">visited.add(v)</text>
+</g>
+<g data-node="F"><polygon points="180.0,330 324,382.0 180.0,434 36,382.0" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="180.0" y="382.0" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#e6e6e6" data-label="for child in v._prev">for child in v._prev</text>
+</g>
+<g data-node="C"><rect x="70" y="492" width="220" height="52" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="180.0" y="518.0" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#e6e6e6" data-label="build_topo(child)">build_topo(child)</text>
+</g>
+<g data-node="A"><rect x="66" y="636" width="228" height="52" fill="#202020" stroke="#e6e6e6" stroke-width="1.4"/>
+<text x="180.0" y="662.0" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#e6e6e6" data-label="topo.append(v)">topo.append(v)</text>
+</g>
+<g data-node="R"><rect x="116" y="752" width="128" height="48" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="180.0" y="776.0" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#e6e6e6" data-label="return">return</text>
+</g>
+<path data-edge="B-&gt;Q" d="M180 76 V108" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path data-edge="Q-&gt;V" d="M180 196 V236" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="196" y="216" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#c8c8c8" data-label="是">是</text>
+<path data-edge="Q-&gt;R" d="M312 152 H350 V776 H244" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="330" y="137" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#c8c8c8" data-label="否">否</text>
+<path data-edge="V-&gt;F" d="M180 288 V330" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path data-edge="F-&gt;C" d="M180 434 V492" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="227" y="464" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#c8c8c8" data-label="还有 child">还有 child</text>
+<path data-edge="C-&gt;F" d="M180 544 V578 H334 V400 L314 392" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="5 5"/>
+<text x="254" y="560" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#c8c8c8" data-label="recursion 返回">recursion 返回</text>
+<path data-edge="F-&gt;A" d="M36 382 H26 V612 H110 V636" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="107" y="596" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#c8c8c8" data-label="for loop 结束">for loop 结束</text>
+<path data-edge="A-&gt;R" d="M180 688 V752" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+</svg>

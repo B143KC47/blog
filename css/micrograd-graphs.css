@@ -1,0 +1,147 @@
+/* Only graph presentation in micrograd; the article's text is untouched. */
+.prose .micrograd-diagram {
+  margin: 1.75rem 0;
+  padding: 0;
+  max-width: 100%;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: #080808;
+}
+.learning-graph-tools {
+  display: flex;
+  justify-content: flex-end;
+  min-height: 2.75rem;
+  border-bottom: 1px solid #202020;
+}
+.learning-graph-expand, .learning-graph-close, .learning-graph-reset, .learning-graph-pan {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0.7rem;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+.learning-graph-expand svg, .learning-graph-close svg, .learning-graph-reset svg, .learning-graph-pan svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  max-width: none;
+}
+.learning-graph-expand:hover, .learning-graph-close:hover, .learning-graph-reset:hover, .learning-graph-pan:hover {
+  background: var(--fill);
+}
+.learning-graph-pan:disabled { opacity: 0.3; cursor: default; }
+:is(.learning-graph-expand, .learning-graph-close, .learning-graph-reset, .learning-graph-pan, .learning-graph-viewport):focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: -3px;
+}
+.learning-graph-viewport {
+  overflow: auto;
+  overscroll-behavior-inline: contain;
+  padding: 1.25rem;
+  scrollbar-color: #8a8a8a #141414;
+  scrollbar-width: thin;
+}
+.learning-graph-viewport picture { display: block; }
+.prose .micrograd-diagram img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border: 0;
+}
+.prose .micrograd-diagram--scroll img {
+  width: 780px;
+  max-width: none;
+}
+.learning-graph-dialog {
+  width: min(96vw, 90rem);
+  max-width: 96vw;
+  height: min(92dvh, 70rem);
+  max-height: 92dvh;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #7c7c7c;
+  border-radius: 0;
+  background: #080808;
+  color: var(--text);
+}
+.learning-graph-dialog[open] { display: flex; flex-direction: column; }
+.learning-graph-dialog::backdrop { background: rgb(0 0 0 / 85%); }
+.learning-graph-dialog .learning-graph-viewport { flex: 1; min-height: 0; }
+.learning-graph-dialog img { display: block; max-width: none; height: auto; margin: 0 auto; }
+.learning-graph-dialog .learning-graph-tools { flex-shrink: 0; }
+.prose .gpt-graph.micrograd-plot { height: auto !important; min-height: var(--graph-h, 380px); }
+.micrograd-plot .gpt-graph-canvas { min-height: var(--graph-h, 380px); }
+.prose .micrograd-plot .gpt-graph-panel {
+  width: 13rem;
+  gap: 1.25rem;
+  padding: 1rem;
+  background: #101010;
+}
+.micrograd-plot .gpt-slider { gap: 0.35rem; color: #c8c8c8; }
+.micrograd-plot .gpt-slider-value { min-width: 3rem; font-size: 0.875rem; }
+.micrograd-plot .gpt-graph-title::after {
+  content: "";
+  display: block;
+  width: 1.5rem;
+  margin-top: 0.5rem;
+  border-top: 2px solid #e6e6e6;
+}
+.micrograd-plot .gpt-slider input[type="range"] {
+  height: 2.75rem;
+  margin: 0;
+  background: linear-gradient(#626262, #626262) center / 100% 2px no-repeat;
+}
+.micrograd-plot .gpt-slider input[type="range"]::-webkit-slider-thumb {
+  width: 16px;
+  height: 18px;
+  border: 2px solid #101010;
+}
+.micrograd-plot .gpt-slider input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 14px;
+  border: 2px solid #101010;
+}
+.micrograd-plot input[type="range"]:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+.learning-plot-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 1rem;
+  margin-top: auto;
+  color: #c8c8c8;
+  font: 0.8125rem/1.5 var(--font);
+}
+.learning-plot-key { display: inline-flex; align-items: center; gap: 0.5rem; }
+.learning-plot-key::before { content: ""; width: 1.5rem; border-top: 2px solid #e6e6e6; }
+.learning-plot-key--reference::before { border-top: 2px dashed #9a9a9a; }
+.learning-plot-key mjx-container { overflow: visible; margin: 0 !important; }
+.learning-plot-reset-row { display: flex; justify-content: flex-end; margin: -0.5rem -0.5rem -0.5rem 0; }
+@media (max-width: 40rem) {
+  .learning-graph-viewport { padding: 0.5rem; }
+  .prose .micrograd-plot .gpt-graph-panel {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem 1.25rem;
+    padding: 1rem;
+  }
+  .micrograd-plot .gpt-graph-title { grid-column: 1 / -1; }
+  .micrograd-plot .gpt-slider-row { gap: 0.25rem; }
+  .micrograd-plot .gpt-slider-value { min-width: 2.6rem; padding-inline: 0.25rem; }
+  .learning-plot-legend { grid-column: 1 / -1; margin-top: 0.5rem; }
+  .learning-plot-reset-row { grid-column: 2; justify-self: end; }
+}
+@media print {
+  .learning-graph-tools, .learning-plot-reset-row { display: none; }
+  .learning-graph-viewport { overflow: visible; }
+  .prose .micrograd-diagram--scroll img { max-width: 100%; }
+}

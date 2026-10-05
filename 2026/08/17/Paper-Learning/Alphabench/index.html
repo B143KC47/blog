@@ -11,7 +11,7 @@
   <link rel="canonical" href="https://b143kc47.github.io/blog/2026/08/17/Paper-Learning/Alphabench/index.html">
   <link rel="preload" href="https://cdn.jsdelivr.net/fontsource/fonts/geist-mono:vf@5.3.0/latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/blog/css/style.css?v=reader-5">
-  <link rel="stylesheet" href="/blog/css/covers.css?v=reader-8">
+  <link rel="stylesheet" href="/blog/css/covers.css?v=reader-9">
   
   <link rel="icon" href="/blog/avatar.jpg" type="image/jpeg">
   <meta name="description" content="论文笔记：AlphaBench —— 在公式化 Alpha 因子挖掘的完整工作流中，大语言模型适合扮演什么角色：因子公式生成器、不做回测的因子评审员、接收回测反馈不断提出新候选的搜索器。">
@@ -110,13 +110,19 @@ window.MathJax = {
 </ul>
 <p>理解Alpha Factor:</p>
 <p>Alpha Factor 是一个用量化指标（历史价格 成交量）等等有数据的量化指标 计算出来的一个数学表达</p>
-<p>例如 动量因子：<br>$$<br>f_{i,t} &#x3D; \frac{Close_{i,t}-Close_{i,t-20}}{Close_{i,t-20}}<br>$$</p>
-<p>Qlib DSL中：<br>Div(<br>    Sub($close, Ref($close, 20)),<br>    Add(Ref($close, 20), 1e-12)<br>)</p>
+<p>例如 动量因子：</p>
+<div class="math-source math-source--display">$$ 
+f_{i,t} &#x3D; \frac{Close_{i,t}-Close_{i,t-20}}{Close_{i,t-20}}
+$$</div>
+<p>Qlib DSL中：<br>Div(<br>    Sub(<span class="math-source">$close, Ref($</span>close, 20)),<br>    Add(Ref($close, 20), 1e-12)<br>)</p>
 <p>每天对所有股票计算因子的值，然后根据因子值从高到低排名。之后可以构造一个多空组合：</p>
 <p>买入因子值高的股票；<br>卖出或者低配因子值低的股票。</p>
 <p>这是因为因子可能与股价上涨有正相关 值高则上涨的相关性更高 负相关则相反<br>背后也可以有类似的金融逻辑解释<br>动量因子这里 使用 当前收盘价-20天前的收盘价&#x2F;(20天前的收盘价) 这里算的是 新的收盘价上涨的幅度相较于20天前的收盘是百分之多少<br>这里可以合理解释为<br>价格上涨多 -&gt; 市场认为其上涨动力强 -&gt; 更多人追高 -&gt; 价格可能继续上涨</p>
 <p>如何判断因子有没有预测力呢</p>
-<p>论文当中使用 IC (Information coefficient):<br>$$<br>IC_t &#x3D; Corr_i(f_{i,t},r_{i,t+1})<br>$$</p>
+<p>论文当中使用 IC (Information coefficient):</p>
+<div class="math-source math-source--display">$$
+IC_t &#x3D; Corr_i(f_{i,t},r_{i,t+1})
+$$</div>
 <p>IC的数值理解为<br>IC &gt; 0 : 因子和股价是正相关，越高相关性越高<br>IC &#x3D; 0 : 完全的无相关<br>IC &lt; 0 : 因子和股价是负相关,越负负相关性越高</p>
 <p>ICIR (Information Coefficient Information Ratio) 是预测能力的稳定性</p>
 <ul>
@@ -125,7 +131,7 @@ window.MathJax = {
 <li>Skewness</li>
 </ul>
 <p>论文中建立了什么benchmark</p>
-<div class="table-scroll"><table>
+<div class="table-scroll" data-columns="4" style="--table-columns:4"><table>
 <thead>
 <tr>
 <th>任务</th>
@@ -162,7 +168,7 @@ window.MathJax = {
 </ul>
 <p>Text2Alpha</p>
 <p>例如给一段文字描述：<br>Return the rolling max of close minus current close, divided by volume SMA, default window &#x3D; 25.</p>
-<p>Return Alpha Factor:<br>Div(<br>    Sub(Max($close, 25), $close),<br>    Add(Mean($volume, 25), 1e-12)<br>)</p>
+<p>Return Alpha Factor:<br>Div(<br>    Sub(Max(<span class="math-source">$close, 25), $</span>close),<br>    Add(Mean($volume, 25), 1e-12)<br>)</p>
 <p>这个任务主要测试：</p>
 <p>是否理解自然语言；<br>是否选对变量；<br>是否选对操作符；<br>是否使用正确窗口；<br>是否生成可解析、可执行的公式。</p>
 <p>论文将难度分为：</p>
@@ -407,6 +413,7 @@ window.MathJax = {
 </footer>
 
     <script src="/blog/js/covers.js?v=reader-8"></script>
-    <script src="/blog/js/main.js?v=reader-4"></script>
+    <script src="/blog/js/reading.js?v=reader-1"></script>
+    <script src="/blog/js/main.js?v=reader-5"></script>
   </body>
 </html>

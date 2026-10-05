@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 472" width="320" height="472" role="img" aria-labelledby="title" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Noto Sans SC', 'Microsoft YaHei', monospace">
+<title id="title">从输入、输出到 Loss function</title>
+<defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M1 1 L7 4 L1 7 Z" fill="#adadad"/></marker></defs>
+<g data-node="I"><rect x="64" y="24" width="192" height="52" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="160.0" y="50.0" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#e6e6e6" data-label="Feed input">Feed input</text>
+</g>
+<g data-node="P"><rect x="64" y="112" width="192" height="52" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="160.0" y="138.0" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#e6e6e6" data-label="Process">Process</text>
+</g>
+<g data-node="O"><rect x="64" y="200" width="192" height="52" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="160.0" y="226.0" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#e6e6e6" data-label="Output">Output</text>
+</g>
+<g data-node="L"><rect x="64" y="288" width="192" height="52" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="160.0" y="314.0" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#e6e6e6" data-label="loss function">loss function</text>
+</g>
+<g data-node="U"><rect x="64" y="376" width="192" height="52" fill="#202020" stroke="#e6e6e6" stroke-width="1.4"/>
+<text x="160.0" y="402.0" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#e6e6e6" data-label="调整权重和bias">调整权重和bias</text>
+</g>
+<path data-edge="I-&gt;P" d="M160 76 V112" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path data-edge="P-&gt;O" d="M160 164 V200" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path data-edge="O-&gt;L" d="M160 252 V288" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path data-edge="L-&gt;U" d="M160 340 V376" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path data-edge="U-&gt;P" d="M256 402 H298 V138 H256" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="5 5"/>
+</svg>

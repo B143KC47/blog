@@ -95,7 +95,11 @@
     if (block.querySelector(":scope > .code-bar")) return;
     const code = block.querySelector("code");
     const names = Array.from((code || block).classList);
-    const language = names.find(function (name) { return name !== "hljs" && name !== "highlight" && name !== "code"; }) || "";
+    let language = names.find(function (name) { return name !== "hljs" && name !== "highlight" && name !== "code" && name !== "literal-block"; }) || "";
+    if (language.indexOf("literal-block--") === 0) {
+      const kind = language.replace("literal-block--", "");
+      language = kind === "code" ? "pseudocode" : kind === "tree" ? "tree" : kind === "aligned" ? "output" : kind;
+    }
     const zh = (document.documentElement.lang || "").toLowerCase().indexOf("zh") === 0;
     const copyIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="8" y="8" width="12" height="12"/><path d="M4 16V4h12"/></svg>';
     const doneIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12.5 10 17.5 19 7"/></svg>';
@@ -145,11 +149,25 @@
   });
 
   function bootMermaid() {
-    const nodes = document.querySelectorAll("pre.mermaid");
+    const nodes = Array.from(document.querySelectorAll("pre.mermaid"));
     if (!nodes.length) return;
     const script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js";
-    script.onload = function () {
+    script.src = "https://cdn.jsdelivr.net/npm/mermaid@11.17.2/dist/mermaid.min.js";
+    function fallback(node, source) {
+      const details = document.createElement('details');
+      details.className = 'diagram-source';
+      const summary = document.createElement('summary');
+      summary.textContent = '图表未能加载，查看原始内容';
+      const pre = document.createElement('pre');
+      pre.textContent = source;
+      details.append(summary, pre);
+      node.replaceChildren(details);
+      node.dataset.diagramState = 'error';
+    }
+    script.onerror = function () {
+      nodes.forEach(function (node) { fallback(node, node.textContent); });
+    };
+    script.onload = async function () {
       if (!window.mermaid) return;
       const ink = "#e6e6e6";
       const mute = "rgba(230,230,230,0.5)";
@@ -222,15 +240,45 @@
           padding: 16
         }
       });
-      function squareNodes() {
-        document.querySelectorAll(".prose .mermaid rect, .mermaid rect").forEach(function (rect) {
-          rect.setAttribute("rx", "0");
-          rect.setAttribute("ry", "0");
-        });
+      await document.fonts.ready;
+      for (let index = 0; index < nodes.length; index++) {
+        const node = nodes[index];
+        const source = node.textContent;
+        const figure = document.createElement('figure');
+        figure.className = 'mermaid';
+        node.replaceWith(figure);
+        try {
+          // Mermaid must measure labels under the same prose styles used for
+          // display. Measuring in its default body container clips wrapped text.
+          let measurement = figure;
+          let temporary;
+          if (!figure.getBoundingClientRect().height && figure.closest('details:not([open])')) {
+            temporary = document.createElement('div');
+            temporary.className = 'prose';
+            temporary.style.cssText = 'position:absolute;visibility:hidden;left:-10000px;width:760px';
+            measurement = document.createElement('figure');
+            measurement.className = 'mermaid';
+            temporary.appendChild(measurement);
+            document.body.appendChild(temporary);
+          }
+          let result;
+          try {
+            result = await window.mermaid.render('article-diagram-' + index, source, measurement);
+          } finally {
+            if (temporary) temporary.remove();
+          }
+          figure.innerHTML = result.svg;
+          if (result.bindFunctions) result.bindFunctions(figure);
+          figure.querySelectorAll('rect').forEach(function (rect) {
+            rect.setAttribute("rx", "0");
+            rect.setAttribute("ry", "0");
+          });
+          figure.dataset.diagramState = 'ready';
+          if (window.ReadingUI) window.ReadingUI.enhanceDiagram(figure);
+        } catch (error) {
+          fallback(figure, source);
+        }
       }
-      const run = window.mermaid.run({ nodes: nodes });
-      if (run && typeof run.then === "function") run.then(squareNodes);
-      else squareNodes();
     };
     document.head.appendChild(script);
   }
