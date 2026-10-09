@@ -1,0 +1,105 @@
+/* A second palette for Simplism. Its type, spacing, square edges and artwork
+   stay in the original stylesheet; dark remains the default. */
+html[data-theme="dark"] { color-scheme: dark; }
+html[data-theme="light"] {
+  color-scheme: light;
+  --bg: #fff;
+  --text: #1a1a1a;
+  --muted: #626262;
+  --faint: #767676;
+  --line: #d4d4d4;
+  --fill: #f3f3f3;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  gap: 0.5rem;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+.theme-toggle[hidden] { display: none; }
+.theme-toggle:hover { border-color: var(--text); }
+.theme-toggle svg { width: 1rem; height: 1rem; flex: none; }
+.theme-icon--dark { display: none; }
+html[data-theme="light"] .theme-icon--light { display: none; }
+html[data-theme="light"] .theme-icon--dark { display: block; }
+
+/* The original palette contains a few literal colors outside its variables. */
+html[data-theme="light"] .lede { color: var(--muted); }
+html[data-theme="light"] .series-link.is-on { color: var(--bg); }
+html[data-theme="light"] :is(.prose, .post-title, .lede) ::selection {
+  background: #1a1a1a;
+  color: #fff;
+}
+html[data-theme="light"] .prose .table-scroll[data-reader-overflow="true"] :is(th, td):first-child {
+  box-shadow: 8px 0 12px -8px rgb(0 0 0 / 20%);
+}
+
+/* Keep plots, diagrams and syntax highlighting on their established dark
+   canvas. Their labels and controls inherit these local values, not the page's
+   light ink; no renderer or notebook source needs to change. */
+html[data-theme="light"] :is(
+  .prose .highlight,
+  .prose pre,
+  .prose .mermaid,
+  .prose .gpt-graph,
+  .prose .desmos-graph,
+  .prose .micrograd-diagram,
+  .diagram-dialog,
+  .learning-graph-dialog
+) {
+  color-scheme: dark;
+  --bg: #000;
+  --text: #e6e6e6;
+  --muted: #999;
+  --faint: #767676;
+  --line: rgba(230, 230, 230, 0.22);
+  --fill: #141414;
+  color: var(--text);
+}
+html[data-theme="light"] .prose :is(.highlight, pre, .mermaid, .gpt-graph, .desmos-graph) {
+  border-color: #bcbcbc;
+}
+
+/* The author-only studio uses literal dark colors too. Its pixel preview
+   frames remain dark so changing the page palette does not change the export. */
+html[data-theme="light"] body { background: var(--bg); color: var(--text); }
+html[data-theme="light"] :is(.studio-bar, .studio section) { border-color: var(--line); }
+html[data-theme="light"] :is(
+  .studio-bar span,
+  .studio .kicker,
+  .privacy,
+  .studio output,
+  .studio small,
+  .studio .hint,
+  .preview-grid figcaption,
+  .studio-status
+) { color: var(--muted); }
+html[data-theme="light"] .studio :is(input[type="text"], select, textarea) {
+  background: var(--fill);
+  border-color: #aaa;
+}
+html[data-theme="light"] .studio input::file-selector-button,
+html[data-theme="light"] .studio button {
+  border-color: #888;
+  color: var(--text);
+}
+html[data-theme="light"] .studio button:hover:not(:disabled) {
+  background: var(--text);
+  color: var(--bg);
+}
+html[data-theme="light"] .studio button:disabled { color: #767676; border-color: #d4d4d4; }
+html[data-theme="light"] .studio input[type="range"] { accent-color: var(--text); }
+html[data-theme="light"] .studio code { color: var(--text); }
+
+@media print { .theme-toggle { display: none; } }

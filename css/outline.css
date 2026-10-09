@@ -1,0 +1,45 @@
+/* Section navigation added to the original Simplism design. */
+html, body { overflow-x: clip; }
+.post-reading-layout { width: min(1040px, calc(100% - 2 * var(--gutter))); margin-inline: auto; }
+.post-reading-layout.has-outline { --outline-width: clamp(9rem, 14vw, 12rem); --outline-gap: clamp(1.25rem, 2.2vw, 2rem); display: grid; grid-template-columns: var(--outline-width) minmax(0, 1fr) var(--outline-width); gap: var(--outline-gap); width: min(88rem, calc(100% - 2 * var(--gutter))); }
+.post-reading-content { min-width: 0; }
+.has-outline .post-reading-content { grid-column: 2; }
+.has-outline .prose :is(h1, h2, h3, h4) { scroll-margin-top: 2rem; }
+.article-outline { position: sticky; top: 1.5rem; align-self: start; min-width: 0; width: 100%; max-width: none; margin: 0; border: 0; color: var(--muted); font-size: var(--ui); }
+.outline-panel { display: flex; flex-direction: column; max-height: calc(100dvh - 3rem); }
+.outline-controls { display: none; }
+.article-outline nav { padding: 0; min-height: 0; max-height: none; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; -ms-overflow-style: none; }
+.article-outline nav::-webkit-scrollbar { display: none; width: 0; height: 0; }
+.article-outline ul { list-style: none; margin: 0; padding: 0; }
+.article-outline li { margin: 0; }
+.article-outline a { display: block; padding: 0.6rem 0; border: 0; color: var(--muted); font-size: 0.8125rem; line-height: 1.6; text-decoration: none; overflow-wrap: anywhere; }
+.article-outline .outline-subsection { padding-left: 0; }
+.article-outline .outline-subsection a { padding-left: 0.75rem; font-size: 0.75rem; }
+.article-outline a:hover { color: var(--text); opacity: 1; text-decoration: none; }
+.article-outline a[aria-current="location"] { color: var(--text); }
+.outline-mobile-bar, .outline-close { display: none; }
+.outline-toggle, .outline-close { align-items: center; justify-content: center; width: 2.75rem; min-height: 2.75rem; padding: 0; border: 0; color: var(--text); background: none; font: inherit; font-size: 0.8125rem; cursor: pointer; }
+.outline-toggle svg, .outline-close svg { width: 20px; height: 20px; flex-shrink: 0; }
+.outline-close { width: 2.75rem; flex-shrink: 0; }
+.outline-close:hover { background: var(--fill); }
+.outline-dialog { position: fixed; inset: 0 auto 0 0; width: min(22rem, calc(100% - 3rem)); height: 100dvh; max-height: 100%; margin: 0; padding: max(1.5rem, env(safe-area-inset-top)) 1.5rem max(1.5rem, env(safe-area-inset-bottom)); background: var(--bg); color: var(--text); }
+.outline-dialog::backdrop { background: #0008; }
+.outline-dialog .outline-panel { height: 100%; max-height: none; }
+.outline-dialog .outline-controls { display: flex; justify-content: flex-end; margin-bottom: 1rem; flex-shrink: 0; }
+.outline-dialog .outline-close { display: inline-flex; }
+.outline-dialog a { min-height: 2.75rem; }
+.outline-mobile-bar[hidden], .outline-close[hidden], .outline-dialog:not([open]) { display: none !important; }
+body.outline-open { overflow: hidden; }
+@media (max-width: 56.25rem) {
+  .post-reading-layout.has-outline { display: block; width: min(1040px, calc(100% - 2 * var(--gutter))); }
+  .article-outline:not(.outline-dialog) { position: static; width: min(22rem, 100%); margin: 0 0 2rem; }
+  .article-outline:not(.outline-dialog) .outline-panel { max-height: 24rem; }
+  .outline-ready > .article-outline { display: none; }
+  .outline-mobile-bar:not([hidden]) { display: flex; position: sticky; top: 0; z-index: 35; margin: 0 0 1.5rem; padding: 0.25rem 0; background: var(--bg); border-bottom: 1px solid var(--line); }
+  .outline-toggle { display: inline-flex; }
+  .has-outline .prose :is(h1, h2, h3, h4) { scroll-margin-top: 5rem; }
+}
+@media print {
+  .article-outline, .outline-mobile-bar { display: none !important; }
+  .post-reading-layout.has-outline { display: block; width: 100%; }
+}

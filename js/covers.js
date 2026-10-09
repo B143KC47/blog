@@ -307,33 +307,6 @@
       if (win.MutationObserver) new win.MutationObserver(focusScrollers).observe(prose, { childList: true, subtree: true });
       win.addEventListener("resize", focusScrollers);
     }
-    if (prose && !doc.querySelector(".article-outline")) {
-      const headings = Array.from(prose.querySelectorAll("h2, h3")).filter(h => !h.closest("details, .mermaid, .source-block"));
-      if (headings.length >= 4) {
-        const details = doc.createElement("details");
-        details.className = "article-outline";
-        const summary = doc.createElement("summary");
-        const lang = (doc.documentElement.lang || "").toLowerCase();
-        summary.textContent = lang.startsWith("zh") ? "目录" : "Contents";
-        const nav = doc.createElement("nav");
-        nav.setAttribute("aria-label", lang.startsWith("zh") ? "目录" : "Article sections");
-        const list = doc.createElement("ul");
-        headings.forEach((heading, index) => {
-          if (!heading.id) {
-            let id = "section-" + (index + 1);
-            while (doc.getElementById(id)) id += "-";
-            heading.id = id;
-          }
-          const li = doc.createElement("li");
-          li.className = heading.tagName === "H3" ? "outline-subsection" : "";
-          const a = doc.createElement("a");
-          a.href = "#" + encodeURIComponent(heading.id);
-          a.textContent = heading.textContent.trim();
-          li.append(a); list.append(li);
-        });
-        nav.append(list); details.append(summary, nav); prose.before(details);
-      }
-    }
     if (prose) {
       const bar = doc.createElement("div");
       bar.className = "read-progress";

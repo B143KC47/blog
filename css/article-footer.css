@@ -1,0 +1,30 @@
+/* Article information follows the reference's arrangement in our own palette. */
+.article-info {
+  --article-info-chip: #353535;
+  width: min(80rem, calc(100% - 2 * var(--gutter)));
+  max-width: 100%;
+  margin: 4.5rem auto 0;
+  padding: clamp(2.25rem, 4vw, 3.75rem) clamp(1.25rem, 4vw, 3.75rem);
+  background: #1f1f1f;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--ui);
+}
+html[data-theme="light"] .article-info { --article-info-chip: #e1e1e1; background: #f3f3f3; }
+.article-info-inner { width: min(38rem, 100%); margin-inline: auto; }
+.article-info-topics { display: flex; flex-wrap: wrap; gap: 0.6rem; list-style: none; padding: 0; margin: 0 0 1.5rem; }
+.article-info-topics li { max-width: 100%; min-width: 0; }
+.article-info-chip { display: inline-flex; align-items: center; justify-content: center; max-width: 100%; min-height: 2.25rem; padding: 0.45rem 0.8rem; background: var(--article-info-chip); border-radius: 2rem; color: var(--text); font-size: 0.8125rem; line-height: 1.6; text-decoration: none; overflow-wrap: anywhere; }
+.article-info-chip:hover { opacity: 1; text-decoration: underline; }
+.article-info-label { margin: 0; color: var(--muted); font-size: 0.8125rem; }
+.article-info-name { display: inline-flex; align-items: center; min-height: 2.75rem; max-width: 100%; margin: 0; padding-block: 0.5rem; color: var(--text); text-decoration: none; overflow-wrap: anywhere; }
+a.article-info-name:hover { opacity: 1; text-decoration: underline; }
+.article-info-note { margin: 1.5rem 0 0; font-style: italic; font-size: 0.8125rem; line-height: 1.7; overflow-wrap: anywhere; }
+@media (max-width: 40rem) {
+  .article-info { margin-top: 3rem; }
+  .article-info-chip { min-height: 2.75rem; }
+}
+@media print {
+  .article-info { background: transparent; padding: 1rem 0; border-top: 1px solid currentColor; }
+  .article-info-chip { background: transparent; }
+}
