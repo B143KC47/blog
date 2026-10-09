@@ -19,6 +19,9 @@
   gap: 0.5rem;
   min-height: 2.75rem;
   padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
   color: var(--text);
   font: inherit;
   list-style: none;
@@ -28,8 +31,22 @@
 .series-topics-toggle::-webkit-details-marker { display: none; }
 .series-topics-toggle::marker { content: ""; }
 .series-topics-toggle:hover { opacity: 0.65; }
+.series-topics-toggle:hover span { text-decoration: underline; text-underline-offset: 0.25em; }
 .series-topics-toggle svg { width: 1rem; height: 1rem; flex: none; }
 .series-topics-more[open] .series-topics-toggle svg { transform: rotate(180deg); }
+
+.series-nav .series-link:focus-visible,
+.series-topics-toggle:focus-visible {
+  outline: none;
+  font-weight: 600;
+}
+
+.series-nav .series-link:focus-visible,
+.series-topics-toggle:focus-visible span {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.25em;
+}
 
 .series-topics-panel {
   position: absolute;
@@ -41,8 +58,9 @@
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
   gap: 0.5rem 1rem;
   padding: 1rem;
-  border: 1px solid var(--line);
-  background: var(--fill);
+  border: 0;
+  background: var(--bg);
+  box-shadow: none;
 }
 
 .series-topics-item {

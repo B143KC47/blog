@@ -37,7 +37,6 @@ html[data-theme="light"] .theme-icon--dark { display: block; }
 
 /* The original palette contains a few literal colors outside its variables. */
 html[data-theme="light"] .lede { color: var(--muted); }
-html[data-theme="light"] .series-link.is-on { color: var(--bg); }
 html[data-theme="light"] :is(.prose, .post-title, .lede) ::selection {
   background: #1a1a1a;
   color: #fff;
