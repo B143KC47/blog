@@ -3,51 +3,39 @@
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Evoalpha · BlackCat</title>
-  <meta name="description" content="论文笔记：EvoAlpha（内容整理中）。">
+  <title>OpenAI Gym · BlackCat</title>
+  <meta name="description" content="Notes by KO Ho Tin (BlackCat) on LLM agents, formulaic alpha-factor mining, computer vision, and research tooling.">
   <meta name="author" content="KO Ho Tin">
   <meta name="theme-color" content="#000000">
   <meta name="color-scheme" content="dark">
   <script>try { const choice = localStorage.getItem('blackcat-theme'); if (choice === 'light' || choice === 'dark') document.documentElement.dataset.theme = choice; } catch (_) {}</script>
-  <link rel="canonical" href="https://b143kc47.github.io/blog/2026/08/16/Paper-Learning/Evoalpha/index.html">
+  <link rel="canonical" href="https://b143kc47.github.io/blog/2026/10/09/Paper-Learning/AI%20paper/OpenAI/OpenAI%20Gym/index.html">
   <link rel="preload" href="https://cdn.jsdelivr.net/fontsource/fonts/geist-mono:vf@5.3.0/latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/blog/css/style.css?v=reader-5">
   <link rel="stylesheet" href="/blog/css/covers.css?v=reader-10">
   <link rel="stylesheet" href="/blog/css/appearance.css?v=20261009-3">
-  <link rel="stylesheet" href="/blog/css/topics.css?v=20261009-2">
+  <link rel="stylesheet" href="/blog/css/topics.css?v=20261009-3">
   <link rel="stylesheet" href="/blog/css/outline.css?v=20261009-2">
-  <link rel="stylesheet" href="/blog/css/article-footer.css?v=20261009-1">
+  <link rel="stylesheet" href="/blog/css/article-footer.css?v=20261009-2">
   <link rel="stylesheet" href="/blog/css/article-hero.css?v=20261009-2">
   
   <link rel="icon" href="/blog/avatar.jpg" type="image/jpeg">
-  <meta name="description" content="论文笔记：EvoAlpha（内容整理中）。">
+  <meta name="description" content="OpenAI Gymurl:  https:&#x2F;&#x2F;github.com&#x2F;openai&#x2F;gym   https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1606.01540  OpenAI Gym 是什么 Gym 是一个用于 强化学习(Reinforcement Learning,RL) 研究的Python Library主要做两件事情:  提供API，统一环境 提供大一批适用这个接口的基准任务(benchm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Evoalpha">
-<meta property="og:url" content="https://b143kc47.github.io/blog/2026/08/16/Paper-Learning/Evoalpha/index.html">
+<meta property="og:title" content="OpenAI Gym">
+<meta property="og:url" content="https://b143kc47.github.io/blog/2026/10/09/Paper-Learning/AI%20paper/OpenAI/OpenAI%20Gym/index.html">
 <meta property="og:site_name" content="BlackCat">
-<meta property="og:description" content="论文笔记：EvoAlpha（内容整理中）。">
+<meta property="og:description" content="OpenAI Gymurl:  https:&#x2F;&#x2F;github.com&#x2F;openai&#x2F;gym   https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1606.01540  OpenAI Gym 是什么 Gym 是一个用于 强化学习(Reinforcement Learning,RL) 研究的Python Library主要做两件事情:  提供API，统一环境 提供大一批适用这个接口的基准任务(benchm">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://b143kc47.github.io/blog/avatar.jpg">
-<meta property="article:published_time" content="2026-08-16T15:01:22.000Z">
-<meta property="article:modified_time" content="2026-08-21T05:11:54.138Z">
+<meta property="article:published_time" content="2026-10-09T13:51:53.000Z">
+<meta property="article:modified_time" content="2026-10-10T13:00:02.604Z">
 <meta property="article:author" content="KO Ho Tin">
 <meta property="article:tag" content="KO Ho Tin, BlackCat, B143KC47, blog, LLM agents, alpha mining, computer vision">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://b143kc47.github.io/blog/avatar.jpg">
-<!-- hexo injector head_end start -->
-<script>
-window.MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']],
-    displayMath: [['$$', '$$'], ['\\[', '\\]']],
-    processEscapes: true
-  },
-  options: {
-    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-  }
-};
-</script>
-<script async id="mathjax-cdn-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+<!-- hexo injector head_end start --><script>window.MathJax = {"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]],"processEscapes":true},"options":{"skipHtmlTags":["script","noscript","style","textarea","pre","code"],"enableMenu":false}};</script>
+<script async id="mathjax-cdn-script" src="/blog/vendor/mathjax/tex-chtml.js?v=3.2.2"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/blog/css/notebook-html.css?v=20261009-2"></head>
 
   <body>
     <a class="skip-link" href="#main">Skip to writing</a>
@@ -83,16 +71,14 @@ window.MathJax = {
 <header class="post-hero article-hero">
   <div class="post-well">
     <div class="post-head">
-      <p class="article-hero-date"><time datetime="2026-08-16T15:01:22.000Z">八月 16, 2026</time></p>
-      <h1 class="post-title">Evoalpha</h1>
-      
-        <p class="lede">论文笔记：EvoAlpha（内容整理中）。</p>
+      <p class="article-hero-date"><time datetime="2026-10-09T13:51:53.000Z">十月 9, 2026</time></p>
+      <h1 class="post-title">OpenAI Gym</h1>
       
       <p class="meta">
         
           <a href="/blog/categories/Paper-Learning/">Paper-Learning</a>
         
-        <span>1 min read</span>
+        <span>2 min read</span>
       </p>
       <div class="article-share-controls">
         <button type="button" class="article-share" hidden>
@@ -110,7 +96,7 @@ window.MathJax = {
       
         <canvas
   class="pixel-banner pixel-banner--cover"
-  data-seed="1085f8a9"
+  data-seed="ddd7181c"
   data-cols="96"
   data-rows="32"
   aria-hidden="true"
@@ -126,7 +112,42 @@ window.MathJax = {
       
       <div class="post-reading-content">
         
-        <div class="prose"></div>
+        <div class="prose"><p>url:  <a target="_blank" rel="noopener" href="https://github.com/openai/gym">https://github.com/openai/gym</a>   <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1606.01540">https://arxiv.org/abs/1606.01540</a> </p>
+<p>OpenAI Gym 是什么</p>
+<p>Gym 是一个用于 强化学习(Reinforcement Learning,RL) 研究的Python Library<br>主要做两件事情:</p>
+<ol>
+<li>提供API，统一环境</li>
+<li>提供大一批适用这个接口的基准任务(benchmark problems)</li>
+</ol>
+<p>强化学习：一个Agent 在一个环境Environment里反复做决策,每一个决策，也就是一个动作(action), 环境会有一些反馈(observation)和奖励(reward)。我们的优化目标就是让最大化奖励。</p>
+<pre><code>    action  aₜ
+</code></pre>
+<p>  Agent ─────────────▶ Environment<br>  智能体 ◀───────────── 环境<br>        observation oₜ₊₁, reward rₜ</p>
+<p>以下是一个例子：</p>
+<figure class="notebook-html-embed"><figcaption><a href="&#x2F;blog&#x2F;2026&#x2F;10&#x2F;09&#x2F;Paper-Learning&#x2F;AI paper&#x2F;OpenAI&#x2F;OpenAI Gym&#x2F;gym_cartpole_step_loop.html" target="_blank" rel="noopener">gym_cartpole_step_loop.html</a></figcaption><iframe class="notebook-html-frame" src="&#x2F;blog&#x2F;2026&#x2F;10&#x2F;09&#x2F;Paper-Learning&#x2F;AI paper&#x2F;OpenAI&#x2F;OpenAI Gym&#x2F;gym_cartpole_step_loop.html" title="gym_cartpole_step_loop.html" loading="lazy" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe></figure>
+<p>为什么会出现Gym?</p>
+<p>以前的研究人员如果没有一个统一的框架 对于不同的研究要些写不同适配的代码</p>
+<ul>
+<li>A 研究 CartPole，透过左右移动保持杆子平衡。</li>
+<li>B 研究 Atari 游戏，让 AI 学会玩游戏。</li>
+<li>C 研究机器人，让机械臂学会抓取物体</li>
+</ul>
+<h1 id="A-的环境"><a href="#A-的环境" class="headerlink" title="A 的环境"></a>A 的环境</h1><p>state &#x3D; cartpole.start()<br>next_state, reward &#x3D; cartpole.move_left()</p>
+<h1 id="B-的环境"><a href="#B-的环境" class="headerlink" title="B 的环境"></a>B 的环境</h1><p>game.initialize()<br>screen, score, game_over &#x3D; game.press_button(2)</p>
+<h1 id="C-的环境"><a href="#C-的环境" class="headerlink" title="C 的环境"></a>C 的环境</h1><p>robot.restart()<br>sensors, reward, finished &#x3D; robot.apply_torque([0.1, 0.2])</p>
+<p>那如果我们引入了一个强化算法想套用到这三个任务上，那就会导致一个问题 也就是我们要写三套适配的算法，也就是重复造轮子。</p>
+<p>所以我们需要引用gym 也就是标准化环境，也是不论环境内部多复杂，都必须允许 Agent 使用相同的方式与它交互。</p>
+<p>Gym 最主要关注回合制(episodic setting)强化学习。每个回合会从一个随机初始状态或者设置确定的初始状态开始，然后回一直进行直到终止状态(terminal state)。</p>
+<p>目标有两个：</p>
+<ul>
+<li>每个回复的expected reward 要高</li>
+<li>尽可能少回合学会</li>
+</ul>
+<p>Gym最主要只规定了 env 的接口,没有规定agent的接口，这样做的设计是为了让开发者可以自由的选择在线学习(online learning) 或 批量学习(batch update)等风格。</p>
+<p><img src="/blog/2026/10/09/Paper-Learning/AI paper/OpenAI/OpenAI Gym/image.png" alt="alt text"></p>
+<p>在线学习 (online learning)：每走一步，立刻用 (obs, action, reward, next_obs) 更新一次。例子：Q-learning。</p>
+<p>批量更新 (batch update)：先走完一整个回合，只记录数据，不学习。回合结束后，用整条轨迹 (trajectory) 一次性更新。例子：REINFORCE、PPO。</p>
+</div>
       </div>
     </div>
 
@@ -143,7 +164,7 @@ window.MathJax = {
               
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/08/17/Paper-Learning/Alphabench/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/08/17/Paper-Learning/AI%20paper/Conference/Other/Alphabench/" aria-hidden="true" tabindex="-1">
     
       <canvas
   class="pixel-banner pixel-banner--card"
@@ -157,7 +178,7 @@ window.MathJax = {
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/08/17/Paper-Learning/Alphabench/">Alphabench</a>
+      <a href="/blog/2026/08/17/Paper-Learning/AI%20paper/Conference/Other/Alphabench/">Alphabench</a>
     </h3>
     <p class="meta">
       
@@ -172,7 +193,36 @@ window.MathJax = {
               
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/08/16/Paper-Learning/Qfinzero/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/08/16/Paper-Learning/AI%20paper/Conference/Other/Evoalpha/" aria-hidden="true" tabindex="-1">
+    
+      <canvas
+  class="pixel-banner pixel-banner--card"
+  data-seed="1085f8a9"
+  data-cols="48"
+  data-rows="36"
+  aria-hidden="true"
+></canvas>
+
+    
+  </a>
+  <div class="card-body">
+    <h3 class="card-title">
+      <a href="/blog/2026/08/16/Paper-Learning/AI%20paper/Conference/Other/Evoalpha/">Evoalpha</a>
+    </h3>
+    <p class="meta">
+      
+        <a href="/blog/categories/Paper-Learning/">Paper-Learning</a>
+      
+      <time datetime="2026-08-16T15:01:22.000Z">2026-08-16</time>
+    </p>
+  </div>
+</article>
+
+            
+              
+
+<article class="card">
+  <a class="card-media" href="/blog/2026/08/16/Paper-Learning/AI%20paper/Conference/Other/Qfinzero/" aria-hidden="true" tabindex="-1">
     
       <canvas
   class="pixel-banner pixel-banner--card"
@@ -186,42 +236,13 @@ window.MathJax = {
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/08/16/Paper-Learning/Qfinzero/">Qfinzero</a>
+      <a href="/blog/2026/08/16/Paper-Learning/AI%20paper/Conference/Other/Qfinzero/">Qfinzero</a>
     </h3>
     <p class="meta">
       
         <a href="/blog/categories/Paper-Learning/">Paper-Learning</a>
       
       <time datetime="2026-08-16T15:01:06.000Z">2026-08-16</time>
-    </p>
-  </div>
-</article>
-
-            
-              
-
-<article class="card">
-  <a class="card-media" href="/blog/2026/10/01/Kaggle-Solution/Predicting%20Student%20Health%20Risk/" aria-hidden="true" tabindex="-1">
-    
-      <canvas
-  class="pixel-banner pixel-banner--card"
-  data-seed="4873a8d0"
-  data-cols="48"
-  data-rows="36"
-  aria-hidden="true"
-></canvas>
-
-    
-  </a>
-  <div class="card-body">
-    <h3 class="card-title">
-      <a href="/blog/2026/10/01/Kaggle-Solution/Predicting%20Student%20Health%20Risk/">Predicting Student Health Risk</a>
-    </h3>
-    <p class="meta">
-      
-        <a href="/blog/categories/Kaggle-Solution/">Kaggle-Solution</a>
-      
-      <time datetime="2026-09-30T17:47:01.000Z">2026-10-01</time>
     </p>
   </div>
 </article>
@@ -374,5 +395,5 @@ window.MathJax = {
     <script src="/blog/js/topics.js?v=20261009-1"></script>
     <script src="/blog/js/outline.js?v=20261009-3"></script>
     <script src="/blog/js/article-share.js?v=20261009-2"></script>
-  </body>
+  <script src="/blog/js/notebook-html.js?v=20261009-3" defer></script></body>
 </html>

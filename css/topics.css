@@ -9,6 +9,15 @@
   min-height: 2.75rem;
 }
 
+.series-link,
+.tag,
+.meta a[href*="/categories/"],
+.meta a[href*="/tags/"] {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
 .series-topics-more {
   margin-left: auto;
 }
@@ -35,13 +44,20 @@
 .series-topics-toggle svg { width: 1rem; height: 1rem; flex: none; }
 .series-topics-more[open] .series-topics-toggle svg { transform: rotate(180deg); }
 
-.series-nav .series-link:focus-visible,
+.series-link:focus-visible,
+.tag:focus-visible,
+.meta a[href*="/categories/"]:focus-visible,
+.meta a[href*="/tags/"]:focus-visible,
 .series-topics-toggle:focus-visible {
   outline: none;
   font-weight: 600;
+  color: var(--text);
 }
 
-.series-nav .series-link:focus-visible,
+.series-link:focus-visible,
+.tag:focus-visible,
+.meta a[href*="/categories/"]:focus-visible,
+.meta a[href*="/tags/"]:focus-visible,
 .series-topics-toggle:focus-visible span {
   text-decoration: underline;
   text-decoration-thickness: 2px;

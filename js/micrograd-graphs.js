@@ -74,52 +74,7 @@
     const bounds = reluOnly ? {left:-4,right:4,bottom:-1.5,top:4.5} : {left:-5,right:5,bottom:-3,top:5};
     calc.setMathBounds(bounds);
     calc.setDefaultState(calc.getState());
-    const panel = root.querySelector('.gpt-graph-panel');
-    if (panel) {
-      const curves = calc.getExpressions().filter(function (expr) { return expr.latex && /^y=/.test(expr.latex); });
-      const legend = document.createElement('div');
-      legend.className = 'learning-plot-legend';
-      curves.forEach(function (expr, index) {
-        if (index === 0) return;
-        const key = document.createElement('span');
-        key.className = 'learning-plot-key' + (index ? ' learning-plot-key--reference' : '');
-        // The primary curve already has the article's unchanged title above it.
-        const latex = expr.latex;
-        const formula = document.createElement('span');
-        formula.textContent = '\\(' + latex + '\\)';
-        key.appendChild(formula);
-        legend.appendChild(key);
-      });
-      panel.appendChild(legend);
-      const resetRow = document.createElement('div');
-      resetRow.className = 'learning-plot-reset-row';
-      const reset = document.createElement('button');
-      reset.type = 'button';
-      reset.className = 'learning-graph-reset';
-      reset.setAttribute('aria-label', '重置图形');
-      reset.title = '重置图形';
-      reset.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1 7M4 4v6h6"/></svg>';
-      reset.addEventListener('click', function () {
-        root.querySelectorAll('input[data-slider]').forEach(function (input) {
-          input.value = input.defaultValue;
-          input.dispatchEvent(new Event('input', {bubbles:true}));
-        });
-        calc.setMathBounds(bounds);
-      });
-      resetRow.appendChild(reset);
-      panel.appendChild(resetRow);
-      function typesetLegend() {
-        if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([legend]).catch(function () {});
-      }
-      if (window.MathJax && MathJax.startup && MathJax.startup.promise) MathJax.startup.promise.then(typesetLegend);
-      else typesetLegend();
-      root.querySelectorAll('input[data-slider]').forEach(function (input) {
-        const slider = input.closest('.gpt-slider');
-        const label = slider.querySelector('.gpt-slider-row span');
-        label.id = root.id + '-label-' + input.dataset.slider;
-        input.setAttribute('aria-labelledby', label.id);
-      });
-    }
+    // Both renderers share slider bindings, legend and reset controls in graphs.js.
     return true;
   }
   document.querySelectorAll('.micrograd-plot').forEach(function (root) {

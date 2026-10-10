@@ -1,0 +1,5 @@
+.prose .notebook-html-embed { margin: 1.75rem 0; padding: 0; min-width: 0; border: 0; background: transparent; box-shadow: none; }
+.notebook-html-embed figcaption { margin: 0 0 .75rem; font: .8125rem/1.6 var(--font); overflow-wrap: anywhere; color: var(--muted); }
+.notebook-html-embed figcaption a { border: 0; background: transparent; color: inherit; text-decoration: none; }
+.notebook-html-embed figcaption a:hover, .notebook-html-embed figcaption a:focus-visible { color: var(--text); text-decoration: underline; text-underline-offset: .25em; }
+.notebook-html-frame { display: block; width: 100%; max-width: 100%; height: 520px; border: 0; overflow: hidden; background: transparent; color-scheme: normal; }

@@ -14,9 +14,9 @@
   <link rel="stylesheet" href="/blog/css/style.css?v=reader-5">
   <link rel="stylesheet" href="/blog/css/covers.css?v=reader-10">
   <link rel="stylesheet" href="/blog/css/appearance.css?v=20261009-3">
-  <link rel="stylesheet" href="/blog/css/topics.css?v=20261009-2">
+  <link rel="stylesheet" href="/blog/css/topics.css?v=20261009-3">
   <link rel="stylesheet" href="/blog/css/outline.css?v=20261009-2">
-  <link rel="stylesheet" href="/blog/css/article-footer.css?v=20261009-1">
+  <link rel="stylesheet" href="/blog/css/article-footer.css?v=20261009-2">
   <link rel="stylesheet" href="/blog/css/article-hero.css?v=20261009-2">
   
   <link rel="icon" href="/blog/avatar.jpg" type="image/jpeg">
@@ -29,25 +29,13 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://b143kc47.github.io/blog/images/covers/micrograd-pixel-v1.png">
 <meta property="article:published_time" content="2026-08-18T14:01:11.000Z">
-<meta property="article:modified_time" content="2026-09-29T03:53:09.028Z">
+<meta property="article:modified_time" content="2026-10-10T13:00:02.581Z">
 <meta property="article:author" content="KO Ho Tin">
 <meta property="article:tag" content="KO Ho Tin, BlackCat, B143KC47, blog, LLM agents, alpha mining, computer vision">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://b143kc47.github.io/blog/images/covers/micrograd-pixel-v1.png">
-<!-- hexo injector head_end start -->
-<script>
-window.MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']],
-    displayMath: [['$$', '$$'], ['\\[', '\\]']],
-    processEscapes: true
-  },
-  options: {
-    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-  }
-};
-</script>
-<script async id="mathjax-cdn-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/blog/css/micrograd-graphs.css?v=1"></head>
+<!-- hexo injector head_end start --><script>window.MathJax = {"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]],"processEscapes":true},"options":{"skipHtmlTags":["script","noscript","style","textarea","pre","code"],"enableMenu":false}};</script>
+<script async id="mathjax-cdn-script" src="/blog/vendor/mathjax/tex-chtml.js?v=3.2.2"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/blog/css/notebook-html.css?v=20261009-2"><link rel="stylesheet" href="/blog/css/graphs.css?v=20261009-1"><link rel="stylesheet" href="/blog/css/micrograd-graphs.css?v=1"></head>
 
   <body>
     <a class="skip-link" href="#main">Skip to writing</a>
@@ -225,95 +213,7 @@ $$</div>
 <h3 id="2-4-Activation-function-与-ReLU"><a href="#2-4-Activation-function-与-ReLU" class="headerlink" title="2.4 Activation function 与 ReLU"></a>2.4 Activation function 与 ReLU</h3><p>但是单单只有一条 直线，是不够的，所以我们要引入 <strong>非线性</strong>。</p>
 <p>也就是 Activation function（激活函数）。</p>
 <p>我们先介绍第一种 Activation function，ReLU：</p>
-<div id="desmos-graph-1" class="desmos-graph micrograd-plot" style="height:400px;"></div>
-<script>
-(function () {
-  function mountWhenVisible(elt, create) {
-    if (!elt || elt.__desmosInit || elt.__desmosPending) return;
-    elt.__desmosPending = true;
-    var observer;
-    function mount() {
-      if (elt.closest('details:not([open])') || !elt.clientWidth || !elt.clientHeight || elt.__desmosInit) return;
-      if (observer) observer.disconnect();
-      document.removeEventListener('toggle', mount, true);
-      window.removeEventListener('resize', mount);
-      var calc = create();
-      elt.__desmosCalc = calc;
-      elt.__desmosInit = true;
-      elt.__desmosPending = false;
-      watchGraph(calc, elt);
-    }
-    if (window.ResizeObserver) {
-      observer = new ResizeObserver(mount);
-      observer.observe(elt);
-    }
-    document.addEventListener('toggle', mount, true);
-    window.addEventListener('resize', mount);
-    mount();
-  }
-  function watchGraph(calc, elt) {
-    if (!window.ResizeObserver || !elt) return;
-    var frame = 0;
-    var observer = new ResizeObserver(function () {
-      if (!elt.clientWidth || !elt.clientHeight) return;
-      window.cancelAnimationFrame(frame);
-      frame = window.requestAnimationFrame(function () {
-        try { calc.resize(); } catch (error) {}
-      });
-    });
-    observer.observe(elt);
-  }
-  window.__desmosQueue = window.__desmosQueue || [];
-  window.__desmosQueue.push({ id: "desmos-graph-1", expressions: [{"latex":"y=\\max(0,x)","color":"#191919"}] });
-
-  function initDesmos() {
-    window.__desmosQueue.forEach(function (item) {
-      if (item.sliders) return;
-      var elt = document.getElementById(item.id);
-      mountWhenVisible(elt, function () {
-        var calc = Desmos.GraphingCalculator(elt, {
-        invertedColors: true,
-        expressions: false,
-        expressionsTopbar: false,
-        keypad: false,
-        settingsMenu: false,
-        zoomButtons: true,
-        showResetButtonOnGraphpaper: true,
-        border: false,
-        fontSize: 16
-      });
-        calc.setExpressions(item.expressions);
-        calc.setDefaultState(calc.getState());
-        return calc;
-      });
-    });
-  }
-  
-  if (window.Desmos) { initDesmos(); return; }
-  var existing = document.getElementById('desmos-api-script');
-  if (existing) {
-    var prev = existing.onload;
-    existing.onload = function () { if (prev) prev(); initDesmos(); };
-    return;
-  }
-  var s = document.createElement('script');
-  s.id = 'desmos-api-script';
-  s.src = 'https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6';
-  s.onload = initDesmos;
-  s.onerror = function () {
-    (window.__desmosQueue || []).forEach(function (item) {
-      var elt = document.getElementById(item.id + (item.sliders ? '-canvas' : ''));
-      if (!elt) return;
-      elt.textContent = '图形暂未加载，请刷新页面重试。';
-      var source = document.createElement('pre');
-      source.textContent = item.expressions.map(function (expression) { return expression.latex; }).join('\n');
-      elt.appendChild(source);
-      elt.setAttribute('role', 'status');
-    });
-  };
-  document.head.appendChild(s);
-})();
-</script>
+<div id="desmos-graph-1" class="desmos-graph micrograd-plot" data-graph-config="{&quot;expressions&quot;:[{&quot;latex&quot;:&quot;y&#x3D;\\max(0,x)&quot;,&quot;id&quot;:&quot;curve-0&quot;,&quot;color&quot;:&quot;#191919&quot;}],&quot;sliders&quot;:[]}" style="height:400px;"></div>
 
 <p>其实也就是创造一个折点，在几何意义上。</p>
 <h3 id="2-5-神经网络的连接结构"><a href="#2-5-神经网络的连接结构" class="headerlink" title="2.5 神经网络的连接结构"></a>2.5 神经网络的连接结构</h3><p>那我们现在画一个最简单的神经网络，长这样（2个输入、3个隐藏神经元、1个输出）：</p>
@@ -321,381 +221,11 @@ $$</div>
 <p>每条连线就是一个权重w，每个神经元做的是 加权求和，再过一个Activation function。</p>
 <h3 id="2-6-线性变换的局限"><a href="#2-6-线性变换的局限" class="headerlink" title="2.6 线性变换的局限"></a>2.6 线性变换的局限</h3><p>为什么一定要非线性？</p>
 <p>如果每个神经元都只是线性加权求和，那不管叠多少层，组合起来还是一条直线：</p>
-<div class="gpt-graph micrograd-plot" id="gpt-graph-1" style="height:380px;--graph-h:380px;">
-  <div class="gpt-graph-panel">
-    <div class="gpt-graph-title" data-tex="y = mx + b"></div>
-    
-    <div class="gpt-slider">
-      <div class="gpt-slider-row">
-        <span>m（斜率）</span>
-        <span class="gpt-slider-value" data-slider-value="0">1</span>
-      </div>
-      <input type="range" aria-label="m（斜率）" data-slider="0" min="-10" max="10" step="0.1" value="1">
-    </div>
-    <div class="gpt-slider">
-      <div class="gpt-slider-row">
-        <span>b（y截距）</span>
-        <span class="gpt-slider-value" data-slider-value="1">0.5</span>
-      </div>
-      <input type="range" aria-label="b（y截距）" data-slider="1" min="-10" max="10" step="0.1" value="0.5">
-    </div>
-  </div>
-  <div class="gpt-graph-canvas" id="gpt-graph-1-canvas"></div>
-</div>
-<script>
-(function () {
-  function mountWhenVisible(elt, create) {
-    if (!elt || elt.__desmosInit || elt.__desmosPending) return;
-    elt.__desmosPending = true;
-    var observer;
-    function mount() {
-      if (elt.closest('details:not([open])') || !elt.clientWidth || !elt.clientHeight || elt.__desmosInit) return;
-      if (observer) observer.disconnect();
-      document.removeEventListener('toggle', mount, true);
-      window.removeEventListener('resize', mount);
-      var calc = create();
-      elt.__desmosCalc = calc;
-      elt.__desmosInit = true;
-      elt.__desmosPending = false;
-      watchGraph(calc, elt);
-    }
-    if (window.ResizeObserver) {
-      observer = new ResizeObserver(mount);
-      observer.observe(elt);
-    }
-    document.addEventListener('toggle', mount, true);
-    window.addEventListener('resize', mount);
-    mount();
-  }
-  function watchGraph(calc, elt) {
-    if (!window.ResizeObserver || !elt) return;
-    var frame = 0;
-    var observer = new ResizeObserver(function () {
-      if (!elt.clientWidth || !elt.clientHeight) return;
-      window.cancelAnimationFrame(frame);
-      frame = window.requestAnimationFrame(function () {
-        try { calc.resize(); } catch (error) {}
-      });
-    });
-    observer.observe(elt);
-  }
-  window.__desmosQueue = window.__desmosQueue || [];
-  var config = {
-    id: "gpt-graph-1",
-    expressions: [{"latex":"y=mx+b","color":"#191919"},{"latex":"y=\\sin(x)","color":"#656565"}],
-    sliders: [{"label":"m（斜率）","varName":"m","init":1,"min":-10,"max":10,"step":0.1},{"label":"b（y截距）","varName":"b","init":0.5,"min":-10,"max":10,"step":0.1}]
-  };
-  window.__desmosQueue.push(config);
-
-  function initOne(item) {
-    var canvas = document.getElementById(item.id + '-canvas');
-    mountWhenVisible(canvas, function () {
-    var calc = Desmos.GraphingCalculator(canvas, {
-        invertedColors: true,
-        expressions: false,
-        expressionsTopbar: false,
-        keypad: false,
-        settingsMenu: false,
-        zoomButtons: true,
-        showResetButtonOnGraphpaper: true,
-        border: false,
-        fontSize: 16
-      });
-    calc.setExpressions(item.expressions);
-    item.sliders.forEach(function (s, i) {
-      calc.setExpression({ id: 'slider-' + i, latex: s.varName + '=' + s.init });
-    });
-    calc.setDefaultState(calc.getState());
-
-    var root = document.getElementById(item.id);
-    root.querySelectorAll('input[data-slider]').forEach(function (input) {
-      input.addEventListener('input', function () {
-        var i = Number(input.getAttribute('data-slider'));
-        var value = input.value;
-        calc.setExpression({ id: 'slider-' + i, latex: item.sliders[i].varName + '=' + value });
-        var badge = root.querySelector('[data-slider-value="' + i + '"]');
-        if (badge) badge.textContent = value;
-      });
-    });
-    calc.observeEvent('change', function () {
-      var expressions = calc.getExpressions();
-      item.sliders.forEach(function (slider, i) {
-        var expression = expressions.find(function (entry) { return entry.id === 'slider-' + i; });
-        if (!expression) return;
-        var value = Number(expression.latex.slice(expression.latex.lastIndexOf('=') + 1));
-        if (!Number.isFinite(value)) return;
-        var input = root.querySelector('[data-slider="' + i + '"]');
-        var badge = root.querySelector('[data-slider-value="' + i + '"]');
-        if (input) input.value = value;
-        if (badge) badge.textContent = value;
-      });
-    });
-
-    renderTitle(root);
-    return calc;
-    });
-  }
-
-  function renderTitle(root) {
-    var titleEl = root.querySelector('.gpt-graph-title');
-    if (!titleEl) return;
-    var raw = titleEl.getAttribute('data-tex') || '';
-    if (!raw) return;
-    ensureMathJax(function () {
-      titleEl.textContent = '';
-      titleEl.textContent = '\\(' + raw + '\\)';
-      if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise([titleEl]).catch(function () { titleEl.textContent = raw; });
-      } else {
-        titleEl.textContent = raw;
-      }
-    });
-  }
-
-  function ensureMathJax(cb) {
-    if (window.MathJax && MathJax.typesetPromise) { cb(); return; }
-    var existing = document.getElementById('mathjax-cdn-script');
-    if (existing) {
-      var prev = existing.onload;
-      existing.onload = function () { if (prev) prev(); cb(); };
-      if (window.MathJax && MathJax.typesetPromise) cb();
-      return;
-    }
-    window.MathJax = window.MathJax || { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
-    var s = document.createElement('script');
-    s.id = 'mathjax-cdn-script';
-    s.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js';
-    s.onload = cb;
-    document.head.appendChild(s);
-  }
-
-  function initDesmos() {
-    window.__desmosQueue.forEach(function (item) {
-      if (item.sliders) initOne(item);
-    });
-  }
-  
-  if (window.Desmos) { initDesmos(); return; }
-  var existing = document.getElementById('desmos-api-script');
-  if (existing) {
-    var prev = existing.onload;
-    existing.onload = function () { if (prev) prev(); initDesmos(); };
-    return;
-  }
-  var s = document.createElement('script');
-  s.id = 'desmos-api-script';
-  s.src = 'https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6';
-  s.onload = initDesmos;
-  s.onerror = function () {
-    (window.__desmosQueue || []).forEach(function (item) {
-      var elt = document.getElementById(item.id + (item.sliders ? '-canvas' : ''));
-      if (!elt) return;
-      elt.textContent = '图形暂未加载，请刷新页面重试。';
-      var source = document.createElement('pre');
-      source.textContent = item.expressions.map(function (expression) { return expression.latex; }).join('\n');
-      elt.appendChild(source);
-      elt.setAttribute('role', 'status');
-    });
-  };
-  document.head.appendChild(s);
-})();
-</script>
+<div class="gpt-graph micrograd-plot" id="gpt-graph-2" data-graph-config="{&quot;expressions&quot;:[{&quot;latex&quot;:&quot;y&#x3D;mx+b&quot;,&quot;id&quot;:&quot;curve-0&quot;,&quot;color&quot;:&quot;#191919&quot;},{&quot;latex&quot;:&quot;y&#x3D;\\sin(x)&quot;,&quot;id&quot;:&quot;curve-1&quot;,&quot;color&quot;:&quot;#656565&quot;}],&quot;sliders&quot;:[{&quot;label&quot;:&quot;m（斜率）&quot;,&quot;varName&quot;:&quot;m&quot;,&quot;init&quot;:1,&quot;min&quot;:-10,&quot;max&quot;:10,&quot;step&quot;:0.1},{&quot;label&quot;:&quot;b（y截距）&quot;,&quot;varName&quot;:&quot;b&quot;,&quot;init&quot;:0.5,&quot;min&quot;:-10,&quot;max&quot;:10,&quot;step&quot;:0.1}]}" style="height:380px;--graph-h:380px;"><div class="gpt-graph-panel"><div class="gpt-graph-title" data-tex="y &#x3D; mx + b">\(y &#x3D; mx + b\)</div><div class="gpt-slider"><div class="gpt-slider-row"><span id="gpt-graph-2-label-0">m（斜率）</span><span class="gpt-slider-value" data-slider-value="0">1</span></div><input type="range" aria-labelledby="gpt-graph-2-label-0" data-slider="0" min="-10" max="10" step="0.1" value="1"></div><div class="gpt-slider"><div class="gpt-slider-row"><span id="gpt-graph-2-label-1">b（y截距）</span><span class="gpt-slider-value" data-slider-value="1">0.5</span></div><input type="range" aria-labelledby="gpt-graph-2-label-1" data-slider="1" min="-10" max="10" step="0.1" value="0.5"></div></div><div class="gpt-graph-canvas" id="gpt-graph-2-canvas"></div></div>
 
 <p>拖动左边m b的滑条，怎么调都只是一条直线，永远拟合不了sin(x)。</p>
 <h3 id="2-7-多个-ReLU-的组合"><a href="#2-7-多个-ReLU-的组合" class="headerlink" title="2.7 多个 ReLU 的组合"></a>2.7 多个 ReLU 的组合</h3><p>但是只要加上ReLU这种非线性，把几个ReLU加起来，曲线就开始拐弯了：</p>
-<div class="gpt-graph micrograd-plot" id="gpt-graph-2" style="height:380px;--graph-h:380px;">
-  <div class="gpt-graph-panel">
-    <div class="gpt-graph-title" data-tex="y = \sum_{i=1}^{4} c_i \max(0, x - p_i)"></div>
-    
-    <div class="gpt-slider">
-      <div class="gpt-slider-row">
-        <span>c₁</span>
-        <span class="gpt-slider-value" data-slider-value="0">1</span>
-      </div>
-      <input type="range" aria-label="c₁" data-slider="0" min="-3" max="3" step="0.1" value="1">
-    </div>
-    <div class="gpt-slider">
-      <div class="gpt-slider-row">
-        <span>c₂</span>
-        <span class="gpt-slider-value" data-slider-value="1">-0.8</span>
-      </div>
-      <input type="range" aria-label="c₂" data-slider="1" min="-3" max="3" step="0.1" value="-0.8">
-    </div>
-    <div class="gpt-slider">
-      <div class="gpt-slider-row">
-        <span>c₃</span>
-        <span class="gpt-slider-value" data-slider-value="2">0.5</span>
-      </div>
-      <input type="range" aria-label="c₃" data-slider="2" min="-3" max="3" step="0.1" value="0.5">
-    </div>
-    <div class="gpt-slider">
-      <div class="gpt-slider-row">
-        <span>c₄</span>
-        <span class="gpt-slider-value" data-slider-value="3">-0.3</span>
-      </div>
-      <input type="range" aria-label="c₄" data-slider="3" min="-3" max="3" step="0.1" value="-0.3">
-    </div>
-  </div>
-  <div class="gpt-graph-canvas" id="gpt-graph-2-canvas"></div>
-</div>
-<script>
-(function () {
-  function mountWhenVisible(elt, create) {
-    if (!elt || elt.__desmosInit || elt.__desmosPending) return;
-    elt.__desmosPending = true;
-    var observer;
-    function mount() {
-      if (elt.closest('details:not([open])') || !elt.clientWidth || !elt.clientHeight || elt.__desmosInit) return;
-      if (observer) observer.disconnect();
-      document.removeEventListener('toggle', mount, true);
-      window.removeEventListener('resize', mount);
-      var calc = create();
-      elt.__desmosCalc = calc;
-      elt.__desmosInit = true;
-      elt.__desmosPending = false;
-      watchGraph(calc, elt);
-    }
-    if (window.ResizeObserver) {
-      observer = new ResizeObserver(mount);
-      observer.observe(elt);
-    }
-    document.addEventListener('toggle', mount, true);
-    window.addEventListener('resize', mount);
-    mount();
-  }
-  function watchGraph(calc, elt) {
-    if (!window.ResizeObserver || !elt) return;
-    var frame = 0;
-    var observer = new ResizeObserver(function () {
-      if (!elt.clientWidth || !elt.clientHeight) return;
-      window.cancelAnimationFrame(frame);
-      frame = window.requestAnimationFrame(function () {
-        try { calc.resize(); } catch (error) {}
-      });
-    });
-    observer.observe(elt);
-  }
-  window.__desmosQueue = window.__desmosQueue || [];
-  var config = {
-    id: "gpt-graph-2",
-    expressions: [{"latex":"y=c_{1}\\max(0,x+3)+c_{2}\\max(0,x+1)+c_{3}\\max(0,x-1)+c_{4}\\max(0,x-3)","color":"#191919"},{"latex":"y=\\sin(x)","color":"#656565"}],
-    sliders: [{"label":"c₁","varName":"c_{1}","init":1,"min":-3,"max":3,"step":0.1},{"label":"c₂","varName":"c_{2}","init":-0.8,"min":-3,"max":3,"step":0.1},{"label":"c₃","varName":"c_{3}","init":0.5,"min":-3,"max":3,"step":0.1},{"label":"c₄","varName":"c_{4}","init":-0.3,"min":-3,"max":3,"step":0.1}]
-  };
-  window.__desmosQueue.push(config);
-
-  function initOne(item) {
-    var canvas = document.getElementById(item.id + '-canvas');
-    mountWhenVisible(canvas, function () {
-    var calc = Desmos.GraphingCalculator(canvas, {
-        invertedColors: true,
-        expressions: false,
-        expressionsTopbar: false,
-        keypad: false,
-        settingsMenu: false,
-        zoomButtons: true,
-        showResetButtonOnGraphpaper: true,
-        border: false,
-        fontSize: 16
-      });
-    calc.setExpressions(item.expressions);
-    item.sliders.forEach(function (s, i) {
-      calc.setExpression({ id: 'slider-' + i, latex: s.varName + '=' + s.init });
-    });
-    calc.setDefaultState(calc.getState());
-
-    var root = document.getElementById(item.id);
-    root.querySelectorAll('input[data-slider]').forEach(function (input) {
-      input.addEventListener('input', function () {
-        var i = Number(input.getAttribute('data-slider'));
-        var value = input.value;
-        calc.setExpression({ id: 'slider-' + i, latex: item.sliders[i].varName + '=' + value });
-        var badge = root.querySelector('[data-slider-value="' + i + '"]');
-        if (badge) badge.textContent = value;
-      });
-    });
-    calc.observeEvent('change', function () {
-      var expressions = calc.getExpressions();
-      item.sliders.forEach(function (slider, i) {
-        var expression = expressions.find(function (entry) { return entry.id === 'slider-' + i; });
-        if (!expression) return;
-        var value = Number(expression.latex.slice(expression.latex.lastIndexOf('=') + 1));
-        if (!Number.isFinite(value)) return;
-        var input = root.querySelector('[data-slider="' + i + '"]');
-        var badge = root.querySelector('[data-slider-value="' + i + '"]');
-        if (input) input.value = value;
-        if (badge) badge.textContent = value;
-      });
-    });
-
-    renderTitle(root);
-    return calc;
-    });
-  }
-
-  function renderTitle(root) {
-    var titleEl = root.querySelector('.gpt-graph-title');
-    if (!titleEl) return;
-    var raw = titleEl.getAttribute('data-tex') || '';
-    if (!raw) return;
-    ensureMathJax(function () {
-      titleEl.textContent = '';
-      titleEl.textContent = '\\(' + raw + '\\)';
-      if (window.MathJax && MathJax.typesetPromise) {
-        MathJax.typesetPromise([titleEl]).catch(function () { titleEl.textContent = raw; });
-      } else {
-        titleEl.textContent = raw;
-      }
-    });
-  }
-
-  function ensureMathJax(cb) {
-    if (window.MathJax && MathJax.typesetPromise) { cb(); return; }
-    var existing = document.getElementById('mathjax-cdn-script');
-    if (existing) {
-      var prev = existing.onload;
-      existing.onload = function () { if (prev) prev(); cb(); };
-      if (window.MathJax && MathJax.typesetPromise) cb();
-      return;
-    }
-    window.MathJax = window.MathJax || { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true } };
-    var s = document.createElement('script');
-    s.id = 'mathjax-cdn-script';
-    s.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js';
-    s.onload = cb;
-    document.head.appendChild(s);
-  }
-
-  function initDesmos() {
-    window.__desmosQueue.forEach(function (item) {
-      if (item.sliders) initOne(item);
-    });
-  }
-  
-  if (window.Desmos) { initDesmos(); return; }
-  var existing = document.getElementById('desmos-api-script');
-  if (existing) {
-    var prev = existing.onload;
-    existing.onload = function () { if (prev) prev(); initDesmos(); };
-    return;
-  }
-  var s = document.createElement('script');
-  s.id = 'desmos-api-script';
-  s.src = 'https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6';
-  s.onload = initDesmos;
-  s.onerror = function () {
-    (window.__desmosQueue || []).forEach(function (item) {
-      var elt = document.getElementById(item.id + (item.sliders ? '-canvas' : ''));
-      if (!elt) return;
-      elt.textContent = '图形暂未加载，请刷新页面重试。';
-      var source = document.createElement('pre');
-      source.textContent = item.expressions.map(function (expression) { return expression.latex; }).join('\n');
-      elt.appendChild(source);
-      elt.setAttribute('role', 'status');
-    });
-  };
-  document.head.appendChild(s);
-})();
-</script>
+<div class="gpt-graph micrograd-plot" id="gpt-graph-3" data-graph-config="{&quot;expressions&quot;:[{&quot;latex&quot;:&quot;y&#x3D;c_{1}\\max(0,x+3)+c_{2}\\max(0,x+1)+c_{3}\\max(0,x-1)+c_{4}\\max(0,x-3)&quot;,&quot;id&quot;:&quot;curve-0&quot;,&quot;color&quot;:&quot;#191919&quot;},{&quot;latex&quot;:&quot;y&#x3D;\\sin(x)&quot;,&quot;id&quot;:&quot;curve-1&quot;,&quot;color&quot;:&quot;#656565&quot;}],&quot;sliders&quot;:[{&quot;label&quot;:&quot;c₁&quot;,&quot;varName&quot;:&quot;c_{1}&quot;,&quot;init&quot;:1,&quot;min&quot;:-3,&quot;max&quot;:3,&quot;step&quot;:0.1},{&quot;label&quot;:&quot;c₂&quot;,&quot;varName&quot;:&quot;c_{2}&quot;,&quot;init&quot;:-0.8,&quot;min&quot;:-3,&quot;max&quot;:3,&quot;step&quot;:0.1},{&quot;label&quot;:&quot;c₃&quot;,&quot;varName&quot;:&quot;c_{3}&quot;,&quot;init&quot;:0.5,&quot;min&quot;:-3,&quot;max&quot;:3,&quot;step&quot;:0.1},{&quot;label&quot;:&quot;c₄&quot;,&quot;varName&quot;:&quot;c_{4}&quot;,&quot;init&quot;:-0.3,&quot;min&quot;:-3,&quot;max&quot;:3,&quot;step&quot;:0.1}]}" style="height:380px;--graph-h:380px;"><div class="gpt-graph-panel"><div class="gpt-graph-title" data-tex="y &#x3D; \sum_{i&#x3D;1}^{4} c_i \max(0, x - p_i)">\(y &#x3D; \sum_{i&#x3D;1}^{4} c_i \max(0, x - p_i)\)</div><div class="gpt-slider"><div class="gpt-slider-row"><span id="gpt-graph-3-label-0">c₁</span><span class="gpt-slider-value" data-slider-value="0">1</span></div><input type="range" aria-labelledby="gpt-graph-3-label-0" data-slider="0" min="-3" max="3" step="0.1" value="1"></div><div class="gpt-slider"><div class="gpt-slider-row"><span id="gpt-graph-3-label-1">c₂</span><span class="gpt-slider-value" data-slider-value="1">-0.8</span></div><input type="range" aria-labelledby="gpt-graph-3-label-1" data-slider="1" min="-3" max="3" step="0.1" value="-0.8"></div><div class="gpt-slider"><div class="gpt-slider-row"><span id="gpt-graph-3-label-2">c₃</span><span class="gpt-slider-value" data-slider-value="2">0.5</span></div><input type="range" aria-labelledby="gpt-graph-3-label-2" data-slider="2" min="-3" max="3" step="0.1" value="0.5"></div><div class="gpt-slider"><div class="gpt-slider-row"><span id="gpt-graph-3-label-3">c₄</span><span class="gpt-slider-value" data-slider-value="3">-0.3</span></div><input type="range" aria-labelledby="gpt-graph-3-label-3" data-slider="3" min="-3" max="3" step="0.1" value="-0.3"></div></div><div class="gpt-graph-canvas" id="gpt-graph-3-canvas"></div></div>
 
 <p>拖动c₁到c₄的滑条，可以看到分段线性的曲线可以一点点逼近sin(x)。</p>
 <p>神经元的数量越多，拐弯的点越多，就能逼近越复杂的函数。</p>
@@ -792,17 +322,13 @@ $$</div>
 <h3 id="然后就是最重要的方法"><a href="#然后就是最重要的方法" class="headerlink" title="然后就是最重要的方法"></a>然后就是最重要的方法</h3><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">backward</span>(<span class="hljs-params">self</span>):<br><br>    <span class="hljs-comment"># topological order all of the children in the graph</span><br>    topo = []<br>    visited = <span class="hljs-built_in">set</span>()<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">build_topo</span>(<span class="hljs-params">v</span>):<br>        <span class="hljs-keyword">if</span> v <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> visited:<br>            visited.add(v)<br>            <span class="hljs-keyword">for</span> child <span class="hljs-keyword">in</span> v._prev:<br>                build_topo(child)<br>            topo.append(v)<br>    build_topo(<span class="hljs-variable language_">self</span>)<br><br>    <span class="hljs-comment"># go one variable at a time and apply the chain rule to get its gradient</span><br>    <span class="hljs-variable language_">self</span>.grad = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> <span class="hljs-built_in">reversed</span>(topo):<br>        v._backward()<br></code></pre></td></tr></table></figure>
 
 <p>backward 首先我们创造了 <code>topo</code> 一个list 和 <code>visited</code> 一个 set。为什么要用set？首先我们需要获取所有的child，也就是需要做gradient 的child，set 是不重复的，收录所有的child，可以确保child 只看了一次。</p>
-<figure class="micrograd-diagram"><div class="learning-graph-tools"><button type="button" class="learning-graph-expand" aria-label="放大图形" title="放大图形"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></button></div><div class="learning-graph-viewport" tabindex="0" role="region" aria-label="build_topo(v)"><picture><img src="/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/graphs/04-topological.svg" alt="build_topo(v)" decoding="async"></picture></div></figure>
-
 <p>然后我们就开始进行 topological order，也就是 从 output 开始，最顶端 output的child，再到 output child 的 child（这里使用了recursion function calling itself）。</p>
 <p>例如我 <code>x = a + b</code>，那么 topo 里面会有 <code>a,b,x</code>。</p>
 <p><strong>topo里面是有order的，set 是无order，并且只记录一次的（确保所有node遍历过）。</strong></p>
 <p>因为它是处理完child 之后才会处理自己，<code>topo.append(v)</code> 在 for loop 后面，然后 for loop 里面有recursion，是处理for loop 里面的 recursion 先，然后就导致我们的list，x是在最后的。</p>
-<figure class="micrograd-diagram micrograd-diagram--scroll"><div class="learning-graph-tools"><button type="button" class="learning-graph-pan" data-pan="-1" aria-label="向左查看" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><button type="button" class="learning-graph-pan" data-pan="1" aria-label="向右查看"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button><button type="button" class="learning-graph-expand" aria-label="放大图形" title="放大图形"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></button></div><div class="learning-graph-viewport" tabindex="0" role="region" aria-label="topo = [a,b,x]"><picture><img src="/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/graphs/05-sequence.svg" alt="topo = [a,b,x]" decoding="async"></picture></div></figure>
-
 <p>然后我们因为要从最顶端开始，所以是 <code>reversed</code>，从顶端的output，然后因为 node gradient已经有了，我们定义过 <code>dL/dL = 1</code>，然后利用local derivative + chain rule，计算child 的gradient，这样。</p>
-<figure class="micrograd-diagram"><div class="learning-graph-tools"><button type="button" class="learning-graph-expand" aria-label="放大图形" title="放大图形"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></button></div><div class="learning-graph-viewport" tabindex="0" role="region" aria-label="local derivative + chain rule"><picture><img src="/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/graphs/06-backward.svg" alt="local derivative + chain rule" decoding="async"></picture></div></figure>
-
+<figure class="notebook-html-embed"><figcaption><a href="&#x2F;blog&#x2F;2026&#x2F;08&#x2F;18&#x2F;Neural-Networks-Zero-to-Hero&#x2F;micrograd&#x2F;graphs&#x2F;topological_sort_backprop_stepper.html" target="_blank" rel="noopener">topological_sort_backprop_stepper.html</a></figcaption><iframe class="notebook-html-frame" src="&#x2F;blog&#x2F;2026&#x2F;08&#x2F;18&#x2F;Neural-Networks-Zero-to-Hero&#x2F;micrograd&#x2F;graphs&#x2F;topological_sort_backprop_stepper.html" title="topological_sort_backprop_stepper.html" loading="lazy" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe></figure>
+<p>这里在做的事 topological sort 因为整个back propagation 是 有向无环图 DAG (Direct Acyclic graph)</p>
 <p>以上就是整个engine的代码解析</p>
 <h2 id="那么我们如何制作一个最简单的神经网络来进行back-propagation呢？"><a href="#那么我们如何制作一个最简单的神经网络来进行back-propagation呢？" class="headerlink" title="那么我们如何制作一个最简单的神经网络来进行back propagation呢？"></a>那么我们如何制作一个最简单的神经网络来进行back propagation呢？</h2><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> Engine <span class="hljs-keyword">import</span> Value<br><span class="hljs-keyword">import</span> random<br></code></pre></td></tr></table></figure>
 
@@ -864,6 +390,35 @@ $$</div>
               
 
 <article class="card">
+  <a class="card-media" href="/blog/2026/10/09/Paper-Learning/AI%20paper/OpenAI/OpenAI%20Gym/" aria-hidden="true" tabindex="-1">
+    
+      <canvas
+  class="pixel-banner pixel-banner--card"
+  data-seed="ddd7181c"
+  data-cols="48"
+  data-rows="36"
+  aria-hidden="true"
+></canvas>
+
+    
+  </a>
+  <div class="card-body">
+    <h3 class="card-title">
+      <a href="/blog/2026/10/09/Paper-Learning/AI%20paper/OpenAI/OpenAI%20Gym/">OpenAI Gym</a>
+    </h3>
+    <p class="meta">
+      
+        <a href="/blog/categories/Paper-Learning/">Paper-Learning</a>
+      
+      <time datetime="2026-10-09T13:51:53.000Z">2026-10-09</time>
+    </p>
+  </div>
+</article>
+
+            
+              
+
+<article class="card">
   <a class="card-media" href="/blog/2026/10/01/Kaggle-Solution/Predicting%20Student%20Health%20Risk/" aria-hidden="true" tabindex="-1">
     
       <canvas
@@ -885,35 +440,6 @@ $$</div>
         <a href="/blog/categories/Kaggle-Solution/">Kaggle-Solution</a>
       
       <time datetime="2026-09-30T17:47:01.000Z">2026-10-01</time>
-    </p>
-  </div>
-</article>
-
-            
-              
-
-<article class="card">
-  <a class="card-media" href="/blog/2026/09/29/Economics/Analysis/Analysis%20Principle/" aria-hidden="true" tabindex="-1">
-    
-      <canvas
-  class="pixel-banner pixel-banner--card"
-  data-seed="a592790b"
-  data-cols="48"
-  data-rows="36"
-  aria-hidden="true"
-></canvas>
-
-    
-  </a>
-  <div class="card-body">
-    <h3 class="card-title">
-      <a href="/blog/2026/09/29/Economics/Analysis/Analysis%20Principle/">Analysis Principle</a>
-    </h3>
-    <p class="meta">
-      
-        <a href="/blog/categories/Economics/">Economics</a>
-      
-      <time datetime="2026-09-29T06:33:40.000Z">2026-09-29</time>
     </p>
   </div>
 </article>
@@ -1066,5 +592,5 @@ $$</div>
     <script src="/blog/js/topics.js?v=20261009-1"></script>
     <script src="/blog/js/outline.js?v=20261009-3"></script>
     <script src="/blog/js/article-share.js?v=20261009-2"></script>
-  <script src="/blog/js/micrograd-graphs.js?v=1"></script></body>
+  <script src="/blog/js/notebook-html.js?v=20261009-3" defer></script><script src="/blog/js/graph-expression.js?v=20261009-1" defer></script><script src="/blog/js/graphs.js?v=20261009-1" defer></script><script src="/blog/js/micrograd-graphs.js?v=2"></script></body>
 </html>

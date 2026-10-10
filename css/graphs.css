@@ -1,0 +1,21 @@
+.graph-local-svg { display:block; width:100%; height:100%; max-width:none !important; margin:0 !important; touch-action:pan-y; }
+.graph-local-grid { stroke:#242424; stroke-width:1; }
+.graph-local-axis { stroke:#626262; stroke-width:1; }
+.graph-local-label { fill:#999; font:12px var(--font,monospace); }
+.graph-local-curve { fill:none; stroke-width:3; vector-effect:non-scaling-stroke; }
+.gpt-graph-canvas, .desmos-graph { position:relative; }
+.graph-local-zoom { position:absolute; top:.5rem; right:.5rem; display:flex; flex-direction:column; }
+.graph-local-zoom button { width:44px; height:44px; padding:0; border:0; background:#080808; color:#e6e6e6; font:22px/1 var(--font); cursor:pointer; }
+.graph-local-zoom button:hover { background:#191919; }
+.graph-local-zoom button:focus-visible { outline:2px solid #e6e6e6; outline-offset:-3px; }
+.graph-source-fallback { white-space:pre-wrap; overflow-wrap:anywhere; padding:1rem; color:#e6e6e6; }
+.gpt-graph-panel { min-width:0; }
+.gpt-graph-title { overflow-wrap:anywhere; }
+.gpt-graph-title mjx-container { max-width:100%; overflow-x:auto; }
+.learning-plot-legend { display:flex; flex-wrap:wrap; gap:.5rem; color:#c8c8c8; font:.8125rem/1.5 var(--font); }
+.learning-plot-key { display:inline-flex; align-items:center; gap:.5rem; }
+.learning-plot-key--reference::before { content:''; width:1.5rem; border-top:2px dashed #9a9a9a; }
+.learning-plot-reset-row { display:flex; justify-content:flex-end; }
+.learning-graph-reset { width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; padding:.7rem; background:transparent; border:0; color:#e6e6e6; cursor:pointer; }
+.learning-graph-reset svg { width:20px; height:20px; }
+.learning-graph-reset:focus-visible { outline:2px solid currentColor; outline-offset:-3px; }
