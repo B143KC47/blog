@@ -92,48 +92,43 @@
     });
   }
   function mountCodeBlock(block) {
-    if (block.querySelector(":scope > .code-bar")) return;
-    const code = block.querySelector("code");
-    const names = Array.from((code || block).classList);
-    let language = names.find(function (name) { return name !== "hljs" && name !== "highlight" && name !== "code" && name !== "literal-block"; }) || "";
-    if (language.indexOf("literal-block--") === 0) {
-      const kind = language.replace("literal-block--", "");
-      language = kind === "code" ? "pseudocode" : kind === "tree" ? "tree" : kind === "aligned" ? "output" : kind;
+    if (block.querySelector(":scope > .code-copy") || block.parentElement.classList.contains("code-block")) return;
+    // A bare <pre> scrolls sideways, so the icon sits beside it in a frame
+    // instead of inside it, matching Hexo's figure.highlight.
+    if (block.tagName === "PRE") {
+      const frame = document.createElement("div");
+      frame.className = "code-block" + (block.classList.contains("literal-block--code") ? " code-block--fit" : "");
+      block.before(frame);
+      frame.appendChild(block);
+      block = frame;
     }
     const zh = (document.documentElement.lang || "").toLowerCase().indexOf("zh") === 0;
-    const copyIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="8" y="8" width="12" height="12"/><path d="M4 16V4h12"/></svg>';
-    const doneIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12.5 10 17.5 19 7"/></svg>';
+    const copyIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/></svg>';
+    const doneIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 17.5 19 7"/></svg>';
     const idleLabel = zh ? "复制代码" : "Copy code";
     const doneLabel = zh ? "已复制" : "Copied";
-    const bar = document.createElement("div");
-    bar.className = "code-bar";
-    if (language) {
-      const label = document.createElement("span");
-      label.className = "code-lang";
-      label.textContent = language;
-      bar.appendChild(label);
-    } else {
-      bar.appendChild(document.createElement("span"));
-    }
     const button = document.createElement("button");
     button.type = "button";
     button.className = "code-copy";
-    button.innerHTML = copyIcon;
-    button.setAttribute("aria-label", idleLabel);
+    function show(icon, label, state) {
+      button.innerHTML = icon;
+      button.setAttribute("aria-label", label);
+      button.title = label;
+      if (state) button.dataset.state = state;
+      else delete button.dataset.state;
+    }
+    show(copyIcon, idleLabel);
+    let reset = 0;
     button.addEventListener("click", function () {
+      window.clearTimeout(reset);
       writeClipboard(codeText(block)).then(function () {
-        button.innerHTML = doneIcon;
-        button.setAttribute("aria-label", doneLabel);
-        window.setTimeout(function () {
-          button.innerHTML = copyIcon;
-          button.setAttribute("aria-label", idleLabel);
-        }, 1600);
+        show(doneIcon, doneLabel, "done");
+        reset = window.setTimeout(function () { show(copyIcon, idleLabel); }, 1600);
       }).catch(function () {
-        button.setAttribute("aria-label", zh ? "复制失败" : "Copy failed");
+        show(copyIcon, zh ? "复制失败" : "Copy failed");
       });
     });
-    bar.appendChild(button);
-    block.insertBefore(bar, block.firstChild);
+    block.appendChild(button);
   }
   document.querySelectorAll(".prose figure.highlight").forEach(mountCodeBlock);
   document.querySelectorAll(".prose pre").forEach(function (node) {

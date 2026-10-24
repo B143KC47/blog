@@ -649,6 +649,7 @@ summary:focus-visible {
 }
 
 .prose p,
+.prose h1,
 .prose h2,
 .prose h3,
 .prose h4,
@@ -739,7 +740,7 @@ summary:focus-visible {
   font-size: 28px;
   line-height: 36px;
   font-weight: 500;
-  margin-top: 0;
+  margin-top: 3.25rem;
 }
 
 .prose .desmos-graph,
@@ -1344,69 +1345,62 @@ mjx-container[display="true"] {
   padding: 0;
 }
 
+/* Syntax colors follow the reference panel: purple keywords, green strings,
+   near-white code, regular weight throughout. */
 .hljs {
-  color: #e6e6e6;
+  color: #f9f9f9;
 }
 
 .hljs-comment,
 .hljs-quote {
-  color: #8b949e;
+  color: #7f848e;
   font-style: italic;
 }
 
 .hljs-keyword,
 .hljs-selector-tag,
-.hljs-addition,
-.hljs-type {
-  color: #ff7b72;
-  font-weight: 600;
+.hljs-type,
+.hljs-meta,
+.hljs-doctag {
+  color: #ca78d1;
 }
 
 .hljs-string,
 .hljs-attribute,
 .hljs-attr,
-.hljs-regexp {
-  color: #7ee787;
+.hljs-regexp,
+.hljs-addition {
+  color: #7fd184;
 }
 
 .hljs-number,
-.hljs-literal {
-  color: #ffa657;
+.hljs-literal,
+.hljs-subst,
+.hljs-variable {
+  color: #e8a55c;
 }
 
-.hljs-subst,
-.hljs-variable,
 .hljs-variable.language_ {
-  color: #ffa657;
+  color: #ef7d86;
 }
 
 .hljs-title.function_,
 .hljs-title.function {
-  color: #d2a8ff;
-  font-weight: 500;
+  color: #6cb4f5;
 }
 
 .hljs-title,
 .hljs-title.class_,
-.hljs-title.class {
-  color: #79c0ff;
-  font-weight: 500;
-}
-
+.hljs-title.class,
 .hljs-built_in,
 .hljs-name,
 .hljs-selector-id,
 .hljs-selector-class {
-  color: #79c0ff;
+  color: #e5c07b;
 }
 
 .hljs-params {
-  color: #e6e6e6;
-}
-
-.hljs-meta,
-.hljs-doctag {
-  color: #d2a8ff;
+  color: #f9f9f9;
 }
 
 .post-foot {
@@ -1589,6 +1583,7 @@ mjx-container[display="true"] {
   .post-foot,
   .lede,
   .prose p,
+  .prose h1,
   .prose h2,
   .prose h3,
   .prose h4,

@@ -1,0 +1,170 @@
+/* Polish layer: one corner radius and one soft fill shared by every surface
+   (code, inline code, tables, diagrams, media, chips, buttons), so the code
+   panel style reads as part of the site rather than an exception. Palette,
+   type and hairlines stay those of Simplism. Loaded last on purpose. */
+:root {
+  --radius: 4px;
+  --chip: rgb(255 255 255 / 8%);
+  --chip-hover: rgb(255 255 255 / 14%);
+  --row-hover: color-mix(in srgb, var(--text) 4%, var(--bg));
+}
+html[data-theme="light"] {
+  --chip: rgb(0 0 0 / 6%);
+  --chip-hover: rgb(0 0 0 / 11%);
+}
+/* Diagrams and code keep their dark canvas in the light theme. */
+html[data-theme="light"] :is(.prose .mermaid, .diagram-dialog, .prose .highlight, .prose .code-block) {
+  --chip: rgb(255 255 255 / 8%);
+  --chip-hover: rgb(255 255 255 / 14%);
+}
+
+/* Header: the current page is marked, not dimmed into looking disabled. */
+.nav-link.is-active {
+  opacity: 1;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.35em;
+}
+
+/* Prose links: a quiet underline that firms up on hover. */
+.prose a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  transition: text-decoration-color 0.15s ease;
+}
+.prose a:hover {
+  opacity: 1;
+  text-decoration-color: currentColor;
+}
+
+/* Inline code matches the code panel: soft fill, no box. */
+.prose :not(pre) > code {
+  padding: 0.12em 0.4em;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--chip);
+  font-size: 0.875em;
+}
+
+/* Quotes: a softer bar than the full-ink rule. */
+.prose blockquote {
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--faint);
+}
+
+/* Rules sit on the reading column instead of overhanging it. */
+.prose hr {
+  max-width: 38rem;
+  margin: 3rem auto;
+}
+
+/* Tables: a clear header row and a row highlight for scanning. */
+.prose .table-scroll {
+  border-radius: var(--radius);
+}
+.prose .table-scroll thead :is(th, td),
+.prose .table-scroll[data-reader-overflow="true"] thead :is(th, td):first-child {
+  background: var(--fill);
+  color: var(--text);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+@media (hover: hover) {
+  .prose .table-scroll tbody tr:hover > :is(th, td) { background: var(--row-hover); }
+}
+
+/* Media, panels and controls share the radius; the pixel banner stays square. */
+.prose :is(p, figure) > img,
+.card-media,
+.featured-media,
+.post-cover,
+.btn,
+.search-input,
+.prose .callout,
+.prose > :is(.source-block, .source-card, details, .fold) {
+  border-radius: var(--radius);
+}
+.card-media,
+.featured-media,
+.prose .callout,
+.prose > :is(.source-block, .source-card, details, .fold) {
+  overflow: hidden;
+}
+.btn { transition: background-color 0.15s ease, color 0.15s ease; }
+.search-input:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+/* Diagrams: same frame as code, with a slim toolbar of soft buttons. */
+.prose .mermaid,
+.diagram-dialog {
+  border-radius: var(--radius);
+}
+.diagram-toolbar {
+  gap: 0.25rem;
+  padding: 0.375rem;
+  background: transparent;
+}
+.diagram-toolbar button {
+  min-height: 2.25rem;
+  padding: 0.35rem 0.75rem;
+  border: 0;
+  border-radius: var(--radius);
+  color: var(--muted);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.diagram-toolbar button:hover,
+.diagram-toolbar button[aria-pressed="true"] {
+  background: var(--chip);
+  color: var(--text);
+}
+@media (pointer: coarse) {
+  .diagram-toolbar button { min-height: 2.75rem; }
+}
+
+/* Contents: a thin guide line with a marker on the section being read. */
+.article-outline nav > ul {
+  border-left: 1px solid var(--line);
+}
+.article-outline nav a {
+  margin-left: -1px;
+  padding: 0.45rem 0 0.45rem 0.9rem;
+  border-left: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.article-outline .outline-subsection a {
+  padding-left: 1.65rem;
+}
+.article-outline a[aria-current="location"] {
+  border-left-color: var(--text);
+}
+
+/* Article information: a lighter panel; topics read as tappable chips. */
+.article-info {
+  background: var(--fill);
+  border-radius: var(--radius);
+}
+.article-info-chip {
+  border-radius: var(--radius);
+  background: var(--chip);
+  transition: background-color 0.15s ease;
+}
+.article-info-chip:hover {
+  background: var(--chip-hover);
+  text-decoration: none;
+}
+.article-info-chip:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+  font-weight: inherit;
+  text-decoration: none;
+}
+
+@media (max-width: 40rem) {
+  .prose hr { max-width: 100%; margin-block: 2.25rem; }
+}
+@media print {
+  .prose :not(pre) > code { background: transparent; padding: 0; }
+}

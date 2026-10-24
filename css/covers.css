@@ -58,6 +58,7 @@
 .lede,
 .featured-excerpt,
 .prose:not(.prose-ui) p,
+.prose:not(.prose-ui) h1,
 .prose:not(.prose-ui) h2,
 .prose:not(.prose-ui) h3,
 .prose:not(.prose-ui) h4,
@@ -149,62 +150,6 @@ mjx-container[display="true"] {
   box-shadow: none;
   background: transparent;
 }
-.prose > .highlight,
-.prose > pre:not(.mermaid) {
-  margin-top: 1.5rem;
-  margin-bottom: 1.75rem;
-}
-.prose .highlight {
-  overflow: hidden;
-}
-.prose .highlight pre {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: auto;
-  padding: 1.15rem 1.25rem 1.25rem;
-}
-.code-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  min-height: 2.75rem;
-  padding: 0.35rem 0.45rem 0.35rem 1.15rem;
-  border-bottom: 1px solid var(--line);
-  background: transparent;
-}
-.code-lang {
-  font-family: var(--font);
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
-  text-transform: lowercase;
-  color: #bdbdbd;
-}
-.code-copy {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  padding: 0;
-  color: var(--text);
-  background: transparent;
-  border: 1px solid var(--line);
-  cursor: pointer;
-}
-.code-copy svg {
-  display: block;
-  width: 16px;
-  height: 16px;
-}
-.code-copy:hover {
-  background: var(--text);
-  color: #000;
-}
-.code-copy:focus-visible {
-  outline: 2px solid var(--text);
-  outline-offset: 2px;
-}
 /* Sequence actors were painted with the text color, so the label disappeared. */
 .prose .mermaid rect.actor {
   fill: #141414 !important;
@@ -286,9 +231,6 @@ mjx-container[display="true"] {
 .prose details > :not(summary):not(.fold-body) { margin-inline: var(--reader-inset); }
 .prose :is(.desmos-graph, .gpt-graph, .mermaid, .table-scroll, figure) { margin-block: 1.75rem; }
 .prose blockquote { padding-block: 0.5rem; }
-.prose .highlight pre { padding: var(--reader-inset); }
-.code-copy { width: 2.75rem; height: 2.75rem; flex-shrink: 0; }
-.code-bar { padding: 0.35rem 0.5rem 0.35rem var(--reader-inset); }
 .prose :is(h2, h3, h4) { scroll-margin-top: 2rem; }
 
 @media (max-width: 40rem) {
@@ -300,22 +242,8 @@ mjx-container[display="true"] {
   .prose .mermaid { padding: 1.25rem 1rem; }
 }
 
-/* Verbatim structures and TeX keep their source layout at readable type sizes. */
-.prose pre.literal-block {
-  margin: 1.25rem 0;
-  padding: 1rem 1.25rem;
-}
-.prose pre.literal-block--code {
-  width: fit-content;
-  min-width: min(100%, 20rem);
-  max-width: 100%;
-}
-.prose .literal-block > code {
-  white-space: pre;
-  overflow-wrap: normal;
-  word-break: normal;
-  line-height: 1.65;
-}
+/* Verbatim structures and TeX keep their source layout at readable type sizes.
+   Literal blocks share the code frame at the end of this file. */
 .math-source--display { display: block; max-width: 100%; }
 .prose mjx-container[display="true"] { padding-block: 0.2em; }
 .prose mjx-container:not([display="true"])[data-reader-overflow="true"] {
@@ -438,4 +366,103 @@ mjx-container[display="true"] {
 .gpt-slider input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; }
 @media (max-width: 40rem) {
   .gpt-graph-canvas { flex: none; height: clamp(260px, var(--graph-h, 320px), 420px); }
+}
+
+/* Code blocks: Hexo's figure.highlight and the frame main.js puts around a
+   bare <pre> share one look: a borderless panel one step above the page, the
+   code alone inside it, and a bare copy icon in the top-right corner. The
+   horizontal scroll stays inside the block. */
+:root { --code-bg: #1b1c20; --code-ink: #f9f9f9; }
+.prose > :is(.highlight, .code-block),
+.prose > pre:not(.mermaid) {
+  margin-block: 1.5rem 1.75rem;
+}
+.prose :is(.highlight, .code-block) {
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  background: var(--code-bg);
+  border: 0;
+  border-radius: 4px;
+  color: var(--code-ink);
+}
+.prose .code-block--fit,
+.prose pre.literal-block--code {
+  width: fit-content;
+  min-width: min(100%, 20rem);
+  max-width: 100%;
+}
+.prose .code-block > pre {
+  margin: 0;
+  border: 0;
+  background: transparent;
+}
+.prose .highlight table { border-spacing: 0; border-collapse: collapse; }
+.prose :is(.highlight pre, .code-block > pre) {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 1rem 3.25rem 1rem 1.375rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  tab-size: 4;
+  /* Long lines still scroll (swipe, trackpad, Shift+wheel, arrow keys once
+     focused); the bar itself is never drawn. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.prose :is(.highlight pre, .code-block > pre)::-webkit-scrollbar { display: none; }
+/* Hexo wraps highlighted code in a table, so the article-table rule for inline
+   code (nowrap) reached it and collapsed every indent. Code keeps its spaces. */
+.prose :is(.highlight, .code-block, pre) :is(pre, code) {
+  white-space: pre !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+/* The icon has no box of its own; its fill is the panel color so text that
+   scrolls sideways passes beneath it instead of through it. */
+.code-copy {
+  position: absolute;
+  top: 0.625rem;
+  right: 0.625rem;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: var(--code-bg);
+  color: rgb(249 249 249 / 45%);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.code-copy svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+.prose :is(.highlight, .code-block):hover .code-copy { color: rgb(249 249 249 / 70%); }
+.prose :is(.highlight, .code-block) .code-copy:hover { color: var(--code-ink); }
+.code-copy:focus-visible {
+  outline: 2px solid var(--code-ink);
+  outline-offset: -2px;
+  color: var(--code-ink);
+}
+.prose :is(.highlight, .code-block) .code-copy[data-state="done"] { color: #7fd184; }
+.prose :is(.highlight, .code-block) figcaption {
+  margin: 0;
+  padding: 0.75rem 3.25rem 0 1.375rem;
+  color: rgb(249 249 249 / 55%);
+}
+@media (pointer: coarse) {
+  .code-copy { top: 0.375rem; right: 0.375rem; width: 2.75rem; height: 2.75rem; }
+}
+@media (max-width: 40rem) {
+  .prose :is(.highlight pre, .code-block > pre) {
+    padding: 0.875rem 3rem 0.875rem 1rem;
+    font-size: 0.8125rem;
+  }
 }

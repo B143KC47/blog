@@ -8,7 +8,7 @@
   function refresh() {
     window.cancelAnimationFrame(frame);
     frame = window.requestAnimationFrame(function () {
-      prose.querySelectorAll('.table-scroll, .literal-block > code, .highlight pre, mjx-container, .mermaid-scroll').forEach(function (node) {
+      prose.querySelectorAll('.table-scroll, .code-block > pre, .highlight pre, mjx-container, .mermaid-scroll').forEach(function (node) {
         if (!node.clientWidth || !node.clientHeight) return;
         const overflow = node.scrollWidth > node.clientWidth + 4;
         node.dataset.readerOverflow = String(overflow);
@@ -33,7 +33,7 @@
             hint = document.createElement('div');
             hint.className = 'reader-scroll-hint';
             hint.textContent = '左右滑动查看完整' + label;
-            const anchor = node.closest('.literal-block') || node;
+            const anchor = node.closest('.code-block') || node.closest('.literal-block') || node;
             anchor.after(hint);
             hints.set(node, hint);
           }

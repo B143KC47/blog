@@ -11,13 +11,14 @@
   <script>try { const choice = localStorage.getItem('blackcat-theme'); if (choice === 'light' || choice === 'dark') document.documentElement.dataset.theme = choice; } catch (_) {}</script>
   <link rel="canonical" href="https://b143kc47.github.io/blog/2026/10/18/Kaggle/Kaggle%20learning%20journey/Pandas/index.html">
   <link rel="preload" href="https://cdn.jsdelivr.net/fontsource/fonts/geist-mono:vf@5.3.0/latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/blog/css/style.css?v=reader-5">
-  <link rel="stylesheet" href="/blog/css/covers.css?v=reader-10">
-  <link rel="stylesheet" href="/blog/css/appearance.css?v=20261009-3">
+  <link rel="stylesheet" href="/blog/css/style.css?v=reader-7">
+  <link rel="stylesheet" href="/blog/css/covers.css?v=reader-14">
+  <link rel="stylesheet" href="/blog/css/appearance.css?v=20261023-1">
   <link rel="stylesheet" href="/blog/css/topics.css?v=20261009-3">
   <link rel="stylesheet" href="/blog/css/outline.css?v=20261009-2">
   <link rel="stylesheet" href="/blog/css/article-footer.css?v=20261009-2">
   <link rel="stylesheet" href="/blog/css/article-hero.css?v=20261009-2">
+  <link rel="stylesheet" href="/blog/css/polish.css?v=20261023-1">
   
   <link rel="icon" href="/blog/avatar.jpg" type="image/jpeg">
   <meta name="description" content="pandas 有两个核心对象: DataFrame(数据框) 和 Series(序列). DataFrame 是 一张表table , matrix Series是一列数据, vector 一个DataFrame 也就是很多个Series拼起来，每一个列就是一个Series  导入:import pandas as pd   创建Dataframe参数是一个字典也就是key是列 value是行 p">
@@ -73,7 +74,7 @@
 <header class="post-hero article-hero">
   <div class="post-well">
     <div class="post-head">
-      <p class="article-hero-date"><time datetime="2026-10-18T09:58:09.000Z">十月 18, 2026</time></p>
+      <p class="article-hero-date"><time datetime="2026-10-18T09:58:09.000Z">2026-10-18</time></p>
       <h1 class="post-title">Pandas</h1>
       
       <p class="meta">
@@ -264,11 +265,10 @@
 </tr>
 </tbody></table></div>
 <h2 id="Maps"><a href="#Maps" class="headerlink" title="Maps"></a>Maps</h2><p>把数据转换成更有用的形式</p>
-<h3 id="方法1-使用map函数："><a href="#方法1-使用map函数：" class="headerlink" title="方法1 使用map函数："></a>方法1 使用map函数：</h3><p>​<code>python review_points_mean = reviews.points.mean() reviews.points.map(lambda p: p - review_points_mean) ​</code></p>
-<h3 id="方式2-使用apply"><a href="#方式2-使用apply" class="headerlink" title="方式2 使用apply:"></a>方式2 使用apply:</h3><p>​&#96;&#96;&#96;python<br>def remean_points(row):<br>    row.points &#x3D; row.points - review_points_mean<br>    return row</p>
-<pre class="literal-block literal-block--code"><code>reviews.apply(remean_points, axis&#x3D;&#39;columns&#39;)
-# axis 是反转的 也就是沿着row执行</code></pre>
-<p>​&#96;&#96;&#96;</p>
+<h3 id="方法1-使用map函数："><a href="#方法1-使用map函数：" class="headerlink" title="方法1 使用map函数："></a>方法1 使用map函数：</h3><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python">review_points_mean = reviews.points.mean()<br>reviews.points.<span class="hljs-built_in">map</span>(<span class="hljs-keyword">lambda</span> p: p - review_points_mean)<br></code></pre></td></tr></table></figure>
+
+<h3 id="方式2-使用apply"><a href="#方式2-使用apply" class="headerlink" title="方式2 使用apply:"></a>方式2 使用apply:</h3><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">remean_points</span>(<span class="hljs-params">row</span>):<br>    row.points = row.points - review_points_mean<br>    <span class="hljs-keyword">return</span> row<br><br>reviews.apply(remean_points, axis=<span class="hljs-string">&#x27;columns&#x27;</span>)<br><span class="hljs-comment"># axis 是反转的 也就是沿着row执行</span><br></code></pre></td></tr></table></figure>
+
 <blockquote>
 <p><strong>注意：</strong> <code>map</code> 和 <code>apply</code> 不会修改原Dataframe 这是一个新的result 需要拿变量保存</p>
 </blockquote>
@@ -581,8 +581,8 @@
 </footer>
 
     <script src="/blog/js/covers.js?v=reader-10"></script>
-    <script src="/blog/js/reading.js?v=reader-1"></script>
-    <script src="/blog/js/main.js?v=reader-5"></script>
+    <script src="/blog/js/reading.js?v=reader-3"></script>
+    <script src="/blog/js/main.js?v=reader-7"></script>
     <script src="/blog/js/appearance.js?v=20261009-1"></script>
     <script src="/blog/js/topics.js?v=20261009-1"></script>
     <script src="/blog/js/outline.js?v=20261009-3"></script>
