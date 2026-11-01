@@ -3,13 +3,13 @@
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>BlackCat · This is my blog</title>
+  <title>金融数学 · BlackCat</title>
   <meta name="description" content="Notes by KO Ho Tin (BlackCat) on LLM agents, formulaic alpha-factor mining, computer vision, and research tooling.">
   <meta name="author" content="KO Ho Tin">
   <meta name="theme-color" content="#000000">
   <meta name="color-scheme" content="dark">
   <script>try { const choice = localStorage.getItem('blackcat-theme'); if (choice === 'light' || choice === 'dark') document.documentElement.dataset.theme = choice; } catch (_) {}</script>
-  <link rel="canonical" href="https://b143kc47.github.io/blog/page/3/index.html">
+  <link rel="canonical" href="https://b143kc47.github.io/blog/2026/10/31/Economics&amp;Finance/%E9%87%91%E8%9E%8D%E6%95%B0%E5%AD%A6/index.html">
   <link rel="preload" href="https://cdn.jsdelivr.net/fontsource/fonts/geist-mono:vf@5.3.0/latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/blog/css/style.css?v=reader-7">
   <link rel="stylesheet" href="/blog/css/covers.css?v=reader-14">
@@ -21,14 +21,16 @@
   <link rel="stylesheet" href="/blog/css/polish.css?v=20261023-1">
   
   <link rel="icon" href="/blog/avatar.jpg" type="image/jpeg">
-  <meta name="description" content="Notes by KO Ho Tin (BlackCat) on LLM agents, formulaic alpha-factor mining, computer vision, and research tooling.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="BlackCat">
-<meta property="og:url" content="https://b143kc47.github.io/blog/page/3/index.html">
+  <meta name="description" content="金融数学金融产品本质上都是一套现金流(cashflow) :  一个时间点 付出钱 另一个时间点收回钱  不同时间点的钱由于通胀等等（环境 需求） 价值不同所以会需要一个工具，把不同时间的钱换算到同一个时间点，再比较。 也就是  interest rate(利率) time(时间)  单利与复利（simple vs compound interest） 单利是本金计息。复利是（本金+利息产生的钱）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="金融数学">
+<meta property="og:url" content="https://b143kc47.github.io/blog/2026/10/31/Economics&Finance/%E9%87%91%E8%9E%8D%E6%95%B0%E5%AD%A6/index.html">
 <meta property="og:site_name" content="BlackCat">
-<meta property="og:description" content="Notes by KO Ho Tin (BlackCat) on LLM agents, formulaic alpha-factor mining, computer vision, and research tooling.">
+<meta property="og:description" content="金融数学金融产品本质上都是一套现金流(cashflow) :  一个时间点 付出钱 另一个时间点收回钱  不同时间点的钱由于通胀等等（环境 需求） 价值不同所以会需要一个工具，把不同时间的钱换算到同一个时间点，再比较。 也就是  interest rate(利率) time(时间)  单利与复利（simple vs compound interest） 单利是本金计息。复利是（本金+利息产生的钱）">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://b143kc47.github.io/blog/avatar.jpg">
+<meta property="article:published_time" content="2026-10-31T15:38:33.000Z">
+<meta property="article:modified_time" content="2026-11-01T13:00:01.761Z">
 <meta property="article:author" content="KO Ho Tin">
 <meta property="article:tag" content="KO Ho Tin, BlackCat, B143KC47, blog, LLM agents, alpha mining, computer vision">
 <meta name="twitter:card" content="summary">
@@ -64,159 +66,214 @@
     <div class="page">
       
 
-
-
-
-
 <main id="main">
-  
-    <header class="hero hero-compact">
-      <div class="measure">
-        <h1 class="kicker">[ Writing ]</h1>
-        <p class="muted">Page 3 of 3</p>
+  <article class="post">
+    
+<header class="post-hero article-hero">
+  <div class="post-well">
+    <div class="post-head">
+      <p class="article-hero-date"><time datetime="2026-10-31T15:38:33.000Z">2026-10-31</time></p>
+      <h1 class="post-title">金融数学</h1>
+      
+      <p class="meta">
+        
+          <a href="/blog/categories/Economics-Finance/">Economics&amp;Finance</a>
+        
+        <span>1 min read</span>
+      </p>
+      <div class="article-share-controls">
+        <button type="button" class="article-share" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span>分享</span>
+        </button>
+        <p class="article-share-status" role="status" aria-live="polite" aria-atomic="true"></p>
+        <div class="article-share-manual" hidden>
+          <input class="article-share-link" type="text" readonly aria-label="文章链接，选择后复制">
+          <button class="article-share-dismiss" type="button" aria-label="关闭链接"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15"/></svg></button>
+        </div>
       </div>
-    </header>
-  
-
-  <section class="block" aria-labelledby="writing-heading">
-    <div class="measure measure-wide">
+    </div>
+    <div class="post-cover">
       
-        <h2 id="writing-heading" class="sr-only">Writing</h2>
-      
-      
-
-
-
-  <nav class="series-nav" aria-label="Series">
-    <a class="series-link is-on" href="/blog/" aria-current="page">All</a>
-    
-      <a class="series-link series-topic" href="/blog/categories/AI/">AI</a>
-    
-      <a class="series-link series-topic" href="/blog/categories/Book-Reading/">Book Reading</a>
-    
-      <a class="series-link series-topic" href="/blog/categories/Cognitive-Science/">Cognitive Science</a>
-    
-      <a class="series-link series-topic" href="/blog/categories/Continue-Learning/">Continue Learning</a>
-    
-      <a class="series-link series-topic" href="/blog/categories/Economics/">Economics</a>
-    
-    
-      <details class="series-topics-more">
-        <summary class="series-topics-toggle" aria-controls="all-topics">
-          <span>View all topics</span>
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="m5 7.5 5 5 5-5"/></svg>
-        </summary>
-        <div class="series-topics-panel" id="all-topics" role="group" aria-label="All topics">
-          
-            <a class="series-link series-topics-item" href="/blog/categories/AI/">AI</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Book-Reading/">Book Reading</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Cognitive-Science/">Cognitive Science</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Continue-Learning/">Continue Learning</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Economics/">Economics</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Kaggle/">Kaggle</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/MIT-18-01/">MIT 18.01</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Neural-Networks-Zero-to-Hero/">Neural-Networks-Zero-to-Hero</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Neuro-Sceince/">Neuro Sceince</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Paper-Learning/">Paper-Learning</a>
-          
-        </div>
-      </details>
-    
-  </nav>
-
-
-
-      
-
-      
-
-      
-        <div class="card-grid">
-          
-            
-
-<article class="card">
-  <a class="card-media" href="/blog/2026/08/16/Paper-Learning/AI%20paper/Conference/Other/Evoalpha/" aria-hidden="true" tabindex="-1">
-    
-      
-
-
-<img src="/blog/images/covers/gpt-20261019/evoalpha.webp" alt=""
-  width="640" height="480"
-  loading="lazy" decoding="async"
-  data-cover-style="processed"
-  data-cover-options="{}">
-
-    
-  </a>
-  <div class="card-body">
-    <h3 class="card-title">
-      <a href="/blog/2026/08/16/Paper-Learning/AI%20paper/Conference/Other/Evoalpha/">Evoalpha</a>
-    </h3>
-    <p class="meta">
-      
-        <a href="/blog/categories/Paper-Learning/">Paper-Learning</a>
-      
-      <time datetime="2026-08-16T15:01:22.000Z">2026-08-16</time>
-    </p>
-  </div>
-</article>
-
-          
-            
-
-<article class="card">
-  <a class="card-media" href="/blog/2026/08/16/Paper-Learning/AI%20paper/Conference/Other/Qfinzero/" aria-hidden="true" tabindex="-1">
-    
-      
-
-
-<img src="/blog/images/covers/gpt-20261019/qfinzero.webp" alt=""
-  width="640" height="480"
-  loading="lazy" decoding="async"
-  data-cover-style="processed"
-  data-cover-options="{}">
-
-    
-  </a>
-  <div class="card-body">
-    <h3 class="card-title">
-      <a href="/blog/2026/08/16/Paper-Learning/AI%20paper/Conference/Other/Qfinzero/">Qfinzero</a>
-    </h3>
-    <p class="meta">
-      
-        <a href="/blog/categories/Paper-Learning/">Paper-Learning</a>
-      
-      <time datetime="2026-08-16T15:01:06.000Z">2026-08-16</time>
-    </p>
-  </div>
-</article>
-
-          
-        </div>
-      
-
-      
-
-      
-  <nav class="pager" aria-label="Pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/2/">Prev</a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
-
-
+        <canvas
+  class="pixel-banner pixel-banner--cover"
+  data-seed="371c491d"
+  data-cols="96"
+  data-rows="32"
+  aria-hidden="true"
+></canvas>
 
       
     </div>
-  </section>
+  </div>
+</header>
+
+
+    <div class="post-reading-layout">
+      
+      <div class="post-reading-content">
+        
+        <div class="prose"><p>金融产品本质上都是一套现金流(cashflow) :</p>
+<ul>
+<li>一个时间点 付出钱</li>
+<li>另一个时间点收回钱</li>
+</ul>
+<p>不同时间点的钱由于通胀等等（环境 需求） 价值不同<br>所以会需要一个工具，把不同时间的钱换算到同一个时间点，再比较。</p>
+<p>也就是</p>
+<ul>
+<li>interest rate(利率)</li>
+<li>time(时间)</li>
+</ul>
+<p>单利与复利（simple vs compound interest）</p>
+<p>单利是本金计息。<br>复利是（本金+利息产生的钱）一起计息。</p>
+<p>单利</p>
+<div class="math-source math-source--display">$$终值(Future value) &#x3D; 现值(Present Value)\times(1+r \times n)$$
+</div>
+<p>复利</p>
+<div class="math-source math-source--display">$$终值(Future value) &#x3D; 现值(Present Value)\times(1 +r)^n$$</div>
+<p>r是每期利率 n就是多少期</p>
+<p>计息频率（compounding frequency）： 计息越多 ，实际收益越高</p>
+<p>有效年利率 EAR &#x3D; (1+ r&#x2F;m)^(m)-1</p>
+<p>开始得早比收益高 重要</p>
+<p>72法则</p>
+<p>用途： 心算翻倍时间 翻倍的年数 &#x3D; 72&#x2F; 年利率%</p>
+<p>为什么叫72法则:<br>精准翻倍年数是怎么算的</p>
+<p>货币时间价值(time value of money,TVM)<br>今天的钱比未来同样数值的钱 更值钱</p>
+<ul>
+<li>复利</li>
+<li>通胀</li>
+<li>风险</li>
+</ul>
+<p>把钱在未来核算叫复利</p>
+<p>把钱往今天拉叫折现</p>
+<p><img src="/blog/2026/10/31/Economics&Finance/金融数学/image.png" alt="alt text"></p>
+</div>
+      </div>
+    </div>
+
+    <div class="post-well">
+      
+      
+        <section class="keep-reading" aria-labelledby="keep-reading-heading">
+          <div class="keep-head">
+            <h2 id="keep-reading-heading">Keep reading</h2>
+            <a class="keep-all" href="/blog/archives/">View all</a>
+          </div>
+          <div class="card-grid">
+            
+              
+
+<article class="card">
+  <a class="card-media" href="/blog/2026/10/25/Kaggle/AI%20Agent%20Security/" aria-hidden="true" tabindex="-1">
+    
+      <canvas
+  class="pixel-banner pixel-banner--card"
+  data-seed="d5634d94"
+  data-cols="48"
+  data-rows="36"
+  aria-hidden="true"
+></canvas>
+
+    
+  </a>
+  <div class="card-body">
+    <h3 class="card-title">
+      <a href="/blog/2026/10/25/Kaggle/AI%20Agent%20Security/">AI Agent Security</a>
+    </h3>
+    <p class="meta">
+      
+        <a href="/blog/categories/Kaggle/">Kaggle</a>
+      
+      <time datetime="2026-10-25T15:59:42.000Z">2026-10-25</time>
+    </p>
+  </div>
+</article>
+
+            
+              
+
+<article class="card">
+  <a class="card-media" href="/blog/2026/10/18/Paper-Learning/AI%20paper/OpenAI/Weight%20normalization/" aria-hidden="true" tabindex="-1">
+    
+      
+
+
+<img src="/blog/images/covers/gpt-20261019/weight-normalization.webp" alt=""
+  width="640" height="480"
+  loading="lazy" decoding="async"
+  data-cover-style="processed"
+  data-cover-options="{}">
+
+    
+  </a>
+  <div class="card-body">
+    <h3 class="card-title">
+      <a href="/blog/2026/10/18/Paper-Learning/AI%20paper/OpenAI/Weight%20normalization/">Weight normalization</a>
+    </h3>
+    <p class="meta">
+      
+        <a href="/blog/categories/Paper-Learning/">Paper-Learning</a>
+      
+      <time datetime="2026-10-18T12:44:33.000Z">2026-10-18</time>
+    </p>
+  </div>
+</article>
+
+            
+              
+
+<article class="card">
+  <a class="card-media" href="/blog/2026/10/18/Kaggle/Kaggle%20learning%20journey/Data%20cleaning/" aria-hidden="true" tabindex="-1">
+    
+      
+
+
+<img src="/blog/images/covers/gpt-20261019/data-cleaning.webp" alt=""
+  width="640" height="480"
+  loading="lazy" decoding="async"
+  data-cover-style="processed"
+  data-cover-options="{}">
+
+    
+  </a>
+  <div class="card-body">
+    <h3 class="card-title">
+      <a href="/blog/2026/10/18/Kaggle/Kaggle%20learning%20journey/Data%20cleaning/">Data cleaning</a>
+    </h3>
+    <p class="meta">
+      
+        <a href="/blog/categories/Kaggle/">Kaggle</a>
+      
+      <time datetime="2026-10-18T12:24:00.000Z">2026-10-18</time>
+    </p>
+  </div>
+</article>
+
+            
+          </div>
+        </section>
+      
+    </div>
+    
+<footer class="article-info" aria-label="Article information">
+  <div class="article-info-inner">
+    <ul class="article-info-topics" aria-label="Year and topics">
+      <li><a class="article-info-chip" href="/blog/archives/2026/">2026</a></li>
+      
+        <li><a class="article-info-chip" href="/blog/categories/Economics-Finance/">Economics&amp;Finance</a></li>
+      
+    </ul>
+    <div class="article-info-author">
+      <p class="article-info-label">Author</p>
+      
+        <a class="article-info-name" href="/blog/about/" rel="author">KO Ho Tin</a>
+      
+    </div>
+    
+  </div>
+</footer>
+
+  </article>
 </main>
 
     </div>
