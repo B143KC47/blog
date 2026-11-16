@@ -1,0 +1,1253 @@
+/* Reusable Split-Stage + Reader article layout for Simplism.
+   Loaded only on posts that opt into `stage` or `canvas` front matter. */
+
+:root {
+  --stage-bar-h: 3.25rem;
+  --stage-surface: #000000;
+  --stage-elevated: #141414;
+  --stage-card: #141414;
+  --stage-accent: var(--text);
+  --stage-accent-soft: var(--chip);
+  --stage-shape: rgb(255 255 255 / 11%);
+  --stage-ok: var(--text);
+  --stage-warn: var(--muted);
+  --stage-dim: 0.28;
+  --stage-shadow: 0 8px 28px rgb(0 0 0 / 55%);
+}
+
+html[data-theme="light"] {
+  --stage-surface: #ffffff;
+  --stage-elevated: #f3f3f3;
+  --stage-card: #ffffff;
+  --stage-accent: var(--text);
+  --stage-accent-soft: var(--chip);
+  --stage-shape: rgb(0 0 0 / 8%);
+  --stage-ok: var(--text);
+  --stage-warn: var(--muted);
+  --stage-dim: 0.24;
+  --stage-shadow: 0 6px 20px rgb(0 0 0 / 12%);
+}
+
+/* Viewport workspace lock when in split or full-stage mode.
+   `:has()` applies from frame 0 before JS runs; `[data-stage-active]` mirrors dynamic state. */
+html:has(.post--staged:not([data-stage-view="reader"])),
+html:has(.post--staged:not([data-stage-view="reader"])) body,
+html[data-stage-active="true"],
+html[data-stage-active="true"] body {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+html:has(.post--staged:not([data-stage-view="reader"])) body,
+html[data-stage-active="true"] body {
+  display: flex;
+  flex-direction: column;
+}
+
+html:has(.post--staged:not([data-stage-view="reader"])) > body > .site-bar,
+html[data-stage-active="true"] .site-bar {
+  flex-shrink: 0;
+  min-height: var(--stage-bar-h);
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+html:has(.post--staged:not([data-stage-view="reader"])) .site-bar-inner,
+html[data-stage-active="true"] .site-bar-inner {
+  width: calc(100% - 2 * var(--gutter));
+}
+
+html:has(.post--staged:not([data-stage-view="reader"])) > body > .page,
+html[data-stage-active="true"] > body > .page {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+html:has(.post--staged:not([data-stage-view="reader"])) > body > .site-foot,
+html[data-stage-active="true"] > body > .site-foot {
+  display: none !important;
+}
+
+html:has(.post--staged:not([data-stage-view="reader"])) > body > .read-progress,
+html[data-stage-active="true"] > body > .read-progress {
+  display: none !important;
+}
+
+.stage-main {
+  min-width: 0;
+}
+
+html:has(.post--staged:not([data-stage-view="reader"])) .stage-main,
+html[data-stage-active="true"] .stage-main {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.post--staged {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, var(--split-x, 52%)) 9px minmax(0, 1fr);
+  height: 100%;
+  padding-bottom: 0;
+  overflow: clip;
+  background: var(--bg);
+}
+
+/* Expanded full-stage mode */
+.post--staged[data-stage-view="stage"] {
+  grid-template-columns: 1fr;
+}
+.post--staged[data-stage-view="stage"] .stage-splitter,
+.post--staged[data-stage-view="stage"] .stage-reader-shell {
+  display: none;
+}
+
+/* Classic non-canvas reader mode on demand — identical spacing to `.post` */
+.post--staged[data-stage-view="reader"] {
+  display: block;
+  flex: none;
+  height: auto;
+  min-height: 0;
+  padding-bottom: 5rem;
+  overflow: visible;
+}
+.post--staged[data-stage-view="reader"] .stage-dock,
+.post--staged[data-stage-view="reader"] .stage-splitter,
+.post--staged[data-stage-view="reader"] .stage-reader-bar,
+.post--staged[data-stage-view="reader"] .stage-contents-menu,
+.post--staged[data-stage-view="reader"] .stage-transport {
+  display: none !important;
+}
+
+/* ---------- Left Pane: Stage Dock ---------- */
+.stage-dock {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: clip;
+  background: var(--stage-surface);
+}
+
+.stage-dock-chrome {
+  position: absolute;
+  z-index: 12;
+  top: 0.75rem;
+  right: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+.stage-dock-chrome:has(.stage-tabs) {
+  position: relative;
+  top: auto;
+  right: auto;
+  padding: 0.5rem 0.85rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--stage-elevated);
+  pointer-events: auto;
+  flex-wrap: wrap;
+}
+.stage-dock-chrome:has(.stage-tabs) .stage-tabs {
+  margin-right: auto;
+}
+.stage-dock-chrome > * {
+  pointer-events: auto;
+}
+
+.stage-tabs {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--stage-elevated) 92%, transparent);
+  backdrop-filter: blur(6px);
+  overflow: hidden;
+}
+
+.stage-tab {
+  padding: 0.35rem 0.7rem;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: 0.75rem/1.3 var(--font);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.stage-tab + .stage-tab {
+  border-left: 1px solid var(--line);
+}
+.stage-tab:hover {
+  color: var(--text);
+  background: var(--chip);
+}
+.stage-tab[aria-selected="true"] {
+  color: var(--bg);
+  background: var(--text);
+}
+
+.stage-mode-pill,
+.stage-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.68rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--stage-elevated);
+  color: var(--text);
+  font: 0.75rem/1.25 var(--font);
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.stage-mode-pill:hover,
+.stage-btn:hover {
+  border-color: var(--text);
+  background: var(--chip-hover);
+  opacity: 1;
+}
+
+.stage-panes {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: clip;
+}
+.stage-panes--tabs .stage-pane {
+  position: absolute;
+  inset: 0;
+}
+.stage-pane {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  overflow: clip;
+  background: var(--stage-surface);
+}
+.stage-pane[hidden] {
+  display: none !important;
+}
+.stage-pane.has-rule {
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- Canvas Adapter ---------- */
+.stage-canvas-shell {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+}
+.stage-canvas-tools {
+  position: absolute;
+  z-index: 8;
+  top: 0.75rem;
+  left: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  pointer-events: none;
+}
+.stage-canvas-tools > * {
+  pointer-events: auto;
+}
+.stage-zoom-group {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--stage-elevated);
+  overflow: hidden;
+}
+.stage-zoom-group button {
+  width: 1.95rem;
+  height: 1.95rem;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: 1rem/1 var(--font);
+  cursor: pointer;
+}
+.stage-zoom-group button + button {
+  border-left: 1px solid var(--line);
+}
+.stage-zoom-group button:hover {
+  background: var(--chip-hover);
+}
+
+.stage-canvas-viewport {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  touch-action: none;
+  cursor: grab;
+  outline: 0;
+}
+.stage-canvas-viewport.is-dragging,
+.stage-canvas-viewport.is-dragging * {
+  cursor: grabbing !important;
+}
+.stage-canvas-world {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  user-select: none;
+}
+.stage-canvas-artwork {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.stage-canvas-artwork > svg,
+.stage-canvas-lifted > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+}
+.stage-canvas-artwork > svg {
+  overflow: visible;
+}
+html:not([data-theme="light"]) .stage-canvas-shell[data-invert-dark="true"] :is(.stage-canvas-artwork > svg, .stage-canvas-lifted > svg) {
+  filter: invert(0.93) hue-rotate(180deg) saturate(0.42) contrast(1.04);
+}
+.stage-canvas-world.is-focused .stage-canvas-artwork {
+  opacity: var(--stage-dim);
+}
+.stage-canvas-lifted {
+  position: absolute;
+  pointer-events: none;
+  background: var(--stage-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--stage-shadow);
+  overflow: hidden;
+}
+.stage-canvas-hotspots,
+.stage-canvas-outline {
+  --inv: 1;
+}
+.stage-hotspot {
+  position: absolute;
+  padding: 0;
+  border-radius: calc(var(--radius) * var(--inv));
+  border: calc(1px * var(--inv)) solid transparent;
+  background: transparent;
+  touch-action: none;
+  cursor: pointer;
+}
+.stage-hotspot.is-available {
+  border-color: color-mix(in srgb, var(--stage-accent) 26%, transparent);
+}
+.stage-hotspot.is-hover {
+  background: color-mix(in srgb, var(--stage-accent) 5%, transparent);
+  border-color: color-mix(in srgb, var(--stage-accent) 68%, transparent);
+}
+.stage-canvas-outline {
+  position: absolute;
+  pointer-events: none;
+  border: calc(1.5px * var(--inv)) solid var(--stage-accent);
+  border-radius: calc(var(--radius) * var(--inv));
+}
+.stage-canvas-outline.is-preview {
+  border-width: calc(2.5px * var(--inv));
+  background: color-mix(in srgb, var(--stage-accent) 6%, transparent);
+  box-shadow: 0 0 0 calc(4px * var(--inv)) color-mix(in srgb, var(--stage-accent) 12%, transparent);
+}
+.stage-canvas-world [data-from] {
+  transition: opacity 0.4s ease;
+}
+
+/* ---------- Picture / Image Adapter ---------- */
+.stage-image-shell {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  background: var(--stage-surface);
+}
+.stage-image-tools {
+  position: absolute;
+  z-index: 8;
+  top: 0.75rem;
+  left: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  max-width: calc(100% - 9rem);
+  pointer-events: none;
+}
+.stage-image-tools > * {
+  pointer-events: auto;
+}
+.stage-image-viewport {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  touch-action: none;
+  cursor: grab;
+  outline: 0;
+}
+.stage-image-viewport.is-dragging {
+  cursor: grabbing;
+}
+.stage-image-world {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  user-select: none;
+}
+.stage-image-world > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+.stage-image-world.is-focused > img {
+  opacity: 0.35;
+}
+.stage-image-spotlight {
+  position: absolute;
+  pointer-events: none;
+  overflow: hidden;
+  border: 2px solid var(--stage-accent);
+  border-radius: var(--radius);
+  box-shadow: var(--stage-shadow);
+}
+.stage-image-spotlight > img {
+  position: absolute;
+  max-width: none;
+  pointer-events: none;
+}
+.stage-overlay-card {
+  position: absolute;
+  z-index: 8;
+  left: 0.85rem;
+  bottom: 0.85rem;
+  max-width: min(26rem, calc(100% - 1.7rem));
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--stage-elevated) 92%, transparent);
+  backdrop-filter: blur(6px);
+  color: var(--text);
+  font: 0.8125rem/1.5 var(--font-read);
+}
+.stage-overlay-card[hidden] {
+  display: none !important;
+}
+.stage-overlay-kicker {
+  display: block;
+  font: 0.72rem/1.3 var(--font);
+  color: var(--muted);
+  margin-bottom: 0.15rem;
+}
+
+/* ---------- PDF Adapter ---------- */
+.stage-pdf-shell {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--stage-surface);
+}
+.stage-pdf-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0.35rem 7.5rem 0.35rem 0.85rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--stage-elevated);
+  font: 0.75rem/1.2 var(--font);
+}
+.stage-pdf-page-input {
+  width: 3.2rem;
+  padding: 0.25rem 0.4rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  text-align: center;
+}
+.stage-pdf-host {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 0;
+}
+.stage-pdf-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  border: 0;
+  background: #fff;
+}
+
+/* ---------- Virtual World / Interactive Embed / 3D Adapter ---------- */
+.stage-world-shell {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  background: var(--stage-surface);
+}
+.stage-world-shell .stage-overlay-card {
+  top: 0.75rem;
+  right: 0.85rem;
+  left: auto;
+  bottom: auto;
+  max-width: min(18rem, calc(100% - 11rem));
+}
+.stage-world-tools {
+  position: absolute;
+  z-index: 8;
+  top: 0.75rem;
+  left: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  pointer-events: none;
+}
+.stage-world-tools > * {
+  pointer-events: auto;
+}
+.stage-world-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  border: 0;
+  background: transparent;
+}
+.stage-model-host {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+.stage-model-host model-viewer {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Media & Chart & Scene Adapters ---------- */
+.stage-media-shell {
+  position: absolute;
+  inset: 0;
+  background: #0a0a0a;
+}
+.stage-media-shell video,
+.stage-media-shell > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: contain;
+}
+.stage-clip-chips {
+  position: absolute;
+  z-index: 8;
+  top: 0.75rem;
+  left: 0.85rem;
+  display: flex;
+  gap: 0.35rem;
+}
+.stage-clip-chips button[aria-pressed="true"] {
+  border-color: var(--stage-accent);
+  color: var(--stage-accent);
+}
+.stage-chart-shell,
+.stage-scene-shell {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+}
+.stage-chart-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  font: 12px var(--font);
+}
+.stage-chart-svg .grid { stroke: var(--line); }
+.stage-chart-svg .axis-line { stroke: var(--muted); }
+.stage-chart-svg .tick,
+.stage-chart-svg .label,
+.stage-chart-svg .legend,
+.stage-chart-svg .mark-label { fill: var(--muted); }
+.stage-chart-svg .title { fill: var(--text); font-weight: 600; font-size: 13px; }
+.stage-chart-svg .line { fill: none; stroke-width: 2.1; stroke-linejoin: round; }
+.stage-chart-svg .band { fill: var(--stage-accent-soft); }
+.stage-chart-svg .zero { stroke: #e03131; stroke-dasharray: 5 4; }
+.stage-chart-svg .mark { stroke: var(--muted); stroke-dasharray: 3 3; }
+.stage-chart-svg .playhead { stroke: var(--text); stroke-width: 1.5; }
+.stage-chart-svg.is-seekable { cursor: pointer; }
+.stage-empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  color: var(--muted);
+  font: 0.8125rem/1.6 var(--font);
+  text-align: center;
+}
+
+/* ---------- Draggable Splitter ---------- */
+.stage-splitter {
+  position: relative;
+  z-index: 15;
+  background: var(--stage-surface);
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  cursor: col-resize;
+  touch-action: none;
+}
+.stage-splitter::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 3px;
+  height: 34px;
+  transform: translate(-50%, -50%);
+  border-radius: 99px;
+  background: var(--muted);
+  opacity: 0.45;
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+}
+.stage-splitter:hover::after,
+.stage-splitter:focus-visible::after {
+  opacity: 1;
+  background: var(--stage-accent);
+}
+
+/* ---------- Right Pane: Reader ---------- */
+.stage-reader-shell {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+.stage-reader-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 2.9rem;
+  padding: 0.35rem clamp(1.1rem, 3vw, 2.5rem);
+  border-bottom: 1px solid var(--line);
+  font: 0.78rem/1.3 var(--font);
+  flex-shrink: 0;
+}
+
+.stage-page-nav {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.stage-page-nav a {
+  padding: 0.28rem 0.6rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+.stage-page-nav a[aria-current="page"] {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.stage-contents-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.5rem;
+  border: 0;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+.stage-contents-toggle:hover {
+  background: var(--chip);
+}
+.stage-contents-toggle svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.15s ease;
+}
+.stage-contents-toggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.stage-current-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
+}
+
+.stage-view-switch {
+  display: inline-flex;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.stage-view-btn {
+  padding: 0.28rem 0.58rem;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: 0.75rem/1.2 var(--font);
+  cursor: pointer;
+}
+.stage-view-btn + .stage-view-btn {
+  border-left: 1px solid var(--line);
+}
+.stage-view-btn:hover {
+  color: var(--text);
+  background: var(--chip);
+}
+.stage-view-btn[aria-pressed="true"] {
+  background: var(--chip-hover);
+  color: var(--text);
+}
+
+.stage-contents-menu {
+  position: absolute;
+  z-index: 20;
+  top: 3.1rem;
+  left: clamp(0.85rem, 2.5vw, 2rem);
+  right: clamp(0.85rem, 2.5vw, 2rem);
+  max-height: min(26rem, calc(100% - 4rem));
+  overflow-y: auto;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--stage-elevated);
+  box-shadow: var(--stage-shadow);
+  font: 0.8125rem/1.55 var(--font-read);
+}
+.stage-contents-menu[hidden] {
+  display: none !important;
+}
+.stage-expand-all {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font: 0.75rem/1.4 var(--font);
+  cursor: pointer;
+}
+.stage-toc-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid var(--line);
+}
+.stage-toc-list li {
+  margin: 0;
+}
+.stage-toc-list a {
+  display: block;
+  margin-left: -1px;
+  padding: 0.42rem 0.55rem 0.42rem 0.9rem;
+  border-left: 2px solid transparent;
+  border-radius: 0;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.stage-toc-list li.is-sub a {
+  padding-left: 1.65rem;
+  font-size: 0.78rem;
+}
+.stage-toc-list a:hover {
+  color: var(--text);
+  background: transparent;
+  opacity: 1;
+}
+.stage-toc-list a[aria-current="location"] {
+  color: var(--text);
+  border-left-color: var(--text);
+  background: transparent;
+  font-weight: 400;
+}
+
+.stage-reader {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  outline: 0;
+  container-type: inline-size;
+}
+
+.stage-reader-inner {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 0 clamp(1.1rem, 3.5vw, 2.75rem) 65vh;
+}
+
+/* Split & full-stage reader pane uses compact Simplism editorial header & single-column layout */
+.post--staged:not([data-stage-view="reader"]) .article-outline,
+.post--staged:not([data-stage-view="reader"]) .outline-mobile-bar,
+.post--staged:not([data-stage-view="reader"]) .article-stage-return,
+.post--staged:not([data-stage-view="reader"]) .article-hero .post-cover {
+  display: none !important;
+}
+.post--staged:not([data-stage-view="reader"]) .article-hero {
+  padding-block: 2.25rem 1.5rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 1.75rem;
+}
+.post--staged:not([data-stage-view="reader"]) .article-hero .post-well {
+  width: 100%;
+}
+.post--staged:not([data-stage-view="reader"]) .article-hero .post-head {
+  margin-bottom: 0;
+}
+.post--staged:not([data-stage-view="reader"]) .article-hero-date {
+  margin-bottom: 0.85rem;
+}
+.post--staged:not([data-stage-view="reader"]) .article-hero .post-title {
+  font-size: clamp(1.65rem, 2.5vw, 2.35rem);
+}
+.post--staged:not([data-stage-view="reader"]) .article-hero .lede {
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+.post--staged:not([data-stage-view="reader"]) .article-hero .meta,
+.post--staged:not([data-stage-view="reader"]) .article-hero .article-share-controls {
+  margin-top: 1rem;
+}
+.post--staged:not([data-stage-view="reader"]) :is(.post-reading-layout, .post-reading-layout.has-outline) {
+  display: block;
+  width: 100%;
+  margin-inline: 0;
+}
+.post--staged:not([data-stage-view="reader"]) .post-well {
+  width: 100%;
+  max-width: 38rem;
+  margin-inline: auto;
+}
+.post--staged:not([data-stage-view="reader"]) .keep-reading .card-grid {
+  grid-template-columns: 1fr;
+}
+@container (min-width: 32rem) {
+  .post--staged:not([data-stage-view="reader"]) .keep-reading .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@container (min-width: 54rem) {
+  .post--staged:not([data-stage-view="reader"]) .keep-reading .card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.post--staged:not([data-stage-view="reader"]) .article-info {
+  width: 100%;
+  max-width: 38rem;
+  margin: 3rem auto 0;
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2.25rem);
+}
+
+/* Reader-only ("Article" / "纯阅读") overrides — must follow .stage-reader* so
+   flex-basis: 0 never collapses the natural document height of the article.
+   With .stage-reader-inner unboxed, non-canvas Simplism CSS governs every pixel. */
+.post--staged[data-stage-view="reader"] .stage-reader-shell {
+  display: block;
+  min-height: 0;
+  border-left: 0;
+}
+.post--staged[data-stage-view="reader"] .stage-reader {
+  display: block;
+  flex: none;
+  min-height: auto;
+  height: auto;
+  overflow: visible;
+  container-type: normal;
+}
+.post--staged[data-stage-view="reader"] .stage-reader-inner {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Subtle Simplism return-to-split controls (shown only in `reader` mode) */
+.article-share-controls:has(.article-stage-return) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem 1.25rem;
+}
+.article-share-controls:has(.article-stage-return) .article-share-manual {
+  flex: 0 0 100%;
+  margin-top: 1.5rem;
+}
+.article-stage-return {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.25rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: color 160ms ease, opacity 160ms ease;
+}
+.article-stage-return:hover {
+  color: var(--text);
+  opacity: 0.8;
+}
+.article-stage-return svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: 0 0 auto;
+}
+.outline-stage-return {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  align-self: flex-start;
+  margin: 0 0 0.85rem;
+  padding: 0.3rem 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted);
+  font: 0.8125rem/1.5 var(--font);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.outline-stage-return:hover {
+  color: var(--text);
+}
+.outline-stage-return--mobile {
+  margin: 0 0 0 auto;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.25rem;
+}
+.post--staged[data-stage-view="reader"] .outline-mobile-bar:not([hidden]) {
+  align-items: center;
+}
+
+/* Cross-reference chips & Simplism-aligned fold spacing inside .prose */
+.post--staged .prose :is(h2, h3).is-stage-current {
+  color: var(--text);
+}
+.stage-chapter-kicker {
+  display: block;
+  margin: 2rem 0 -0.5rem;
+  color: var(--muted);
+  font: 0.75rem/1.4 var(--font);
+  letter-spacing: 0.04em;
+}
+.prose a.stage-xref {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  cursor: pointer;
+}
+.prose a.stage-xref:hover,
+.prose a.stage-xref.is-linked {
+  color: var(--text);
+  text-decoration-color: currentColor;
+  background: var(--chip);
+  border-radius: 2px;
+}
+.prose details.stage-components-fold > summary + :not(.fold-body) {
+  margin-top: 1.25rem;
+}
+.prose details.stage-components-fold > :last-child:not(summary):not(.fold-body) {
+  margin-bottom: 1.5rem;
+}
+.prose details.stage-components-fold .fold-body > .stage-detail:first-child > h3:first-child {
+  margin-top: 0;
+}
+
+/* Structured canvas-explainer blocks inside .prose */
+.prose .stage-io {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.4rem 0.9rem;
+  margin: 1rem 0 1.4rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--fill);
+  font-size: 0.95rem;
+}
+.prose .stage-io dt {
+  font: 600 0.75rem/1.9 var(--font);
+  color: var(--muted);
+}
+.prose .stage-io dd {
+  margin: 0;
+}
+.prose .stage-math {
+  padding: 0.08em 0.36em;
+  border-radius: 3px;
+  background: var(--chip);
+  font-size: 0.92em;
+  white-space: nowrap;
+}
+.prose .stage-math.is-shape {
+  background: var(--stage-shape);
+}
+.prose .stage-mf.is-layer {
+  font-weight: 600;
+}
+.prose .stage-mo {
+  color: var(--stage-accent);
+  padding: 0 0.08em;
+}
+.prose .stage-checks {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 1.5rem;
+}
+.prose .stage-checks li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.25rem 0.75rem;
+  padding: 0.6rem 0;
+  border-top: 1px solid var(--line);
+  font-size: 0.95rem;
+}
+.stage-badge {
+  align-self: start;
+  padding: 0.05rem 0.5rem;
+  border-radius: 99px;
+  font: 600 0.7rem/1.6 var(--font);
+  white-space: nowrap;
+}
+.stage-badge.is-verified {
+  color: var(--stage-ok);
+  border: 1px solid var(--stage-ok);
+}
+.stage-badge.is-assumed {
+  color: var(--stage-warn);
+  border: 1px solid var(--stage-warn);
+}
+.stage-check-how {
+  grid-column: 2;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.stage-component-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0.5rem 0 1rem;
+}
+.prose a.stage-component-chip {
+  display: inline-flex;
+  padding: 0.28rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  font: 0.78rem/1.35 var(--font);
+  text-decoration: none;
+}
+.stage-routes {
+  margin: 1.5rem 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+.stage-route-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0;
+  padding: 0 !important;
+  margin: 0.25rem 0 0.85rem !important;
+  font: 0.85rem/1.5 var(--font);
+}
+.stage-route-links li + li::before {
+  content: "→";
+  color: var(--muted);
+  margin: 0 0.45rem;
+}
+.post--staged:not([data-stage-view="reader"]) .stage-keep-reading {
+  margin-top: 2.75rem;
+}
+
+/* Autoplay Transport */
+.stage-transport {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem clamp(1.1rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--line);
+  background: var(--stage-elevated);
+  font: 0.78rem/1.2 var(--font);
+  flex-shrink: 0;
+}
+.stage-transport[hidden] {
+  display: none !important;
+}
+.stage-transport button {
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+.stage-transport .stage-tp-play {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+.stage-tp-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.stage-tp-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 2px;
+}
+.stage-tp-progress i {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--stage-accent);
+}
+
+/* Mobile Responsive Top / Bottom Split */
+@media (max-width: 56.25rem) {
+  .post--staged {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, var(--split-y, 44%)) 10px minmax(0, 1fr);
+  }
+  .post--staged[data-stage-view="stage"] {
+    grid-template-rows: 1fr;
+  }
+  .stage-splitter {
+    border-left: 0;
+    border-right: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    cursor: row-resize;
+  }
+  .stage-splitter::after {
+    width: 36px;
+    height: 3px;
+  }
+  .stage-reader-shell {
+    border-left: 0;
+  }
+  .stage-current-label {
+    display: none;
+  }
+  .stage-view-switch {
+    margin-left: auto;
+  }
+  .stage-reader-inner {
+    padding-bottom: 50vh;
+  }
+  .stage-world-shell .stage-overlay-card {
+    top: 3.1rem;
+    left: 0.85rem;
+    right: auto;
+    max-width: calc(100% - 1.7rem);
+  }
+}
+
+@media (max-width: 40rem) {
+  .post--staged[data-stage-view="reader"] {
+    padding-bottom: 3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .post--staged *,
+  .post--staged *::before,
+  .post--staged *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  html[data-stage-active="true"],
+  html[data-stage-active="true"] body {
+    height: auto;
+    overflow: visible;
+  }
+  .post--staged {
+    display: block;
+    height: auto;
+    overflow: visible;
+  }
+  .stage-splitter,
+  .stage-reader-bar,
+  .stage-transport,
+  .stage-dock-chrome {
+    display: none !important;
+  }
+  .stage-dock {
+    height: 28rem;
+    margin-bottom: 2rem;
+    page-break-inside: avoid;
+  }
+  .stage-reader {
+    height: auto;
+    overflow: visible;
+  }
+  .stage-reader-inner {
+    padding-bottom: 2rem;
+  }
+}

@@ -2,10 +2,17 @@
   'use strict';
   const frames = [...document.querySelectorAll('.notebook-html-frame')];
   const mounted = new WeakMap();
+  function isViewportDoc(doc) {
+    return Boolean(doc?.querySelector('.workspace, [data-tour-ready], meta[name="blog-embed-mode"][content="viewport"]'));
+  }
   function theme(frame) {
     const doc = frame.contentDocument;
     if (!doc?.body) return;
     const light = document.documentElement.dataset.theme === 'light';
+    if (isViewportDoc(doc)) {
+      doc.documentElement.dataset.theme = light ? 'light' : 'dark';
+      return;
+    }
     let style = doc.getElementById('blog-embed-theme');
     if (!style) { style = doc.createElement('style'); style.id = 'blog-embed-theme'; doc.head.appendChild(style); }
     style.textContent = `:root { color-scheme:${light ? 'light' : 'dark'} !important; --surface-1:${light ? '#fff' : '#000'}; --surface-2:${light ? '#f3f3f3' : '#101010'}; --text-primary:${light ? '#151515' : '#e6e6e6'}; --text-secondary:${light ? '#505050' : '#b0b0b0'}; --text-muted:${light ? '#6a6a6a' : '#999'}; --border:${light ? '#ddd' : '#303030'}; --border-strong:${light ? '#c0c0c0' : '#505050'}; --border-stronger:${light ? '#888' : '#999'}; }
@@ -30,6 +37,12 @@
     function size() {
       pending = 0;
       if (!frame.isConnected || !frame.clientWidth) return;
+      if (isViewportDoc(doc)) {
+        const viewportHeight = 'min(78vh, 720px)';
+        if (frame.style.height !== viewportHeight) frame.style.height = viewportHeight;
+        frame.dataset.embedReady = 'true';
+        return;
+      }
       const graph = doc.querySelector('svg#g[viewBox]');
       if (graph?.viewBox.baseVal.width && graph.clientWidth) {
         const scale = graph.clientWidth / graph.viewBox.baseVal.width;
