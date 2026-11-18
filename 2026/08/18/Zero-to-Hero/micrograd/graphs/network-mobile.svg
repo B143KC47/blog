@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 402" width="320" height="402" role="img" aria-labelledby="title" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Noto Sans SC', 'Microsoft YaHei', monospace">
+<title id="title">h = ReLU( w·x + b )</title>
+<defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M1 1 L7 4 L1 7 Z" fill="#adadad"/></marker></defs>
+<text x="160" y="28" text-anchor="middle" dominant-baseline="middle" font-size="17" fill="#e6e6e6" data-label="h = ReLU( w·x + b )">h = ReLU( w·x + b )</text>
+<text x="40" y="82" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#e6e6e6" data-label="输入层">输入层</text>
+<text x="160" y="82" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#e6e6e6" data-label="隐藏层（激活函数）">隐藏层（激活函数）</text>
+<text x="280" y="82" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#e6e6e6" data-label="输出层">输出层</text>
+<path data-edge="x₁-&gt;h₁" d="M67 190 C102 190 104 132 131 132" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path data-edge="x₁-&gt;h₂" d="M67 190 C102 190 104 240 131 240" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path data-edge="x₁-&gt;h₃" d="M67 190 C102 190 104 348 131 348" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path data-edge="x₂-&gt;h₁" d="M67 290 C102 290 104 132 131 132" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path data-edge="x₂-&gt;h₂" d="M67 290 C102 290 104 240 131 240" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path data-edge="x₂-&gt;h₃" d="M67 290 C102 290 104 348 131 348" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path data-edge="h₁-&gt;y" d="M187 132 C218 132 224 240 251 240" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path data-edge="h₂-&gt;y" d="M187 240 C218 240 224 240 251 240" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path data-edge="h₃-&gt;y" d="M187 348 C218 348 224 240 251 240" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="90" y="142" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#e6e6e6" data-label="w₁">w₁</text>
+<text x="90" y="338" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#e6e6e6" data-label="w₂">w₂</text>
+<circle data-node="x₁" cx="40" cy="190" r="27" fill="#111111" stroke="#9a9a9a" stroke-width="1.6"/>
+<text x="40" y="190" text-anchor="middle" dominant-baseline="middle" font-size="20" fill="#e6e6e6" data-label="x₁">x₁</text>
+<circle data-node="x₂" cx="40" cy="290" r="27" fill="#111111" stroke="#9a9a9a" stroke-width="1.6"/>
+<text x="40" y="290" text-anchor="middle" dominant-baseline="middle" font-size="20" fill="#e6e6e6" data-label="x₂">x₂</text>
+<circle data-node="h₁" cx="160" cy="132" r="27" fill="#111111" stroke="#9a9a9a" stroke-width="1.6"/>
+<text x="160" y="132" text-anchor="middle" dominant-baseline="middle" font-size="20" fill="#e6e6e6" data-label="h₁">h₁</text>
+<circle data-node="h₂" cx="160" cy="240" r="27" fill="#111111" stroke="#9a9a9a" stroke-width="1.6"/>
+<text x="160" y="240" text-anchor="middle" dominant-baseline="middle" font-size="20" fill="#e6e6e6" data-label="h₂">h₂</text>
+<circle data-node="h₃" cx="160" cy="348" r="27" fill="#111111" stroke="#9a9a9a" stroke-width="1.6"/>
+<text x="160" y="348" text-anchor="middle" dominant-baseline="middle" font-size="20" fill="#e6e6e6" data-label="h₃">h₃</text>
+<circle data-node="y" cx="280" cy="240" r="27" fill="#242424" stroke="#e6e6e6" stroke-width="1.6"/>
+<circle cx="280" cy="240" r="23" fill="none" stroke="#e6e6e6" stroke-width="0.8"/>
+<text x="280" y="240" text-anchor="middle" dominant-baseline="middle" font-size="20" fill="#e6e6e6" data-label="y">y</text>
+</svg>

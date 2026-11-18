@@ -131,7 +131,7 @@
     block.appendChild(button);
   }
   document.querySelectorAll(".prose figure.highlight").forEach(mountCodeBlock);
-  document.querySelectorAll(".prose pre").forEach(function (node) {
+  document.querySelectorAll(".prose pre, .article-cite-fold pre").forEach(function (node) {
     if (node.classList.contains("mermaid") || node.closest("figure.highlight")) return;
     mountCodeBlock(node);
   });

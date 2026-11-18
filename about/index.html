@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>About · BlackCat</title>
-  <meta name="description" content="Notes by KO Ho Tin (BlackCat) on LLM agents, formulaic alpha-factor mining, computer vision, and research tooling.">
+  <meta name="description" content="Research notes by KO Ho Tin (BlackCat) on LLM agents, AI security, quantitative alpha mining, continual learning, and mathematical foundations.">
   <meta name="author" content="KO Ho Tin">
   <meta name="theme-color" content="#000000">
   <meta name="color-scheme" content="dark">
@@ -19,25 +19,27 @@
   <link rel="stylesheet" href="/blog/css/article-footer.css?v=20261009-2">
   <link rel="stylesheet" href="/blog/css/article-hero.css?v=20261009-2">
   <link rel="stylesheet" href="/blog/css/polish.css?v=20261023-1">
+  <link rel="stylesheet" href="/blog/css/academic.css?v=20261118-1">
+  
   
   
   
   <link rel="icon" href="/blog/avatar.jpg" type="image/jpeg">
-  <meta name="description" content="This is my blog. I am KO Ho Tin, also known as BlackCat (B143KC47) — an AI researcher and engineering student in Hong Kong. I work on LLM agents, formulaic alpha-factor mining, computer vision, and re">
+  <meta name="description" content="I am KO Ho Tin (BlackCat &#x2F; B143KC47), an AI researcher and engineering student in Hong Kong. My research focuses on LLM agents and tool-use security, formulaic alpha-factor mining, continual lear">
 <meta property="og:type" content="website">
 <meta property="og:title" content="About">
 <meta property="og:url" content="https://b143kc47.github.io/blog/about/index.html">
 <meta property="og:site_name" content="BlackCat">
-<meta property="og:description" content="This is my blog. I am KO Ho Tin, also known as BlackCat (B143KC47) — an AI researcher and engineering student in Hong Kong. I work on LLM agents, formulaic alpha-factor mining, computer vision, and re">
+<meta property="og:description" content="I am KO Ho Tin (BlackCat &#x2F; B143KC47), an AI researcher and engineering student in Hong Kong. My research focuses on LLM agents and tool-use security, formulaic alpha-factor mining, continual lear">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://b143kc47.github.io/blog/avatar.jpg">
 <meta property="article:published_time" content="2026-09-01T02:00:00.000Z">
-<meta property="article:modified_time" content="2026-09-07T13:10:32.000Z">
+<meta property="article:modified_time" content="2026-11-18T03:31:14.320Z">
 <meta property="article:author" content="KO Ho Tin">
 <meta property="article:tag" content="KO Ho Tin, BlackCat, B143KC47, blog, LLM agents, alpha mining, computer vision">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://b143kc47.github.io/blog/avatar.jpg">
-<!-- hexo injector head_end start --><script>window.MathJax = {"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]],"processEscapes":true},"options":{"skipHtmlTags":["script","noscript","style","textarea","pre","code"],"enableMenu":false}};</script>
+<!-- hexo injector head_end start --><script>window.MathJax = {"loader":{"load":["[tex]/cancel"]},"tex":{"packages":{"[+]":["cancel"]},"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]],"processEscapes":true,"tags":"ams"},"options":{"skipHtmlTags":["script","noscript","style","textarea","pre","code"],"enableMenu":false}};</script>
 <script async id="mathjax-cdn-script" src="/blog/vendor/mathjax/tex-chtml.js?v=3.2.2"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
 
   <body>
@@ -48,10 +50,13 @@
     <nav class="site-nav" aria-label="Primary">
       
         
-        <a class="nav-link is-active" href="/blog/about/" aria-current="page">About</a>
+        <a class="nav-link" href="/blog/papers/">Papers</a>
       
         
         <a class="nav-link" href="/blog/archives/">Archive</a>
+      
+        
+        <a class="nav-link is-active" href="/blog/about/" aria-current="page">About</a>
       
         
         <a class="nav-link" href="/blog/search/">Search</a>
@@ -85,21 +90,21 @@
     </header>
     <div class="post-well">
       <div class="prose">
-        <p>This is my blog.</p>
-<p>I am <strong>KO Ho Tin</strong>, also known as <strong>BlackCat</strong> (<code>B143KC47</code>) — an AI researcher and engineering student in Hong Kong. I work on LLM agents, formulaic alpha-factor mining, computer vision, and research tooling.</p>
-<p>The <a href="https://b143kc47.github.io/">research profile</a> is who I am, what I build, where it is published, and how to reach me. This site is the notebook: notes I actually write while reading and building.</p>
-<h2 id="What-you-will-find"><a href="#What-you-will-find" class="headerlink" title="What you will find"></a>What you will find</h2><ul>
-<li>Paper notes (AlphaBench, EvoAlpha, QFinZero)</li>
-<li>Engineering notes from zero (micrograd and the rest of the trail)</li>
-<li>Learning notes on neuroscience, continual learning, and related work</li>
+        <p>I am <strong>KO Ho Tin</strong> (<strong>BlackCat</strong> &#x2F; <code>B143KC47</code>), an AI researcher and engineering student in Hong Kong. My research focuses on <strong>LLM agents and tool-use security</strong>, <strong>formulaic alpha-factor mining</strong>, <strong>continual learning</strong>, and <strong>computer vision</strong>.</p>
+<p>The <a href="https://b143kc47.github.io/">main research profile</a> hosts formal publications, repositories, and biographical details. This site serves as an open <strong>research notebook</strong> — publishing technical surveys, structured paper reviews, mathematical derivations, and interactive empirical replications written in the course of research.</p>
+<h2 id="Research-Pillars"><a href="#Research-Pillars" class="headerlink" title="Research Pillars"></a>Research Pillars</h2><ul>
+<li><strong>LLM Agents &amp; Security</strong> — Tool-using agent architectures, multi-step adversarial evaluation (<code>CONFUSED_DEPUTY</code>, <code>EXFILTRATION</code>), and environment interfaces (<a href="/blog/papers/#pillar-agents">OpenAI Gym</a>).</li>
+<li><strong>Quantitative Alpha &amp; Financial ML</strong> — LLM-guided formulaic alpha generation, evaluation, and feedback search (<code>AlphaBench</code>, <code>EvoAlpha</code>, <code>QFinZero</code>), alongside mathematical finance foundations.</li>
+<li><strong>Continual &amp; Representation Learning</strong> — Sequential optimization under bounded memory&#x2F;compute, plasticity–stability trade-offs, pretrained representation routing, and from-scratch neural network implementations (<code>micrograd</code>).</li>
+<li><strong>Mathematical &amp; Empirical Foundations</strong> — Real analysis and calculus (<code>MIT 18.01</code>), thermodynamic complexity (<code>Complexodynamics</code>), causal &amp; empirical research design (<em>The Effect</em>), and cognitive science.</li>
 </ul>
-<h2 id="Contact"><a href="#Contact" class="headerlink" title="Contact"></a>Contact</h2><p>Same routes as the research profile:</p>
-<ul>
-<li>Email: <a href="mailto:&#115;&#50;&#x30;&#50;&#48;&#x30;&#48;&#x35;&#x37;&#64;&#x79;&#x6c;&#x6d;&#97;&#x73;&#115;&#46;&#101;&#x64;&#117;&#x2e;&#x68;&#x6b;">s20200057@ylmass.edu.hk</a></li>
-<li>GitHub: <a target="_blank" rel="noopener" href="https://github.com/B143KC47">B143KC47</a></li>
-<li>LinkedIn: <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/kohotin/">kohotin</a></li>
-<li>ORCID: <a target="_blank" rel="noopener" href="https://orcid.org/0009-0002-7298-8196">0009-0002-7298-8196</a></li>
-<li><a target="_blank" rel="noopener" href="https://scholar.google.com/scholar?q=%22Ho+Tin+Ko%22">Google Scholar</a>, <a target="_blank" rel="noopener" href="https://www.kaggle.com/b14ckc4tmr">Kaggle</a>, <a target="_blank" rel="noopener" href="https://openreview.net/profile?id=~Ho_Tin_Ko2">OpenReview</a>, <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/B143KC47">Zhihu</a>, and <a target="_blank" rel="noopener" href="https://blog.csdn.net/B143KC47">CSDN</a></li>
+<h2 id="Scholarly-Identifiers-Contact"><a href="#Scholarly-Identifiers-Contact" class="headerlink" title="Scholarly Identifiers &amp; Contact"></a>Scholarly Identifiers &amp; Contact</h2><ul>
+<li><strong>Research Profile</strong>: <a href="https://b143kc47.github.io/">b143kc47.github.io</a></li>
+<li><strong>ORCID</strong>: <a target="_blank" rel="noopener" href="https://orcid.org/0009-0002-7298-8196">0009-0002-7298-8196</a></li>
+<li><strong>Google Scholar</strong>: <a target="_blank" rel="noopener" href="https://scholar.google.com/scholar?q=%22Ho+Tin+Ko%22">Ho Tin Ko</a></li>
+<li><strong>OpenReview</strong>: <a target="_blank" rel="noopener" href="https://openreview.net/profile?id=~Ho_Tin_Ko2">~Ho_Tin_Ko2</a></li>
+<li><strong>GitHub</strong>: <a target="_blank" rel="noopener" href="https://github.com/B143KC47">B143KC47</a> · <strong>Kaggle</strong>: <a target="_blank" rel="noopener" href="https://www.kaggle.com/b14ckc4tmr">b14ckc4tmr</a></li>
+<li><strong>Email</strong>: <a href="mailto:&#115;&#x32;&#48;&#x32;&#48;&#48;&#x30;&#x35;&#x37;&#x40;&#x79;&#x6c;&#x6d;&#x61;&#115;&#x73;&#46;&#101;&#x64;&#x75;&#46;&#104;&#x6b;">s20200057@ylmass.edu.hk</a> · <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/kohotin/">LinkedIn</a> · <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/B143KC47">Zhihu</a> · <a target="_blank" rel="noopener" href="https://blog.csdn.net/B143KC47">CSDN</a></li>
 </ul>
 
       </div>
@@ -111,12 +116,12 @@
     <footer class="site-foot">
   <div class="measure">
     
-      <p class="kicker foot-kicker">This is my blog.</p>
+      <p class="kicker foot-kicker">[ Research Notebook ]</p>
     
     
       <div class="foot-intro">
         
-          <p>I am KO Ho Tin (BlackCat / B143KC47), an AI researcher and engineering student in Hong Kong. These notes are the working layer of my research profile — what I am reading, building, and trying to make true.</p>
+          <p>KO Ho Tin (BlackCat / B143KC47) — AI researcher in Hong Kong working on LLM agents, formulaic alpha-factor mining, continual learning, and computer vision.</p>
         
       </div>
     
@@ -216,7 +221,7 @@
       </nav>
     
     
-      <p class="muted foot-credit">KO Ho Tin · AI researcher &amp; builder</p>
+      <p class="muted foot-credit">KO Ho Tin · ORCID 0009-0002-7298-8196</p>
     
   </div>
 </footer>

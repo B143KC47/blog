@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 634" width="780" height="634" role="img" aria-labelledby="title" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Noto Sans SC', 'Microsoft YaHei', monospace">
+<title id="title">topo = [a,b,x]</title>
+<defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M1 1 L7 4 L1 7 Z" fill="#adadad"/></marker></defs>
+<path d="M112 80 V604" fill="none" stroke="#535353" stroke-width="1" stroke-dasharray="4 6"/>
+<g data-node="X"><rect x="24" y="24" width="176" height="52" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="112.0" y="50.0" text-anchor="middle" dominant-baseline="middle" font-size="15" fill="#e6e6e6" data-label="build_topo(x)">build_topo(x)</text>
+</g>
+<path d="M300 80 V604" fill="none" stroke="#535353" stroke-width="1" stroke-dasharray="4 6"/>
+<g data-node="A"><rect x="212" y="24" width="176" height="52" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="300.0" y="50.0" text-anchor="middle" dominant-baseline="middle" font-size="15" fill="#e6e6e6" data-label="build_topo(a)">build_topo(a)</text>
+</g>
+<path d="M488 80 V604" fill="none" stroke="#535353" stroke-width="1" stroke-dasharray="4 6"/>
+<g data-node="B"><rect x="400" y="24" width="176" height="52" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="488.0" y="50.0" text-anchor="middle" dominant-baseline="middle" font-size="15" fill="#e6e6e6" data-label="build_topo(b)">build_topo(b)</text>
+</g>
+<path d="M674 80 V604" fill="none" stroke="#535353" stroke-width="1" stroke-dasharray="4 6"/>
+<g data-node="T"><rect x="586" y="24" width="176" height="52" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="674.0" y="50.0" text-anchor="middle" dominant-baseline="middle" font-size="15" fill="#e6e6e6" data-label="topo">topo</text>
+</g>
+<rect x="109" y="110" width="6" height="430" fill="#333333" stroke="#8c8c8c"/>
+<rect x="297" y="132" width="6" height="130" fill="#333333" stroke="#8c8c8c"/>
+<rect x="485" y="320" width="6" height="124" fill="#333333" stroke="#8c8c8c"/>
+<path data-edge="X-&gt;A" d="M112 136 H300" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="206.0" y="118" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#c8c8c8" data-label="build_topo(a)">build_topo(a)</text>
+<path data-edge="A-&gt;T" d="M300 204 H674" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="487.0" y="186" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#c8c8c8" data-label="topo.append(a)">topo.append(a)</text>
+<path data-edge="A-&gt;X" d="M300 264 H112" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="5 5"/>
+<text x="206.0" y="246" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#c8c8c8" data-label="return">return</text>
+<path data-edge="X-&gt;B" d="M112 324 H488" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="300.0" y="306" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#c8c8c8" data-label="build_topo(b)">build_topo(b)</text>
+<path data-edge="B-&gt;T" d="M488 388 H674" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="581.0" y="370" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#c8c8c8" data-label="topo.append(b)">topo.append(b)</text>
+<path data-edge="B-&gt;X" d="M488 448 H112" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="5 5"/>
+<text x="300.0" y="430" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#c8c8c8" data-label="return">return</text>
+<path data-edge="X-&gt;T" d="M112 516 H674" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="393.0" y="498" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#c8c8c8" data-label="topo.append(x)">topo.append(x)</text>
+<g data-node="note-T"><rect x="606" y="550" width="136" height="52" fill="#202020" stroke="#e6e6e6" stroke-width="1.4"/>
+<text x="674.0" y="576.0" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#e6e6e6" data-label="[a,b,x]">[a,b,x]</text>
+</g>
+</svg>

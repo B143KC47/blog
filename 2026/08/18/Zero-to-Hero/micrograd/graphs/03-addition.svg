@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 212" width="340" height="212" role="img" aria-labelledby="title" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Noto Sans SC', 'Microsoft YaHei', monospace">
+<title id="title">加法：__add__</title>
+<defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M1 1 L7 4 L1 7 Z" fill="#adadad"/></marker></defs>
+<g data-node="A"><rect x="20" y="24" width="76" height="48" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="58.0" y="48.0" text-anchor="middle" dominant-baseline="middle" font-size="20" fill="#e6e6e6" data-label="a">a</text>
+</g>
+<g data-node="B"><rect x="20" y="140" width="76" height="48" fill="#111111" stroke="#7c7c7c" stroke-width="1.4"/>
+<text x="58.0" y="164.0" text-anchor="middle" dominant-baseline="middle" font-size="20" fill="#e6e6e6" data-label="b">b</text>
+</g>
+<g data-node="X"><rect x="182" y="82" width="138" height="48" fill="#202020" stroke="#e6e6e6" stroke-width="1.4"/>
+<text x="251.0" y="106.0" text-anchor="middle" dominant-baseline="middle" font-size="16" fill="#e6e6e6" data-label="x = a + b">x = a + b</text>
+</g>
+<path data-edge="A-&gt;X" d="M96 48 H126 L158 98 H182" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path data-edge="B-&gt;X" d="M96 164 H126 L158 114 H182" fill="none" stroke="#adadad" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+</svg>

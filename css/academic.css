@@ -1,0 +1,486 @@
+/* Scholarly layer for BlackCat Research Notebook.
+   Strictly adheres to Simplism's monochrome palette, Geist Mono UI labels,
+   4px radius, and 38rem reading measure. */
+
+/* Epistemic article kind badge */
+.article-kind-badge,
+.papers-entry-kind {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1rem 0.48rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+/* [ Target Paper ] / [ Primary Source ] header card */
+.paper-meta-card {
+  max-width: 38rem;
+  margin: 0 auto 2.25rem;
+  padding: 1.15rem 1.35rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--fill);
+}
+.paper-meta-title {
+  margin: 0;
+  font-family: var(--font-read);
+  font-size: 1.02rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text);
+}
+.paper-meta-title a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+}
+.paper-meta-title a:hover {
+  text-decoration-color: currentColor;
+  opacity: 1;
+}
+.paper-meta-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+}
+.paper-meta-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.24rem 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  font: 0.75rem/1.4 var(--font);
+  text-decoration: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.paper-meta-chip:hover {
+  border-color: var(--text);
+  background: var(--chip-hover);
+  opacity: 1;
+}
+
+/* Formal mathematical environments: Definition, Theorem, Proposition, Lemma, Proof */
+.prose .academic-env {
+  max-width: 38rem;
+  margin: 1.75rem auto;
+  padding: 1.1rem 1.3rem;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--text);
+  border-radius: var(--radius);
+  background: var(--fill);
+}
+.prose .academic-env--proof {
+  background: transparent;
+  border-left-color: var(--muted);
+}
+.prose .academic-env--remark {
+  border-left-color: var(--muted);
+}
+.prose .academic-env > :first-child {
+  margin-top: 0;
+}
+.prose .academic-env > :last-child {
+  margin-bottom: 0;
+}
+.prose .academic-env p {
+  max-width: none;
+}
+.prose .academic-env-head {
+  margin: 0 0 0.55rem !important;
+  font-family: var(--font);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+.prose .academic-env-label {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.prose .academic-env-title {
+  color: var(--muted);
+  font-family: var(--font-read);
+  font-size: 0.92rem;
+}
+.prose .academic-qed {
+  margin: 0.5rem 0 0 !important;
+  text-align: right;
+  font-family: var(--font);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* Numbered figures & captions */
+.prose figure.academic-figure {
+  max-width: 44rem;
+  margin: 2rem auto;
+}
+.prose figure.academic-figure img {
+  display: block;
+  margin: 0;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.prose figure.academic-figure figcaption {
+  margin-top: 0.65rem;
+  color: var(--muted);
+  font-size: 0.825rem;
+  line-height: 1.6;
+  text-align: center;
+}
+.prose .academic-fig-num {
+  font-family: var(--font);
+  color: var(--text);
+  font-size: 0.78rem;
+}
+
+/* Footnotes & scholarly References list */
+.prose sup.academic-fn-ref {
+  font-family: var(--font);
+  font-size: 0.72em;
+  line-height: 0;
+  margin-left: 0.1em;
+}
+.prose sup.academic-fn-ref a {
+  text-decoration: none;
+  color: var(--muted);
+  padding: 0 0.12em;
+}
+.prose sup.academic-fn-ref a:hover {
+  color: var(--text);
+  text-decoration: underline;
+}
+.prose .academic-references {
+  max-width: 38rem;
+  margin: 3.5rem auto 0;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--line);
+}
+.prose .academic-references h2 {
+  margin-top: 0;
+  font-family: var(--font);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.prose .academic-fn-list {
+  margin-top: 1rem;
+  padding-left: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+.prose .academic-fn-list li {
+  margin: 0.55rem 0;
+}
+.prose .academic-fn-back {
+  margin-left: 0.35rem;
+  font-family: var(--font);
+  text-decoration: none;
+}
+
+/* Ordered Series Progression Bar */
+.series-trail {
+  max-width: 38rem;
+  margin: 3rem auto 0;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--fill);
+}
+.series-trail-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--line);
+}
+.series-trail-head .kicker {
+  margin: 0;
+}
+.series-trail-step {
+  font: 0.75rem/1.4 var(--font);
+  color: var(--muted);
+}
+.series-trail-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.series-trail-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  text-decoration: none;
+  color: var(--text);
+}
+.series-trail-link.is-next {
+  text-align: right;
+  align-items: flex-end;
+}
+.series-trail-dir {
+  font: 0.75rem/1.4 var(--font);
+  color: var(--muted);
+}
+.series-trail-title {
+  font-family: var(--font-read);
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+.series-trail-link:hover .series-trail-title {
+  text-decoration: underline;
+}
+
+/* Article Footer ORCID & BibTeX Drawer */
+.article-info-author-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 1rem;
+}
+.article-info-orcid {
+  font: 0.78rem/1.4 var(--font);
+  color: var(--muted);
+  text-decoration: none;
+}
+.article-info-orcid:hover {
+  color: var(--text);
+  text-decoration: underline;
+}
+.article-cite-fold {
+  max-width: none;
+  margin: 1.25rem 0 0;
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+.article-cite-fold > summary {
+  padding: 0.75rem 1rem;
+  font: 0.8125rem/1.4 var(--font);
+  color: var(--muted);
+}
+.article-cite-fold[open] > summary {
+  color: var(--text);
+}
+.article-cite-fold .fold-body {
+  padding: 0;
+}
+.article-cite-fold .code-block {
+  position: relative;
+  overflow: hidden;
+  background: var(--code-bg, #1b1c20);
+  color: var(--code-ink, #f9f9f9);
+}
+.article-cite-fold .code-block,
+.article-cite-fold pre {
+  margin: 0 !important;
+  width: 100% !important;
+  border: 0 !important;
+  border-radius: 0 0 var(--radius) var(--radius) !important;
+}
+.article-cite-fold pre {
+  padding: 0.9rem 3.25rem 0.9rem 1rem;
+  overflow-x: auto;
+  background: transparent;
+  color: var(--code-ink, #f9f9f9);
+  font: 0.78rem/1.65 var(--font);
+  white-space: pre;
+}
+.article-cite-fold .code-block:hover .code-copy {
+  color: rgb(249 249 249 / 75%);
+}
+.article-cite-fold .code-copy:hover {
+  color: var(--code-ink, #f9f9f9);
+}
+.article-cite-fold .code-copy[data-state="done"] {
+  color: #7fd184;
+}
+
+/* Homepage [ Research Tracks ] 2x2 Grid */
+.pillars-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+}
+.pillars-head .kicker {
+  margin: 0;
+}
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.pillar-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--fill);
+  text-decoration: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.pillar-card:hover {
+  border-color: var(--text);
+  background: var(--row-hover);
+  opacity: 1;
+}
+.pillar-card-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.pillar-card-title {
+  margin: 0;
+  font-family: var(--font-read);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text);
+}
+.pillar-card-count {
+  flex-shrink: 0;
+  font: 0.75rem/1.4 var(--font);
+  color: var(--muted);
+}
+.pillar-card-summary {
+  margin: 0;
+  font-family: var(--font-read);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* /papers/ Literature & Monograph Index */
+.papers-intro {
+  max-width: 42rem;
+  margin: 0.85rem 0 1.75rem;
+  line-height: 1.7;
+}
+.papers-track-nav {
+  margin-bottom: 0;
+}
+.papers-pillar-section {
+  scroll-margin-top: 2rem;
+}
+.papers-pillar-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+.papers-pillar-head .kicker {
+  margin: 0 0 0.35rem;
+}
+.papers-pillar-title {
+  margin: 0;
+  font-family: var(--font-read);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+.papers-pillar-desc {
+  max-width: 30rem;
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.papers-matrix {
+  display: flex;
+  flex-direction: column;
+}
+.papers-entry {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr) auto;
+  gap: 0.75rem 1.5rem;
+  align-items: baseline;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.papers-entry-date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  font: 0.8125rem/1.4 var(--font);
+  color: var(--muted);
+}
+.papers-entry-title {
+  margin: 0;
+  font-family: var(--font-read);
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+.papers-entry-title a {
+  text-decoration: none;
+}
+.papers-entry-title a:hover {
+  text-decoration: underline;
+  opacity: 1;
+}
+.papers-entry-source {
+  margin: 0.35rem 0 0;
+  font-family: var(--font-read);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+.papers-entry-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  font: 0.78rem/1.4 var(--font);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 48rem) {
+  .pillars-grid {
+    grid-template-columns: 1fr;
+  }
+  .papers-entry {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+  .papers-entry-date {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.65rem;
+  }
+  .papers-entry-meta {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.85rem;
+  }
+  .series-trail-links {
+    grid-template-columns: 1fr;
+  }
+  .series-trail-link.is-next {
+    text-align: left;
+    align-items: flex-start;
+  }
+}

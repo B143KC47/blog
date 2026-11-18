@@ -3,8 +3,8 @@
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>BlackCat · This is my blog</title>
-  <meta name="description" content="Notes by KO Ho Tin (BlackCat) on LLM agents, formulaic alpha-factor mining, computer vision, and research tooling.">
+  <title>BlackCat · Research Notebook · KO Ho Tin</title>
+  <meta name="description" content="Research notes by KO Ho Tin (BlackCat) on LLM agents, AI security, quantitative alpha mining, continual learning, and mathematical foundations.">
   <meta name="author" content="KO Ho Tin">
   <meta name="theme-color" content="#000000">
   <meta name="color-scheme" content="dark">
@@ -19,23 +19,25 @@
   <link rel="stylesheet" href="/blog/css/article-footer.css?v=20261009-2">
   <link rel="stylesheet" href="/blog/css/article-hero.css?v=20261009-2">
   <link rel="stylesheet" href="/blog/css/polish.css?v=20261023-1">
+  <link rel="stylesheet" href="/blog/css/academic.css?v=20261118-1">
+  
   
   
   
   <link rel="icon" href="/blog/avatar.jpg" type="image/jpeg">
-  <meta name="description" content="Notes by KO Ho Tin (BlackCat) on LLM agents, formulaic alpha-factor mining, computer vision, and research tooling.">
+  <meta name="description" content="Research notes by KO Ho Tin (BlackCat) on LLM agents, AI security, quantitative alpha mining, continual learning, and mathematical foundations.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="BlackCat">
 <meta property="og:url" content="https://b143kc47.github.io/blog/page/2/index.html">
 <meta property="og:site_name" content="BlackCat">
-<meta property="og:description" content="Notes by KO Ho Tin (BlackCat) on LLM agents, formulaic alpha-factor mining, computer vision, and research tooling.">
+<meta property="og:description" content="Research notes by KO Ho Tin (BlackCat) on LLM agents, AI security, quantitative alpha mining, continual learning, and mathematical foundations.">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://b143kc47.github.io/blog/avatar.jpg">
 <meta property="article:author" content="KO Ho Tin">
 <meta property="article:tag" content="KO Ho Tin, BlackCat, B143KC47, blog, LLM agents, alpha mining, computer vision">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://b143kc47.github.io/blog/avatar.jpg">
-<!-- hexo injector head_end start --><script>window.MathJax = {"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]],"processEscapes":true},"options":{"skipHtmlTags":["script","noscript","style","textarea","pre","code"],"enableMenu":false}};</script>
+<!-- hexo injector head_end start --><script>window.MathJax = {"loader":{"load":["[tex]/cancel"]},"tex":{"packages":{"[+]":["cancel"]},"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]],"processEscapes":true,"tags":"ams"},"options":{"skipHtmlTags":["script","noscript","style","textarea","pre","code"],"enableMenu":false}};</script>
 <script async id="mathjax-cdn-script" src="/blog/vendor/mathjax/tex-chtml.js?v=3.2.2"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
 
   <body>
@@ -46,10 +48,13 @@
     <nav class="site-nav" aria-label="Primary">
       
         
-        <a class="nav-link" href="/blog/about/">About</a>
+        <a class="nav-link" href="/blog/papers/">Papers</a>
       
         
         <a class="nav-link" href="/blog/archives/">Archive</a>
+      
+        
+        <a class="nav-link" href="/blog/about/">About</a>
       
         
         <a class="nav-link" href="/blog/search/">Search</a>
@@ -92,46 +97,18 @@
   <nav class="series-nav" aria-label="Series">
     <a class="series-link is-on" href="/blog/" aria-current="page">All</a>
     
-      <a class="series-link series-topic" href="/blog/categories/AI/">AI</a>
+      <a class="series-link series-topic" href="/blog/categories/Paper-Learning/">Paper-Learning</a>
     
-      <a class="series-link series-topic" href="/blog/categories/Book-Reading/">Book Reading</a>
+      <a class="series-link series-topic" href="/blog/categories/Continual-Learning/">Continual-Learning</a>
     
-      <a class="series-link series-topic" href="/blog/categories/Cognitive-Science/">Cognitive Science</a>
+      <a class="series-link series-topic" href="/blog/categories/Zero-to-Hero/">Zero-to-Hero</a>
     
-      <a class="series-link series-topic" href="/blog/categories/Continue-Learning/">Continue Learning</a>
+      <a class="series-link series-topic" href="/blog/categories/Courses/">Courses</a>
     
-      <a class="series-link series-topic" href="/blog/categories/Economics-Finance/">Economics&amp;Finance</a>
+      <a class="series-link series-topic" href="/blog/categories/Kaggle/">Kaggle</a>
     
+      <a class="series-link series-topic" href="/blog/categories/Books/">Books</a>
     
-      <details class="series-topics-more">
-        <summary class="series-topics-toggle" aria-controls="all-topics">
-          <span>View all topics</span>
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="m5 7.5 5 5 5-5"/></svg>
-        </summary>
-        <div class="series-topics-panel" id="all-topics" role="group" aria-label="All topics">
-          
-            <a class="series-link series-topics-item" href="/blog/categories/AI/">AI</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Book-Reading/">Book Reading</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Cognitive-Science/">Cognitive Science</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Continue-Learning/">Continue Learning</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Economics-Finance/">Economics&amp;Finance</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Kaggle/">Kaggle</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/MIT-18-01/">MIT 18.01</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Neural-Networks-Zero-to-Hero/">Neural-Networks-Zero-to-Hero</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Neuro-Sceince/">Neuro Sceince</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Paper-Learning/">Paper-Learning</a>
-          
-        </div>
-      </details>
     
   </nav>
 
@@ -147,97 +124,7 @@
             
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/10/06/Kaggle/Predicting%20Student%20Health%20Risk/" aria-hidden="true" tabindex="-1">
-    
-      
-
-
-<img src="/blog/images/covers/gpt-20261019/student-health.webp" alt=""
-  width="640" height="480"
-  loading="lazy" decoding="async"
-  data-cover-style="processed"
-  data-cover-options="{}">
-
-    
-  </a>
-  <div class="card-body">
-    <h3 class="card-title">
-      <a href="/blog/2026/10/06/Kaggle/Predicting%20Student%20Health%20Risk/">Predicting Student Health Risk</a>
-    </h3>
-    <p class="meta">
-      
-        <a href="/blog/categories/Kaggle/">Kaggle</a>
-      
-      <time datetime="2026-10-05T17:41:22.000Z">2026-10-06</time>
-    </p>
-  </div>
-</article>
-
-          
-            
-
-<article class="card">
-  <a class="card-media" href="/blog/2026/09/29/Neural-Networks-Zero-to-Hero/makemore/" aria-hidden="true" tabindex="-1">
-    
-      
-
-
-<img src="/blog/images/covers/gpt-20261019/makemore.webp" alt=""
-  width="640" height="480"
-  loading="lazy" decoding="async"
-  data-cover-style="processed"
-  data-cover-options="{}">
-
-    
-  </a>
-  <div class="card-body">
-    <h3 class="card-title">
-      <a href="/blog/2026/09/29/Neural-Networks-Zero-to-Hero/makemore/">makemore</a>
-    </h3>
-    <p class="meta">
-      
-        <a href="/blog/categories/Neural-Networks-Zero-to-Hero/">Neural-Networks-Zero-to-Hero</a>
-      
-      <time datetime="2026-09-29T03:55:38.000Z">2026-09-29</time>
-    </p>
-  </div>
-</article>
-
-          
-            
-
-<article class="card">
-  <a class="card-media" href="/blog/2026/09/25/Book%20Reading/The%20Effect/" aria-hidden="true" tabindex="-1">
-    
-      
-
-
-<img src="/blog/images/covers/gpt-20261019/the-effect.webp" alt=""
-  width="640" height="480"
-  loading="lazy" decoding="async"
-  data-cover-style="processed"
-  data-cover-options="{}">
-
-    
-  </a>
-  <div class="card-body">
-    <h3 class="card-title">
-      <a href="/blog/2026/09/25/Book%20Reading/The%20Effect/">The Effect</a>
-    </h3>
-    <p class="meta">
-      
-        <a href="/blog/categories/Book-Reading/">Book Reading</a>
-      
-      <time datetime="2026-09-25T12:54:58.000Z">2026-09-25</time>
-    </p>
-  </div>
-</article>
-
-          
-            
-
-<article class="card">
-  <a class="card-media" href="/blog/2026/09/21/Cognitive%20Science/Cognitive%20Science/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/09/21/Courses/Cognitive-Science/Cognitive%20Science/" aria-hidden="true" tabindex="-1">
     
       
 
@@ -252,11 +139,11 @@
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/09/21/Cognitive%20Science/Cognitive%20Science/">Cognitive Science</a>
+      <a href="/blog/2026/09/21/Courses/Cognitive-Science/Cognitive%20Science/">Cognitive Science</a>
     </h3>
     <p class="meta">
       
-        <a href="/blog/categories/Cognitive-Science/">Cognitive Science</a>
+        <a href="/blog/categories/Courses/">Courses</a>
       
       <time datetime="2026-09-21T14:20:45.000Z">2026-09-21</time>
     </p>
@@ -267,7 +154,7 @@
             
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/08/21/Continue%20Learning/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/08/21/Continual-Learning/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0/" aria-hidden="true" tabindex="-1">
     
       
 
@@ -282,11 +169,11 @@
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/08/21/Continue%20Learning/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0/">持续学习</a>
+      <a href="/blog/2026/08/21/Continual-Learning/%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0/">持续学习</a>
     </h3>
     <p class="meta">
       
-        <a href="/blog/categories/Continue-Learning/">Continue Learning</a>
+        <a href="/blog/categories/Continual-Learning/">Continual-Learning</a>
       
       <time datetime="2026-08-21T04:58:58.000Z">2026-08-21</time>
     </p>
@@ -297,12 +184,12 @@
             
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/08/20/Neuro%20Sceince/Roadmap/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/08/18/Zero-to-Hero/micrograd/" aria-hidden="true" tabindex="-1">
     
       
 
 
-<img src="/blog/images/covers/gpt-20261019/roadmap.webp" alt=""
+<img src="/blog/images/covers/micrograd-pixel-v1.png" alt=""
   width="640" height="480"
   loading="lazy" decoding="async"
   data-cover-style="processed"
@@ -312,13 +199,43 @@
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/08/20/Neuro%20Sceince/Roadmap/">Roadmap</a>
+      <a href="/blog/2026/08/18/Zero-to-Hero/micrograd/">micrograd：从神经元到反向传播</a>
     </h3>
     <p class="meta">
       
-        <a href="/blog/categories/Neuro-Sceince/">Neuro Sceince</a>
+        <a href="/blog/categories/Zero-to-Hero/">Zero-to-Hero</a>
       
-      <time datetime="2026-08-20T09:54:27.000Z">2026-08-20</time>
+      <time datetime="2026-08-18T14:01:11.000Z">2026-08-18</time>
+    </p>
+  </div>
+</article>
+
+          
+            
+
+<article class="card">
+  <a class="card-media" href="/blog/2026/08/17/Paper-Learning/Quant-Alpha/Alphabench/" aria-hidden="true" tabindex="-1">
+    
+      
+
+
+<img src="/blog/images/covers/gpt-20261019/alphabench.webp" alt=""
+  width="640" height="480"
+  loading="lazy" decoding="async"
+  data-cover-style="processed"
+  data-cover-options="{}">
+
+    
+  </a>
+  <div class="card-body">
+    <h3 class="card-title">
+      <a href="/blog/2026/08/17/Paper-Learning/Quant-Alpha/Alphabench/">AlphaBench: Formulaic Alpha Factor Mining with LLMs</a>
+    </h3>
+    <p class="meta">
+      
+        <a href="/blog/categories/Paper-Learning/">Paper-Learning</a>
+      
+      <time datetime="2026-08-16T16:19:02.000Z">2026-08-17</time>
     </p>
   </div>
 </article>
@@ -327,54 +244,6 @@
         </div>
       
 
-      
-        <div class="row-list" aria-label="All notes">
-          
-            
-<a class="row" href="/blog/2026/08/18/Neural-Networks-Zero-to-Hero/micrograd/">
-  <span class="row-title">micrograd：从神经元到反向传播</span>
-  <span class="row-meta">
-    <span>Neural-Networks-Zero-to-Hero</span>
-    <time datetime="2026-08-18T14:01:11.000Z">2026-08-18</time>
-    <span class="row-arrow" aria-hidden="true">›</span>
-  </span>
-</a>
-
-          
-            
-<a class="row" href="/blog/2026/08/17/Paper-Learning/AI%20paper/Conference/Other/Alphabench/">
-  <span class="row-title">Alphabench</span>
-  <span class="row-meta">
-    <span>Paper-Learning</span>
-    <time datetime="2026-08-16T16:19:02.000Z">2026-08-17</time>
-    <span class="row-arrow" aria-hidden="true">›</span>
-  </span>
-</a>
-
-          
-            
-<a class="row" href="/blog/2026/08/16/Paper-Learning/AI%20paper/Conference/Other/Evoalpha/">
-  <span class="row-title">Evoalpha</span>
-  <span class="row-meta">
-    <span>Paper-Learning</span>
-    <time datetime="2026-08-16T15:01:22.000Z">2026-08-16</time>
-    <span class="row-arrow" aria-hidden="true">›</span>
-  </span>
-</a>
-
-          
-            
-<a class="row" href="/blog/2026/08/16/Paper-Learning/AI%20paper/Conference/Other/Qfinzero/">
-  <span class="row-title">Qfinzero</span>
-  <span class="row-meta">
-    <span>Paper-Learning</span>
-    <time datetime="2026-08-16T15:01:06.000Z">2026-08-16</time>
-    <span class="row-arrow" aria-hidden="true">›</span>
-  </span>
-</a>
-
-          
-        </div>
       
 
       
@@ -393,12 +262,12 @@
     <footer class="site-foot">
   <div class="measure">
     
-      <p class="kicker foot-kicker">This is my blog.</p>
+      <p class="kicker foot-kicker">[ Research Notebook ]</p>
     
     
       <div class="foot-intro">
         
-          <p>I am KO Ho Tin (BlackCat / B143KC47), an AI researcher and engineering student in Hong Kong. These notes are the working layer of my research profile — what I am reading, building, and trying to make true.</p>
+          <p>KO Ho Tin (BlackCat / B143KC47) — AI researcher in Hong Kong working on LLM agents, formulaic alpha-factor mining, continual learning, and computer vision.</p>
         
       </div>
     
@@ -498,7 +367,7 @@
       </nav>
     
     
-      <p class="muted foot-credit">KO Ho Tin · AI researcher &amp; builder</p>
+      <p class="muted foot-credit">KO Ho Tin · ORCID 0009-0002-7298-8196</p>
     
   </div>
 </footer>

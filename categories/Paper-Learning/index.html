@@ -3,8 +3,8 @@
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>BlackCat · This is my blog</title>
-  <meta name="description" content="Notes by KO Ho Tin (BlackCat) on LLM agents, formulaic alpha-factor mining, computer vision, and research tooling.">
+  <title>BlackCat · Research Notebook · KO Ho Tin</title>
+  <meta name="description" content="Research notes by KO Ho Tin (BlackCat) on LLM agents, AI security, quantitative alpha mining, continual learning, and mathematical foundations.">
   <meta name="author" content="KO Ho Tin">
   <meta name="theme-color" content="#000000">
   <meta name="color-scheme" content="dark">
@@ -19,23 +19,25 @@
   <link rel="stylesheet" href="/blog/css/article-footer.css?v=20261009-2">
   <link rel="stylesheet" href="/blog/css/article-hero.css?v=20261009-2">
   <link rel="stylesheet" href="/blog/css/polish.css?v=20261023-1">
+  <link rel="stylesheet" href="/blog/css/academic.css?v=20261118-1">
+  
   
   
   
   <link rel="icon" href="/blog/avatar.jpg" type="image/jpeg">
-  <meta name="description" content="Notes by KO Ho Tin (BlackCat) on LLM agents, formulaic alpha-factor mining, computer vision, and research tooling.">
+  <meta name="description" content="Research notes by KO Ho Tin (BlackCat) on LLM agents, AI security, quantitative alpha mining, continual learning, and mathematical foundations.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="BlackCat">
 <meta property="og:url" content="https://b143kc47.github.io/blog/categories/Paper-Learning/index.html">
 <meta property="og:site_name" content="BlackCat">
-<meta property="og:description" content="Notes by KO Ho Tin (BlackCat) on LLM agents, formulaic alpha-factor mining, computer vision, and research tooling.">
+<meta property="og:description" content="Research notes by KO Ho Tin (BlackCat) on LLM agents, AI security, quantitative alpha mining, continual learning, and mathematical foundations.">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://b143kc47.github.io/blog/avatar.jpg">
 <meta property="article:author" content="KO Ho Tin">
 <meta property="article:tag" content="KO Ho Tin, BlackCat, B143KC47, blog, LLM agents, alpha mining, computer vision">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://b143kc47.github.io/blog/avatar.jpg">
-<!-- hexo injector head_end start --><script>window.MathJax = {"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]],"processEscapes":true},"options":{"skipHtmlTags":["script","noscript","style","textarea","pre","code"],"enableMenu":false}};</script>
+<!-- hexo injector head_end start --><script>window.MathJax = {"loader":{"load":["[tex]/cancel"]},"tex":{"packages":{"[+]":["cancel"]},"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]],"processEscapes":true,"tags":"ams"},"options":{"skipHtmlTags":["script","noscript","style","textarea","pre","code"],"enableMenu":false}};</script>
 <script async id="mathjax-cdn-script" src="/blog/vendor/mathjax/tex-chtml.js?v=3.2.2"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
 
   <body>
@@ -46,10 +48,13 @@
     <nav class="site-nav" aria-label="Primary">
       
         
-        <a class="nav-link" href="/blog/about/">About</a>
+        <a class="nav-link" href="/blog/papers/">Papers</a>
       
         
         <a class="nav-link" href="/blog/archives/">Archive</a>
+      
+        
+        <a class="nav-link" href="/blog/about/">About</a>
       
         
         <a class="nav-link" href="/blog/search/">Search</a>
@@ -70,7 +75,7 @@
     <div class="measure-wide">
       <p class="kicker">[ Series ]</p>
       <h1 class="hero-title">Paper-Learning</h1>
-      <p class="muted">6 notes</p>
+      <p class="muted">4 notes</p>
       
 
 
@@ -78,46 +83,18 @@
   <nav class="series-nav" aria-label="Series">
     <a class="series-link" href="/blog/">All</a>
     
-      <a class="series-link series-topic" href="/blog/categories/AI/">AI</a>
-    
-      <a class="series-link series-topic" href="/blog/categories/Book-Reading/">Book Reading</a>
-    
-      <a class="series-link series-topic" href="/blog/categories/Cognitive-Science/">Cognitive Science</a>
-    
-      <a class="series-link series-topic" href="/blog/categories/Continue-Learning/">Continue Learning</a>
-    
       <a class="series-link series-topic is-on" href="/blog/categories/Paper-Learning/" aria-current="page">Paper-Learning</a>
     
+      <a class="series-link series-topic" href="/blog/categories/Continual-Learning/">Continual-Learning</a>
     
-      <details class="series-topics-more">
-        <summary class="series-topics-toggle" aria-controls="all-topics">
-          <span>View all topics</span>
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="m5 7.5 5 5 5-5"/></svg>
-        </summary>
-        <div class="series-topics-panel" id="all-topics" role="group" aria-label="All topics">
-          
-            <a class="series-link series-topics-item" href="/blog/categories/AI/">AI</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Book-Reading/">Book Reading</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Cognitive-Science/">Cognitive Science</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Continue-Learning/">Continue Learning</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Economics-Finance/">Economics&amp;Finance</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Kaggle/">Kaggle</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/MIT-18-01/">MIT 18.01</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Neural-Networks-Zero-to-Hero/">Neural-Networks-Zero-to-Hero</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Neuro-Sceince/">Neuro Sceince</a>
-          
-            <a class="series-link series-topics-item is-on" href="/blog/categories/Paper-Learning/" aria-current="page">Paper-Learning</a>
-          
-        </div>
-      </details>
+      <a class="series-link series-topic" href="/blog/categories/Zero-to-Hero/">Zero-to-Hero</a>
+    
+      <a class="series-link series-topic" href="/blog/categories/Courses/">Courses</a>
+    
+      <a class="series-link series-topic" href="/blog/categories/Kaggle/">Kaggle</a>
+    
+      <a class="series-link series-topic" href="/blog/categories/Books/">Books</a>
+    
     
   </nav>
 
@@ -135,37 +112,7 @@
           
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/10/18/Paper-Learning/AI%20paper/OpenAI/Weight%20normalization/" aria-hidden="true" tabindex="-1">
-    
-      
-
-
-<img src="/blog/images/covers/gpt-20261019/weight-normalization.webp" alt=""
-  width="640" height="480"
-  loading="lazy" decoding="async"
-  data-cover-style="processed"
-  data-cover-options="{}">
-
-    
-  </a>
-  <div class="card-body">
-    <h3 class="card-title">
-      <a href="/blog/2026/10/18/Paper-Learning/AI%20paper/OpenAI/Weight%20normalization/">Weight normalization</a>
-    </h3>
-    <p class="meta">
-      
-        <a href="/blog/categories/Paper-Learning/">Paper-Learning</a>
-      
-      <time datetime="2026-10-18T12:44:33.000Z">2026-10-18</time>
-    </p>
-  </div>
-</article>
-
-        
-          
-
-<article class="card">
-  <a class="card-media" href="/blog/2026/10/16/Paper-Learning/AI%20paper/Conference/The%20First%20Law%20of%20Complexodynamics/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/10/16/Paper-Learning/Complex-Systems/The%20First%20Law%20of%20Complexodynamics/" aria-hidden="true" tabindex="-1">
     
       
 
@@ -180,7 +127,7 @@
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/10/16/Paper-Learning/AI%20paper/Conference/The%20First%20Law%20of%20Complexodynamics/">The First Law of Complexodynamics</a>
+      <a href="/blog/2026/10/16/Paper-Learning/Complex-Systems/The%20First%20Law%20of%20Complexodynamics/">The First Law of Complexodynamics</a>
     </h3>
     <p class="meta">
       
@@ -195,7 +142,37 @@
           
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/10/09/Paper-Learning/AI%20paper/OpenAI/OpenAI%20Gym/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/10/14/Paper-Learning/Deep-Learning/Deep%20Residual%20Learning%20for%20Image%20Recognition/" aria-hidden="true" tabindex="-1">
+    
+      
+
+
+<img src="/blog/images/covers/gpt-20261019/residual-learning.webp" alt=""
+  width="640" height="480"
+  loading="lazy" decoding="async"
+  data-cover-style="processed"
+  data-cover-options="{}">
+
+    
+  </a>
+  <div class="card-body">
+    <h3 class="card-title">
+      <a href="/blog/2026/10/14/Paper-Learning/Deep-Learning/Deep%20Residual%20Learning%20for%20Image%20Recognition/">Deep Residual Learning for Image Recognition</a>
+    </h3>
+    <p class="meta">
+      
+        <a href="/blog/categories/Paper-Learning/">Paper-Learning</a>
+      
+      <time datetime="2026-10-14T14:36:27.000Z">2026-10-14</time>
+    </p>
+  </div>
+</article>
+
+        
+          
+
+<article class="card">
+  <a class="card-media" href="/blog/2026/10/09/Paper-Learning/RL-and-Agents/OpenAI%20Gym/" aria-hidden="true" tabindex="-1">
     
       
 
@@ -210,7 +187,7 @@
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/10/09/Paper-Learning/AI%20paper/OpenAI/OpenAI%20Gym/">OpenAI Gym</a>
+      <a href="/blog/2026/10/09/Paper-Learning/RL-and-Agents/OpenAI%20Gym/">OpenAI Gym</a>
     </h3>
     <p class="meta">
       
@@ -225,7 +202,7 @@
           
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/08/17/Paper-Learning/AI%20paper/Conference/Other/Alphabench/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/08/17/Paper-Learning/Quant-Alpha/Alphabench/" aria-hidden="true" tabindex="-1">
     
       
 
@@ -240,73 +217,13 @@
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/08/17/Paper-Learning/AI%20paper/Conference/Other/Alphabench/">Alphabench</a>
+      <a href="/blog/2026/08/17/Paper-Learning/Quant-Alpha/Alphabench/">AlphaBench: Formulaic Alpha Factor Mining with LLMs</a>
     </h3>
     <p class="meta">
       
         <a href="/blog/categories/Paper-Learning/">Paper-Learning</a>
       
       <time datetime="2026-08-16T16:19:02.000Z">2026-08-17</time>
-    </p>
-  </div>
-</article>
-
-        
-          
-
-<article class="card">
-  <a class="card-media" href="/blog/2026/08/16/Paper-Learning/AI%20paper/Conference/Other/Evoalpha/" aria-hidden="true" tabindex="-1">
-    
-      
-
-
-<img src="/blog/images/covers/gpt-20261019/evoalpha.webp" alt=""
-  width="640" height="480"
-  loading="lazy" decoding="async"
-  data-cover-style="processed"
-  data-cover-options="{}">
-
-    
-  </a>
-  <div class="card-body">
-    <h3 class="card-title">
-      <a href="/blog/2026/08/16/Paper-Learning/AI%20paper/Conference/Other/Evoalpha/">Evoalpha</a>
-    </h3>
-    <p class="meta">
-      
-        <a href="/blog/categories/Paper-Learning/">Paper-Learning</a>
-      
-      <time datetime="2026-08-16T15:01:22.000Z">2026-08-16</time>
-    </p>
-  </div>
-</article>
-
-        
-          
-
-<article class="card">
-  <a class="card-media" href="/blog/2026/08/16/Paper-Learning/AI%20paper/Conference/Other/Qfinzero/" aria-hidden="true" tabindex="-1">
-    
-      
-
-
-<img src="/blog/images/covers/gpt-20261019/qfinzero.webp" alt=""
-  width="640" height="480"
-  loading="lazy" decoding="async"
-  data-cover-style="processed"
-  data-cover-options="{}">
-
-    
-  </a>
-  <div class="card-body">
-    <h3 class="card-title">
-      <a href="/blog/2026/08/16/Paper-Learning/AI%20paper/Conference/Other/Qfinzero/">Qfinzero</a>
-    </h3>
-    <p class="meta">
-      
-        <a href="/blog/categories/Paper-Learning/">Paper-Learning</a>
-      
-      <time datetime="2026-08-16T15:01:06.000Z">2026-08-16</time>
     </p>
   </div>
 </article>
@@ -324,12 +241,12 @@
     <footer class="site-foot">
   <div class="measure">
     
-      <p class="kicker foot-kicker">This is my blog.</p>
+      <p class="kicker foot-kicker">[ Research Notebook ]</p>
     
     
       <div class="foot-intro">
         
-          <p>I am KO Ho Tin (BlackCat / B143KC47), an AI researcher and engineering student in Hong Kong. These notes are the working layer of my research profile — what I am reading, building, and trying to make true.</p>
+          <p>KO Ho Tin (BlackCat / B143KC47) — AI researcher in Hong Kong working on LLM agents, formulaic alpha-factor mining, continual learning, and computer vision.</p>
         
       </div>
     
@@ -429,7 +346,7 @@
       </nav>
     
     
-      <p class="muted foot-credit">KO Ho Tin · AI researcher &amp; builder</p>
+      <p class="muted foot-credit">KO Ho Tin · ORCID 0009-0002-7298-8196</p>
     
   </div>
 </footer>

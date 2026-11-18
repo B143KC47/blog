@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Predicting Student Health Risk · BlackCat</title>
-  <meta name="description" content="Notes by KO Ho Tin (BlackCat) on LLM agents, formulaic alpha-factor mining, computer vision, and research tooling.">
+  <meta name="description" content="类别极度不平衡下的学生健康风险预测：平衡准确率（Balanced Accuracy）评估指标分析与决策树规则归纳。">
   <meta name="author" content="KO Ho Tin">
   <meta name="theme-color" content="#000000">
   <meta name="color-scheme" content="dark">
@@ -19,27 +19,37 @@
   <link rel="stylesheet" href="/blog/css/article-footer.css?v=20261009-2">
   <link rel="stylesheet" href="/blog/css/article-hero.css?v=20261009-2">
   <link rel="stylesheet" href="/blog/css/polish.css?v=20261023-1">
+  <link rel="stylesheet" href="/blog/css/academic.css?v=20261118-1">
   
+  
+  
+    <meta name="citation_title" content="Predicting Student Health Risk">
+    <meta name="citation_author" content="Ko, Ho Tin">
+    <meta name="citation_author_orcid" content="0009-0002-7298-8196">
+    <meta name="citation_publication_date" content="2026/10/06">
+    <meta name="citation_journal_title" content="BlackCat Research Notebook">
+    <meta name="citation_public_url" content="https://b143kc47.github.io/blog/2026/10/06/Kaggle/Predicting%20Student%20Health%20Risk/">
+    <meta name="citation_keywords" content="Imbalanced Classification; Balanced Accuracy; Decision Trees">
   
   
   <link rel="icon" href="/blog/avatar.jpg" type="image/jpeg">
-  <meta name="description" content="Kaggle Competition (URL) : https:&#x2F;&#x2F;www.kaggle.com&#x2F;competitions&#x2F;playground-series-s6e7  题目背景每一行是一个学生健康状况的记录，然后我们的target 是预测 health_condition (qualitative, ordinal )： health_condition要预测的状态：   at-risk">
+  <meta name="description" content="类别极度不平衡下的学生健康风险预测：平衡准确率（Balanced Accuracy）评估指标分析与决策树规则归纳。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Predicting Student Health Risk">
 <meta property="og:url" content="https://b143kc47.github.io/blog/2026/10/06/Kaggle/Predicting%20Student%20Health%20Risk/index.html">
 <meta property="og:site_name" content="BlackCat">
-<meta property="og:description" content="Kaggle Competition (URL) : https:&#x2F;&#x2F;www.kaggle.com&#x2F;competitions&#x2F;playground-series-s6e7  题目背景每一行是一个学生健康状况的记录，然后我们的target 是预测 health_condition (qualitative, ordinal )： health_condition要预测的状态：   at-risk">
+<meta property="og:description" content="类别极度不平衡下的学生健康风险预测：平衡准确率（Balanced Accuracy）评估指标分析与决策树规则归纳。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://b143kc47.github.io/blog/images/covers/gpt-20261019/student-health.webp">
 <meta property="article:published_time" content="2026-10-05T17:41:22.000Z">
-<meta property="article:modified_time" content="2026-10-05T17:41:22.149Z">
+<meta property="article:modified_time" content="2026-11-18T05:35:24.398Z">
 <meta property="article:author" content="KO Ho Tin">
-<meta property="article:tag" content="Kaggle">
-<meta property="article:tag" content="分类模型">
-<meta property="article:tag" content="决策树">
+<meta property="article:tag" content="Imbalanced Classification">
+<meta property="article:tag" content="Balanced Accuracy">
+<meta property="article:tag" content="Decision Trees">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://b143kc47.github.io/blog/images/covers/gpt-20261019/student-health.webp">
-<!-- hexo injector head_end start --><script>window.MathJax = {"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]],"processEscapes":true},"options":{"skipHtmlTags":["script","noscript","style","textarea","pre","code"],"enableMenu":false}};</script>
+<!-- hexo injector head_end start --><script>window.MathJax = {"loader":{"load":["[tex]/cancel"]},"tex":{"packages":{"[+]":["cancel"]},"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]],"processEscapes":true,"tags":"ams"},"options":{"skipHtmlTags":["script","noscript","style","textarea","pre","code"],"enableMenu":false}};</script>
 <script async id="mathjax-cdn-script" src="/blog/vendor/mathjax/tex-chtml.js?v=3.2.2"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
 
   <body>
@@ -50,10 +60,13 @@
     <nav class="site-nav" aria-label="Primary">
       
         
-        <a class="nav-link" href="/blog/about/">About</a>
+        <a class="nav-link" href="/blog/papers/">Papers</a>
       
         
         <a class="nav-link" href="/blog/archives/">Archive</a>
+      
+        
+        <a class="nav-link" href="/blog/about/">About</a>
       
         
         <a class="nav-link" href="/blog/search/">Search</a>
@@ -79,11 +92,17 @@
   <div class="post-well">
     <div class="post-head">
       <p class="article-hero-date"><time datetime="2026-10-05T17:41:22.000Z">2026-10-06</time></p>
-      <h1 class="post-title">Predicting Student Health Risk</h1>
+      <h1 class="post-title">题目背景</h1>
+      
+        <p class="lede">类别极度不平衡下的学生健康风险预测：平衡准确率（Balanced Accuracy）评估指标分析与决策树规则归纳。</p>
       
       <p class="meta">
         
           <a href="/blog/categories/Kaggle/">Kaggle</a>
+        
+        
+          <span class="article-kind-badge">Empirical Study</span>
+        
         
         <span>3 min read</span>
       </p>
@@ -121,8 +140,30 @@
       
       <div class="post-reading-content">
         
-        <div class="prose"><p>Kaggle Competition (URL) : <a target="_blank" rel="noopener" href="https://www.kaggle.com/competitions/playground-series-s6e7">https://www.kaggle.com/competitions/playground-series-s6e7</a> </p>
-<h1 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h1><p>每一行是一个学生健康状况的记录，然后我们的target 是预测 <code>health_condition</code> (qualitative, ordinal )：</p>
+        
+<aside class="paper-meta-card" aria-label="Target publication metadata">
+  <p class="source-kicker">[ Evaluation Benchmark ]</p>
+  <p class="paper-meta-title">
+    
+      <a href="https://www.kaggle.com/competitions/playground-series-s6e7" target="_blank" rel="noopener noreferrer">Predicting Student Health Risk (Playground Series S6E7)</a>
+    
+  </p>
+  
+    <p class="source-meta">Kaggle Competition · 2026</p>
+  
+  
+    <div class="paper-meta-links">
+      
+        <a class="paper-meta-chip" href="https://www.kaggle.com/competitions/playground-series-s6e7" target="_blank" rel="noopener noreferrer">Specification ↗</a>
+      
+      
+      
+    </div>
+  
+</aside>
+
+
+        <div class="prose"><p>每一行是一个学生健康状况的记录，然后我们的target 是预测 <code>health_condition</code> (qualitative, ordinal )：</p>
 <p>health_condition要预测的状态： </p>
 <ul>
 <li>at-risk </li>
@@ -247,6 +288,8 @@ $$</div>
 规则预测错误：              4,101
 Accuracy：                 99.1985% (并非BA)</code></pre>
 <h1 id="自己的思路"><a href="#自己的思路" class="headerlink" title="自己的思路"></a>自己的思路</h1><h1 id="他人的思路"><a href="#他人的思路" class="headerlink" title="他人的思路"></a>他人的思路</h1><h1 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h1></div>
+        
+
       </div>
     </div>
 
@@ -292,7 +335,7 @@ Accuracy：                 99.1985% (并非BA)</code></pre>
               
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/10/18/Kaggle/Kaggle%20learning%20journey/Data%20cleaning/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/10/18/Kaggle/Data-Science-Workflow/Data%20cleaning/" aria-hidden="true" tabindex="-1">
     
       
 
@@ -307,7 +350,7 @@ Accuracy：                 99.1985% (并非BA)</code></pre>
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/10/18/Kaggle/Kaggle%20learning%20journey/Data%20cleaning/">Data cleaning</a>
+      <a href="/blog/2026/10/18/Kaggle/Data-Science-Workflow/Data%20cleaning/">Data cleaning</a>
     </h3>
     <p class="meta">
       
@@ -322,7 +365,7 @@ Accuracy：                 99.1985% (并非BA)</code></pre>
               
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/10/18/Kaggle/Kaggle%20learning%20journey/Pandas/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/10/18/Kaggle/Data-Science-Workflow/Pandas/" aria-hidden="true" tabindex="-1">
     
       
 
@@ -337,7 +380,7 @@ Accuracy：                 99.1985% (并非BA)</code></pre>
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/10/18/Kaggle/Kaggle%20learning%20journey/Pandas/">Pandas</a>
+      <a href="/blog/2026/10/18/Kaggle/Data-Science-Workflow/Pandas/">Pandas</a>
     </h3>
     <p class="meta">
       
@@ -359,19 +402,45 @@ Accuracy：                 99.1985% (并非BA)</code></pre>
     <ul class="article-info-topics" aria-label="Year and topics">
       <li><a class="article-info-chip" href="/blog/archives/2026/">2026</a></li>
       
+        <li><a class="article-info-chip" href="/blog/papers/">Empirical Study</a></li>
+      
+      
         <li><a class="article-info-chip" href="/blog/categories/Kaggle/">Kaggle</a></li>
       
-        <li><a class="article-info-chip" href="/blog/tags/%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/">分类模型</a></li>
+        <li><a class="article-info-chip" href="/blog/tags/Imbalanced-Classification/">Imbalanced Classification</a></li>
       
-        <li><a class="article-info-chip" href="/blog/tags/%E5%86%B3%E7%AD%96%E6%A0%91/">决策树</a></li>
+        <li><a class="article-info-chip" href="/blog/tags/Balanced-Accuracy/">Balanced Accuracy</a></li>
+      
+        <li><a class="article-info-chip" href="/blog/tags/Decision-Trees/">Decision Trees</a></li>
       
     </ul>
     <div class="article-info-author">
       <p class="article-info-label">Author</p>
-      
-        <a class="article-info-name" href="/blog/about/" rel="author">KO Ho Tin</a>
-      
+      <div class="article-info-author-row">
+        
+          <a class="article-info-name" href="/blog/about/" rel="author">KO Ho Tin</a>
+        
+        
+          <a class="article-info-orcid" href="https://orcid.org/0009-0002-7298-8196" target="_blank" rel="me noopener noreferrer">ORCID 0009-0002-7298-8196</a>
+        
+      </div>
     </div>
+    
+      <details class="fold article-cite-fold">
+        <summary>Cite this note (BibTeX)</summary>
+        <div class="fold-body">
+          <pre class="literal-block literal-block--code"><code>@misc{ko2026predicting,
+  author       = {Ko, Ho Tin},
+  title        = {{Predicting Student Health Risk}},
+  year         = {2026},
+  month        = 10月,
+  howpublished = {BlackCat Research Notebook},
+  note         = {ORCID: 0009-0002-7298-8196},
+  url          = {https://b143kc47.github.io/blog/2026/10/06/Kaggle/Predicting%20Student%20Health%20Risk/}
+}</code></pre>
+        </div>
+      </details>
+    
     
   </div>
 </footer>
@@ -384,12 +453,12 @@ Accuracy：                 99.1985% (并非BA)</code></pre>
     <footer class="site-foot">
   <div class="measure">
     
-      <p class="kicker foot-kicker">This is my blog.</p>
+      <p class="kicker foot-kicker">[ Research Notebook ]</p>
     
     
       <div class="foot-intro">
         
-          <p>I am KO Ho Tin (BlackCat / B143KC47), an AI researcher and engineering student in Hong Kong. These notes are the working layer of my research profile — what I am reading, building, and trying to make true.</p>
+          <p>KO Ho Tin (BlackCat / B143KC47) — AI researcher in Hong Kong working on LLM agents, formulaic alpha-factor mining, continual learning, and computer vision.</p>
         
       </div>
     
@@ -489,7 +558,7 @@ Accuracy：                 99.1985% (并非BA)</code></pre>
       </nav>
     
     
-      <p class="muted foot-credit">KO Ho Tin · AI researcher &amp; builder</p>
+      <p class="muted foot-credit">KO Ho Tin · ORCID 0009-0002-7298-8196</p>
     
   </div>
 </footer>

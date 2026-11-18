@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>AI Agent Security · BlackCat</title>
-  <meta name="description" content="Notes by KO Ho Tin (BlackCat) on LLM agents, formulaic alpha-factor mining, computer vision, and research tooling.">
+  <meta name="description" content="Kaggle AI Agent Security 多步骤工具攻击竞赛复盘：公开榜与私有榜护栏迁移风险、双轨组合吞吐量建模及与第一名 GCG 方案的对比反思。">
   <meta name="author" content="KO Ho Tin">
   <meta name="theme-color" content="#000000">
   <meta name="color-scheme" content="dark">
@@ -19,25 +19,38 @@
   <link rel="stylesheet" href="/blog/css/article-footer.css?v=20261009-2">
   <link rel="stylesheet" href="/blog/css/article-hero.css?v=20261009-2">
   <link rel="stylesheet" href="/blog/css/polish.css?v=20261023-1">
+  <link rel="stylesheet" href="/blog/css/academic.css?v=20261118-1">
   
+  
+  
+    <meta name="citation_title" content="AI Agent Security">
+    <meta name="citation_author" content="Ko, Ho Tin">
+    <meta name="citation_author_orcid" content="0009-0002-7298-8196">
+    <meta name="citation_publication_date" content="2026/10/25">
+    <meta name="citation_journal_title" content="BlackCat Research Notebook">
+    <meta name="citation_public_url" content="https://b143kc47.github.io/blog/2026/10/25/Kaggle/AI%20Agent%20Security/">
+    <meta name="citation_keywords" content="LLM Agents; AI Security; Confused Deputy; Adversarial Evaluation">
   
   
   <link rel="icon" href="/blog/avatar.jpg" type="image/jpeg">
-  <meta name="description" content="AI Agent Security: Multi-Step Tool Attacks  AI 智能体安全：多步骤工具攻击最终私有榜（private leaderboard）成绩为 19.245，排名第 139 位。最终选定的两个提交是 v107 和原始版 F121。按 Kaggle 通常规则，最终成绩取选定提交中私有分较高的一个，即 F121 的 19.245 本次比赛中 公榜到私榜中的严重的sh">
+  <meta name="description" content="Kaggle AI Agent Security 多步骤工具攻击竞赛复盘：公开榜与私有榜护栏迁移风险、双轨组合吞吐量建模及与第一名 GCG 方案的对比反思。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AI Agent Security">
 <meta property="og:url" content="https://b143kc47.github.io/blog/2026/10/25/Kaggle/AI%20Agent%20Security/index.html">
 <meta property="og:site_name" content="BlackCat">
-<meta property="og:description" content="AI Agent Security: Multi-Step Tool Attacks  AI 智能体安全：多步骤工具攻击最终私有榜（private leaderboard）成绩为 19.245，排名第 139 位。最终选定的两个提交是 v107 和原始版 F121。按 Kaggle 通常规则，最终成绩取选定提交中私有分较高的一个，即 F121 的 19.245 本次比赛中 公榜到私榜中的严重的sh">
+<meta property="og:description" content="Kaggle AI Agent Security 多步骤工具攻击竞赛复盘：公开榜与私有榜护栏迁移风险、双轨组合吞吐量建模及与第一名 GCG 方案的对比反思。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://b143kc47.github.io/blog/avatar.jpg">
 <meta property="article:published_time" content="2026-10-25T15:59:42.000Z">
-<meta property="article:modified_time" content="2026-10-30T15:54:14.002Z">
+<meta property="article:modified_time" content="2026-11-18T05:35:24.391Z">
 <meta property="article:author" content="KO Ho Tin">
-<meta property="article:tag" content="KO Ho Tin, BlackCat, B143KC47, blog, LLM agents, alpha mining, computer vision">
+<meta property="article:tag" content="LLM Agents">
+<meta property="article:tag" content="AI Security">
+<meta property="article:tag" content="Confused Deputy">
+<meta property="article:tag" content="Adversarial Evaluation">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://b143kc47.github.io/blog/avatar.jpg">
-<!-- hexo injector head_end start --><script>window.MathJax = {"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]],"processEscapes":true},"options":{"skipHtmlTags":["script","noscript","style","textarea","pre","code"],"enableMenu":false}};</script>
+<!-- hexo injector head_end start --><script>window.MathJax = {"loader":{"load":["[tex]/cancel"]},"tex":{"packages":{"[+]":["cancel"]},"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]],"processEscapes":true,"tags":"ams"},"options":{"skipHtmlTags":["script","noscript","style","textarea","pre","code"],"enableMenu":false}};</script>
 <script async id="mathjax-cdn-script" src="/blog/vendor/mathjax/tex-chtml.js?v=3.2.2"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
 
   <body>
@@ -48,10 +61,13 @@
     <nav class="site-nav" aria-label="Primary">
       
         
-        <a class="nav-link" href="/blog/about/">About</a>
+        <a class="nav-link" href="/blog/papers/">Papers</a>
       
         
         <a class="nav-link" href="/blog/archives/">Archive</a>
+      
+        
+        <a class="nav-link" href="/blog/about/">About</a>
       
         
         <a class="nav-link" href="/blog/search/">Search</a>
@@ -79,9 +95,15 @@
       <p class="article-hero-date"><time datetime="2026-10-25T15:59:42.000Z">2026-10-25</time></p>
       <h1 class="post-title">AI Agent Security: Multi-Step Tool Attacks AI 智能体安全：多步骤工具攻击</h1>
       
+        <p class="lede">Kaggle AI Agent Security 多步骤工具攻击竞赛复盘：公开榜与私有榜护栏迁移风险、双轨组合吞吐量建模及与第一名 GCG 方案的对比反思。</p>
+      
       <p class="meta">
         
           <a href="/blog/categories/Kaggle/">Kaggle</a>
+        
+        
+          <span class="article-kind-badge">Empirical Study</span>
+        
         
         <span>17 min read</span>
       </p>
@@ -185,6 +207,29 @@
         
           <div class="outline-mobile-bar" hidden><button type="button" class="outline-toggle" aria-label="打开目录" aria-haspopup="dialog" aria-controls="article-outline-dialog" aria-expanded="false"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M7 5h10M7 10h10M7 15h10M3 5h1M3 10h1M3 15h1"/></svg></button></div>
         
+        
+<aside class="paper-meta-card" aria-label="Target publication metadata">
+  <p class="source-kicker">[ Evaluation Benchmark ]</p>
+  <p class="paper-meta-title">
+    
+      <a href="https://www.kaggle.com/competitions/ai-agent-security-multi-step-tool-attacks" target="_blank" rel="noopener noreferrer">AI Agent Security: Multi-Step Tool Attacks</a>
+    
+  </p>
+  
+    <p class="source-meta">GPT-OSS 20B &amp; Gemma 4 26B Evaluation Sandbox · Kaggle Competition · 2026</p>
+  
+  
+    <div class="paper-meta-links">
+      
+        <a class="paper-meta-chip" href="https://www.kaggle.com/competitions/ai-agent-security-multi-step-tool-attacks" target="_blank" rel="noopener noreferrer">Specification ↗</a>
+      
+      
+      
+    </div>
+  
+</aside>
+
+
         <div class="prose"><p>最终私有榜（private leaderboard）成绩为 19.245，排名第 139 位。最终选定的两个提交是 v107 和原始版 F121。按 Kaggle 通常规则，最终成绩取选定提交中私有分较高的一个，即 F121 的 19.245</p>
 <p>本次比赛中 公榜到私榜中的严重的shake-up 当时根据公开与私有护栏的差异，判断存在较大的迁移风险；所以会有比较严重的shaking 。较高的公榜分数（public score）不一定意味着能够迁移到私榜分数,所以当时我在比赛开发的过程中采用双轨优化的研究路线：一条追求公开分，一条追求能迁移到私有榜的分数。</p>
 <p>所选的submission<br>数据外泄（EXFILTRATION）公榜分数为 82.620，私榜分数为 0.000；<br>混淆代理（CD,CONFUSED_DEPUTY）的公榜和私榜分数均为 19.245;</p>
@@ -257,7 +302,7 @@
 </tr>
 </tbody></table></div>
 <p>评分器（scorer）透过判定执行的严重程度（severity）和不同的执行模式。</p>
-<p><img src="/blog/2026/10/25/Kaggle/AI Agent Security/image-1.png" alt="流程"></p>
+<figure class="academic-figure"><img src="/blog/2026/10/25/Kaggle/AI Agent Security/image-1.png" alt="评测器三阶段架构：候选生成、公开护栏回放与私有护栏回放独立计时"><figcaption><span class="academic-fig-num">Fig. 1</span> — 评测器三阶段架构：候选生成、公开护栏回放与私有护栏回放独立计时</figcaption></figure>
 <p>资源限制： </p>
 <p>每个模型的生成、公开回放、私有回放，各自独立获得 8,750 秒</p>
 <h3 id="2-3-计分规则"><a href="#2-3-计分规则" class="headerlink" title="2.3 计分规则"></a>2.3 计分规则</h3><div class="table-scroll" data-columns="3" style="--table-columns:3"><table>
@@ -462,7 +507,7 @@ $$</div>
 <td>122</td>
 </tr>
 </tbody></table></div>
-<p>这里我们需要挑选出能触发CD的候选,我们不需要任何不会触发的来浪费我们时间。<br>然后在阶段1(我们代码攻击时候)先测试，生成阶段筛选出曾成功的候选，回放阶段也需要重新验证。(测评器回访的时候)<br>这里最主要看的是公榜的护栏。<br><img src="/blog/2026/10/25/Kaggle/AI Agent Security/image-2.png" alt="alt text"></p>
+<p>这里我们需要挑选出能触发CD的候选,我们不需要任何不会触发的来浪费我们时间。<br>然后在阶段1(我们代码攻击时候)先测试，生成阶段筛选出曾成功的候选，回放阶段也需要重新验证。(测评器回访的时候)<br>这里最主要看的是公榜的护栏。<br><img src="/blog/2026/10/25/Kaggle/AI Agent Security/image-2.png" alt="混淆代理（CONFUSED_DEPUTY）候选筛选与评测器回放验证流程"></p>
 <p><strong>UTA 附加组件（对冲）。</strong></p>
 <p>一个双消息UTA(UNTRUSTED_TO_ACTION)的结构：</p>
 <ul>
@@ -627,8 +672,7 @@ $$</div>
 <li><strong>搜索方法</strong>：用 GCG（Greedy Coordinate Gradient）在提示词 token 上搜索。损失函数是第一跳目标调用的平均负对数似然，加上第二跳的 logit margin 项。任何改变第一跳贪心输出的编辑都直接拒绝。</li>
 </ol>
 <p>第二跳的 margin 定义为：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><code class="hljs latex">m(x)=z<span class="hljs-built_in">_</span>&#123;<span class="hljs-keyword">\mathrm</span>&#123;EOG&#125;&#125;(x)-<span class="hljs-keyword">\max</span><span class="hljs-built_in">_</span>&#123;v<span class="hljs-keyword">\neq</span> <span class="hljs-keyword">\mathrm</span>&#123;EOG&#125;&#125; z<span class="hljs-built_in">_</span>v(x)<br></code></pre></td></tr></table></figure>
-
+<p>$<br>m(x)&#x3D;z_{\mathrm{EOG}}(x)-\max_{v\neq \mathrm{EOG}} z_v(x)<br>$</p>
 <p>m &gt; 0 时，EOG 成为贪心解码的下一个 token。这里 x 仍然是提示词 token。logit margin 是搜索目标，不是直接修改模型输出分数的权限。</p>
 <h3 id="6-2-代理模型与迁移"><a href="#6-2-代理模型与迁移" class="headerlink" title="6.2 代理模型与迁移"></a>6.2 代理模型与迁移</h3><ul>
 <li>竞赛模型是 GGUF 量化格式，不提供梯度。冠军用 BF16 原始权重作为代理（proxy）产生候选，再用 ridge 模型重排，最后在目标 GGUF 上验证。</li>
@@ -692,6 +736,8 @@ $$</div>
 <li><a target="_blank" rel="noopener" href="https://github.com/Jun-Morita/kaggle-ai-agent-security">Jun-Morita 仓库</a></li>
 </ul>
 </div>
+        
+
       </div>
     </div>
 
@@ -708,7 +754,7 @@ $$</div>
               
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/10/18/Kaggle/Kaggle%20learning%20journey/Data%20cleaning/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/10/18/Kaggle/Data-Science-Workflow/Data%20cleaning/" aria-hidden="true" tabindex="-1">
     
       
 
@@ -723,7 +769,7 @@ $$</div>
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/10/18/Kaggle/Kaggle%20learning%20journey/Data%20cleaning/">Data cleaning</a>
+      <a href="/blog/2026/10/18/Kaggle/Data-Science-Workflow/Data%20cleaning/">Data cleaning</a>
     </h3>
     <p class="meta">
       
@@ -738,7 +784,7 @@ $$</div>
               
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/10/18/Kaggle/Kaggle%20learning%20journey/Pandas/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/10/18/Kaggle/Data-Science-Workflow/Pandas/" aria-hidden="true" tabindex="-1">
     
       
 
@@ -753,7 +799,7 @@ $$</div>
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/10/18/Kaggle/Kaggle%20learning%20journey/Pandas/">Pandas</a>
+      <a href="/blog/2026/10/18/Kaggle/Data-Science-Workflow/Pandas/">Pandas</a>
     </h3>
     <p class="meta">
       
@@ -805,15 +851,47 @@ $$</div>
     <ul class="article-info-topics" aria-label="Year and topics">
       <li><a class="article-info-chip" href="/blog/archives/2026/">2026</a></li>
       
+        <li><a class="article-info-chip" href="/blog/papers/">Empirical Study</a></li>
+      
+      
         <li><a class="article-info-chip" href="/blog/categories/Kaggle/">Kaggle</a></li>
+      
+        <li><a class="article-info-chip" href="/blog/tags/LLM-Agents/">LLM Agents</a></li>
+      
+        <li><a class="article-info-chip" href="/blog/tags/AI-Security/">AI Security</a></li>
+      
+        <li><a class="article-info-chip" href="/blog/tags/Confused-Deputy/">Confused Deputy</a></li>
+      
+        <li><a class="article-info-chip" href="/blog/tags/Adversarial-Evaluation/">Adversarial Evaluation</a></li>
       
     </ul>
     <div class="article-info-author">
       <p class="article-info-label">Author</p>
-      
-        <a class="article-info-name" href="/blog/about/" rel="author">KO Ho Tin</a>
-      
+      <div class="article-info-author-row">
+        
+          <a class="article-info-name" href="/blog/about/" rel="author">KO Ho Tin</a>
+        
+        
+          <a class="article-info-orcid" href="https://orcid.org/0009-0002-7298-8196" target="_blank" rel="me noopener noreferrer">ORCID 0009-0002-7298-8196</a>
+        
+      </div>
     </div>
+    
+      <details class="fold article-cite-fold">
+        <summary>Cite this note (BibTeX)</summary>
+        <div class="fold-body">
+          <pre class="literal-block literal-block--code"><code>@misc{ko2026ai,
+  author       = {Ko, Ho Tin},
+  title        = {{AI Agent Security}},
+  year         = {2026},
+  month        = 10月,
+  howpublished = {BlackCat Research Notebook},
+  note         = {ORCID: 0009-0002-7298-8196},
+  url          = {https://b143kc47.github.io/blog/2026/10/25/Kaggle/AI%20Agent%20Security/}
+}</code></pre>
+        </div>
+      </details>
+    
     
   </div>
 </footer>
@@ -826,12 +904,12 @@ $$</div>
     <footer class="site-foot">
   <div class="measure">
     
-      <p class="kicker foot-kicker">This is my blog.</p>
+      <p class="kicker foot-kicker">[ Research Notebook ]</p>
     
     
       <div class="foot-intro">
         
-          <p>I am KO Ho Tin (BlackCat / B143KC47), an AI researcher and engineering student in Hong Kong. These notes are the working layer of my research profile — what I am reading, building, and trying to make true.</p>
+          <p>KO Ho Tin (BlackCat / B143KC47) — AI researcher in Hong Kong working on LLM agents, formulaic alpha-factor mining, continual learning, and computer vision.</p>
         
       </div>
     
@@ -931,7 +1009,7 @@ $$</div>
       </nav>
     
     
-      <p class="muted foot-credit">KO Ho Tin · AI researcher &amp; builder</p>
+      <p class="muted foot-credit">KO Ho Tin · ORCID 0009-0002-7298-8196</p>
     
   </div>
 </footer>

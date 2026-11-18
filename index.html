@@ -3,8 +3,8 @@
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>BlackCat · This is my blog</title>
-  <meta name="description" content="Notes by KO Ho Tin (BlackCat) on LLM agents, formulaic alpha-factor mining, computer vision, and research tooling.">
+  <title>BlackCat · Research Notebook · KO Ho Tin</title>
+  <meta name="description" content="Research notes by KO Ho Tin (BlackCat) on LLM agents, AI security, quantitative alpha mining, continual learning, and mathematical foundations.">
   <meta name="author" content="KO Ho Tin">
   <meta name="theme-color" content="#000000">
   <meta name="color-scheme" content="dark">
@@ -19,23 +19,25 @@
   <link rel="stylesheet" href="/blog/css/article-footer.css?v=20261009-2">
   <link rel="stylesheet" href="/blog/css/article-hero.css?v=20261009-2">
   <link rel="stylesheet" href="/blog/css/polish.css?v=20261023-1">
+  <link rel="stylesheet" href="/blog/css/academic.css?v=20261118-1">
+  
   
   
   
   <link rel="icon" href="/blog/avatar.jpg" type="image/jpeg">
-  <meta name="description" content="Notes by KO Ho Tin (BlackCat) on LLM agents, formulaic alpha-factor mining, computer vision, and research tooling.">
+  <meta name="description" content="Research notes by KO Ho Tin (BlackCat) on LLM agents, AI security, quantitative alpha mining, continual learning, and mathematical foundations.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="BlackCat">
 <meta property="og:url" content="https://b143kc47.github.io/blog/index.html">
 <meta property="og:site_name" content="BlackCat">
-<meta property="og:description" content="Notes by KO Ho Tin (BlackCat) on LLM agents, formulaic alpha-factor mining, computer vision, and research tooling.">
+<meta property="og:description" content="Research notes by KO Ho Tin (BlackCat) on LLM agents, AI security, quantitative alpha mining, continual learning, and mathematical foundations.">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://b143kc47.github.io/blog/avatar.jpg">
 <meta property="article:author" content="KO Ho Tin">
 <meta property="article:tag" content="KO Ho Tin, BlackCat, B143KC47, blog, LLM agents, alpha mining, computer vision">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://b143kc47.github.io/blog/avatar.jpg">
-<!-- hexo injector head_end start --><script>window.MathJax = {"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]],"processEscapes":true},"options":{"skipHtmlTags":["script","noscript","style","textarea","pre","code"],"enableMenu":false}};</script>
+<!-- hexo injector head_end start --><script>window.MathJax = {"loader":{"load":["[tex]/cancel"]},"tex":{"packages":{"[+]":["cancel"]},"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]],"processEscapes":true,"tags":"ams"},"options":{"skipHtmlTags":["script","noscript","style","textarea","pre","code"],"enableMenu":false}};</script>
 <script async id="mathjax-cdn-script" src="/blog/vendor/mathjax/tex-chtml.js?v=3.2.2"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
 
   <body>
@@ -46,10 +48,13 @@
     <nav class="site-nav" aria-label="Primary">
       
         
-        <a class="nav-link" href="/blog/about/">About</a>
+        <a class="nav-link" href="/blog/papers/">Papers</a>
       
         
         <a class="nav-link" href="/blog/archives/">Archive</a>
+      
+        
+        <a class="nav-link" href="/blog/about/">About</a>
       
         
         <a class="nav-link" href="/blog/search/">Search</a>
@@ -85,7 +90,7 @@
 
         <ul class="hero-meta">
           <li>Hong Kong</li>
-          <li>Est. 2026</li>
+          <li>Est. 2026 · ORCID 0009-0002-7298-8196</li>
         </ul>
       </div>
     </header>
@@ -93,14 +98,61 @@
     
       <section class="block" aria-labelledby="about-heading">
         <div class="measure">
-          <h2 id="about-heading" class="kicker">[ About ]</h2>
+          <h2 id="about-heading" class="kicker">[ Research Notebook ]</h2>
           <div class="prose prose-ui">
             
-              <p>This is my blog.</p>
+              <p>I am KO Ho Tin (BlackCat / B143KC47) — an AI researcher and engineering student in Hong Kong.</p>
             
-              <p>I am KO Ho Tin, also known as BlackCat — an AI researcher and engineering student in Hong Kong. I write about LLM agents, formulaic alpha-factor mining, computer vision, and the work behind the papers.</p>
+              <p>This notebook publishes technical monographs, paper critiques, and interactive derivations across LLM Agents &amp; Security, Formulaic Alpha-Factor Mining, Continual Learning, and Mathematical Foundations.</p>
             
-              <p>The research profile holds papers, GitHub, and contact. This site is the notebook: notes I actually write while building.</p>
+              <p>Formal publications, open-source repositories, and CV live on the main research profile; this site records the formalisms, replications, and working proofs behind the papers.</p>
+            
+          </div>
+        </div>
+      </section>
+    
+
+    
+    
+      <section class="block" aria-labelledby="pillars-heading">
+        <div class="measure measure-wide">
+          <div class="pillars-head">
+            <h2 id="pillars-heading" class="kicker">[ Research Tracks ]</h2>
+            <a class="keep-all" href="/blog/papers/">Literature &amp; notes index →</a>
+          </div>
+          <div class="pillars-grid">
+            
+              <a class="pillar-card" href="/blog/papers/#pillar-agents">
+                <div class="pillar-card-top">
+                  <h3 class="pillar-card-title">LLM Agents &amp; Security</h3>
+                  <span class="pillar-card-count">2 notes</span>
+                </div>
+                <p class="pillar-card-summary">Tool-using agent architectures, multi-step adversarial security evaluation, and reinforcement learning environment interfaces.</p>
+              </a>
+            
+              <a class="pillar-card" href="/blog/papers/#pillar-quant">
+                <div class="pillar-card-top">
+                  <h3 class="pillar-card-title">Quant Alpha &amp; Financial ML</h3>
+                  <span class="pillar-card-count">2 notes</span>
+                </div>
+                <p class="pillar-card-summary">LLM-guided formulaic alpha-factor generation, evaluation, iterative backtest search, and mathematical finance foundations.</p>
+              </a>
+            
+              <a class="pillar-card" href="/blog/papers/#pillar-dl">
+                <div class="pillar-card-top">
+                  <h3 class="pillar-card-title">Continual &amp; Deep Learning</h3>
+                  <span class="pillar-card-count">3 notes</span>
+                </div>
+                <p class="pillar-card-summary">Sequential optimization under bounded memory and compute, deep residual representations, and autograd/neural networks from scratch.</p>
+              </a>
+            
+              <a class="pillar-card" href="/blog/papers/#pillar-foundations">
+                <div class="pillar-card-top">
+                  <h3 class="pillar-card-title">Math &amp; Empirical Foundations</h3>
+                  <span class="pillar-card-count">7 notes</span>
+                </div>
+                <p class="pillar-card-summary">Single-variable analysis, thermodynamic complexity, causal research design, cognitive science, and empirical data workflows.</p>
+              </a>
             
           </div>
         </div>
@@ -120,46 +172,18 @@
   <nav class="series-nav" aria-label="Series">
     <a class="series-link is-on" href="/blog/" aria-current="page">All</a>
     
-      <a class="series-link series-topic" href="/blog/categories/AI/">AI</a>
+      <a class="series-link series-topic" href="/blog/categories/Paper-Learning/">Paper-Learning</a>
     
-      <a class="series-link series-topic" href="/blog/categories/Book-Reading/">Book Reading</a>
+      <a class="series-link series-topic" href="/blog/categories/Continual-Learning/">Continual-Learning</a>
     
-      <a class="series-link series-topic" href="/blog/categories/Cognitive-Science/">Cognitive Science</a>
+      <a class="series-link series-topic" href="/blog/categories/Zero-to-Hero/">Zero-to-Hero</a>
     
-      <a class="series-link series-topic" href="/blog/categories/Continue-Learning/">Continue Learning</a>
+      <a class="series-link series-topic" href="/blog/categories/Courses/">Courses</a>
     
-      <a class="series-link series-topic" href="/blog/categories/Economics-Finance/">Economics&amp;Finance</a>
+      <a class="series-link series-topic" href="/blog/categories/Kaggle/">Kaggle</a>
     
+      <a class="series-link series-topic" href="/blog/categories/Books/">Books</a>
     
-      <details class="series-topics-more">
-        <summary class="series-topics-toggle" aria-controls="all-topics">
-          <span>View all topics</span>
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="m5 7.5 5 5 5-5"/></svg>
-        </summary>
-        <div class="series-topics-panel" id="all-topics" role="group" aria-label="All topics">
-          
-            <a class="series-link series-topics-item" href="/blog/categories/AI/">AI</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Book-Reading/">Book Reading</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Cognitive-Science/">Cognitive Science</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Continue-Learning/">Continue Learning</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Economics-Finance/">Economics&amp;Finance</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Kaggle/">Kaggle</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/MIT-18-01/">MIT 18.01</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Neural-Networks-Zero-to-Hero/">Neural-Networks-Zero-to-Hero</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Neuro-Sceince/">Neuro Sceince</a>
-          
-            <a class="series-link series-topics-item" href="/blog/categories/Paper-Learning/">Paper-Learning</a>
-          
-        </div>
-      </details>
     
   </nav>
 
@@ -169,11 +193,11 @@
 
       
         <article class="featured">
-          <a class="featured-media" href="/blog/2026/11/15/AI/Learning%20representations%20by%20back-propagating%20errors/" tabindex="-1" aria-hidden="true">
+          <a class="featured-media" href="/blog/2026/10/31/Courses/Financial-Mathematics/%E9%87%91%E8%9E%8D%E6%95%B0%E5%AD%A6/" tabindex="-1" aria-hidden="true">
             
               <canvas
   class="pixel-banner pixel-banner--featured"
-  data-seed="d94f7187"
+  data-seed="371c491d"
   data-cols="96"
   data-rows="32"
   aria-hidden="true"
@@ -185,14 +209,19 @@
             <p class="meta">
               
               
-                <a href="/blog/categories/AI/">AI</a>
+                <a href="/blog/categories/Courses/">Courses</a>
               
-              <time datetime="2026-11-15T10:07:08.000Z">2026-11-15</time>
+              
+                <span class="article-kind-badge">Course Note</span>
+              
+              <time datetime="2026-10-31T15:38:33.000Z">2026-10-31</time>
               <span>1 min read</span>
             </p>
             <h3 class="featured-title">
-              <a href="/blog/2026/11/15/AI/Learning%20representations%20by%20back-propagating%20errors/">Learning representations by back-propagating errors</a>
+              <a href="/blog/2026/10/31/Courses/Financial-Mathematics/%E9%87%91%E8%9E%8D%E6%95%B0%E5%AD%A6/">金融数学</a>
             </h3>
+            
+              <p class="featured-excerpt">金融数学基础：现金流时间尺度、单利与复利、有效年利率（EAR）、72法则与货币时间价值（TVM）折现。</p>
             
           </div>
         </article>
@@ -200,35 +229,6 @@
 
       
         <div class="card-grid">
-          
-            
-
-<article class="card">
-  <a class="card-media" href="/blog/2026/10/31/Economics&amp;Finance/%E9%87%91%E8%9E%8D%E6%95%B0%E5%AD%A6/" aria-hidden="true" tabindex="-1">
-    
-      <canvas
-  class="pixel-banner pixel-banner--card"
-  data-seed="371c491d"
-  data-cols="48"
-  data-rows="36"
-  aria-hidden="true"
-></canvas>
-
-    
-  </a>
-  <div class="card-body">
-    <h3 class="card-title">
-      <a href="/blog/2026/10/31/Economics&amp;Finance/%E9%87%91%E8%9E%8D%E6%95%B0%E5%AD%A6/">金融数学</a>
-    </h3>
-    <p class="meta">
-      
-        <a href="/blog/categories/Economics-Finance/">Economics&amp;Finance</a>
-      
-      <time datetime="2026-10-31T15:38:33.000Z">2026-10-31</time>
-    </p>
-  </div>
-</article>
-
           
             
 
@@ -262,37 +262,7 @@
             
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/10/18/Paper-Learning/AI%20paper/OpenAI/Weight%20normalization/" aria-hidden="true" tabindex="-1">
-    
-      
-
-
-<img src="/blog/images/covers/gpt-20261019/weight-normalization.webp" alt=""
-  width="640" height="480"
-  loading="lazy" decoding="async"
-  data-cover-style="processed"
-  data-cover-options="{}">
-
-    
-  </a>
-  <div class="card-body">
-    <h3 class="card-title">
-      <a href="/blog/2026/10/18/Paper-Learning/AI%20paper/OpenAI/Weight%20normalization/">Weight normalization</a>
-    </h3>
-    <p class="meta">
-      
-        <a href="/blog/categories/Paper-Learning/">Paper-Learning</a>
-      
-      <time datetime="2026-10-18T12:44:33.000Z">2026-10-18</time>
-    </p>
-  </div>
-</article>
-
-          
-            
-
-<article class="card">
-  <a class="card-media" href="/blog/2026/10/18/Kaggle/Kaggle%20learning%20journey/Data%20cleaning/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/10/18/Kaggle/Data-Science-Workflow/Data%20cleaning/" aria-hidden="true" tabindex="-1">
     
       
 
@@ -307,7 +277,7 @@
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/10/18/Kaggle/Kaggle%20learning%20journey/Data%20cleaning/">Data cleaning</a>
+      <a href="/blog/2026/10/18/Kaggle/Data-Science-Workflow/Data%20cleaning/">Data cleaning</a>
     </h3>
     <p class="meta">
       
@@ -322,7 +292,7 @@
             
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/10/18/Kaggle/Kaggle%20learning%20journey/Pandas/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/10/18/Kaggle/Data-Science-Workflow/Pandas/" aria-hidden="true" tabindex="-1">
     
       
 
@@ -337,7 +307,7 @@
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/10/18/Kaggle/Kaggle%20learning%20journey/Pandas/">Pandas</a>
+      <a href="/blog/2026/10/18/Kaggle/Data-Science-Workflow/Pandas/">Pandas</a>
     </h3>
     <p class="meta">
       
@@ -352,7 +322,7 @@
             
 
 <article class="card">
-  <a class="card-media" href="/blog/2026/10/16/Paper-Learning/AI%20paper/Conference/The%20First%20Law%20of%20Complexodynamics/" aria-hidden="true" tabindex="-1">
+  <a class="card-media" href="/blog/2026/10/16/Paper-Learning/Complex-Systems/The%20First%20Law%20of%20Complexodynamics/" aria-hidden="true" tabindex="-1">
     
       
 
@@ -367,13 +337,73 @@
   </a>
   <div class="card-body">
     <h3 class="card-title">
-      <a href="/blog/2026/10/16/Paper-Learning/AI%20paper/Conference/The%20First%20Law%20of%20Complexodynamics/">The First Law of Complexodynamics</a>
+      <a href="/blog/2026/10/16/Paper-Learning/Complex-Systems/The%20First%20Law%20of%20Complexodynamics/">The First Law of Complexodynamics</a>
     </h3>
     <p class="meta">
       
         <a href="/blog/categories/Paper-Learning/">Paper-Learning</a>
       
       <time datetime="2026-10-16T14:07:20.000Z">2026-10-16</time>
+    </p>
+  </div>
+</article>
+
+          
+            
+
+<article class="card">
+  <a class="card-media" href="/blog/2026/10/14/Paper-Learning/Deep-Learning/Deep%20Residual%20Learning%20for%20Image%20Recognition/" aria-hidden="true" tabindex="-1">
+    
+      
+
+
+<img src="/blog/images/covers/gpt-20261019/residual-learning.webp" alt=""
+  width="640" height="480"
+  loading="lazy" decoding="async"
+  data-cover-style="processed"
+  data-cover-options="{}">
+
+    
+  </a>
+  <div class="card-body">
+    <h3 class="card-title">
+      <a href="/blog/2026/10/14/Paper-Learning/Deep-Learning/Deep%20Residual%20Learning%20for%20Image%20Recognition/">Deep Residual Learning for Image Recognition</a>
+    </h3>
+    <p class="meta">
+      
+        <a href="/blog/categories/Paper-Learning/">Paper-Learning</a>
+      
+      <time datetime="2026-10-14T14:36:27.000Z">2026-10-14</time>
+    </p>
+  </div>
+</article>
+
+          
+            
+
+<article class="card">
+  <a class="card-media" href="/blog/2026/10/13/Courses/MIT-18.01-Calculus/Limits-and-Continuity/" aria-hidden="true" tabindex="-1">
+    
+      
+
+
+<img src="/blog/images/covers/gpt-20261019/mit-calculus.webp" alt=""
+  width="640" height="480"
+  loading="lazy" decoding="async"
+  data-cover-style="processed"
+  data-cover-options="{}">
+
+    
+  </a>
+  <div class="card-body">
+    <h3 class="card-title">
+      <a href="/blog/2026/10/13/Courses/MIT-18.01-Calculus/Limits-and-Continuity/">MIT 18.01 Calculus: Limits, Continuity, and Derivatives</a>
+    </h3>
+    <p class="meta">
+      
+        <a href="/blog/categories/Courses/">Courses</a>
+      
+      <time datetime="2026-10-13T09:45:55.000Z">2026-10-13</time>
     </p>
   </div>
 </article>
@@ -386,33 +416,33 @@
         <div class="row-list" aria-label="All notes">
           
             
-<a class="row" href="/blog/2026/10/14/AI/Deep%20Residual%20Learning%20for%20Image%20Recognition/">
-  <span class="row-title">Deep Residual Learning for Image Recognition</span>
-  <span class="row-meta">
-    <span>AI</span>
-    <time datetime="2026-10-14T14:36:27.000Z">2026-10-14</time>
-    <span class="row-arrow" aria-hidden="true">›</span>
-  </span>
-</a>
-
-          
-            
-<a class="row" href="/blog/2026/10/13/University%20Course/MIT%2018.01/MIT%20/">
-  <span class="row-title">MIT </span>
-  <span class="row-meta">
-    <span>MIT 18.01</span>
-    <time datetime="2026-10-13T09:45:55.000Z">2026-10-13</time>
-    <span class="row-arrow" aria-hidden="true">›</span>
-  </span>
-</a>
-
-          
-            
-<a class="row" href="/blog/2026/10/09/Paper-Learning/AI%20paper/OpenAI/OpenAI%20Gym/">
+<a class="row" href="/blog/2026/10/09/Paper-Learning/RL-and-Agents/OpenAI%20Gym/">
   <span class="row-title">OpenAI Gym</span>
   <span class="row-meta">
     <span>Paper-Learning</span>
     <time datetime="2026-10-09T13:51:53.000Z">2026-10-09</time>
+    <span class="row-arrow" aria-hidden="true">›</span>
+  </span>
+</a>
+
+          
+            
+<a class="row" href="/blog/2026/10/06/Kaggle/Predicting%20Student%20Health%20Risk/">
+  <span class="row-title">Predicting Student Health Risk</span>
+  <span class="row-meta">
+    <span>Kaggle</span>
+    <time datetime="2026-10-05T17:41:22.000Z">2026-10-06</time>
+    <span class="row-arrow" aria-hidden="true">›</span>
+  </span>
+</a>
+
+          
+            
+<a class="row" href="/blog/2026/09/25/Books/The%20Effect/">
+  <span class="row-title">The Effect</span>
+  <span class="row-meta">
+    <span>Books</span>
+    <time datetime="2026-09-25T12:54:58.000Z">2026-09-25</time>
     <span class="row-arrow" aria-hidden="true">›</span>
   </span>
 </a>
@@ -430,7 +460,7 @@
 
       
         <p class="cta-wrap">
-          <a class="btn" href="/blog/archives/">Read the archive</a>
+          <a class="btn" href="/blog/papers/">Browse literature &amp; notes index</a>
         </p>
       
     </div>
@@ -441,12 +471,12 @@
     <footer class="site-foot">
   <div class="measure">
     
-      <p class="kicker foot-kicker">This is my blog.</p>
+      <p class="kicker foot-kicker">[ Research Notebook ]</p>
     
     
       <div class="foot-intro">
         
-          <p>I am KO Ho Tin (BlackCat / B143KC47), an AI researcher and engineering student in Hong Kong. These notes are the working layer of my research profile — what I am reading, building, and trying to make true.</p>
+          <p>KO Ho Tin (BlackCat / B143KC47) — AI researcher in Hong Kong working on LLM agents, formulaic alpha-factor mining, continual learning, and computer vision.</p>
         
       </div>
     
@@ -546,7 +576,7 @@
       </nav>
     
     
-      <p class="muted foot-credit">KO Ho Tin · AI researcher &amp; builder</p>
+      <p class="muted foot-credit">KO Ho Tin · ORCID 0009-0002-7298-8196</p>
     
   </div>
 </footer>
