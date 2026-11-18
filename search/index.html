@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="/blog/css/article-footer.css?v=20261009-2">
   <link rel="stylesheet" href="/blog/css/article-hero.css?v=20261009-2">
   <link rel="stylesheet" href="/blog/css/polish.css?v=20261023-1">
-  <link rel="stylesheet" href="/blog/css/academic.css?v=20261119-2">
+  <link rel="stylesheet" href="/blog/css/academic.css?v=20261119-3">
   
   
   
@@ -76,27 +76,20 @@
 
     <div class="page">
       <main id="main">
-  <header class="hero">
-    <div class="measure">
-      <h1 class="hero-title">Search</h1>
-      <canvas
-  class="pixel-banner pixel-banner--rule"
-  data-seed="803328a9"
-  data-cols="48"
-  data-rows="6"
-  aria-hidden="true"
-></canvas>
-
+  <header class="kp-masthead">
+    <div class="measure kp-measure">
+      <h1 class="kp-masthead-title">Search</h1>
+      <p class="kp-masthead-tagline">Search across all notes, papers, equations, and series.</p>
     </div>
   </header>
-  <section class="block">
-    <div class="measure">
-      <form class="search-form" role="search" action="/blog/search/" method="get">
+  <section class="kp-stream-section kp-search-section">
+    <div class="measure kp-measure">
+      <form class="search-form kp-search-form" role="search" action="/blog/search/" method="get">
         <label class="sr-only" for="q">Search</label>
-        <input id="q" class="search-input" type="search" name="q" placeholder="Search notes" autocomplete="off" spellcheck="false">
+        <input id="q" class="search-input kp-search-input" type="search" name="q" placeholder="Filter by title, paper, concept, or series…" autocomplete="off" spellcheck="false" autofocus>
       </form>
-      <p class="muted search-status" hidden></p>
-      <div class="row-list search-results" data-index="/blog/search.json"></div>
+      <p class="muted search-status kp-search-status" hidden></p>
+      <ul class="kp-post-list search-results" data-index="/blog/search.json"></ul>
     </div>
   </section>
 </main>
@@ -121,7 +114,7 @@
 
     <script src="/blog/js/covers.js?v=reader-10"></script>
     <script src="/blog/js/reading.js?v=reader-3"></script>
-    <script src="/blog/js/main.js?v=reader-7"></script>
+    <script src="/blog/js/main.js?v=20261119-3"></script>
     <script src="/blog/js/appearance.js?v=20261119-2"></script>
     <script src="/blog/js/topics.js?v=20261009-1"></script>
     <script src="/blog/js/outline.js?v=20261009-3"></script>

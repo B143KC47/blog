@@ -164,38 +164,40 @@
     };
     script.onload = async function () {
       if (!window.mermaid) return;
-      const ink = "#e6e6e6";
-      const mute = "rgba(230,230,230,0.5)";
-      const fill = "#141414";
-      const paper = "#000000";
+      const isLight = document.documentElement.getAttribute("data-theme") !== "dark";
+      const ink = isLight ? "#111111" : "#e6e6e6";
+      const mute = isLight ? "#64748b" : "rgba(230,230,230,0.5)";
+      const fill = isLight ? "#ffffff" : "#141414";
+      const paper = isLight ? "#f8fafc" : "#000000";
+      const sansFont = "Inter, -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Noto Sans SC, sans-serif";
       window.mermaid.initialize({
         startOnLoad: false,
         theme: "base",
         securityLevel: "loose",
         htmlLabels: true,
-        fontFamily: "Geist Mono, ui-monospace, SFMono-Regular, Menlo, Consolas, Noto Sans SC, Microsoft YaHei, sans-serif",
+        fontFamily: sansFont,
         fontSize: "14px",
         themeVariables: {
-          darkMode: true,
+          darkMode: !isLight,
           background: paper,
-          fontFamily: "Geist Mono, ui-monospace, SFMono-Regular, Menlo, Consolas, Noto Sans SC, Microsoft YaHei, sans-serif",
+          fontFamily: sansFont,
           fontSize: "14px",
           primaryColor: fill,
           primaryTextColor: ink,
           primaryBorderColor: mute,
-          secondaryColor: "#101010",
+          secondaryColor: isLight ? "#f1f5f9" : "#101010",
           secondaryTextColor: ink,
           secondaryBorderColor: mute,
-          tertiaryColor: "#0a0a0a",
+          tertiaryColor: isLight ? "#f8fafc" : "#0a0a0a",
           tertiaryTextColor: ink,
-          tertiaryBorderColor: "rgba(230,230,230,0.22)",
+          tertiaryBorderColor: isLight ? "#cbd5e1" : "rgba(230,230,230,0.22)",
           lineColor: mute,
           textColor: ink,
           mainBkg: fill,
           nodeBkg: fill,
           nodeBorder: mute,
-          clusterBkg: "#0a0a0a",
-          clusterBorder: "rgba(230,230,230,0.22)",
+          clusterBkg: isLight ? "#f1f5f9" : "#0a0a0a",
+          clusterBorder: isLight ? "#cbd5e1" : "rgba(230,230,230,0.22)",
           titleColor: ink,
           edgeLabelBackground: paper,
           actorBkg: fill,
@@ -211,7 +213,7 @@
           noteBkgColor: fill,
           noteTextColor: ink,
           noteBorderColor: mute,
-          activationBkgColor: "#1a1a1a",
+          activationBkgColor: isLight ? "#e2e8f0" : "#1a1a1a",
           sequenceNumberColor: paper
         },
         flowchart: {
@@ -295,8 +297,8 @@
         const initial = params.get("q");
         if (initial) {
           input.value = initial;
-          render(initial);
         }
+        render(initial || "");
       })
       .catch(function () {
         if (status) {
@@ -308,32 +310,65 @@
     function render(q) {
       const query = (q || "").trim().toLowerCase();
       results.innerHTML = "";
-      if (!query) {
-        if (status) status.hidden = true;
-        return;
-      }
-      const hits = index.filter(function (item) {
-        return (
-          (item.title || "").toLowerCase().indexOf(query) !== -1 ||
-          (item.excerpt || "").toLowerCase().indexOf(query) !== -1 ||
-          (item.category || "").toLowerCase().indexOf(query) !== -1
-        );
-      });
+      const hits = !query
+        ? index
+        : index.filter(function (item) {
+            return (
+              (item.title || "").toLowerCase().indexOf(query) !== -1 ||
+              (item.excerpt || "").toLowerCase().indexOf(query) !== -1 ||
+              (item.category || "").toLowerCase().indexOf(query) !== -1 ||
+              (item.kind || "").toLowerCase().indexOf(query) !== -1
+            );
+          });
       if (status) {
         status.hidden = false;
-        status.textContent = hits.length
-          ? hits.length + " note" + (hits.length === 1 ? "" : "s")
-          : "No matching notes.";
+        status.textContent = !query
+          ? index.length + " published notes"
+          : (hits.length
+              ? hits.length + " matching note" + (hits.length === 1 ? "" : "s")
+              : "No matching notes.");
       }
       hits.forEach(function (item) {
+        const li = document.createElement("li");
+        li.className = "kp-post-item";
+
+        const meta = document.createElement("div");
+        meta.className = "kp-post-meta";
+        const time = document.createElement("time");
+        time.className = "kp-post-date";
+        time.textContent = item.date || "";
+        meta.appendChild(time);
+
+        if (item.kind) {
+          const badge = document.createElement("span");
+          badge.className = "article-kind-badge";
+          badge.textContent = item.kind;
+          meta.appendChild(badge);
+        }
+        if (item.category) {
+          const cat = document.createElement("span");
+          cat.className = "kp-post-series";
+          cat.textContent = item.category;
+          meta.appendChild(cat);
+        }
+        li.appendChild(meta);
+
+        const h2 = document.createElement("h2");
+        h2.className = "kp-post-title";
         const a = document.createElement("a");
-        a.className = "row";
+        a.className = "kp-post-link";
         a.href = item.url;
-        a.innerHTML =
-          '<span class="row-title"></span><span class="row-meta"><span></span><span class="row-arrow" aria-hidden="true">›</span></span>';
-        a.querySelector(".row-title").textContent = item.title;
-        a.querySelector(".row-meta span").textContent = item.date;
-        results.appendChild(a);
+        a.textContent = item.title || "";
+        h2.appendChild(a);
+        li.appendChild(h2);
+
+        if (item.excerpt) {
+          const p = document.createElement("p");
+          p.className = "kp-post-excerpt";
+          p.textContent = item.excerpt.length > 180 ? item.excerpt.slice(0, 180).replace(/\s+\S*$/, "") + "…" : item.excerpt;
+          li.appendChild(p);
+        }
+        results.appendChild(li);
       });
     }
 

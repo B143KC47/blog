@@ -1147,7 +1147,138 @@ body:not(:has(.post--staged)) .site-bar-inner {
 .pillar-card-count { font-size: 0.78rem; color: var(--muted); }
 .pillar-card-summary { margin: 0; font-size: 0.875rem; line-height: 1.6; color: var(--muted); }
 
+/* Search page polish */
+.kp-search-section {
+  padding-top: 1.15rem;
+}
+
+.kp-search-form {
+  margin: 0 0 0.75rem;
+}
+
+.kp-search-input {
+  width: 100%;
+  padding: 0.7rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--fill);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.kp-search-input:focus {
+  outline: none;
+  border-color: var(--link-accent);
+  background: var(--bg);
+}
+
+.kp-search-status {
+  margin: 0.5rem 0 0.25rem;
+  font-size: 0.82rem;
+}
+
+/* BibTeX Light-Mode copy button visibility & hidden scrollbar */
+.article-cite-fold pre {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.article-cite-fold pre::-webkit-scrollbar {
+  display: none;
+}
+
+html[data-theme="light"] .article-cite-fold .code-copy {
+  background: var(--code-bg);
+  color: rgba(31, 35, 40, 0.5);
+}
+
+html[data-theme="light"] .article-cite-fold .code-block:hover .code-copy,
+html[data-theme="light"] .article-cite-fold .code-copy:hover {
+  color: #1f2328;
+}
+
+html[data-theme="light"] .article-cite-fold .code-copy[data-state="done"] {
+  color: #1a7f37;
+}
+
+/* Prevent vertical clipping on multi-slider interactive graph titles */
+.gpt-graph-title {
+  overflow-x: auto;
+  overflow-y: visible;
+  scrollbar-width: none;
+  line-height: 1.65;
+}
+
+.gpt-graph-title::-webkit-scrollbar {
+  display: none;
+}
+
+/* Light-Paper Mermaid diagrams */
+html[data-theme="light"] .prose :is(.mermaid, pre.mermaid) {
+  color-scheme: light;
+  --bg: #f8fafc;
+  --text: #111111;
+  --muted: #64748b;
+  --fill: #ffffff;
+  --line: #e2e8f0;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  color: #111111;
+}
+
+/* Inline Share dot separator & Mobile Outline label */
+.kp-share-inline {
+  margin-left: 0;
+}
+
+.kp-share-inline:has(.article-share:not([hidden]))::before {
+  content: "·";
+  color: var(--muted);
+  margin-right: 0.1rem;
+}
+
+.outline-toggle {
+  width: auto;
+  gap: 0.4rem;
+  padding: 0 0.25rem;
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
+  font-weight: 500;
+}
+
+.outline-toggle:hover {
+  color: var(--text);
+}
+
 @media (max-width: 44rem) {
+  .site-bar {
+    min-height: auto;
+    padding: 0.65rem 0;
+  }
+  .site-bar-inner {
+    gap: 0.45rem 1rem;
+  }
+  .site-nav {
+    gap: 0.9rem;
+  }
+  .kp-masthead .series-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin-right: calc(-1 * var(--gutter));
+    padding-right: var(--gutter);
+  }
+  .kp-masthead .series-link {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .kp-masthead .series-nav::-webkit-scrollbar {
+    display: none;
+  }
   .pillars-grid,
   .series-trail-links {
     grid-template-columns: 1fr;
