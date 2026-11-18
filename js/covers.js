@@ -253,7 +253,7 @@
     }
     // Existing Hexo cover <img> output also works; body figures are never selected.
     doc.querySelectorAll(".card-media img, .featured-media img, .post-cover img").forEach(image => {
-      if (image.dataset.coverStyle === "processed" || !localSource(image.getAttribute("src"), doc.baseURI)) return;
+      if (image.dataset.coverStyle === "processed" || /\.svg(?:[?#]|$)/i.test(image.getAttribute("src") || "") || !localSource(image.getAttribute("src"), doc.baseURI)) return;
       const node = doc.createElement("canvas");
       const card = image.closest(".card-media");
       node.className = "pixel-banner " + (card ? "pixel-banner--card" : image.closest(".post-cover") ? "pixel-banner--cover" : "pixel-banner--featured");

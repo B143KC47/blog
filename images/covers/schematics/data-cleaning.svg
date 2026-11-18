@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400" fill="none">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 1 1.5 L 8.5 5 L 1 8.5" fill="none" stroke="#e6e6e6" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arr-muted" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 1.5 L 8.5 5 L 1 8.5" fill="none" stroke="#8a8a8a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="400" fill="#0a0a0a"/>
+  <rect x="16" y="12" width="1168" height="376" rx="2" stroke="#242424" stroke-width="1"/>
+  <line x1="16" y1="48" x2="1184" y2="48" stroke="#1f1f1f" stroke-width="1"/>
+  <line x1="120" y1="48" x2="120" y2="368" stroke="#161616" stroke-width="1"/>
+  <line x1="240" y1="48" x2="240" y2="368" stroke="#161616" stroke-width="1"/>
+  <line x1="360" y1="48" x2="360" y2="368" stroke="#161616" stroke-width="1"/>
+  <line x1="480" y1="48" x2="480" y2="368" stroke="#161616" stroke-width="1"/>
+  <line x1="600" y1="48" x2="600" y2="368" stroke="#161616" stroke-width="1"/>
+  <line x1="720" y1="48" x2="720" y2="368" stroke="#161616" stroke-width="1"/>
+  <line x1="840" y1="48" x2="840" y2="368" stroke="#161616" stroke-width="1"/>
+  <line x1="960" y1="48" x2="960" y2="368" stroke="#161616" stroke-width="1"/>
+  <line x1="1080" y1="48" x2="1080" y2="368" stroke="#161616" stroke-width="1"/>
+  <line x1="40" y1="96" x2="1160" y2="96" stroke="#161616" stroke-width="1"/>
+  <line x1="40" y1="164" x2="1160" y2="164" stroke="#161616" stroke-width="1"/>
+  <line x1="40" y1="232" x2="1160" y2="232" stroke="#161616" stroke-width="1"/>
+  <line x1="40" y1="300" x2="1160" y2="300" stroke="#161616" stroke-width="1"/>
+  <text x="40" y="34" fill="#8e8e8e" font-family="ui-monospace, 'Geist Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="13" letter-spacing="1.1">[ SCHEMATIC 18 · MISSINGNESS MECHANISM &amp; IMPUTATION PIPELINE ]</text>
+  <text x="1148" y="34" text-anchor="end" fill="#b0b0b0" font-family="'STIX Two Math', 'Cambria Math', 'Times New Roman', Georgia, serif" font-style="italic" font-size="15">P(R = 0 | Y_obs, Y_mis)  [MCAR · MAR · MNAR]</text>
+  
+      <rect x="150" y="130" width="240" height="164" rx="3" fill="#111111" stroke="#9a9a9a" stroke-width="1.25"/>
+      <rect x="174" y="154" width="52" height="24" fill="#262626"/>
+      <rect x="244" y="154" width="52" height="24" stroke="#8a8a8a" stroke-dasharray="3 2"/>
+      <text x="270" y="170" text-anchor="middle" fill="#b8b8b8" font-family="ui-monospace, 'Geist Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="10">NaN</text>
+      <rect x="314" y="154" width="52" height="24" fill="#262626"/>
+      <rect x="174" y="196" width="52" height="24" fill="#262626"/>
+      <rect x="244" y="196" width="52" height="24" fill="#262626"/>
+      <rect x="314" y="196" width="52" height="24" stroke="#8a8a8a" stroke-dasharray="3 2"/>
+      <text x="340" y="212" text-anchor="middle" fill="#b8b8b8" font-family="ui-monospace, 'Geist Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="10">NaN</text>
+      <rect x="174" y="238" width="52" height="24" stroke="#8a8a8a" stroke-dasharray="3 2"/>
+      <text x="200" y="254" text-anchor="middle" fill="#b8b8b8" font-family="ui-monospace, 'Geist Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="10">NaN</text>
+      <rect x="244" y="238" width="52" height="24" fill="#262626"/>
+      <rect x="314" y="238" width="52" height="24" fill="#262626"/>
+      <rect x="486" y="176" width="228" height="72" rx="3" fill="#111111" stroke="#ececec" stroke-width="1.65"/>
+  <text x="600" y="208" text-anchor="middle" fill="#f5f5f5" font-family="ui-monospace, 'Geist Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="13.5">Diagnose Mechanism</text>
+  <text x="600" y="227" text-anchor="middle" fill="#969696" font-family="'STIX Two Math', 'Cambria Math', 'Times New Roman', Georgia, serif" font-style="italic" font-size="13">structural vs unrecorded</text>
+      <rect x="810" y="176" width="236" height="72" rx="3" fill="#111111" stroke="#ececec" stroke-width="1.65"/>
+  <text x="928" y="208" text-anchor="middle" fill="#f5f5f5" font-family="ui-monospace, 'Geist Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="13.5">Validated Matrix X̂</text>
+  <text x="928" y="227" text-anchor="middle" fill="#969696" font-family="'STIX Two Math', 'Cambria Math', 'Times New Roman', Georgia, serif" font-style="italic" font-size="13">typed &amp; indicator-preserved</text>
+      <line x1="390" y1="212" x2="482" y2="212" stroke="#e6e6e6" stroke-width="1.5" marker-end="url(#arr)"/>
+      <line x1="714" y1="212" x2="806" y2="212" stroke="#e6e6e6" stroke-width="1.5" marker-end="url(#arr)"/>
+    
+</svg>

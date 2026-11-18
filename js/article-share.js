@@ -5,10 +5,11 @@
   if (!button) return;
 
   const controls = button.closest(".article-share-controls");
-  const status = controls.querySelector(".article-share-status");
-  const manual = controls.querySelector(".article-share-manual");
-  const field = controls.querySelector(".article-share-link");
-  const close = controls.querySelector(".article-share-dismiss");
+  const scope = (controls && controls.closest(".kp-post-header")) || controls || document;
+  const status = scope.querySelector(".article-share-status");
+  const manual = scope.querySelector(".article-share-manual");
+  const field = scope.querySelector(".article-share-link");
+  const close = scope.querySelector(".article-share-dismiss");
   const isZh = (document.documentElement.lang || "").toLowerCase().startsWith("zh");
   const labels = isZh ? {
     copied: "链接已复制",

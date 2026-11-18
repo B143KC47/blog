@@ -1,7 +1,7 @@
 (function () {
   "use strict";
   const root = document.documentElement;
-  const key = "blackcat-theme";
+  const key = "blackcat-theme-v2";
   const isChinese = (root.lang || "").toLowerCase().startsWith("zh");
 
   function storedTheme() {
@@ -40,7 +40,7 @@
   }
 
   function init() {
-    applyTheme(storedTheme() || root.dataset.theme || "dark", false);
+    applyTheme(storedTheme() || root.dataset.theme || "light", false);
     document.querySelectorAll(".theme-toggle").forEach(function (button) {
       button.addEventListener("click", function () {
         applyTheme(root.dataset.theme === "light" ? "dark" : "light", true);
