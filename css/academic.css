@@ -947,6 +947,11 @@ body:not(:has(.post--staged)) .site-bar-inner {
   min-height: 2.5rem;
 }
 
+.article-comments .utterances {
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
 .article-comments-fallback {
   margin: 0;
   padding: 0.95rem 1.15rem;
