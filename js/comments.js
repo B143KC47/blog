@@ -14,16 +14,10 @@
   }
 
   function renderDisqusNotice() {
-    const shortname = root.dataset.commentsShortname || "b143kc47";
     mount.innerHTML = "";
     const box = document.createElement("div");
     box.className = "article-comments-fallback";
-    box.innerHTML =
-      "<strong>Disqus comments configured (shortname: <code>" +
-      shortname.replace(/[<>&"]/g, "") +
-      "</code>)</strong> — register this shortname free at " +
-      '<a href="https://disqus.com/admin/create/" target="_blank" rel="noopener noreferrer">disqus.com/admin/create</a> ' +
-      "(or update <code>comments.disqus_shortname</code> in <code>_config.simplism.yml</code>) to activate live comment threads.";
+    box.textContent = "Comments powered by Disqus (blocked by browser privacy or content-blocking settings).";
     mount.appendChild(box);
   }
 
@@ -54,41 +48,6 @@
       s.async = true;
       s.setAttribute("data-timestamp", String(+new Date()));
       s.onerror = renderDisqusNotice;
-      s.onload = function () {
-        let readyForHint = false;
-        function syncDisqusStatus() {
-          const frames = thread.querySelectorAll("iframe");
-          let maxHeight = 0;
-          frames.forEach(function (f) {
-            if (f.offsetHeight > maxHeight) maxHeight = f.offsetHeight;
-          });
-          const existingHint = mount.querySelector(".article-comments-fallback");
-          if (maxHeight >= 140) {
-            if (existingHint) existingHint.remove();
-            return;
-          }
-          if (readyForHint && maxHeight > 0 && maxHeight < 120 && !existingHint) {
-            const hint = document.createElement("p");
-            hint.className = "article-comments-fallback";
-            hint.style.marginTop = "0.75rem";
-            hint.innerHTML =
-              "<strong>One-time Disqus activation:</strong> open " +
-              '<a href="https://disqus.com/admin/create/" target="_blank" rel="noopener noreferrer">disqus.com/admin/create</a>, ' +
-              'choose <em>"I want to install Disqus on my site"</em>, enter Website Name <code>Lance Ko blog</code> ' +
-              "(shortname: <code>" + shortname.replace(/[<>&\x22]/g, "") + "</code>), and pick the free <strong>Basic</strong> plan.";
-            mount.appendChild(hint);
-          }
-        }
-        setTimeout(function () {
-          readyForHint = true;
-          syncDisqusStatus();
-        }, 3200);
-        setTimeout(syncDisqusStatus, 6000);
-        if (window.ResizeObserver) {
-          const ro = new ResizeObserver(syncDisqusStatus);
-          ro.observe(thread);
-        }
-      };
       (document.head || document.body).appendChild(s);
       return;
     }
